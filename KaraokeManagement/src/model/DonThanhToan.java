@@ -5,23 +5,24 @@
  */
 package model;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Date;
+
 
 /**
  *
  * @author Thoai
  */
 public class DonThanhToan {
-    private String maDon;
-    private String maNhanVien;
+    private int maDon;
+    private int maNhanVien;
     private String tenNhanVien;
-    private String maKhachHang;
-    private String maPhong;
-    private TimeUnit thoiGianBatDau;
-    private TimeUnit thoiGianKetThuc;
+    private int maKhachHang;
+    private int maPhong;
+    private Date thoiGianBatDau;
+    private Date thoiGianKetThuc;
     private String maKhuyenMai;
 
-    public DonThanhToan(String maDon, String maNhanVien, String tenNhanVien, String maKhachHang, String maPhong, TimeUnit thoiGianBatDau, TimeUnit thoiGianKetThuc, String maKhuyenMai) {
+    public DonThanhToan(int maDon, int maNhanVien, String tenNhanVien, int maKhachHang, int maPhong, Date thoiGianBatDau, Date thoiGianKetThuc, String maKhuyenMai) {
         this.maDon = maDon;
         this.maNhanVien = maNhanVien;
         this.tenNhanVien = tenNhanVien;
@@ -32,19 +33,19 @@ public class DonThanhToan {
         this.maKhuyenMai = maKhuyenMai;
     }
 
-    public String getMaDon() {
+    public int getMaDon() {
         return maDon;
     }
 
-    public void setMaDon(String maDon) {
+    public void setMaDon(int maDon) {
         this.maDon = maDon;
     }
 
-    public String getMaNhanVien() {
+    public int getMaNhanVien() {
         return maNhanVien;
     }
 
-    public void setMaNhanVien(String maNhanVien) {
+    public void setMaNhanVien(int maNhanVien) {
         this.maNhanVien = maNhanVien;
     }
 
@@ -56,35 +57,35 @@ public class DonThanhToan {
         this.tenNhanVien = tenNhanVien;
     }
 
-    public String getMaKhachHang() {
+    public int getMaKhachHang() {
         return maKhachHang;
     }
 
-    public void setMaKhachHang(String maKhachHang) {
+    public void setMaKhachHang(int maKhachHang) {
         this.maKhachHang = maKhachHang;
     }
 
-    public String getMaPhong() {
+    public int getMaPhong() {
         return maPhong;
     }
 
-    public void setMaPhong(String maPhong) {
+    public void setMaPhong(int maPhong) {
         this.maPhong = maPhong;
     }
 
-    public TimeUnit getThoiGianBatDau() {
+    public Date getThoiGianBatDau() {
         return thoiGianBatDau;
     }
 
-    public void setThoiGianBatDau(TimeUnit thoiGianBatDau) {
+    public void setThoiGianBatDau(Date thoiGianBatDau) {
         this.thoiGianBatDau = thoiGianBatDau;
     }
 
-    public TimeUnit getThoiGianKetThuc() {
+    public Date getThoiGianKetThuc() {
         return thoiGianKetThuc;
     }
 
-    public void setThoiGianKetThuc(TimeUnit thoiGianKetThuc) {
+    public void setThoiGianKetThuc(Date thoiGianKetThuc) {
         this.thoiGianKetThuc = thoiGianKetThuc;
     }
 

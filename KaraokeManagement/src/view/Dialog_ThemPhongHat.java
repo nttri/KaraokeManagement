@@ -71,7 +71,7 @@ public class Dialog_ThemPhongHat extends javax.swing.JDialog {
 
         cbbTinhTrang.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cbbTinhTrang.setForeground(new java.awt.Color(10, 125, 39));
-        cbbTinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Trống", "Đang sửa", "Đã đặt" }));
+        cbbTinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Còn trống", "Đang sử dụng", "Đã đặt trước" }));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));

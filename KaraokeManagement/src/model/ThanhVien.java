@@ -12,15 +12,15 @@ import java.util.Date;
  * @author Thoai
  */
 public class ThanhVien {
-    private String maThanhVien;
+    private int maThanhVien;
     private String hoTen;
-    private boolean gioiTinh;
+    private String gioiTinh;
     private Date ngaySinh;
     private String diaChi;
     private String cmnd;
     private String sdt;
 
-    public ThanhVien(String maThanhVien, String hoTen, boolean gioiTinh, Date ngaySinh, String diaChi, String cmnd, String sdt) {
+    public ThanhVien(int maThanhVien, String hoTen, String gioiTinh, Date ngaySinh, String diaChi, String cmnd, String sdt) {
         this.maThanhVien = maThanhVien;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
@@ -30,11 +30,11 @@ public class ThanhVien {
         this.sdt = sdt;
     }
 
-    public String getMaThanhVien() {
+    public int getMaThanhVien() {
         return maThanhVien;
     }
 
-    public void setMaThanhVien(String maThanhVien) {
+    public void setMaThanhVien(int maThanhVien) {
         this.maThanhVien = maThanhVien;
     }
 
@@ -46,11 +46,11 @@ public class ThanhVien {
         this.hoTen = hoTen;
     }
 
-    public boolean isGioiTinh() {
+    public String isGioiTinh() {
         return gioiTinh;
     }
 
-    public void setGioiTinh(boolean gioiTinh) {
+    public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 
@@ -90,6 +90,4 @@ public class ThanhVien {
     public String toString() {
         return "ThanhVien{" + "maThanhVien=" + maThanhVien + ", hoTen=" + hoTen + ", gioiTinh=" + gioiTinh + ", ngaySinh=" + ngaySinh + ", diaChi=" + diaChi + ", cmnd=" + cmnd + ", sdt=" + sdt + '}';
     }
-    
-    
 }
