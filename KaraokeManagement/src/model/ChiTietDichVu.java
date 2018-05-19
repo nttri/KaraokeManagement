@@ -10,13 +10,13 @@ package model;
  * @author Thoai
  */
 public class ChiTietDichVu {
-    private String maDonThanhToan;
+    private int maDonThanhToan;
     private int soThuTu;
     private String tenDichVu;
     private int donGia;
     private int soLuong;
 
-    public ChiTietDichVu(String maDonThanhToan, int soThuTu, String tenDichVu, int donGia, int soLuong) {
+    public ChiTietDichVu(int maDonThanhToan, int soThuTu, String tenDichVu, int donGia, int soLuong) {
         this.maDonThanhToan = maDonThanhToan;
         this.soThuTu = soThuTu;
         this.tenDichVu = tenDichVu;
@@ -24,11 +24,11 @@ public class ChiTietDichVu {
         this.soLuong = soLuong;
     }
 
-    public String getMaDonThanhToan() {
+    public int getMaDonThanhToan() {
         return maDonThanhToan;
     }
 
-    public void setMaDonThanhToan(String maDonThanhToan) {
+    public void setMaDonThanhToan(int maDonThanhToan) {
         this.maDonThanhToan = maDonThanhToan;
     }
 

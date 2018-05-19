@@ -10,14 +10,14 @@ package model;
  * @author Thoai
  */
 public class PhongHat {
-    private String maPhong;
-    private int loaiPhong;
+    private int maPhong;
+    private String loaiPhong;
     private int sucChua;
     private String moTa;
     private int giaPhong;
-    private boolean tinhTrang;
+    private String tinhTrang;
 
-    public PhongHat(String maPhong, int loaiPhong, int sucChua, String moTa, int giaPhong, boolean tinhTrang) {
+    public PhongHat(int maPhong, String loaiPhong, int sucChua, String moTa, int giaPhong, String tinhTrang) {
         this.maPhong = maPhong;
         this.loaiPhong = loaiPhong;
         this.sucChua = sucChua;
@@ -26,19 +26,19 @@ public class PhongHat {
         this.tinhTrang = tinhTrang;
     }
 
-    public String getMaPhong() {
+    public int getMaPhong() {
         return maPhong;
     }
 
-    public void setMaPhong(String maPhong) {
+    public void setMaPhong(int maPhong) {
         this.maPhong = maPhong;
     }
 
-    public int getLoaiPhong() {
+    public String getLoaiPhong() {
         return loaiPhong;
     }
 
-    public void setLoaiPhong(int loaiPhong) {
+    public void setLoaiPhong(String loaiPhong) {
         this.loaiPhong = loaiPhong;
     }
 
@@ -66,11 +66,11 @@ public class PhongHat {
         this.giaPhong = giaPhong;
     }
 
-    public boolean isTinhTrang() {
+    public String isTinhTrang() {
         return tinhTrang;
     }
 
-    public void setTinhTrang(boolean tinhTrang) {
+    public void setTinhTrang(String tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
 

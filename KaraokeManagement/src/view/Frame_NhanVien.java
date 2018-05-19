@@ -67,6 +67,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnTaoMoi_pnDichVu = new javax.swing.JButton();
         btnChinhSua_pnDichVu = new javax.swing.JButton();
         btnXoa_pnDichVu = new javax.swing.JButton();
+        btnThemLoaiDichVu = new javax.swing.JButton();
         pnKhachHangThanhVien = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         spKhachHangThanhVien = new javax.swing.JScrollPane();
@@ -81,6 +82,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnTaoMoi_pnPhongHat = new javax.swing.JButton();
         btnChinhSua_pnPhongHat = new javax.swing.JButton();
         btnXoaPhong_pnPhongHat = new javax.swing.JButton();
+        btnThemLoaiPhongHat = new javax.swing.JButton();
         pnThanhToan = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -337,6 +339,20 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         pnDichVu.add(btnXoa_pnDichVu);
         btnXoa_pnDichVu.setBounds(828, 585, 200, 48);
 
+        btnThemLoaiDichVu.setBackground(new java.awt.Color(51, 51, 51));
+        btnThemLoaiDichVu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnThemLoaiDichVu.setForeground(new java.awt.Color(255, 255, 255));
+        btnThemLoaiDichVu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_add.png"))); // NOI18N
+        btnThemLoaiDichVu.setText("THÊM LOẠI DỊCH VỤ");
+        btnThemLoaiDichVu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnThemLoaiDichVu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemLoaiDichVuActionPerformed(evt);
+            }
+        });
+        pnDichVu.add(btnThemLoaiDichVu);
+        btnThemLoaiDichVu.setBounds(728, 20, 300, 48);
+
         pnKhachHangThanhVien.setBackground(new java.awt.Color(10, 125, 39));
         pnKhachHangThanhVien.setMinimumSize(new java.awt.Dimension(1070, 680));
         pnKhachHangThanhVien.setName(""); // NOI18N
@@ -434,6 +450,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         pnPhongHat.add(jLabel5);
         jLabel5.setBounds(40, 13, 480, 54);
 
+        tbPhongHat_pnPhongHat.setBackground(new java.awt.Color(240, 240, 240));
         tbPhongHat_pnPhongHat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -509,6 +526,19 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         });
         pnPhongHat.add(btnXoaPhong_pnPhongHat);
         btnXoaPhong_pnPhongHat.setBounds(828, 585, 200, 48);
+
+        btnThemLoaiPhongHat.setBackground(new java.awt.Color(51, 51, 51));
+        btnThemLoaiPhongHat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnThemLoaiPhongHat.setForeground(new java.awt.Color(255, 255, 255));
+        btnThemLoaiPhongHat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_add.png"))); // NOI18N
+        btnThemLoaiPhongHat.setText("THÊM LOẠI PHÒNG HÁT");
+        btnThemLoaiPhongHat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemLoaiPhongHatActionPerformed(evt);
+            }
+        });
+        pnPhongHat.add(btnThemLoaiPhongHat);
+        btnThemLoaiPhongHat.setBounds(728, 20, 300, 48);
 
         pnThanhToan.setBackground(new java.awt.Color(10, 125, 39));
         pnThanhToan.setMinimumSize(new java.awt.Dimension(1070, 680));
@@ -736,6 +766,16 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
     }//GEN-LAST:event_btnXoa_pnKhachHangThanhVienActionPerformed
 
+    private void btnThemLoaiDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiDichVuActionPerformed
+        Dialog_ThemLoaiDichVu dThemLoaiDichVu = new Dialog_ThemLoaiDichVu(this, rootPaneCheckingEnabled);
+        dThemLoaiDichVu.setVisible(true);
+    }//GEN-LAST:event_btnThemLoaiDichVuActionPerformed
+
+    private void btnThemLoaiPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiPhongHatActionPerformed
+        Dialog_ThemLoaiPhongHat dThemLoaiPhongHat = new Dialog_ThemLoaiPhongHat(this, rootPaneCheckingEnabled);
+        dThemLoaiPhongHat.setVisible(true);
+    }//GEN-LAST:event_btnThemLoaiPhongHatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -787,6 +827,8 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btnTaoMoi_pnPhongHat;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnThanhToan_pnThanhToan;
+    private javax.swing.JButton btnThemLoaiDichVu;
+    private javax.swing.JButton btnThemLoaiPhongHat;
     private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnTim_pnThanhToan;
     private javax.swing.JButton btnXoaDon_pnDonDatPhong;

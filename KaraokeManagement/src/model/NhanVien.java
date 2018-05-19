@@ -12,16 +12,16 @@ import java.util.Date;
  * @author Thoai
  */
 public class NhanVien extends NguoiDung {
-    private String maNhanVien;
+    private int maNhanVien;
     private String hoten;
-    private boolean gioiTinh;
+    private String gioiTinh;
     private Date ngaySinh;
     private String diaChi;
     private String cmnd;
     private String sdt;
     private int luong;
 
-    public NhanVien(String maNhanVien, String hoten, boolean gioiTinh, Date ngaySinh, String diaChi, String cmnd, String sdt, int luong, String tenDangNhap, String matKhau) {
+    public NhanVien(int maNhanVien, String hoten, String gioiTinh, Date ngaySinh, String diaChi, String cmnd, String sdt, int luong, String tenDangNhap, String matKhau) {
         super(tenDangNhap, matKhau);
         this.maNhanVien = maNhanVien;
         this.hoten = hoten;
@@ -54,11 +54,11 @@ public class NhanVien extends NguoiDung {
         this.matKhau = matKhau;
     }
 
-    public String getMaNhanVien() {
+    public int getMaNhanVien() {
         return maNhanVien;
     }
 
-    public void setMaNhanVien(String maNhanVien) {
+    public void setMaNhanVien(int maNhanVien) {
         this.maNhanVien = maNhanVien;
     }
 
@@ -70,11 +70,11 @@ public class NhanVien extends NguoiDung {
         this.hoten = hoten;
     }
 
-    public boolean isGioiTinh() {
+    public String isGioiTinh() {
         return gioiTinh;
     }
 
-    public void setGioiTinh(boolean gioiTinh) {
+    public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 
