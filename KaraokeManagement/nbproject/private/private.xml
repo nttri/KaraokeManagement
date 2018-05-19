@@ -3,17 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/model/NguoiDung.java</file>
-            <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/model/ChiTietDichVu.java</file>
-            <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/model/PhongHat.java</file>
+            <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/view/Frame_NhanVien.java</file>
+            <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/view/Dialog_ThemLoaiDichVu.java</file>
             <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/DatabaseConnection/ReadPropertiesLibrary.java</file>
-            <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/model/LoaiDichVu.java</file>
-            <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/model/ThanhVien.java</file>
-            <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/model/QuanLy.java</file>
-            <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/model/DichVu.java</file>
+            <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/common/MyColor.java</file>
+            <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/view/Dialog_ThemDichVu.java</file>
             <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/DatabaseConnection/DBConnect.java</file>
-            <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/model/NhanVien.java</file>
-            <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/model/DonThanhToan.java</file>
             <file>file:/E:/thanhtri/Nam3-hk2/PtichThietKePM/TEAM/TEAM%20PROJECT/TEAM%20GIT/KaraokeManagement/KaraokeManagement/src/DatabaseConnection/DataProcess.java</file>
         </group>
     </open-files>
