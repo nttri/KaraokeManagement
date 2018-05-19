@@ -1,6 +1,6 @@
 package view;
 
-import common.MyColor;
+import common.NVColor;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 /**
@@ -15,8 +15,8 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }
     
     void customInit(){
-        setColorAllButton(MyColor.btn_when_disable);
-        btnDonDatPhong.setBackground(MyColor.btn_when_selected);
+        setColorAllButton(NVColor.btn_when_disable);
+        btnDonDatPhong.setBackground(NVColor.btn_when_selected);
         
         setAllPanelDisappear();
         pnDonDatPhong.setVisible(true);
@@ -652,8 +652,8 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
     private void btnDonDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonDatPhongActionPerformed
         
-        setColorAllButton(MyColor.btn_when_disable);
-        btnDonDatPhong.setBackground(MyColor.btn_when_selected);
+        setColorAllButton(NVColor.btn_when_disable);
+        btnDonDatPhong.setBackground(NVColor.btn_when_selected);
         setAllPanelDisappear();
         pnDonDatPhong.setVisible(true);
         
@@ -661,8 +661,8 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
     private void btnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDichVuActionPerformed
         
-        setColorAllButton(MyColor.btn_when_disable);
-        btnDichVu.setBackground(MyColor.btn_when_selected);
+        setColorAllButton(NVColor.btn_when_disable);
+        btnDichVu.setBackground(NVColor.btn_when_selected);
         setAllPanelDisappear();
         pnDichVu.setVisible(true);
         
@@ -670,8 +670,8 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
     private void btnKhachHangThanhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangThanhVienActionPerformed
         
-        setColorAllButton(MyColor.btn_when_disable);
-        btnKhachHangThanhVien.setBackground(MyColor.btn_when_selected);
+        setColorAllButton(NVColor.btn_when_disable);
+        btnKhachHangThanhVien.setBackground(NVColor.btn_when_selected);
         setAllPanelDisappear();
         pnKhachHangThanhVien.setVisible(true);
                 
@@ -679,8 +679,8 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
     private void btnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhongHatActionPerformed
         
-        setColorAllButton(MyColor.btn_when_disable);
-        btnPhongHat.setBackground(MyColor.btn_when_selected);
+        setColorAllButton(NVColor.btn_when_disable);
+        btnPhongHat.setBackground(NVColor.btn_when_selected);
         setAllPanelDisappear();
         pnPhongHat.setVisible(true);
         
@@ -688,8 +688,8 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         
-        setColorAllButton(MyColor.btn_when_disable);
-        btnThanhToan.setBackground(MyColor.btn_when_selected);
+        setColorAllButton(NVColor.btn_when_disable);
+        btnThanhToan.setBackground(NVColor.btn_when_selected);
         setAllPanelDisappear();
         pnThanhToan.setVisible(true);
         

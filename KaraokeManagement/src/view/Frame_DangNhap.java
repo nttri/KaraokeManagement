@@ -128,7 +128,7 @@ public class Frame_DangNhap extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnDangNhap))
                                 .addComponent(jLabel2)
@@ -190,6 +190,13 @@ public class Frame_DangNhap extends javax.swing.JFrame {
             this.setVisible(false);
             fNhanVien.setVisible(true);
             JOptionPane.showMessageDialog(fNhanVien, "Đăng nhập thành công!");
+            return;
+        }
+        if(username.equals("QL")){
+            Frame_QuanLy fQuanLy = new Frame_QuanLy();
+            this.setVisible(false);
+            fQuanLy.setVisible(true);
+            JOptionPane.showMessageDialog(fQuanLy, "Chào mừng boss tổng, vỗ tay đi mấy đứa!");
             return;
         }
         JOptionPane.showMessageDialog(rootPane, "Đăng nhập thất bại, hãy thử tên đăng nhập 'nhan vien'.");
