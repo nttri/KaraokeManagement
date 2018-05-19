@@ -10,22 +10,25 @@ package model;
  * @author Thoai
  */
 public class DichVu {
-    private String maDichVu;
+    private int maDichVu;
+    private int maLoaiDichVu;
     private String tenDichVu;
     private int donGia;
 
-    public DichVu(String maDichVu, String tenDichVu, int donGia) {
-        this.maDichVu = maDichVu;
-        this.tenDichVu = tenDichVu;
-        this.donGia = donGia;
-    }
-
-    public String getMaDichVu() {
+    public int getMaDichVu() {
         return maDichVu;
     }
 
-    public void setMaDichVu(String maDichVu) {
+    public void setMaDichVu(int maDichVu) {
         this.maDichVu = maDichVu;
+    }
+
+    public int getMaLoaiDichVu() {
+        return maLoaiDichVu;
+    }
+
+    public void setMaLoaiDichVu(int maLoaiDichVu) {
+        this.maLoaiDichVu = maLoaiDichVu;
     }
 
     public String getTenDichVu() {
@@ -44,9 +47,17 @@ public class DichVu {
         this.donGia = donGia;
     }
 
+    public DichVu(int maDichVu, int maLoaiDichVu, String tenDichVu, int donGia) {
+        this.maDichVu = maDichVu;
+        this.maLoaiDichVu = maLoaiDichVu;
+        this.tenDichVu = tenDichVu;
+        this.donGia = donGia;
+    }
+
     @Override
     public String toString() {
-        return "DichVu{" + "maDichVu=" + maDichVu + ", tenDichVu=" + tenDichVu + ", donGia=" + donGia + '}';
+        return "DichVu{" + "maDichVu=" + maDichVu + ", maLoaiDichVu=" + maLoaiDichVu + ", tenDichVu=" + tenDichVu + ", donGia=" + donGia + '}';
     }
+
     
 }

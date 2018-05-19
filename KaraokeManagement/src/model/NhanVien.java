@@ -12,7 +12,6 @@ import java.util.Date;
  * @author Thoai
  */
 public class NhanVien extends NguoiDung {
-    private int maNhanVien;
     private String hoten;
     private String gioiTinh;
     private Date ngaySinh;
@@ -22,8 +21,7 @@ public class NhanVien extends NguoiDung {
     private int luong;
 
     public NhanVien(int maNhanVien, String hoten, String gioiTinh, Date ngaySinh, String diaChi, String cmnd, String sdt, int luong, String tenDangNhap, String matKhau) {
-        super(tenDangNhap, matKhau);
-        this.maNhanVien = maNhanVien;
+        super(maNhanVien, tenDangNhap, matKhau);
         this.hoten = hoten;
         this.gioiTinh = gioiTinh;
         this.ngaySinh = ngaySinh;
@@ -32,7 +30,6 @@ public class NhanVien extends NguoiDung {
         this.sdt = sdt;
         this.luong = luong;
     }
-    
     
     @Override
     public String getTenDangNhap() {
@@ -116,70 +113,6 @@ public class NhanVien extends NguoiDung {
 
     public void setLuong(int luong) {
         this.luong = luong;
-    }
-    
-    public void themDichVu() {
-        
-    }
-    
-    public void xoaDichVu() {
-        
-    }
-    
-    public void suaDichVu() {
-        
-    }
-    
-    public void timKiemDichVu() {
-        
-    }
-    
-    public void themKhachHangThanhVien() {
-        
-    }
-    
-    public void xoaKhachHangThanhVien() {
-        
-    }
-    
-    public void suaThongTinKhachHangThanhVien() {
-        
-    }
-    
-    public void timKiemKhachHangThanhVien() {
-        
-    }
-    
-    public void themDonDatPhong() {
-        
-    }
-    
-    public void xoaDonDatPhong() {
-        
-    }
-    
-    public void suaDonDatPhong() {
-        
-    }
-    
-    public void timKiemDonDatPhong() {
-        
-    }
-    
-    public void themPhongHatMoi() {
-        
-    }
-    
-    public void xoaPhongHat() {
-        
-    }
-    
-    public void suaThongTinPhonghat() {
-        
-    }
-    
-    public void timKiemPhongHat() {
-        
     }
 
     @Override

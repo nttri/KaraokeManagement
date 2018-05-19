@@ -11,20 +11,8 @@ package model;
  */
 public class PhongHat {
     private int maPhong;
-    private String loaiPhong;
-    private int sucChua;
-    private String moTa;
-    private int giaPhong;
+    private String maLoaiPhong;
     private String tinhTrang;
-
-    public PhongHat(int maPhong, String loaiPhong, int sucChua, String moTa, int giaPhong, String tinhTrang) {
-        this.maPhong = maPhong;
-        this.loaiPhong = loaiPhong;
-        this.sucChua = sucChua;
-        this.moTa = moTa;
-        this.giaPhong = giaPhong;
-        this.tinhTrang = tinhTrang;
-    }
 
     public int getMaPhong() {
         return maPhong;
@@ -34,39 +22,15 @@ public class PhongHat {
         this.maPhong = maPhong;
     }
 
-    public String getLoaiPhong() {
-        return loaiPhong;
+    public String getMaLoaiPhong() {
+        return maLoaiPhong;
     }
 
-    public void setLoaiPhong(String loaiPhong) {
-        this.loaiPhong = loaiPhong;
+    public void setMaLoaiPhong(String maLoaiPhong) {
+        this.maLoaiPhong = maLoaiPhong;
     }
 
-    public int getSucChua() {
-        return sucChua;
-    }
-
-    public void setSucChua(int sucChua) {
-        this.sucChua = sucChua;
-    }
-
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
-    }
-
-    public int getGiaPhong() {
-        return giaPhong;
-    }
-
-    public void setGiaPhong(int giaPhong) {
-        this.giaPhong = giaPhong;
-    }
-
-    public String isTinhTrang() {
+    public String getTinhTrang() {
         return tinhTrang;
     }
 
@@ -74,9 +38,16 @@ public class PhongHat {
         this.tinhTrang = tinhTrang;
     }
 
+    public PhongHat(int maPhong, String maLoaiPhong, String tinhTrang) {
+        this.maPhong = maPhong;
+        this.maLoaiPhong = maLoaiPhong;
+        this.tinhTrang = tinhTrang;
+    }
+
     @Override
     public String toString() {
-        return "PhongHat{" + "maPhong=" + maPhong + ", loaiPhong=" + loaiPhong + ", sucChua=" + sucChua + ", moTa=" + moTa + ", giaPhong=" + giaPhong + ", tinhTrang=" + tinhTrang + '}';
+        return "PhongHat{" + "maPhong=" + maPhong + ", maLoaiPhong=" + maLoaiPhong + ", tinhTrang=" + tinhTrang + '}';
     }
+    
     
 }

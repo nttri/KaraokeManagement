@@ -35,10 +35,12 @@ public class DataProcess {
         return res;
     }
     
-    public void Execute(String sql){
+    public boolean Execute(String sql){
         try {
             g_Statement.executeQuery(sql);
+            return true;
         } catch (SQLException ex) {
+            return false;
         }
     }
     

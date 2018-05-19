@@ -15,23 +15,13 @@ import java.util.Date;
 public class DonThanhToan {
     private int maDon;
     private int maNhanVien;
-    private String tenNhanVien;
     private int maKhachHang;
     private int maPhong;
+    private int giaPhong;
     private Date thoiGianBatDau;
     private Date thoiGianKetThuc;
     private String maKhuyenMai;
-
-    public DonThanhToan(int maDon, int maNhanVien, String tenNhanVien, int maKhachHang, int maPhong, Date thoiGianBatDau, Date thoiGianKetThuc, String maKhuyenMai) {
-        this.maDon = maDon;
-        this.maNhanVien = maNhanVien;
-        this.tenNhanVien = tenNhanVien;
-        this.maKhachHang = maKhachHang;
-        this.maPhong = maPhong;
-        this.thoiGianBatDau = thoiGianBatDau;
-        this.thoiGianKetThuc = thoiGianKetThuc;
-        this.maKhuyenMai = maKhuyenMai;
-    }
+    private boolean tinhTrang;
 
     public int getMaDon() {
         return maDon;
@@ -49,14 +39,6 @@ public class DonThanhToan {
         this.maNhanVien = maNhanVien;
     }
 
-    public String getTenNhanVien() {
-        return tenNhanVien;
-    }
-
-    public void setTenNhanVien(String tenNhanVien) {
-        this.tenNhanVien = tenNhanVien;
-    }
-
     public int getMaKhachHang() {
         return maKhachHang;
     }
@@ -71,6 +53,14 @@ public class DonThanhToan {
 
     public void setMaPhong(int maPhong) {
         this.maPhong = maPhong;
+    }
+
+    public int getGiaPhong() {
+        return giaPhong;
+    }
+
+    public void setGiaPhong(int giaPhong) {
+        this.giaPhong = giaPhong;
     }
 
     public Date getThoiGianBatDau() {
@@ -97,12 +87,34 @@ public class DonThanhToan {
         this.maKhuyenMai = maKhuyenMai;
     }
 
-    @Override
-    public String toString() {
-        return "DonThanhToan{" + "maDon=" + maDon + ", maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", maKhachHang=" + maKhachHang + ", maPhong=" + maPhong + ", thoiGianBatDau=" + thoiGianBatDau + ", thoiGianKetThuc=" + thoiGianKetThuc + ", maKhuyenMai=" + maKhuyenMai + '}';
+    public boolean isTinhTrang() {
+        return tinhTrang;
+    }
+
+    public void setTinhTrang(boolean tinhTrang) {
+        this.tinhTrang = tinhTrang;
     }
     
-    public int tinhTongTien() {
-        return 0;
+    public DonThanhToan() {
+        
     }
+
+    public DonThanhToan(int maDon, int maNhanVien, int maKhachHang, int maPhong, int giaPhong, Date thoiGianBatDau, Date thoiGianKetThuc, String maKhuyenMai, boolean tinhTrang) {
+        this.maDon = maDon;
+        this.maNhanVien = maNhanVien;
+        this.maKhachHang = maKhachHang;
+        this.maPhong = maPhong;
+        this.giaPhong = giaPhong;
+        this.thoiGianBatDau = thoiGianBatDau;
+        this.thoiGianKetThuc = thoiGianKetThuc;
+        this.maKhuyenMai = maKhuyenMai;
+        this.tinhTrang = tinhTrang;
+    }
+
+    @Override
+    public String toString() {
+        return "DonThanhToan{" + "maDon=" + maDon + ", maNhanVien=" + maNhanVien + ", maKhachHang=" + maKhachHang + ", maPhong=" + maPhong + ", giaPhong=" + giaPhong + ", thoiGianBatDau=" + thoiGianBatDau + ", thoiGianKetThuc=" + thoiGianKetThuc + ", maKhuyenMai=" + maKhuyenMai + ", tinhTrang=" + tinhTrang + '}';
+    }
+    
+
 }

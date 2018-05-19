@@ -12,17 +12,9 @@ package model;
 public class ChiTietDichVu {
     private int maDonThanhToan;
     private int soThuTu;
-    private String tenDichVu;
+    private int maDichVu;
     private int donGia;
     private int soLuong;
-
-    public ChiTietDichVu(int maDonThanhToan, int soThuTu, String tenDichVu, int donGia, int soLuong) {
-        this.maDonThanhToan = maDonThanhToan;
-        this.soThuTu = soThuTu;
-        this.tenDichVu = tenDichVu;
-        this.donGia = donGia;
-        this.soLuong = soLuong;
-    }
 
     public int getMaDonThanhToan() {
         return maDonThanhToan;
@@ -40,12 +32,12 @@ public class ChiTietDichVu {
         this.soThuTu = soThuTu;
     }
 
-    public String getTenDichVu() {
-        return tenDichVu;
+    public int getMaDichVu() {
+        return maDichVu;
     }
 
-    public void setTenDichVu(String tenDichVu) {
-        this.tenDichVu = tenDichVu;
+    public void setMaDichVu(int maDichVu) {
+        this.maDichVu = maDichVu;
     }
 
     public int getDonGia() {
@@ -64,10 +56,18 @@ public class ChiTietDichVu {
         this.soLuong = soLuong;
     }
 
+    public ChiTietDichVu(int maDonThanhToan, int soThuTu, int maDichVu, int donGia, int soLuong) {
+        this.maDonThanhToan = maDonThanhToan;
+        this.soThuTu = soThuTu;
+        this.maDichVu = maDichVu;
+        this.donGia = donGia;
+        this.soLuong = soLuong;
+    }
+
     @Override
     public String toString() {
-        return "ChiTietDichVu{" + "maDonThanhToan=" + maDonThanhToan + ", soThuTu=" + soThuTu + ", tenDichVu=" + tenDichVu + ", donGia=" + donGia + ", soLuong=" + soLuong + '}';
+        return "ChiTietDichVu{" + "maDonThanhToan=" + maDonThanhToan + ", soThuTu=" + soThuTu + ", maDichVu=" + maDichVu + ", donGia=" + donGia + ", soLuong=" + soLuong + '}';
     }
-    
+
     
 }

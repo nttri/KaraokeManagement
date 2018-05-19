@@ -19,6 +19,10 @@ public class ThanhVien {
     private String diaChi;
     private String cmnd;
     private String sdt;
+    
+    public ThanhVien() {
+        
+    }
 
     public ThanhVien(int maThanhVien, String hoTen, String gioiTinh, Date ngaySinh, String diaChi, String cmnd, String sdt) {
         this.maThanhVien = maThanhVien;

@@ -11,51 +11,7 @@ package model;
  */
 public class QuanLy extends NguoiDung{
     
-    public QuanLy(String tenDangNhap, String matKhau) {
-        super(tenDangNhap, matKhau);
-    }
-    
-    public void dangKyNhanVienMoi() {
-    }
-    
-    public void xoaNhanVien(){
-        
-    }
-    
-    public void suaThongTinNhanVien() {
-        
-    }
-    
-    public void timKiemNhanVien() {
-        
-    }
-    
-    public int thongKeTienLuongNhanVien() {
-        return 0;
-    }
-    
-    public long thongKeDoanhThu() {
-        return 0;
-    }
-    
-    public long thongKeLoiNhuan() {
-        return 0;
-    }
-    
-    public boolean xemTinhTrangHoatDong() {
-        return true;
-    }
-    
-    public int thongKeTienCoSoVatChat() {
-        return 0;
-    }
-    
-    public int thongKeTienDichVu() {
-        return 0;
-    }
-    
-    public boolean xemTinhTrangPhong() {
-        return true;
-    }
-    
+    public QuanLy(int maQuanLy, String tenDangNhap, String matKhau) {
+        super(maQuanLy, tenDangNhap, matKhau);
+    }    
 }

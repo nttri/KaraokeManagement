@@ -10,50 +10,46 @@ package model;
  * @author Thoai
  */
 public class NguoiDung {
+    protected int maNhanVien;
     protected String tenDangNhap;
     protected String matKhau;
-    
-    public NguoiDung(String tenDangNhap, String matKhau) {
-        this.tenDangNhap = tenDangNhap;
-        this.matKhau = matKhau;
+
+    public int getMaNhanVien() {
+        return maNhanVien;
+    }
+
+    public void setMaNhanVien(int maNhanVien) {
+        this.maNhanVien = maNhanVien;
     }
 
     public String getTenDangNhap() {
         return tenDangNhap;
     }
 
-    public String getMatKhau() {
-        return matKhau;
-    }
-
     public void setTenDangNhap(String tenDangNhap) {
         this.tenDangNhap = tenDangNhap;
+    }
+
+    public String getMatKhau() {
+        return matKhau;
     }
 
     public void setMatKhau(String matKhau) {
         this.matKhau = matKhau;
     }
 
+    public NguoiDung(int maNhanVien, String tenDangNhap, String matKhau) {
+        this.maNhanVien = maNhanVien;
+        this.tenDangNhap = tenDangNhap;
+        this.matKhau = matKhau;
+    }
+
     @Override
     public String toString() {
-        return "NguoiDung{" + "tenDangNhap=" + tenDangNhap + ", matKhau=" + matKhau + '}';
+        return "NguoiDung{" + "maNhanVien=" + maNhanVien + ", tenDangNhap=" + tenDangNhap + ", matKhau=" + matKhau + '}';
     }
+
     
-    public void dangNhap(){
-        
-    }
-    
-    public void dangXuat(){
-        
-    }
-    
-    public void suaThongTinCaNhan() {
-        
-    }
-    
-    public void xemThongTinKhachHang() {
-        
-    }
     
     
 }
