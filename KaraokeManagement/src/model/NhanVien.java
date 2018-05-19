@@ -20,8 +20,12 @@ public class NhanVien extends NguoiDung {
     private String sdt;
     private int luong;
 
-    public NhanVien(int maNhanVien, String hoten, String gioiTinh, Date ngaySinh, String diaChi, String cmnd, String sdt, int luong, String tenDangNhap, String matKhau) {
-        super(maNhanVien, tenDangNhap, matKhau);
+    public NhanVien() {
+        
+    }
+    
+    public NhanVien(int maNhanVien, String chucVu, String hoten, String gioiTinh, Date ngaySinh, String diaChi, String cmnd, String sdt, int luong, String tenDangNhap, String matKhau) {
+        super(maNhanVien, tenDangNhap, matKhau, chucVu);
         this.hoten = hoten;
         this.gioiTinh = gioiTinh;
         this.ngaySinh = ngaySinh;

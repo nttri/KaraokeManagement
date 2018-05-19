@@ -11,7 +11,7 @@ package model;
  */
 public class QuanLy extends NguoiDung{
     
-    public QuanLy(int maQuanLy, String tenDangNhap, String matKhau) {
-        super(maQuanLy, tenDangNhap, matKhau);
+    public QuanLy(int maQuanLy, String tenDangNhap, String matKhau, String chucVu) {
+        super(maQuanLy, tenDangNhap, matKhau, chucVu);
     }    
 }
