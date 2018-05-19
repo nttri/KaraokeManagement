@@ -698,8 +698,8 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         
         Frame_DangNhap fDangNhap = new Frame_DangNhap();
-            this.setVisible(false);
-            fDangNhap.setVisible(true);
+        this.setVisible(false);
+        fDangNhap.setVisible(true);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnThanhToan_pnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToan_pnThanhToanActionPerformed

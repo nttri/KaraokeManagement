@@ -31,8 +31,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         setFalseAllButton();
         bQuanLyNhanVien = true;
         
-        setColorAllButton(NVColor.btn_when_disable);
-        btn_QuanLyNhanVien.setBackground(NVColor.btn_when_selected);
+        setColorAllButton(QLColor.btn_Default);
+        btn_QuanLyNhanVien.setBackground(QLColor.btn_When_Clicked);
         
         setAllPanelDisappear();
         jpn_QuanLyNhanVien.setVisible(true);
@@ -46,11 +46,12 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jpn_QuanLyDoanhThu.setVisible(false);
     }
     
-    void setColorAllButton(Color color ){
+    void setColorAllButton(Color color){
         btn_QuanLyNhanVien.setBackground(color);
         btn_QuanLyPhongHat.setBackground(color);
         btn_QuanLyDichVu.setBackground(color);
         btn_QuanLyDoanhThu.setBackground(color);
+        btn_Thoat.setBackground(color);
     }
     
     void setFalseAllButton(){
@@ -87,11 +88,15 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 680));
+        setMinimumSize(new java.awt.Dimension(1280, 708));
+        setPreferredSize(new java.awt.Dimension(1280, 708));
+        setResizable(false);
+        setSize(new java.awt.Dimension(1280, 708));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setForeground(new java.awt.Color(60, 63, 65));
+        jPanel1.setMinimumSize(new java.awt.Dimension(210, 100));
         jPanel1.setPreferredSize(new java.awt.Dimension(210, 100));
         jPanel1.setLayout(null);
 
@@ -110,19 +115,21 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jlb_brand.setForeground(new java.awt.Color(255, 255, 255));
         jlb_brand.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlb_brand.setText("Chào Tú");
+        jlb_brand.setPreferredSize(new java.awt.Dimension(210, 30));
         jPanel1.add(jlb_brand);
-        jlb_brand.setBounds(0, 76, 210, 14);
+        jlb_brand.setBounds(0, 70, 210, 30);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 210, 100);
 
         jPanel2.setBackground(new java.awt.Color(32, 78, 80));
+        jPanel2.setMinimumSize(new java.awt.Dimension(210, 580));
         jPanel2.setPreferredSize(new java.awt.Dimension(210, 580));
         jPanel2.setLayout(null);
 
         btn_QuanLyNhanVien.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_QuanLyNhanVien.setForeground(new java.awt.Color(255, 255, 255));
-        btn_QuanLyNhanVien.setText("Quản lý nhân viên");
+        btn_QuanLyNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_QLNV.png"))); // NOI18N
         btn_QuanLyNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_QuanLyNhanVienMouseClicked(evt);
@@ -144,7 +151,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
         btn_QuanLyPhongHat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_QuanLyPhongHat.setForeground(new java.awt.Color(255, 255, 255));
-        btn_QuanLyPhongHat.setText("Quản lý phòng hát");
+        btn_QuanLyPhongHat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_PhongHat.png"))); // NOI18N
         btn_QuanLyPhongHat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_QuanLyPhongHatMouseClicked(evt);
@@ -166,7 +173,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
         btn_QuanLyDichVu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_QuanLyDichVu.setForeground(new java.awt.Color(255, 255, 255));
-        btn_QuanLyDichVu.setText("Quản lý dịch vụ");
+        btn_QuanLyDichVu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_DichVu.png"))); // NOI18N
         btn_QuanLyDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_QuanLyDichVuMouseClicked(evt);
@@ -188,7 +195,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
         btn_QuanLyDoanhThu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_QuanLyDoanhThu.setForeground(new java.awt.Color(255, 255, 255));
-        btn_QuanLyDoanhThu.setText("Quản lý doanh thu");
+        btn_QuanLyDoanhThu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_DoanhThu.png"))); // NOI18N
         btn_QuanLyDoanhThu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_QuanLyDoanhThuMouseClicked(evt);
@@ -210,7 +217,18 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
         btn_Thoat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_Thoat.setForeground(new java.awt.Color(255, 255, 255));
-        btn_Thoat.setText("Thoát");
+        btn_Thoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_Thoat.png"))); // NOI18N
+        btn_Thoat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_ThoatMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_ThoatMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_ThoatMouseExited(evt);
+            }
+        });
         jPanel2.add(btn_Thoat);
         btn_Thoat.setBounds(0, 510, 210, 70);
 
@@ -218,57 +236,62 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jPanel2.setBounds(0, 100, 210, 580);
 
         jpn_QuanLyNhanVien.setBackground(new java.awt.Color(0, 68, 80));
+        jpn_QuanLyNhanVien.setMinimumSize(new java.awt.Dimension(1070, 680));
         jpn_QuanLyNhanVien.setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 50)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("QUẢN LÝ NHÂN VIÊN");
         jpn_QuanLyNhanVien.add(jLabel2);
-        jLabel2.setBounds(100, 30, 510, 70);
+        jLabel2.setBounds(30, 30, 535, 70);
 
         getContentPane().add(jpn_QuanLyNhanVien);
-        jpn_QuanLyNhanVien.setBounds(210, 0, 1064, 680);
+        jpn_QuanLyNhanVien.setBounds(210, 0, 1070, 680);
 
         jpn_QuanLyPhongHat.setBackground(new java.awt.Color(0, 68, 80));
-        jpn_QuanLyPhongHat.setPreferredSize(new java.awt.Dimension(610, 100));
+        jpn_QuanLyPhongHat.setMinimumSize(new java.awt.Dimension(1070, 680));
+        jpn_QuanLyPhongHat.setPreferredSize(new java.awt.Dimension(1070, 680));
         jpn_QuanLyPhongHat.setLayout(null);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 50)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("QUẢN LÝ PHÒNG HÁT");
         jpn_QuanLyPhongHat.add(jLabel3);
-        jLabel3.setBounds(30, 30, 500, 70);
+        jLabel3.setBounds(30, 30, 550, 70);
 
         getContentPane().add(jpn_QuanLyPhongHat);
-        jpn_QuanLyPhongHat.setBounds(210, 0, 1064, 680);
+        jpn_QuanLyPhongHat.setBounds(210, 0, 1070, 680);
 
         jpn_QuanLyDichVu.setBackground(new java.awt.Color(0, 68, 80));
-        jpn_QuanLyDichVu.setPreferredSize(new java.awt.Dimension(610, 100));
+        jpn_QuanLyDichVu.setMinimumSize(new java.awt.Dimension(1070, 680));
+        jpn_QuanLyDichVu.setPreferredSize(new java.awt.Dimension(1070, 680));
         jpn_QuanLyDichVu.setLayout(null);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 50)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("UẢN LÝ DỊCH VỤ");
+        jLabel4.setText("QUẢN LÝ DỊCH VỤ");
         jpn_QuanLyDichVu.add(jLabel4);
-        jLabel4.setBounds(30, 30, 500, 70);
+        jLabel4.setBounds(30, 30, 480, 70);
 
         getContentPane().add(jpn_QuanLyDichVu);
-        jpn_QuanLyDichVu.setBounds(210, 0, 1064, 680);
+        jpn_QuanLyDichVu.setBounds(210, 0, 1070, 680);
 
         jpn_QuanLyDoanhThu.setBackground(new java.awt.Color(0, 68, 80));
-        jpn_QuanLyDoanhThu.setPreferredSize(new java.awt.Dimension(610, 100));
+        jpn_QuanLyDoanhThu.setMinimumSize(new java.awt.Dimension(1070, 680));
+        jpn_QuanLyDoanhThu.setPreferredSize(new java.awt.Dimension(1070, 680));
         jpn_QuanLyDoanhThu.setLayout(null);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 50)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("QUẢN LÝ DOANH THU");
         jpn_QuanLyDoanhThu.add(jLabel5);
-        jLabel5.setBounds(30, 30, 500, 70);
+        jLabel5.setBounds(30, 30, 560, 70);
 
         getContentPane().add(jpn_QuanLyDoanhThu);
-        jpn_QuanLyDoanhThu.setBounds(210, 0, 1064, 680);
+        jpn_QuanLyDoanhThu.setBounds(210, 0, 1070, 680);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_QuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuanLyNhanVienActionPerformed
@@ -384,6 +407,25 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             btn_QuanLyDoanhThu.setBackground(QLColor.btn_Default);
         btn_QuanLyDoanhThu.setText("");
     }//GEN-LAST:event_btn_QuanLyDoanhThuMouseExited
+
+    private void btn_ThoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThoatMouseClicked
+        // TODO add your handling code here:
+        Frame_DangNhap fDangNhap = new Frame_DangNhap();
+        this.setVisible(false);
+        fDangNhap.setVisible(true);
+    }//GEN-LAST:event_btn_ThoatMouseClicked
+
+    private void btn_ThoatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThoatMouseEntered
+        // TODO add your handling code here:
+        btn_Thoat.setBackground(QLColor.btn_When_Entered);
+        btn_Thoat.setText("THOÁT");
+    }//GEN-LAST:event_btn_ThoatMouseEntered
+
+    private void btn_ThoatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThoatMouseExited
+        // TODO add your handling code here:
+        btn_Thoat.setBackground(QLColor.btn_Default);
+        btn_Thoat.setText("");
+    }//GEN-LAST:event_btn_ThoatMouseExited
 
 
     /**
