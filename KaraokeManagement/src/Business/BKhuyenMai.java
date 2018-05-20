@@ -5,7 +5,6 @@
  */
 package Business;
 
-import DatabaseConnection.DataProcess;
 import common.Helper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,8 +28,8 @@ public class BKhuyenMai extends Business{
         sql = "layTatCaKhuyenMai";
         rs = data.fetchData(sql);
         
-        KhuyenMai khuyenMai = new KhuyenMai();
         while(rs.next()) {
+            KhuyenMai khuyenMai = new KhuyenMai();
             Helper.setKhuyenMai(khuyenMai, rs);
             arrKhuyenMai.add(khuyenMai);
         }
@@ -47,8 +46,8 @@ public class BKhuyenMai extends Business{
         return khuyenMai;
     }
     
-    public boolean themKhuyenMai(String tenKM, int giaTriKM, String thoiGianBD, String thoiGianKT) throws SQLException {
-        sql = "themKhuyenMai " + tenKM + ", " + giaTriKM + ", " + thoiGianBD + ", " + thoiGianKT;
+    public boolean themKhuyenMai(String maKM, String tenKM, int giaTriKM, String thoiGianBD, String thoiGianKT) throws SQLException {
+        sql = "themKhuyenMai " + maKM + ", " + tenKM + ", " + giaTriKM + ", " + thoiGianBD + ", " + thoiGianKT;
         return data.Execute(sql);
     }
     

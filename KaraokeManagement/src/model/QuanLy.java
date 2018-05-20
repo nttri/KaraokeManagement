@@ -10,6 +10,9 @@ package model;
  * @author Thoai
  */
 public class QuanLy extends NguoiDung{
+    public QuanLy() {
+        
+    }
     
     public QuanLy(int maQuanLy, String tenDangNhap, String matKhau, String chucVu) {
         super(maQuanLy, tenDangNhap, matKhau, chucVu);

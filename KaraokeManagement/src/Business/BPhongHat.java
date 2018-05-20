@@ -24,8 +24,8 @@ public class BPhongHat extends Business{
         sql = "layThongTinTatCaPhongHat";
         rs = data.fetchData(sql);
         
-        PhongHat phongHat = new PhongHat();
         while(rs.next()) {
+            PhongHat phongHat = new PhongHat();
             Helper.setPhongHat(phongHat, rs);
             arrPhongHat.add(phongHat);
         }
@@ -34,10 +34,10 @@ public class BPhongHat extends Business{
 
     public ArrayList<PhongHat> layThongTinPhongHatTheoTinhTrang(String tinhTrang) throws SQLException {
         ArrayList<PhongHat> arrPhongHat = new ArrayList();
-        PhongHat phongHat = new PhongHat();
         sql = "layThongTinPhongHatTheoTinhTrang " + tinhTrang;
         rs = data.fetchData(sql);
         while (rs.next()) {
+            PhongHat phongHat = new PhongHat();
             Helper.setPhongHat(phongHat, rs);
             arrPhongHat.add(phongHat);
         }

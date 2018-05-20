@@ -56,6 +56,10 @@ public class ChiTietDichVu {
         this.soLuong = soLuong;
     }
 
+    public ChiTietDichVu() {
+        
+    }
+    
     public ChiTietDichVu(int maDonThanhToan, int soThuTu, int maDichVu, int donGia, int soLuong) {
         this.maDonThanhToan = maDonThanhToan;
         this.soThuTu = soThuTu;

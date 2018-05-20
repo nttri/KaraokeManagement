@@ -7,12 +7,16 @@ package common;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.ChiTietDichVu;
+import model.DichVu;
 import model.DonThanhToan;
 import model.KhuyenMai;
 import model.NguoiDung;
 import model.NhanVien;
 import model.PhongHat;
 import model.KhachHang;
+import model.LoaiDichVu;
+import model.LoaiPhongHat;
 
 /**
  *
@@ -75,5 +79,33 @@ public class Helper {
         phongHat.setMaPhong(rs.getInt("MAPHONG"));
         phongHat.setMaLoaiPhong(rs.getInt("MALOAIPHONG"));
         phongHat.setTinhTrang(rs.getString("TINHTRANG"));
+    }
+    
+    public static void setLoaiPhongHat(LoaiPhongHat loaiPhongHat, ResultSet rs) throws SQLException {
+        loaiPhongHat.setMaLoaiPhong(rs.getInt("MALOAIPHONG"));
+        loaiPhongHat.setTenLoai(rs.getString("TENLOAI"));
+        loaiPhongHat.setMoTa(rs.getString("MOTA"));
+        loaiPhongHat.setSucChua(rs.getInt("SUCCHUA"));
+        loaiPhongHat.setGiaPhong(rs.getInt("GIAPHONG"));
+    }
+    
+    public static void setDichVu(DichVu dichVu, ResultSet rs) throws SQLException {
+        dichVu.setMaDichVu(rs.getInt("MADV"));
+        dichVu.setMaLoaiDichVu(rs.getInt("MALOAIDV"));
+        dichVu.setTenDichVu(rs.getString("TENDV"));
+        dichVu.setDonGia(rs.getInt("DONGIA"));
+    }
+    
+    public static void setLoaiDichVu(LoaiDichVu loaiDichVu, ResultSet rs) throws SQLException {
+        loaiDichVu.setMaLoaiDichVu(rs.getInt("MALOAIDV"));
+        loaiDichVu.setTenLoaiDichVu("TENLOAIDV");
+    }
+    
+    public static void setChiTietDichVu(ChiTietDichVu chiTietDichVu, ResultSet rs) throws SQLException {
+        chiTietDichVu.setMaDonThanhToan(rs.getInt("MADON"));
+        chiTietDichVu.setSoThuTu(rs.getInt("STT"));
+        chiTietDichVu.setMaDichVu(rs.getInt("MADV"));
+        chiTietDichVu.setDonGia(rs.getInt("DONGIA"));
+        chiTietDichVu.setSoLuong(rs.getInt("SOLUONG"));
     }
 }
