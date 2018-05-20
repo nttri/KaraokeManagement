@@ -829,7 +829,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         for(int i = 0; i < arrDV.size(); i++){
             LoaiDichVu ldv = new LoaiDichVu();
             try {
-                ldv = bLoaiDichVu.layThongTinLoaiDichVuTheoMa(arrDV.get(i).getMaDichVu());
+                ldv = bLoaiDichVu.layThongTinLoaiDichVuTheoMa(arrDV.get(i).getMaLoaiDichVu());
             } catch (SQLException ex) {
                 Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
             }
