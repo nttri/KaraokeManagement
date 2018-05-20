@@ -51,7 +51,7 @@ public class BLoaiPhongHat extends Business {
     
     public ArrayList<LoaiPhongHat> layThongTinLoaiPhongHatTheoGiaPhong(int giaPhong) throws SQLException {
         ArrayList<LoaiPhongHat> arrLoaiPhongHat = new ArrayList();
-        sql = "layThongTinLoaiPhongHatTheoSucChua " + giaPhong;
+        sql = "layThongTinLoaiPhongHatTheoGiaPhong " + giaPhong;
         rs = data.fetchData(sql);
         
         LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
