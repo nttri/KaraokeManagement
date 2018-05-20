@@ -5,10 +5,16 @@
  */
 package view;
 
+import Business.*;
 import common.*;
 import model.*;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -23,12 +29,19 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     boolean bQuanLyPhongHat = false;
     boolean bQuanLyDichVu = false;
     boolean bQuanLyDoanhThu = false;
+    
+    DefaultTableModel mTable_NhanVien, mTable_PhongHat, mTable_DichVu, mTable_DoanhThu;
+    
     /**
      * Creates new form Frame_QuanLy
      */
     public Frame_QuanLy() {
         initComponents();
         customInit();
+        mTable_NhanVien = (DefaultTableModel) tbDanhSachNhanVien_pnQuanLyNhanVien.getModel();
+        mTable_PhongHat = (DefaultTableModel) tbPhongHat_pnQuanLyPhongHat.getModel();
+        mTable_DichVu = (DefaultTableModel) tbDichVu_pnQuanLyDichVu.getModel();
+        //...
     }
 
     public Frame_QuanLy(NhanVien ql){
@@ -70,6 +83,12 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         bQuanLyDichVu = false;
         bQuanLyDoanhThu = false;
     }
+    
+    void clearAllDataTable(DefaultTableModel dtm){
+        for(int i = dtm.getRowCount() - 1; i >=0; i--){
+            dtm.removeRow(i);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,7 +110,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jpn_QuanLyNhanVien = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbDanhSachNhanVien_pnQuanLyNhanVien = new javax.swing.JTable();
         btnTaoMoi_pnQuanLyNhanVien = new javax.swing.JButton();
         btnChinhSua_pnQuanLyNhanVien = new javax.swing.JButton();
         btnXoa_pnQuanLyNhanVien = new javax.swing.JButton();
@@ -100,13 +119,13 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnTaoMoi_pnPhongHat = new javax.swing.JButton();
         btnChinhSua_pnPhongHat = new javax.swing.JButton();
         spPhongHat_pnPhongHat = new javax.swing.JScrollPane();
-        tbPhongHat_pnPhongHat = new javax.swing.JTable();
+        tbPhongHat_pnQuanLyPhongHat = new javax.swing.JTable();
         btnXoaPhong_pnPhongHat = new javax.swing.JButton();
         btnThemLoaiPhongHat = new javax.swing.JButton();
         jpn_QuanLyDichVu = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         spDichVu_pnDichVu = new javax.swing.JScrollPane();
-        tbDichVu_pnDichVu = new javax.swing.JTable();
+        tbDichVu_pnQuanLyDichVu = new javax.swing.JTable();
         btnTaoMoi_pnDichVu = new javax.swing.JButton();
         btnChinhSua_pnDichVu = new javax.swing.JButton();
         btnXoa_pnDichVu = new javax.swing.JButton();
@@ -151,6 +170,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jPanel1.setBounds(0, 0, 210, 100);
 
         jPanel2.setBackground(new java.awt.Color(32, 78, 80));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setMinimumSize(new java.awt.Dimension(210, 580));
         jPanel2.setPreferredSize(new java.awt.Dimension(210, 580));
         jPanel2.setLayout(null);
@@ -251,7 +271,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btn_Thoat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_Thoat.setForeground(new java.awt.Color(255, 255, 255));
         btn_Thoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_Thoat.png"))); // NOI18N
-        btn_Thoat.setBorder(null);
+        btn_Thoat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btn_Thoat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_ThoatMouseClicked(evt);
@@ -279,19 +299,19 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jpn_QuanLyNhanVien.add(jLabel2);
         jLabel2.setBounds(40, 30, 535, 70);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbDanhSachNhanVien_pnQuanLyNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã nhân viên", "Tên nhân viên", "Giới tính", "Ngày sinh", "CMND", "Lương"
+                "Mã nhân viên", "Tên nhân viên", "Giới tính", "Ngày sinh", "Địa chỉ", "CMND", "SĐT", "Lương"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -302,7 +322,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbDanhSachNhanVien_pnQuanLyNhanVien);
 
         jpn_QuanLyNhanVien.add(jScrollPane1);
         jScrollPane1.setBounds(40, 110, 990, 430);
@@ -312,7 +332,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnTaoMoi_pnQuanLyNhanVien.setForeground(new java.awt.Color(255, 255, 255));
         btnTaoMoi_pnQuanLyNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_add.png"))); // NOI18N
         btnTaoMoi_pnQuanLyNhanVien.setText("TẠO MỚI");
-        btnTaoMoi_pnQuanLyNhanVien.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnTaoMoi_pnQuanLyNhanVien.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnTaoMoi_pnQuanLyNhanVien.setBorderPainted(false);
         btnTaoMoi_pnQuanLyNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTaoMoi_pnQuanLyNhanVienActionPerformed(evt);
@@ -326,7 +347,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnChinhSua_pnQuanLyNhanVien.setForeground(new java.awt.Color(255, 255, 255));
         btnChinhSua_pnQuanLyNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_edit.png"))); // NOI18N
         btnChinhSua_pnQuanLyNhanVien.setText("CHỈNH SỬA");
-        btnChinhSua_pnQuanLyNhanVien.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnChinhSua_pnQuanLyNhanVien.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnChinhSua_pnQuanLyNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChinhSua_pnQuanLyNhanVienActionPerformed(evt);
@@ -340,7 +361,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnXoa_pnQuanLyNhanVien.setForeground(new java.awt.Color(255, 255, 255));
         btnXoa_pnQuanLyNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_remove.png"))); // NOI18N
         btnXoa_pnQuanLyNhanVien.setText("XÓA");
-        btnXoa_pnQuanLyNhanVien.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnXoa_pnQuanLyNhanVien.setBorder(null);
         btnXoa_pnQuanLyNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoa_pnQuanLyNhanVienActionPerformed(evt);
@@ -391,8 +412,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jpn_QuanLyPhongHat.add(btnChinhSua_pnPhongHat);
         btnChinhSua_pnPhongHat.setBounds(440, 585, 200, 48);
 
-        tbPhongHat_pnPhongHat.setBackground(new java.awt.Color(240, 240, 240));
-        tbPhongHat_pnPhongHat.setModel(new javax.swing.table.DefaultTableModel(
+        tbPhongHat_pnQuanLyPhongHat.setBackground(new java.awt.Color(240, 240, 240));
+        tbPhongHat_pnQuanLyPhongHat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -415,7 +436,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        spPhongHat_pnPhongHat.setViewportView(tbPhongHat_pnPhongHat);
+        spPhongHat_pnPhongHat.setViewportView(tbPhongHat_pnQuanLyPhongHat);
 
         jpn_QuanLyPhongHat.add(spPhongHat_pnPhongHat);
         spPhongHat_pnPhongHat.setBounds(40, 110, 990, 430);
@@ -461,7 +482,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jpn_QuanLyDichVu.add(jLabel4);
         jLabel4.setBounds(40, 30, 480, 70);
 
-        tbDichVu_pnDichVu.setModel(new javax.swing.table.DefaultTableModel(
+        tbDichVu_pnQuanLyDichVu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -477,7 +498,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        spDichVu_pnDichVu.setViewportView(tbDichVu_pnDichVu);
+        spDichVu_pnDichVu.setViewportView(tbDichVu_pnQuanLyDichVu);
 
         jpn_QuanLyDichVu.add(spDichVu_pnDichVu);
         spDichVu_pnDichVu.setBounds(40, 110, 990, 430);
@@ -572,6 +593,25 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         bQuanLyNhanVien = true;
         btn_QuanLyNhanVien.setBackground(QLColor.btn_When_Clicked);
         jpn_QuanLyNhanVien.setVisible(true);
+        clearAllDataTable(mTable_NhanVien);
+        
+        BNhanVien bNhanVien = new BNhanVien();
+        ArrayList<NhanVien> arrNV = null;
+        
+        try {
+            arrNV = bNhanVien.layThongTinTatCaNhanVien();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(int i = 0; i < arrNV.size(); i++){
+            mTable_NhanVien.addRow(new Object[]{
+                arrNV.get(i).getMaNhanVien(), arrNV.get(i).getHoten(), arrNV.get(i).getGioiTinh(),
+                arrNV.get(i).getNgaySinh(), arrNV.get(i).getDiaChi(), arrNV.get(i).getCmnd(),
+                arrNV.get(i).getSdt(), arrNV.get(i).getLuong()
+            });           
+        }
+       
     }//GEN-LAST:event_btn_QuanLyNhanVienMouseClicked
 
     private void btn_QuanLyNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyNhanVienMouseEntered
@@ -803,14 +843,14 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel jpn_QuanLyDichVu;
     private javax.swing.JPanel jpn_QuanLyDoanhThu;
     private javax.swing.JPanel jpn_QuanLyNhanVien;
     private javax.swing.JPanel jpn_QuanLyPhongHat;
     private javax.swing.JScrollPane spDichVu_pnDichVu;
     private javax.swing.JScrollPane spPhongHat_pnPhongHat;
-    private javax.swing.JTable tbDichVu_pnDichVu;
-    private javax.swing.JTable tbPhongHat_pnPhongHat;
+    private javax.swing.JTable tbDanhSachNhanVien_pnQuanLyNhanVien;
+    private javax.swing.JTable tbDichVu_pnQuanLyDichVu;
+    private javax.swing.JTable tbPhongHat_pnQuanLyPhongHat;
     // End of variables declaration//GEN-END:variables
 }

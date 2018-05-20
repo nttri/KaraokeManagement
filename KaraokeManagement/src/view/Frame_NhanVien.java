@@ -1,5 +1,6 @@
 package view;
 
+import Business.*;
 import common.*;
 import model.*;
 import java.awt.Color;

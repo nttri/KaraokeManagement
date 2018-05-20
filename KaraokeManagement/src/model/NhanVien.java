@@ -71,7 +71,7 @@ public class NhanVien extends NguoiDung {
         this.hoten = hoten;
     }
 
-    public String isGioiTinh() {
+    public String getGioiTinh() {
         return gioiTinh;
     }
 

@@ -23,8 +23,7 @@ public class DataProcess {
         try {
             g_Statement = g_Connection.createStatement();
         } catch (SQLException ex) {
-        }
-        System.out.println("Haha");
+        };
     }
     
     public ResultSet fetchData(String sql){
