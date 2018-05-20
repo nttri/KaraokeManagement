@@ -33,8 +33,8 @@ public class Helper {
         donThanhToan.setMaKhachHang(rs.getInt("MAKH"));
         donThanhToan.setMaPhong(rs.getInt("MAPHONG"));
         donThanhToan.setGiaPhong(rs.getInt("GIAPHONG"));
-        donThanhToan.setThoiGianBatDau(rs.getDate("THOIGIANBD"));
-        donThanhToan.setThoiGianKetThuc(rs.getDate("THOIGIANKT"));
+        donThanhToan.setThoiGianBatDau(rs.getTimestamp("THOIGIANBD"));
+        donThanhToan.setThoiGianKetThuc(rs.getTimestamp("THOIGIANKT"));
         donThanhToan.setMaKhuyenMai(rs.getString("MAKM"));
         donThanhToan.setTinhTrang(rs.getBoolean("TINHTRANG"));
     }
