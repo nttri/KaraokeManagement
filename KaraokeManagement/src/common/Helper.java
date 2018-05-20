@@ -7,6 +7,7 @@ package common;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.ChiTietDichVu;
 import model.DichVu;
 import model.DonThanhToan;
 import model.KhuyenMai;
@@ -98,5 +99,13 @@ public class Helper {
     public static void setLoaiDichVu(LoaiDichVu loaiDichVu, ResultSet rs) throws SQLException {
         loaiDichVu.setMaLoaiDichVu(rs.getInt("MALOAIDV"));
         loaiDichVu.setTenLoaiDichVu("TENLOAIDV");
+    }
+    
+    public static void setChiTietDichVu(ChiTietDichVu chiTietDichVu, ResultSet rs) throws SQLException {
+        chiTietDichVu.setMaDonThanhToan(rs.getInt("MADON"));
+        chiTietDichVu.setSoThuTu(rs.getInt("STT"));
+        chiTietDichVu.setMaDichVu(rs.getInt("MADV"));
+        chiTietDichVu.setDonGia(rs.getInt("DONGIA"));
+        chiTietDichVu.setSoLuong(rs.getInt("SOLUONG"));
     }
 }
