@@ -1,6 +1,7 @@
 package view;
 
-import common.NVColor;
+import common.*;
+import model.*;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 /**
@@ -9,14 +10,31 @@ import javax.swing.JOptionPane;
  */
 public class Frame_NhanVien extends javax.swing.JFrame {
 
+    static NhanVien NV;
+    
+    boolean bDonDatPhong = false;
+    boolean bDichVu = false;
+    boolean bKhachHangThanhVien = false;
+    boolean bPhongHat = false;
+    boolean bThanhToan = false;
+    
     public Frame_NhanVien() {
         initComponents();
         customInit();
     }
     
+    public Frame_NhanVien(NhanVien nv){
+        this();
+        NV = nv;
+        jLB_Brand.setText(MyStrings.AppTitle);
+        jLB_Name.setText("Chào " + NV.getHoten());
+    }
     void customInit(){
-        setColorAllButton(NVColor.btn_when_disable);
-        btnDonDatPhong.setBackground(NVColor.btn_when_selected);
+        setFalseAllButton();
+        bDonDatPhong = true;
+        
+        setColorAllButton(NVColor.btn_Default);
+        btnDonDatPhong.setBackground(NVColor.btn_When_Clicked);
         
         setAllPanelDisappear();
         pnDonDatPhong.setVisible(true);
@@ -37,15 +55,24 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnKhachHangThanhVien.setBackground(color);
         btnPhongHat.setBackground(color);
         btnThanhToan.setBackground(color);
+        btnThoat.setBackground(color);
     }
 
+    void setFalseAllButton(){
+        bDonDatPhong = false;
+        bDichVu = false;
+        bKhachHangThanhVien = false;
+        bPhongHat = false;
+        bThanhToan = false;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        lbName = new javax.swing.JLabel();
+        jLB_Brand = new javax.swing.JLabel();
+        jLB_Name = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnDonDatPhong = new javax.swing.JButton();
         btnDichVu = new javax.swing.JButton();
@@ -101,25 +128,36 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("My Karaoke");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 210, 75);
+        jLB_Brand.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLB_Brand.setForeground(new java.awt.Color(255, 255, 255));
+        jLB_Brand.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLB_Brand.setText("My Karaoke");
+        jPanel1.add(jLB_Brand);
+        jLB_Brand.setBounds(0, 0, 210, 75);
 
-        lbName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbName.setForeground(new java.awt.Color(0, 204, 51));
-        lbName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbName.setText("Chào nhân viên");
-        jPanel1.add(lbName);
-        lbName.setBounds(0, 75, 210, 25);
+        jLB_Name.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLB_Name.setForeground(new java.awt.Color(0, 204, 51));
+        jLB_Name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLB_Name.setText("Chào");
+        jLB_Name.setToolTipText("");
+        jPanel1.add(jLB_Name);
+        jLB_Name.setBounds(0, 75, 210, 25);
 
         jPanel2.setBackground(new java.awt.Color(0, 100, 0));
         jPanel2.setLayout(null);
 
+        btnDonDatPhong.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnDonDatPhong.setForeground(new java.awt.Color(255, 255, 255));
         btnDonDatPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_DonDatPhong.png"))); // NOI18N
-        btnDonDatPhong.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnDonDatPhong.setBorder(null);
+        btnDonDatPhong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDonDatPhongMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDonDatPhongMouseExited(evt);
+            }
+        });
         btnDonDatPhong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDonDatPhongActionPerformed(evt);
@@ -128,8 +166,18 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         jPanel2.add(btnDonDatPhong);
         btnDonDatPhong.setBounds(0, 0, 210, 70);
 
+        btnDichVu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnDichVu.setForeground(new java.awt.Color(255, 255, 255));
         btnDichVu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_DichVu.png"))); // NOI18N
-        btnDichVu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnDichVu.setBorder(null);
+        btnDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDichVuMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDichVuMouseExited(evt);
+            }
+        });
         btnDichVu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDichVuActionPerformed(evt);
@@ -138,8 +186,18 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         jPanel2.add(btnDichVu);
         btnDichVu.setBounds(0, 70, 210, 70);
 
+        btnKhachHangThanhVien.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnKhachHangThanhVien.setForeground(new java.awt.Color(255, 255, 255));
         btnKhachHangThanhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_KhachHangThanhVien.png"))); // NOI18N
-        btnKhachHangThanhVien.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnKhachHangThanhVien.setBorder(null);
+        btnKhachHangThanhVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnKhachHangThanhVienMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnKhachHangThanhVienMouseExited(evt);
+            }
+        });
         btnKhachHangThanhVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKhachHangThanhVienActionPerformed(evt);
@@ -148,8 +206,18 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         jPanel2.add(btnKhachHangThanhVien);
         btnKhachHangThanhVien.setBounds(0, 140, 210, 70);
 
+        btnPhongHat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnPhongHat.setForeground(new java.awt.Color(255, 255, 255));
         btnPhongHat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_PhongHat.png"))); // NOI18N
-        btnPhongHat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnPhongHat.setBorder(null);
+        btnPhongHat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnPhongHatMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnPhongHatMouseExited(evt);
+            }
+        });
         btnPhongHat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPhongHatActionPerformed(evt);
@@ -158,8 +226,18 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         jPanel2.add(btnPhongHat);
         btnPhongHat.setBounds(0, 210, 210, 70);
 
+        btnThanhToan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnThanhToan.setForeground(new java.awt.Color(255, 255, 255));
         btnThanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_ThanhToan.png"))); // NOI18N
-        btnThanhToan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnThanhToan.setBorder(null);
+        btnThanhToan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnThanhToanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnThanhToanMouseExited(evt);
+            }
+        });
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThanhToanActionPerformed(evt);
@@ -169,7 +247,18 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnThanhToan.setBounds(0, 280, 210, 70);
 
         btnThoat.setBackground(new java.awt.Color(145, 0, 0));
+        btnThoat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnThoat.setForeground(new java.awt.Color(255, 255, 255));
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_Thoat.png"))); // NOI18N
+        btnThoat.setBorder(null);
+        btnThoat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnThoatMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnThoatMouseExited(evt);
+            }
+        });
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThoatActionPerformed(evt);
@@ -651,46 +740,51 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDonDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonDatPhongActionPerformed
-        
-        setColorAllButton(NVColor.btn_when_disable);
-        btnDonDatPhong.setBackground(NVColor.btn_when_selected);
+        setFalseAllButton();
+        setColorAllButton(NVColor.btn_Default);
         setAllPanelDisappear();
+        bDonDatPhong = true;
+        btnDonDatPhong.setBackground(NVColor.btn_When_Clicked);
         pnDonDatPhong.setVisible(true);
         
     }//GEN-LAST:event_btnDonDatPhongActionPerformed
 
     private void btnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDichVuActionPerformed
-        
-        setColorAllButton(NVColor.btn_when_disable);
-        btnDichVu.setBackground(NVColor.btn_when_selected);
+        setFalseAllButton();
+        setColorAllButton(NVColor.btn_Default);
         setAllPanelDisappear();
+        bDichVu = true;            
+        btnDichVu.setBackground(NVColor.btn_When_Clicked);
         pnDichVu.setVisible(true);
         
     }//GEN-LAST:event_btnDichVuActionPerformed
 
     private void btnKhachHangThanhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangThanhVienActionPerformed
-        
-        setColorAllButton(NVColor.btn_when_disable);
-        btnKhachHangThanhVien.setBackground(NVColor.btn_when_selected);
+        setFalseAllButton();        
+        setColorAllButton(NVColor.btn_Default);
         setAllPanelDisappear();
+        bKhachHangThanhVien = true;
+        btnKhachHangThanhVien.setBackground(NVColor.btn_When_Clicked);
         pnKhachHangThanhVien.setVisible(true);
                 
     }//GEN-LAST:event_btnKhachHangThanhVienActionPerformed
 
     private void btnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhongHatActionPerformed
-        
-        setColorAllButton(NVColor.btn_when_disable);
-        btnPhongHat.setBackground(NVColor.btn_when_selected);
+        setFalseAllButton();        
+        setColorAllButton(NVColor.btn_Default);
         setAllPanelDisappear();
+        bPhongHat = true;
+        btnPhongHat.setBackground(NVColor.btn_When_Clicked);
         pnPhongHat.setVisible(true);
         
     }//GEN-LAST:event_btnPhongHatActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        
-        setColorAllButton(NVColor.btn_when_disable);
-        btnThanhToan.setBackground(NVColor.btn_when_selected);
-        setAllPanelDisappear();
+        setFalseAllButton();
+        setAllPanelDisappear();        
+        setColorAllButton(NVColor.btn_Default);
+        bThanhToan = true;
+        btnThanhToan.setBackground(NVColor.btn_When_Clicked);
         pnThanhToan.setVisible(true);
         
     }//GEN-LAST:event_btnThanhToanActionPerformed
@@ -704,22 +798,22 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
     private void btnThanhToan_pnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToan_pnThanhToanActionPerformed
         
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
         
     }//GEN-LAST:event_btnThanhToan_pnThanhToanActionPerformed
 
     private void btnTim_pnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTim_pnThanhToanActionPerformed
         
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
         
     }//GEN-LAST:event_btnTim_pnThanhToanActionPerformed
 
     private void btnChinhSua_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSua_pnPhongHatActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
     }//GEN-LAST:event_btnChinhSua_pnPhongHatActionPerformed
 
     private void btnXoaPhong_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaPhong_pnPhongHatActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
     }//GEN-LAST:event_btnXoaPhong_pnPhongHatActionPerformed
 
     private void btnTaoMoi_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnPhongHatActionPerformed
@@ -728,11 +822,11 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaoMoi_pnPhongHatActionPerformed
 
     private void btnChinhSua_pnDonDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSua_pnDonDatPhongActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
     }//GEN-LAST:event_btnChinhSua_pnDonDatPhongActionPerformed
 
     private void btnXoaDon_pnDonDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDon_pnDonDatPhongActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
     }//GEN-LAST:event_btnXoaDon_pnDonDatPhongActionPerformed
 
     private void btnTaoMoi_pnDonDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnDonDatPhongActionPerformed
@@ -741,11 +835,11 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaoMoi_pnDonDatPhongActionPerformed
 
     private void btnChinhSua_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSua_pnDichVuActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
     }//GEN-LAST:event_btnChinhSua_pnDichVuActionPerformed
 
     private void btnXoa_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnDichVuActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
     }//GEN-LAST:event_btnXoa_pnDichVuActionPerformed
 
     private void btnTaoMoi_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnDichVuActionPerformed
@@ -759,11 +853,11 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaoMoi_pnKhachHangThanhVienActionPerformed
 
     private void btnChinhSua_pnKhachHangThanhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSua_pnKhachHangThanhVienActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
     }//GEN-LAST:event_btnChinhSua_pnKhachHangThanhVienActionPerformed
 
     private void btnXoa_pnKhachHangThanhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnKhachHangThanhVienActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
     }//GEN-LAST:event_btnXoa_pnKhachHangThanhVienActionPerformed
 
     private void btnThemLoaiDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiDichVuActionPerformed
@@ -775,6 +869,88 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         Dialog_ThemLoaiPhongHat dThemLoaiPhongHat = new Dialog_ThemLoaiPhongHat(this, rootPaneCheckingEnabled);
         dThemLoaiPhongHat.setVisible(true);
     }//GEN-LAST:event_btnThemLoaiPhongHatActionPerformed
+
+    private void btnDonDatPhongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDonDatPhongMouseEntered
+        // TODO add your handling code here:
+        if (bDonDatPhong == false)
+            btnDonDatPhong.setBackground(NVColor.btn_When_Entered);
+        btnDonDatPhong.setText(MyStrings.Booking_Bills);
+    }//GEN-LAST:event_btnDonDatPhongMouseEntered
+
+    private void btnDichVuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDichVuMouseEntered
+        // TODO add your handling code here:
+        if (bDichVu == false)
+            btnDichVu.setBackground(NVColor.btn_When_Entered);
+        btnDichVu.setText(MyStrings.Services);
+    }//GEN-LAST:event_btnDichVuMouseEntered
+
+    private void btnKhachHangThanhVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangThanhVienMouseEntered
+        // TODO add your handling code here:
+        if (bKhachHangThanhVien == false)
+            btnKhachHangThanhVien.setBackground(NVColor.btn_When_Entered);
+        btnKhachHangThanhVien.setText(MyStrings.Customers);
+    }//GEN-LAST:event_btnKhachHangThanhVienMouseEntered
+
+    private void btnPhongHatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPhongHatMouseEntered
+        // TODO add your handling code here:
+        if (bPhongHat == false)
+            btnPhongHat.setBackground(NVColor.btn_When_Entered);
+        btnPhongHat.setText(MyStrings.Singing_Rooms);
+    }//GEN-LAST:event_btnPhongHatMouseEntered
+
+    private void btnThanhToanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThanhToanMouseEntered
+        // TODO add your handling code here:
+        if (bThanhToan == false)
+            btnThanhToan.setBackground(NVColor.btn_When_Entered);
+        btnThanhToan.setText(MyStrings.Charged);
+    }//GEN-LAST:event_btnThanhToanMouseEntered
+
+    private void btnThoatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThoatMouseEntered
+        // TODO add your handling code here:
+        btnThoat.setBackground(NVColor.btn_When_Entered);
+        btnThoat.setText(MyStrings.Exit);
+    }//GEN-LAST:event_btnThoatMouseEntered
+
+    private void btnDonDatPhongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDonDatPhongMouseExited
+        // TODO add your handling code here:
+        if (bDonDatPhong == false)
+            btnDonDatPhong.setBackground(NVColor.btn_Default);
+        btnDonDatPhong.setText("");
+    }//GEN-LAST:event_btnDonDatPhongMouseExited
+
+    private void btnDichVuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDichVuMouseExited
+        // TODO add your handling code here:
+        if (bDichVu == false)
+            btnDichVu.setBackground(NVColor.btn_Default);
+        btnDichVu.setText("");
+    }//GEN-LAST:event_btnDichVuMouseExited
+
+    private void btnKhachHangThanhVienMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangThanhVienMouseExited
+        // TODO add your handling code here:
+        if (bKhachHangThanhVien == false)
+            btnKhachHangThanhVien.setBackground(NVColor.btn_Default);
+        btnKhachHangThanhVien.setText("");
+    }//GEN-LAST:event_btnKhachHangThanhVienMouseExited
+
+    private void btnPhongHatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPhongHatMouseExited
+        // TODO add your handling code here:
+        if (bPhongHat == false)
+            btnPhongHat.setBackground(NVColor.btn_Default);
+        btnPhongHat.setText("");
+    }//GEN-LAST:event_btnPhongHatMouseExited
+
+    private void btnThanhToanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThanhToanMouseExited
+        // TODO add your handling code here:
+        if (bThanhToan == false)
+            btnThanhToan.setBackground(NVColor.btn_Default);
+        btnThanhToan.setText("");
+    }//GEN-LAST:event_btnThanhToanMouseExited
+
+    private void btnThoatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThoatMouseExited
+        // TODO add your handling code here:
+        btnThoat.setBackground(NVColor.btn_Default);
+        btnThoat.setText("");
+    }//GEN-LAST:event_btnThoatMouseExited
 
     /**
      * @param args the command line arguments
@@ -835,7 +1011,8 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btnXoaPhong_pnPhongHat;
     private javax.swing.JButton btnXoa_pnDichVu;
     private javax.swing.JButton btnXoa_pnKhachHangThanhVien;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLB_Brand;
+    private javax.swing.JLabel jLB_Name;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -844,7 +1021,6 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lbName;
     private javax.swing.JPanel pnDichVu;
     private javax.swing.JPanel pnDonDatPhong;
     private javax.swing.JPanel pnKhachHangThanhVien;

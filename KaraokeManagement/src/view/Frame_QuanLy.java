@@ -5,8 +5,7 @@
  */
 package view;
 
-import common.NVColor;
-import common.QLColor;
+import common.*;
 import model.*;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -35,6 +34,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     public Frame_QuanLy(NhanVien ql){
         this();
         QL = ql;
+        jLB_Brand.setText(MyStrings.AppTitle);
         jLB_Name.setText("Chào " + QL.getHoten());
     }
     void customInit(){
@@ -139,6 +139,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jLB_Brand.setBounds(0, 0, 210, 70);
         jLB_Brand.getAccessibleContext().setAccessibleName("Tên app");
 
+        jLB_Name.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLB_Name.setForeground(new java.awt.Color(255, 255, 255));
         jLB_Name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLB_Name.setText("Chào Tú");
@@ -157,6 +158,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btn_QuanLyNhanVien.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_QuanLyNhanVien.setForeground(new java.awt.Color(255, 255, 255));
         btn_QuanLyNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_QLNV.png"))); // NOI18N
+        btn_QuanLyNhanVien.setBorder(null);
+        btn_QuanLyNhanVien.setFocusable(false);
         btn_QuanLyNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_QuanLyNhanVienMouseClicked(evt);
@@ -179,6 +182,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btn_QuanLyPhongHat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_QuanLyPhongHat.setForeground(new java.awt.Color(255, 255, 255));
         btn_QuanLyPhongHat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_PhongHat.png"))); // NOI18N
+        btn_QuanLyPhongHat.setBorder(null);
         btn_QuanLyPhongHat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_QuanLyPhongHatMouseClicked(evt);
@@ -201,6 +205,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btn_QuanLyDichVu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_QuanLyDichVu.setForeground(new java.awt.Color(255, 255, 255));
         btn_QuanLyDichVu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_DichVu.png"))); // NOI18N
+        btn_QuanLyDichVu.setBorder(null);
         btn_QuanLyDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_QuanLyDichVuMouseClicked(evt);
@@ -223,6 +228,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btn_QuanLyDoanhThu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_QuanLyDoanhThu.setForeground(new java.awt.Color(255, 255, 255));
         btn_QuanLyDoanhThu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_DoanhThu.png"))); // NOI18N
+        btn_QuanLyDoanhThu.setBorder(null);
         btn_QuanLyDoanhThu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_QuanLyDoanhThuMouseClicked(evt);
@@ -245,6 +251,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btn_Thoat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_Thoat.setForeground(new java.awt.Color(255, 255, 255));
         btn_Thoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_Thoat.png"))); // NOI18N
+        btn_Thoat.setBorder(null);
         btn_Thoat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_ThoatMouseClicked(evt);
@@ -571,7 +578,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (bQuanLyNhanVien == false)
             btn_QuanLyNhanVien.setBackground(QLColor.btn_When_Entered);
-        btn_QuanLyNhanVien.setText("QUẢN LÝ NHÂN VIÊN");
+        btn_QuanLyNhanVien.setText(MyStrings.Management_Staffs);
             
     }//GEN-LAST:event_btn_QuanLyNhanVienMouseEntered
 
@@ -600,7 +607,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (bQuanLyPhongHat == false)
             btn_QuanLyPhongHat.setBackground(QLColor.btn_When_Entered);
-        btn_QuanLyPhongHat.setText("QUẢN LÝ PHÒNG HÁT");
+        btn_QuanLyPhongHat.setText(MyStrings.Management_Singing_Rooms);
     }//GEN-LAST:event_btn_QuanLyPhongHatMouseEntered
 
     private void btn_QuanLyPhongHatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyPhongHatMouseExited
@@ -628,7 +635,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (bQuanLyDichVu == false)
             btn_QuanLyDichVu.setBackground(QLColor.btn_When_Entered);
-        btn_QuanLyDichVu.setText("QUẢN LÝ DỊCH VỤ");
+        btn_QuanLyDichVu.setText(MyStrings.Management_Services);
     }//GEN-LAST:event_btn_QuanLyDichVuMouseEntered
 
     private void btn_QuanLyDichVuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyDichVuMouseExited
@@ -656,7 +663,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (bQuanLyDoanhThu == false)
             btn_QuanLyDoanhThu.setBackground(QLColor.btn_When_Entered);
-        btn_QuanLyDoanhThu.setText("QUẢN LÝ DOANH THU");
+        btn_QuanLyDoanhThu.setText(MyStrings.Management_Revenues);
     }//GEN-LAST:event_btn_QuanLyDoanhThuMouseEntered
 
     private void btn_QuanLyDoanhThuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyDoanhThuMouseExited
@@ -676,7 +683,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private void btn_ThoatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThoatMouseEntered
         // TODO add your handling code here:
         btn_Thoat.setBackground(QLColor.btn_When_Entered);
-        btn_Thoat.setText("THOÁT");
+        btn_Thoat.setText(MyStrings.Exit);
     }//GEN-LAST:event_btn_ThoatMouseEntered
 
     private void btn_ThoatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThoatMouseExited
@@ -691,11 +698,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaoMoi_pnQuanLyNhanVienActionPerformed
 
     private void btnChinhSua_pnQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSua_pnQuanLyNhanVienActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
     }//GEN-LAST:event_btnChinhSua_pnQuanLyNhanVienActionPerformed
 
     private void btnXoa_pnQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnQuanLyNhanVienActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
     }//GEN-LAST:event_btnXoa_pnQuanLyNhanVienActionPerformed
 
     private void btnTaoMoi_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnPhongHatActionPerformed
@@ -704,11 +711,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaoMoi_pnPhongHatActionPerformed
 
     private void btnChinhSua_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSua_pnPhongHatActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
     }//GEN-LAST:event_btnChinhSua_pnPhongHatActionPerformed
 
     private void btnXoaPhong_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaPhong_pnPhongHatActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
     }//GEN-LAST:event_btnXoaPhong_pnPhongHatActionPerformed
 
     private void btnThemLoaiPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiPhongHatActionPerformed
@@ -722,11 +729,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaoMoi_pnDichVuActionPerformed
 
     private void btnChinhSua_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSua_pnDichVuActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
     }//GEN-LAST:event_btnChinhSua_pnDichVuActionPerformed
 
     private void btnXoa_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnDichVuActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện chưa có dữ liệu để thực hiện thao tác này");
+        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
     }//GEN-LAST:event_btnXoa_pnDichVuActionPerformed
 
     private void btnThemLoaiDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiDichVuActionPerformed

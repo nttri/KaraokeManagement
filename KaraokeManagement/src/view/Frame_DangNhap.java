@@ -228,7 +228,7 @@ public class Frame_DangNhap extends javax.swing.JFrame {
                     fQuanLy.setVisible(true);
                 }
                 else if( chucVu.equals(MyStrings.Staff)){
-                    Frame_NhanVien fNhanVien = new Frame_NhanVien();
+                    Frame_NhanVien fNhanVien = new Frame_NhanVien(nv);
                     this.setVisible(false);
                     fNhanVien.setVisible(true);                     
                 }
