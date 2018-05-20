@@ -17,13 +17,14 @@ public class DataProcess {
     Connection g_Connection;
     Statement g_Statement;
     
-    DataProcess(){
+    public DataProcess(){
         g_ConnectDB = new DBConnect();
         g_Connection = g_ConnectDB.getConnectToSQLServer();
         try {
             g_Statement = g_Connection.createStatement();
         } catch (SQLException ex) {
         }
+        System.out.println("Haha");
     }
     
     public ResultSet fetchData(String sql){

@@ -33,7 +33,7 @@ public class DBConnect {
         }
 
         try {
-            conn = DriverManager.getConnection("jdbc:sqlserver://" + serverName + ":" + port + ";databaseName=" + dbName, userName, password);
+            conn = DriverManager.getConnection("jdbc:sqlserver://" + serverName + ":" + port + ";databaseName=" + dbName +";user=" + userName + ";password=" + password);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Kết nối MSSQL Server bị lỗi!");
         }

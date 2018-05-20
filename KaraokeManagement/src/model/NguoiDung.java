@@ -21,9 +21,7 @@ public class NguoiDung {
 
     public void setChucVu(String chucVu) {
         this.chucVu = chucVu;
-    }
-    
-    
+    }    
 
     public int getMaNhanVien() {
         return maNhanVien;

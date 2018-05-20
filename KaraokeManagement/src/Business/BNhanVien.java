@@ -15,15 +15,19 @@ import model.NhanVien;
  *
  * @author Thoai
  */
-public class BNhanVien {
-    DataProcess data;
-    Helper helper;
-    
+public class BNhanVien extends Business{
+
+    public BNhanVien(){
+        super();
+    }
+
     public NhanVien layThongTinNhanVien(int maNV) throws SQLException {
-        String sql = "";
+        String sql = "layThongTinNhanVien " + maNV;
         NhanVien nhanVien = new NhanVien();
         ResultSet rs = data.fetchData(sql);
-        helper.setNhanVien(nhanVien, rs);
+        if (rs.next()){        
+            Helper.setNhanVien(nhanVien, rs);
+        }
         return nhanVien;
     }
 }

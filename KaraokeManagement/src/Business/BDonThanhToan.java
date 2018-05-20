@@ -16,12 +16,12 @@ import model.DonThanhToan;
  *
  * @author Thoai
  */
-public class BDonThanhToan {
-    DataProcess data;
-    Helper helper = new Helper();
-    public BDonThanhToan() {
-        
+public class BDonThanhToan extends Business{
+
+    public BDonThanhToan(){
+        super();
     }
+    
     public ArrayList<DonThanhToan> layTatCaDonThanhToan() throws SQLException {
         ArrayList<DonThanhToan> arrDonThanhToan = new ArrayList();
         String sql = "";
@@ -29,7 +29,7 @@ public class BDonThanhToan {
         
         DonThanhToan donThanhToan = new DonThanhToan();
         while (rs.next()) {
-            helper.setDonThanhToan(donThanhToan, rs);
+            Helper.setDonThanhToan(donThanhToan, rs);
             arrDonThanhToan.add(donThanhToan);
         }
         return arrDonThanhToan;
@@ -39,7 +39,9 @@ public class BDonThanhToan {
         DonThanhToan donThanhToan = new DonThanhToan();
         String sql = "";
         ResultSet rs = data.fetchData(sql);
-        helper.setDonThanhToan(donThanhToan, rs);
+        if (rs.next()){
+            Helper.setDonThanhToan(donThanhToan, rs);
+        }         
         return donThanhToan;
     }
     

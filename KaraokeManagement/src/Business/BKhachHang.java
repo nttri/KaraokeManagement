@@ -16,10 +16,12 @@ import model.ThanhVien;
  *
  * @author Thoai
  */
-public class BKhachHang {
-    DataProcess data;
-    Helper helper;
-    
+public class BKhachHang extends Business{
+
+    public BKhachHang(){
+        super();
+    }
+       
     public ArrayList<ThanhVien> layTatCaThanhVien() throws SQLException {
         ArrayList<ThanhVien> arrThanhVien = new ArrayList();
         String sql = "layTatCaThanhVien";
@@ -27,7 +29,7 @@ public class BKhachHang {
         
         ThanhVien thanhVien = new ThanhVien();
         while (rs.next()) {
-            helper.setThanhVien(thanhVien, rs);
+            Helper.setThanhVien(thanhVien, rs);
             arrThanhVien.add(thanhVien);
         }
         return arrThanhVien;
@@ -37,7 +39,9 @@ public class BKhachHang {
         ThanhVien thanhVien = new ThanhVien();
         String sql = "layThanhVienTheoMa " + maThanhVien;
         ResultSet rs = data.fetchData(sql);
-        helper.setThanhVien(thanhVien, rs);
+        if (rs.next()){
+            Helper.setThanhVien(thanhVien, rs);
+        }         
         return thanhVien;
     }
     

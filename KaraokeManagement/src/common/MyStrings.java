@@ -10,8 +10,9 @@ package common;
  * @author Tu
  */
 public class MyStrings {
-    public static String Manager = "QUANLY";
-    public static String Staff = "NHANVIEN";
+    public static String AppTitle = "PHẦN MỀM QUẢN LÝ QUÁN KARAOKE";
+    public static String Manager = "QL";
+    public static String Staff = "NV";
     public static String Login_Success = "Đăng nhập thành công";
     public static String Login_Failed_Empty = "*Tài khoản và mật khẩu không được bỏ trống";
     public static String Login_Failed_Error = "*Tài khoản hoặc mật khẩu không đúng";

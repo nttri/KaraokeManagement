@@ -22,7 +22,7 @@ public class Helper {
         
     }
     
-    public void setDonThanhToan(DonThanhToan donThanhToan, ResultSet rs) throws SQLException {
+    public static void setDonThanhToan(DonThanhToan donThanhToan, ResultSet rs) throws SQLException {
         donThanhToan.setMaDon(rs.getInt("MADON"));
         donThanhToan.setMaNhanVien(rs.getInt("MANV"));
         donThanhToan.setMaKhachHang(rs.getInt("MAKH"));
@@ -34,7 +34,7 @@ public class Helper {
         donThanhToan.setTinhTrang(rs.getBoolean("TINHTRANG"));
     }
     
-    public void setKhuyenMai(KhuyenMai khuyenMai, ResultSet rs) throws SQLException {
+    public static void setKhuyenMai(KhuyenMai khuyenMai, ResultSet rs) throws SQLException {
         khuyenMai.setMaKM(rs.getString("MAKM"));
         khuyenMai.setTenKM(rs.getNString("TENKM"));
         khuyenMai.setGiaTriKM(rs.getInt("GIATRIKM"));
@@ -42,7 +42,7 @@ public class Helper {
         khuyenMai.setThoiGianKT(rs.getDate("THOIGIANKT"));
     }
     
-    public void setThanhVien(ThanhVien thanhVien, ResultSet rs) throws SQLException {
+    public static void setThanhVien(ThanhVien thanhVien, ResultSet rs) throws SQLException {
         thanhVien.setMaThanhVien(rs.getInt("MAKH"));
         thanhVien.setHoTen(rs.getNString("HOTEN"));
         thanhVien.setGioiTinh(rs.getNString("GIOITINH"));
@@ -52,16 +52,21 @@ public class Helper {
         thanhVien.setSdt(rs.getString("SDT"));
     }
     
-    public void setNguoiDung(NguoiDung nguoiDung, ResultSet rs) throws SQLException {
+    public static void setNguoiDung(NguoiDung nguoiDung, ResultSet rs) throws SQLException {
         nguoiDung.setTenDangNhap(rs.getString("TENTK"));
         nguoiDung.setMatKhau(rs.getString("MATKHAU"));
         nguoiDung.setMaNhanVien(rs.getInt("MANV"));
         nguoiDung.setChucVu(rs.getString("CHUCVU"));
     }
     
-    public void setNhanVien(NhanVien nhanVien, ResultSet rs) throws SQLException {
+    public static void setNhanVien(NhanVien nhanVien, ResultSet rs) throws SQLException {
         nhanVien.setMaNhanVien(rs.getInt("MANV"));
         nhanVien.setHoten(rs.getString("HOTEN"));
-        nhanVien.setChucVu(rs.getString("CHUCVU"));
+        nhanVien.setGioiTinh(rs.getString("GIOITINH"));
+        nhanVien.setDiaChi(rs.getString("DIACHI"));
+        nhanVien.setCmnd(rs.getString("CMND"));
+        nhanVien.setSdt(rs.getString("SDT"));
+        nhanVien.setNgaySinh(rs.getDate("NGAYSINH"));
+        nhanVien.setLuong(rs.getInt("LUONG"));
     }
 }

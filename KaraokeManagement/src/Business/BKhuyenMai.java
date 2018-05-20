@@ -15,18 +15,19 @@ import model.KhuyenMai;
  *
  * @author Thoai
  */
-public class BKhuyenMai {
-    DataProcess data;
-    Helper helper;
-    public BKhuyenMai() {
-        
+public class BKhuyenMai extends Business{
+
+    public BKhuyenMai(){
+        super();
     }
     
     public KhuyenMai layKhuyenMaiTheoMa(String maKM) throws SQLException {
         KhuyenMai khuyenMai = new KhuyenMai();
         String sql = "";
         ResultSet rs = data.fetchData(sql);
-        helper.setKhuyenMai(khuyenMai, rs);
+        if (rs.next()){
+            Helper.setKhuyenMai(khuyenMai, rs);
+        }      
         return khuyenMai;
     }
     

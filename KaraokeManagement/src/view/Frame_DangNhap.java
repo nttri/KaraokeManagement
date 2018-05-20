@@ -25,8 +25,7 @@ public class Frame_DangNhap extends javax.swing.JFrame {
     }
     
     private void customInit(){
-        this.setTitle("PHẦN MỀM QUẢN LÝ QUÁN KARAOKE");
-        tfTenDangNhap.setText("nhan vien");
+        this.setTitle(MyStrings.AppTitle);
         //ScaleImageIcon("src\\Resource\\logo.png", lblLogo);
     }
     
@@ -217,15 +216,14 @@ public class Frame_DangNhap extends javax.swing.JFrame {
         BNguoiDung bND = new BNguoiDung();
         try{
             NguoiDung nd = bND.timTaiKhoan(username, password);
-            if (nd != null){
+            if (nd.getMaNhanVien() != 0){
                 int maNV = nd.getMaNhanVien();
                 BNhanVien bNV = new BNhanVien();
                 NhanVien nv = bNV.layThongTinNhanVien(maNV);
-                String tenNV = nv.getHoten();
                 String chucVu = nd.getChucVu();
                 
                 if (chucVu.equals(MyStrings.Manager)){
-                    Frame_QuanLy fQuanLy = new Frame_QuanLy();
+                    Frame_QuanLy fQuanLy = new Frame_QuanLy(nv);
                     this.setVisible(false);
                     fQuanLy.setVisible(true);
                 }
@@ -238,40 +236,31 @@ public class Frame_DangNhap extends javax.swing.JFrame {
             }
             else{
                 jLB_Info.setText(MyStrings.Login_Failed_Error);
+                tfMatKhau.setText("");
             }
-        } catch (SQLException ex){
+        } catch (SQLException ex){            
             Logger.getLogger(Frame_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
         }        
     }
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-        new Thread(new Runnable() {
-            public void run() {
-                Login();
-            }
-        }).start();       
+        Login();      
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void tfTenDangNhapKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTenDangNhapKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(c==KeyEvent.VK_ENTER){
-            new Thread(new Runnable() {
-                public void run() {
-                    Login();
-                }
-            }).start();
+        jLB_Info.setText("");
+        if(c == KeyEvent.VK_ENTER){
+            Login();
         }
     }//GEN-LAST:event_tfTenDangNhapKeyTyped
 
     private void tfMatKhauKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfMatKhauKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(c==KeyEvent.VK_ENTER){
-            new Thread(new Runnable() {
-                public void run() {
-                    Login();
-                }
-            }).start();
+        jLB_Info.setText("");
+        if(c == KeyEvent.VK_ENTER){
+            Login();
         }
     }//GEN-LAST:event_tfMatKhauKeyTyped
 

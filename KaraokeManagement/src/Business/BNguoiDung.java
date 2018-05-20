@@ -15,15 +15,19 @@ import model.NguoiDung;
  *
  * @author Thoai
  */
-public class BNguoiDung {
-    DataProcess data;
-    Helper helper;
+public class BNguoiDung extends Business{
+
+    public BNguoiDung(){
+        super();
+    }    
     
     public NguoiDung timTaiKhoan(String tenDangNhap, String matKhau) throws SQLException {
         String sql = "timTaiKhoan " + tenDangNhap + ", " + matKhau;
         NguoiDung nguoiDung = new NguoiDung();
         ResultSet rs = data.fetchData(sql);
-        helper.setNguoiDung(nguoiDung, rs);
+        if (rs.next()){
+            Helper.setNguoiDung(nguoiDung, rs);
+        }
         return nguoiDung;
     }
 }
