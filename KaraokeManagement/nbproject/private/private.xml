@@ -12,13 +12,15 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Tu/Desktop/PTTK/Kara%202/KaraokeManagement/src/view/Frame_QuanLy.java</file>
-            <file>file:/C:/Users/Tu/Desktop/PTTK/Kara%202/KaraokeManagement/src/view/Frame_DangNhap.java</file>
-            <file>file:/C:/Users/Tu/Desktop/PTTK/Kara%202/KaraokeManagement/src/Bussiness/BKhuyenMai.java</file>
-            <file>file:/C:/Users/Tu/Desktop/PTTK/Kara%202/KaraokeManagement/src/view/Frame_NhanVien.java</file>
-            <file>file:/C:/Users/Tu/Desktop/PTTK/Kara%202/KaraokeManagement/src/common/NVColor.java</file>
-            <file>file:/C:/Users/Tu/Desktop/PTTK/Kara%202/KaraokeManagement/src/Bussiness/Bussiness.java</file>
-            <file>file:/C:/Users/Tu/Desktop/PTTK/Kara%202/KaraokeManagement/src/Bussiness/BKhachHang.java</file>
+            <file>file:/C:/Users/Thoai/Desktop/PPTK/KaraokeManagement/KaraokeManagement/src/model/KhachHang.java</file>
+            <file>file:/C:/Users/Thoai/Desktop/PPTK/KaraokeManagement/KaraokeManagement/src/Business/BDonThanhToan.java</file>
+            <file>file:/C:/Users/Thoai/Desktop/PPTK/KaraokeManagement/KaraokeManagement/src/Business/BNhanVien.java</file>
+            <file>file:/C:/Users/Thoai/Desktop/PPTK/KaraokeManagement/KaraokeManagement/src/Business/BKhachHang.java</file>
+            <file>file:/C:/Users/Thoai/Desktop/PPTK/KaraokeManagement/KaraokeManagement/src/Business/BNguoiDung.java</file>
+            <file>file:/C:/Users/Thoai/Desktop/PPTK/KaraokeManagement/KaraokeManagement/src/common/Helper.java</file>
+            <file>file:/C:/Users/Thoai/Desktop/PPTK/KaraokeManagement/KaraokeManagement/src/Business/BPhongHat.java</file>
+            <file>file:/C:/Users/Thoai/Desktop/PPTK/KaraokeManagement/KaraokeManagement/src/view/Frame_DangNhap.java</file>
+            <file>file:/C:/Users/Thoai/Desktop/PPTK/KaraokeManagement/KaraokeManagement/src/Business/BKhuyenMai.java</file>
         </group>
     </open-files>
 </project-private>

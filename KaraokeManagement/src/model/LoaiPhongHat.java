@@ -56,6 +56,10 @@ public class LoaiPhongHat {
         this.tenLoai = tenLoai;
     }
 
+    public LoaiPhongHat() {
+        
+    }
+    
     public LoaiPhongHat(int maLoaiPhong, String moTa, int sucChua, int giaPhong, String tenLoai) {
         this.maLoaiPhong = maLoaiPhong;
         this.moTa = moTa;

@@ -13,6 +13,7 @@ import model.NguoiDung;
 import model.NhanVien;
 import model.PhongHat;
 import model.KhachHang;
+import model.LoaiPhongHat;
 
 /**
  *
@@ -75,5 +76,13 @@ public class Helper {
         phongHat.setMaPhong(rs.getInt("MAPHONG"));
         phongHat.setMaLoaiPhong(rs.getInt("MALOAIPHONG"));
         phongHat.setTinhTrang(rs.getString("TINHTRANG"));
+    }
+    
+    public static void setLoaiPhongHat(LoaiPhongHat loaiPhongHat, ResultSet rs) throws SQLException {
+        loaiPhongHat.setMaLoaiPhong(rs.getInt("MALOAIPHONG"));
+        loaiPhongHat.setTenLoai(rs.getString("TENLOAI"));
+        loaiPhongHat.setMoTa(rs.getString("MOTA"));
+        loaiPhongHat.setSucChua(rs.getInt("SUCCHUA"));
+        loaiPhongHat.setGiaPhong(rs.getInt("GIAPHONG"));
     }
 }
