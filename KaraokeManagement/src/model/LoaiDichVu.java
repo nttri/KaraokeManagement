@@ -13,6 +13,10 @@ public class LoaiDichVu {
     private int maLoaiDichVu;
     private String tenLoaiDichVu;
 
+    public LoaiDichVu() {
+        
+    }
+    
     public LoaiDichVu(int maLoaiDichVu, String tenLoaiDichVu) {
         this.maLoaiDichVu = maLoaiDichVu;
         this.tenLoaiDichVu = tenLoaiDichVu;

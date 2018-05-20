@@ -14,6 +14,7 @@ import model.NguoiDung;
 import model.NhanVien;
 import model.PhongHat;
 import model.KhachHang;
+import model.LoaiDichVu;
 import model.LoaiPhongHat;
 
 /**
@@ -92,5 +93,10 @@ public class Helper {
         dichVu.setMaLoaiDichVu(rs.getInt("MALOAIDV"));
         dichVu.setTenDichVu(rs.getString("TENDV"));
         dichVu.setDonGia(rs.getInt("DONGIA"));
+    }
+    
+    public static void setLoaiDichVu(LoaiDichVu loaiDichVu, ResultSet rs) throws SQLException {
+        loaiDichVu.setMaLoaiDichVu(rs.getInt("MALOAIDV"));
+        loaiDichVu.setTenLoaiDichVu("TENLOAIDV");
     }
 }

@@ -5,19 +5,71 @@
  */
 package Business;
 
+import common.Helper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import model.LoaiDichVu;
 
 /**
  *
  * @author Thoai
  */
-public class BLoaiDichVu {
+public class BLoaiDichVu extends Business {
     String sql;
     ResultSet rs;
     
-    public LoaiDichVu layThongTinLoaiDichVuTheoMa(int maLoaiDV) throws SQLException {
+    public BLoaiDichVu() {
+        super();
+    }
+    
+    public ArrayList<LoaiDichVu> layThongTinTatCaLoaiDichVu() throws SQLException {
+        ArrayList<LoaiDichVu> arrLoaiDichVu = new ArrayList<>();
+        sql = "layThongTinTatCaLoaiDichVu";
+        rs = data.fetchData(sql);
         
+        LoaiDichVu loaiDichVu = new LoaiDichVu();
+        while(rs.next()) {
+            Helper.setLoaiDichVu(loaiDichVu, rs);
+            arrLoaiDichVu.add(loaiDichVu);
+        }
+        return arrLoaiDichVu;
+    }
+    
+    public LoaiDichVu layThongTinLoaiDichVuTheoMa(int maLoaiDV) throws SQLException {
+        LoaiDichVu loaiDichVu = new LoaiDichVu();
+        sql = "layThongTinLoaiDichVuTheoMa " + maLoaiDV;
+        rs = data.fetchData(sql);
+        
+        if (rs.next()) {
+            Helper.setLoaiDichVu(loaiDichVu, rs);
+        }
+        return loaiDichVu;
+    }
+    
+    public LoaiDichVu layThongTinLoaiDichVuTheoTen(String tenLoaiDV) throws SQLException {
+        LoaiDichVu loaiDichVu = new LoaiDichVu();
+        sql = "layThongTinLoaiDichVuTheoTen " + tenLoaiDV;
+        rs = data.fetchData(sql);
+        
+        if (rs.next()) {
+            Helper.setLoaiDichVu(loaiDichVu, rs);
+        }
+        return loaiDichVu;
+    }
+    
+    public boolean themLoaiDichVu(String tenLoai) throws SQLException {
+        sql = "themLoaiDichVu " + tenLoai;
+        return data.Execute(sql);
+    }
+    
+    public boolean capNhatLoaiDichVu(String maLoai, String tenLoai) throws SQLException {
+        sql = "capNhatDichVu " + maLoai + ", " + tenLoai;
+        return data.Execute(sql);
+    }
+    
+    public boolean xoaLoaiDichVu(String maLoai) throws SQLException {
+        sql = "xoaLoaiDichVu " + maLoai;
+        return data.Execute(sql);
     }
 }
