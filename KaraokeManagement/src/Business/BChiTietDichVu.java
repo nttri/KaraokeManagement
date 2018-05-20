@@ -36,7 +36,7 @@ public class BChiTietDichVu extends Business{
         return arrChiTietDichVu;
     }
     
-    public ChiTietDichVu layThongTinChiTietDichVuTheoMaDonVaSTT(String maDon, int STT) throws SQLException {
+    public ChiTietDichVu layThongTinChiTietDichVuTheoMaDonVaSTT(int maDon, int STT) throws SQLException {
         ChiTietDichVu chiTietDichVu = new ChiTietDichVu();
         sql = "layThongTinChiTietDichVuTheoMaDonVaSTT " + maDon + ", " + STT;
         rs = data.fetchData(sql);
@@ -46,8 +46,21 @@ public class BChiTietDichVu extends Business{
         return chiTietDichVu;
     }
     
-    public boolean themChiTietDichVu(int maDV, int donGia, int soLuong) throws SQLException {
-        sql = "themChiTietDichVu " + maDV + ", " + donGia + ", " + soLuong;
+    public ArrayList<ChiTietDichVu> layThongTinChiTietDichVuTheoMaDon(int maDon) throws SQLException {
+        ArrayList<ChiTietDichVu> arrChiTietDichVu = new ArrayList<>();
+        sql = "layThongTinChiTietDichVuTheoMaDon " + maDon;
+        rs = data.fetchData(sql);
+        
+        while(rs.next()) {
+            ChiTietDichVu chiTietDichVu = new ChiTietDichVu();
+            Helper.setChiTietDichVu(chiTietDichVu, rs);
+            arrChiTietDichVu.add(chiTietDichVu);
+        }
+        return arrChiTietDichVu;
+    }
+    
+    public boolean themChiTietDichVu(int maDon, int maDV, int donGia, int soLuong) throws SQLException {
+        sql = "themChiTietDichVu " + maDon + ", " + maDV + ", " + donGia + ", " + soLuong;
         return data.Execute(sql);
     }
     

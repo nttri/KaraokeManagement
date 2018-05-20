@@ -56,8 +56,16 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         setAllPanelDisappear();
         pnDonDatPhong.setVisible(true);
         
+        tbDonDatPhong_pnDonDatPhong.setRowHeight(30);
+        tbDichVu_pnDichVu.setRowHeight(30);
+        tbKhachHangThanhVien.setRowHeight(30);
+        tbPhongHat_pnPhongHat.setRowHeight(30);
+        tbThanhToan_pnThanhToan.setRowHeight(30);
+        
         BDonThanhToan bDonDatPhong = new BDonThanhToan();
         ArrayList<DonThanhToan> arrDon = null;
+        
+        BKhachHang bKhachHang = new BKhachHang();
         
         try {
             arrDon = bDonDatPhong.layTatCaDonThanhToan();
@@ -66,10 +74,17 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         }
         
         for(int i = 0; i < arrDon.size(); i++){
+            KhachHang kh = new KhachHang();
+            try {
+                kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
             mTable_DonDatPhong.addRow(new Object[]{
                 arrDon.get(i).getMaDon(),
                 arrDon.get(i).getMaPhong(),
                 arrDon.get(i).getMaKhachHang(),
+                kh.getHoTen(),
                 arrDon.get(i).getThoiGianBatDau()
             });           
         }
@@ -317,19 +332,20 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         pnDonDatPhong.add(jLabel2);
         jLabel2.setBounds(40, 13, 598, 54);
 
+        tbDonDatPhong_pnDonDatPhong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbDonDatPhong_pnDonDatPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã đơn", "Mã phòng", "Mã khách hàng", "Giờ bắt đầu"
+                "Mã đơn", "Mã phòng", "Mã người đặt", "Tên người đặt", "Giờ bắt đầu"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -342,10 +358,11 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         });
         spDonDatPhong_pnDonDatPhong.setViewportView(tbDonDatPhong_pnDonDatPhong);
         if (tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumnCount() > 0) {
-            tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(0).setPreferredWidth(120);
-            tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(1).setPreferredWidth(250);
-            tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(2).setPreferredWidth(200);
-            tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(3).setPreferredWidth(350);
+            tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(3).setPreferredWidth(300);
+            tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(4).setPreferredWidth(340);
         }
 
         pnDonDatPhong.add(spDonDatPhong_pnDonDatPhong);
@@ -403,6 +420,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         pnDichVu.add(jLabel3);
         jLabel3.setBounds(40, 13, 405, 54);
 
+        tbDichVu_pnDichVu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbDichVu_pnDichVu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -411,9 +429,16 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 "Loại dịch vụ", "Mã dịch vụ", "Tên dịch vụ", "Đơn giá"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -491,6 +516,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         pnKhachHangThanhVien.add(jLabel4);
         jLabel4.setBounds(40, 13, 811, 54);
 
+        tbKhachHangThanhVien.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbKhachHangThanhVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -578,6 +604,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         jLabel5.setBounds(40, 13, 480, 54);
 
         tbPhongHat_pnPhongHat.setBackground(new java.awt.Color(240, 240, 240));
+        tbPhongHat_pnPhongHat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbPhongHat_pnPhongHat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -700,6 +727,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         pnThanhToan.add(btnTim_pnThanhToan);
         btnTim_pnThanhToan.setBounds(958, 100, 70, 35);
 
+        tbThanhToan_pnThanhToan.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbThanhToan_pnThanhToan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -712,7 +740,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -790,6 +818,8 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         BDonThanhToan bDonDatPhong = new BDonThanhToan();
         ArrayList<DonThanhToan> arrDon = null;
         
+        BKhachHang bKhachHang = new BKhachHang();
+        
         try {
             arrDon = bDonDatPhong.layTatCaDonThanhToan();
         } catch (SQLException ex) {
@@ -797,10 +827,17 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         }
         
         for(int i = 0; i < arrDon.size(); i++){
+            KhachHang kh = new KhachHang();
+            try {
+                kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
             mTable_DonDatPhong.addRow(new Object[]{
                 arrDon.get(i).getMaDon(),
                 arrDon.get(i).getMaPhong(),
                 arrDon.get(i).getMaKhachHang(),
+                kh.getHoTen(),
                 arrDon.get(i).getThoiGianBatDau()
             });           
         }
@@ -829,7 +866,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         for(int i = 0; i < arrDV.size(); i++){
             LoaiDichVu ldv = new LoaiDichVu();
             try {
-                ldv = bLoaiDichVu.layThongTinLoaiDichVuTheoMa(arrDV.get(i).getMaDichVu());
+                ldv = bLoaiDichVu.layThongTinLoaiDichVuTheoMa(arrDV.get(i).getMaLoaiDichVu());
             } catch (SQLException ex) {
                 Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
             }
