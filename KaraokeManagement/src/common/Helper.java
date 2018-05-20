@@ -98,7 +98,7 @@ public class Helper {
     
     public static void setLoaiDichVu(LoaiDichVu loaiDichVu, ResultSet rs) throws SQLException {
         loaiDichVu.setMaLoaiDichVu(rs.getInt("MALOAIDV"));
-        loaiDichVu.setTenLoaiDichVu("TENLOAIDV");
+        loaiDichVu.setTenLoaiDichVu(rs.getString("TENLOAIDV"));
     }
     
     public static void setChiTietDichVu(ChiTietDichVu chiTietDichVu, ResultSet rs) throws SQLException {
