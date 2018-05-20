@@ -22,7 +22,7 @@ public class BKhachHang {
     
     public ArrayList<ThanhVien> layTatCaThanhVien() throws SQLException {
         ArrayList<ThanhVien> arrThanhVien = new ArrayList();
-        String sql = "";
+        String sql = "layTatCaThanhVien";
         ResultSet rs = data.fetchData(sql);
         
         ThanhVien thanhVien = new ThanhVien();
@@ -35,24 +35,24 @@ public class BKhachHang {
     
     public ThanhVien layThanhVienTheoMa(int maThanhVien) throws SQLException {
         ThanhVien thanhVien = new ThanhVien();
-        String sql = "";
+        String sql = "layThanhVienTheoMa " + maThanhVien;
         ResultSet rs = data.fetchData(sql);
         helper.setThanhVien(thanhVien, rs);
         return thanhVien;
     }
     
-    public boolean themThanhVien(int ma, String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt) throws SQLException {
-        String sql = "";
+    public boolean themThanhVien(String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt) throws SQLException {
+        String sql = "themThanhVien " + hoTen + ", " + gioiTinh + ", " + ngaySinh + ", " + diaChi + ", " + cmnd + ", " + sdt;
         return data.Execute(sql);
     }
     
     public boolean capNhatThanhVien(int ma, String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt) throws SQLException {
-        String sql = "";
+        String sql = "capNhatThanhVien " + ma + ", "+ hoTen + ", " + gioiTinh + ", " + ngaySinh + ", " + diaChi + ", " + cmnd + ", " + sdt;
         return data.Execute(sql);
     }
     
     public boolean xoaThanhVien(int ma) {
-        String sql = "";
+        String sql = "xoaThanhVien " + ma;
         return data.Execute(sql);
     }
 }
