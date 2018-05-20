@@ -23,6 +23,19 @@ public class BDichVu extends Business {
         super();
     }
     
+    public ArrayList<DichVu> layThongTinTatCaDichVu() throws SQLException {
+        ArrayList<DichVu> arrDichVu = new ArrayList<>();
+        sql = "layThongTinTatCaDichVu";
+        rs = data.fetchData(sql);
+        
+        DichVu dichVu = new DichVu();
+        while(rs.next()) {
+            Helper.setDichVu(dichVu, rs);
+            arrDichVu.add(dichVu);
+        }
+        return arrDichVu;
+    }
+    
     public ArrayList<DichVu> layThongTinDichVuTheoDonGia(int donGia) throws SQLException {
         ArrayList<DichVu> arrDichVu = new ArrayList<>();
         sql = "layThongTinDichVuTheoDonGia " + donGia;
@@ -72,6 +85,5 @@ public class BDichVu extends Business {
     public boolean xoaDichVu(int maDichVu) throws SQLException {
         sql = "xoaDichVu " + maDichVu;
         return data.Execute(sql);
-    }
-    
+    }   
 }
