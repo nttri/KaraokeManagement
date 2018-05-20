@@ -6,6 +6,8 @@ import model.*;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -74,7 +76,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         }
         
         for(int i = 0; i < arrDon.size(); i++){
-            if(!arrDon.get(i).isTinhTrang()){
+            if(arrDon.get(i).getTinhTrang().equals("Chưa thanh toán")){
                 KhachHang kh = new KhachHang();
                 try {
                     kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
@@ -735,14 +737,14 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã phòng", "Thời gian đã dùng", "Mã chi tiết dịch vụ", "Tổng cộng"
+                "Mã đơn đặt phòng", "Mã phòng", "Thời gian đã dùng", "Người đặt", "Tổng cộng", "Tình trạng"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -755,9 +757,12 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         });
         spThanhToan_pnThanhToan.setViewportView(tbThanhToan_pnThanhToan);
         if (tbThanhToan_pnThanhToan.getColumnModel().getColumnCount() > 0) {
-            tbThanhToan_pnThanhToan.getColumnModel().getColumn(0).setPreferredWidth(80);
-            tbThanhToan_pnThanhToan.getColumnModel().getColumn(1).setPreferredWidth(200);
-            tbThanhToan_pnThanhToan.getColumnModel().getColumn(2).setPreferredWidth(200);
+            tbThanhToan_pnThanhToan.getColumnModel().getColumn(0).setPreferredWidth(120);
+            tbThanhToan_pnThanhToan.getColumnModel().getColumn(1).setPreferredWidth(60);
+            tbThanhToan_pnThanhToan.getColumnModel().getColumn(2).setPreferredWidth(120);
+            tbThanhToan_pnThanhToan.getColumnModel().getColumn(3).setPreferredWidth(280);
+            tbThanhToan_pnThanhToan.getColumnModel().getColumn(4).setPreferredWidth(140);
+            tbThanhToan_pnThanhToan.getColumnModel().getColumn(5).setPreferredWidth(180);
         }
 
         pnThanhToan.add(spThanhToan_pnThanhToan);
@@ -829,7 +834,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         }
         
         for(int i = 0; i < arrDon.size(); i++){
-            if(arrDon.get(i).isTinhTrang()){
+            if(arrDon.get(i).getTinhTrang().equals("Chưa thanh toán")){
                 KhachHang kh = new KhachHang();
                 try {
                     kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
@@ -959,6 +964,53 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnThanhToan.setBackground(NVColor.btn_When_Clicked);
         pnThanhToan.setVisible(true);
         
+        clearAllDataTable(mTable_ThanhToan);
+        
+        BDonThanhToan bDonDatPhong = new BDonThanhToan();
+        ArrayList<DonThanhToan> arrDon = null;
+        
+        BKhachHang bKhachHang = new BKhachHang();
+        
+        try {
+            arrDon = bDonDatPhong.layTatCaDonThanhToan();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(int i = 0; i < arrDon.size(); i++){
+            KhachHang kh = new KhachHang();
+            try {
+                kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(arrDon.get(i).getTinhTrang().equals("Đã thanh toán")){
+                Date bd =  arrDon.get(i).getThoiGianBatDau();
+                Date kt =  arrDon.get(i).getThoiGianKetThuc();
+                long diff = kt.getTime() - bd.getTime();
+                mTable_ThanhToan.addRow(new Object[]{
+                    arrDon.get(i).getMaDon(),
+                    arrDon.get(i).getMaPhong(),
+                    TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS) + " giờ",
+                    kh.getHoTen(),
+                    "-1",
+                    arrDon.get(i).getTinhTrang()
+                });
+            }else{
+                Date bd =  arrDon.get(i).getThoiGianBatDau();
+                Date kt =  new Date();
+                long diff = kt.getTime() - bd.getTime();
+                mTable_ThanhToan.addRow(new Object[]{
+                    arrDon.get(i).getMaDon(),
+                    arrDon.get(i).getMaPhong(),
+                    TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS) + " giờ",
+                    kh.getHoTen(),
+                    "-1",
+                    arrDon.get(i).getTinhTrang()
+                });
+            }
+            
+        }
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
