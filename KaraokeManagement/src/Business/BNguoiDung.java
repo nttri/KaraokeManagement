@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bussiness;
+package Business;
 
 import DatabaseConnection.DataProcess;
 import common.Helper;
@@ -19,8 +19,8 @@ public class BNguoiDung {
     DataProcess data;
     Helper helper;
     
-    public NguoiDung timTaiKhoanLenServer(String tenDangNhap, String matKhau) throws SQLException {
-        String sql = "";
+    public NguoiDung timTaiKhoan(String tenDangNhap, String matKhau) throws SQLException {
+        String sql = "timTaiKhoan " + tenDangNhap + ", " + matKhau;
         NguoiDung nguoiDung = new NguoiDung();
         ResultSet rs = data.fetchData(sql);
         helper.setNguoiDung(nguoiDung, rs);

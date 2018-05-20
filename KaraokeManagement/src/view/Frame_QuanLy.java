@@ -7,8 +7,10 @@ package view;
 
 import common.NVColor;
 import common.QLColor;
+import model.*;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -16,6 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class Frame_QuanLy extends javax.swing.JFrame {
 
+    static NhanVien QL;
+    
     boolean bQuanLyNhanVien = false;
     boolean bQuanLyPhongHat = false;
     boolean bQuanLyDichVu = false;
@@ -28,6 +32,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         customInit();
     }
 
+    public Frame_QuanLy(NhanVien ql){
+        this();
+        QL = ql;
+        jLB_Name.setText("Chào " + QL.getHoten());
+    }
     void customInit(){
         setFalseAllButton();
         bQuanLyNhanVien = true;
@@ -71,8 +80,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jlb_brand = new javax.swing.JLabel();
+        jLB_Brand = new javax.swing.JLabel();
+        jLB_Name = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btn_QuanLyNhanVien = new javax.swing.JButton();
         btn_QuanLyPhongHat = new javax.swing.JButton();
@@ -118,24 +127,24 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(210, 100));
         jPanel1.setLayout(null);
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Tên APP");
-        jLabel1.setMaximumSize(new java.awt.Dimension(210, 70));
-        jLabel1.setMinimumSize(new java.awt.Dimension(210, 70));
-        jLabel1.setPreferredSize(new java.awt.Dimension(210, 70));
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 210, 70);
-        jLabel1.getAccessibleContext().setAccessibleName("Tên app");
+        jLB_Brand.setBackground(new java.awt.Color(0, 0, 0));
+        jLB_Brand.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLB_Brand.setForeground(new java.awt.Color(255, 255, 255));
+        jLB_Brand.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLB_Brand.setText("Tên APP");
+        jLB_Brand.setMaximumSize(new java.awt.Dimension(210, 70));
+        jLB_Brand.setMinimumSize(new java.awt.Dimension(210, 70));
+        jLB_Brand.setPreferredSize(new java.awt.Dimension(210, 70));
+        jPanel1.add(jLB_Brand);
+        jLB_Brand.setBounds(0, 0, 210, 70);
+        jLB_Brand.getAccessibleContext().setAccessibleName("Tên app");
 
-        jlb_brand.setForeground(new java.awt.Color(255, 255, 255));
-        jlb_brand.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlb_brand.setText("Chào Tú");
-        jlb_brand.setPreferredSize(new java.awt.Dimension(210, 30));
-        jPanel1.add(jlb_brand);
-        jlb_brand.setBounds(0, 70, 210, 30);
+        jLB_Name.setForeground(new java.awt.Color(255, 255, 255));
+        jLB_Name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLB_Name.setText("Chào Tú");
+        jLB_Name.setPreferredSize(new java.awt.Dimension(210, 30));
+        jPanel1.add(jLB_Name);
+        jLB_Name.setBounds(0, 70, 210, 30);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 210, 100);
@@ -778,7 +787,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JButton btn_QuanLyNhanVien;
     private javax.swing.JButton btn_QuanLyPhongHat;
     private javax.swing.JButton btn_Thoat;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLB_Brand;
+    private javax.swing.JLabel jLB_Name;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -787,7 +797,6 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel jlb_brand;
     private javax.swing.JPanel jpn_QuanLyDichVu;
     private javax.swing.JPanel jpn_QuanLyDoanhThu;
     private javax.swing.JPanel jpn_QuanLyNhanVien;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bussiness;
+package Business;
 
 import DatabaseConnection.DataProcess;
 import java.sql.ResultSet;
@@ -12,12 +12,12 @@ import java.sql.ResultSet;
  *
  * @author Thoai
  */
-public class Bussiness {
+public class Business {
     private DataProcess dataBase;
     private String table;
     private String id;
 
-    public Bussiness(DataProcess dataBase, String table, String id) {
+    public Business(DataProcess dataBase, String table, String id) {
         this.dataBase = dataBase;
         this.table = table;
         this.id = id;
