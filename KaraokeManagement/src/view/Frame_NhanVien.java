@@ -4,7 +4,12 @@ import Business.*;
 import common.*;
 import model.*;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author thanhtri
@@ -19,8 +24,17 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     boolean bPhongHat = false;
     boolean bThanhToan = false;
     
+    DefaultTableModel mTable_DonDatPhong, mTable_KhachHang, mTable_PhongHat, mTable_DichVu, mTable_ThanhToan;
+    
     public Frame_NhanVien() {
         initComponents();
+        
+        mTable_DonDatPhong = (DefaultTableModel) tbDonDatPhong_pnDonDatPhong.getModel();
+        mTable_PhongHat = (DefaultTableModel) tbPhongHat_pnPhongHat.getModel();
+        mTable_DichVu = (DefaultTableModel) tbDichVu_pnDichVu.getModel();
+        mTable_KhachHang = (DefaultTableModel) tbKhachHangThanhVien.getModel();
+        mTable_ThanhToan = (DefaultTableModel) tbThanhToan_pnThanhToan.getModel();
+        
         customInit();
     }
     
@@ -30,6 +44,8 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         jLB_Brand.setText(MyStrings.AppTitle);
         jLB_Name.setText("Chào " + NV.getHoten());
     }
+    
+    
     void customInit(){
         setFalseAllButton();
         bDonDatPhong = true;
@@ -40,6 +56,29 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         setAllPanelDisappear();
         pnDonDatPhong.setVisible(true);
         
+        BDonThanhToan bDonDatPhong = new BDonThanhToan();
+        ArrayList<DonThanhToan> arrDon = null;
+        
+        try {
+            arrDon = bDonDatPhong.layTatCaDonThanhToan();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(int i = 0; i < arrDon.size(); i++){
+            mTable_DonDatPhong.addRow(new Object[]{
+                arrDon.get(i).getMaDon(),
+                arrDon.get(i).getMaPhong(),
+                arrDon.get(i).getMaKhachHang(),
+                arrDon.get(i).getThoiGianBatDau()
+            });           
+        }
+    }
+    
+    void clearAllDataTable(DefaultTableModel dtm){
+        for(int i = dtm.getRowCount() - 1; i >=0; i--){
+            dtm.removeRow(i);
+        }
     }
     
     void setAllPanelDisappear(){
@@ -283,14 +322,14 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã đơn", "Mã phòng", "Ngày đặt", "Giờ bắt đầu", "Giờ kết thúc"
+                "Mã đơn", "Mã phòng", "Mã khách hàng", "Giờ bắt đầu"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -307,8 +346,6 @@ public class Frame_NhanVien extends javax.swing.JFrame {
             tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(1).setPreferredWidth(250);
             tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(2).setPreferredWidth(200);
             tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(3).setPreferredWidth(350);
-            tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(4).setPreferredWidth(220);
-            tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(4).setHeaderValue("Giờ kết thúc");
         }
 
         pnDonDatPhong.add(spDonDatPhong_pnDonDatPhong);
@@ -371,11 +408,11 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã dịch vụ", "Tên dịch vụ", "Đơn giá"
+                "Loại dịch vụ", "Mã dịch vụ", "Tên dịch vụ", "Đơn giá"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -748,6 +785,25 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnDonDatPhong.setBackground(NVColor.btn_When_Clicked);
         pnDonDatPhong.setVisible(true);
         
+        clearAllDataTable(mTable_DonDatPhong);
+        
+        BDonThanhToan bDonDatPhong = new BDonThanhToan();
+        ArrayList<DonThanhToan> arrDon = null;
+        
+        try {
+            arrDon = bDonDatPhong.layTatCaDonThanhToan();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(int i = 0; i < arrDon.size(); i++){
+            mTable_DonDatPhong.addRow(new Object[]{
+                arrDon.get(i).getMaDon(),
+                arrDon.get(i).getMaPhong(),
+                arrDon.get(i).getMaKhachHang(),
+                arrDon.get(i).getThoiGianBatDau()
+            });           
+        }
     }//GEN-LAST:event_btnDonDatPhongActionPerformed
 
     private void btnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDichVuActionPerformed
@@ -758,6 +814,32 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnDichVu.setBackground(NVColor.btn_When_Clicked);
         pnDichVu.setVisible(true);
         
+        clearAllDataTable(mTable_DichVu);
+        
+        BDichVu bDichVu = new BDichVu();
+        ArrayList<DichVu> arrDV = null;
+        BLoaiDichVu bLoaiDichVu = new BLoaiDichVu();
+        
+        try {
+            arrDV = bDichVu.layThongTinTatCaDichVu();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(int i = 0; i < arrDV.size(); i++){
+            LoaiDichVu ldv = new LoaiDichVu();
+            try {
+                ldv = bLoaiDichVu.layThongTinLoaiDichVuTheoMa(arrDV.get(i).getMaDichVu());
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            mTable_DichVu.addRow(new Object[]{
+                ldv.getTenLoaiDichVu(),
+                arrDV.get(i).getMaDichVu(),
+                arrDV.get(i).getTenDichVu(),
+                arrDV.get(i).getDonGia()
+            });           
+        }
     }//GEN-LAST:event_btnDichVuActionPerformed
 
     private void btnKhachHangThanhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangThanhVienActionPerformed
@@ -768,6 +850,25 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnKhachHangThanhVien.setBackground(NVColor.btn_When_Clicked);
         pnKhachHangThanhVien.setVisible(true);
                 
+        clearAllDataTable(mTable_KhachHang);
+        
+        BKhachHang bKhachHang = new BKhachHang();
+        ArrayList<KhachHang> arrKH = null;
+        
+        try {
+            arrKH = bKhachHang.layTatCaKhachHang();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(int i = 0; i < arrKH.size(); i++){
+            mTable_KhachHang.addRow(new Object[]{
+                arrKH.get(i).getMaKH(),
+                arrKH.get(i).getHoTen(),
+                arrKH.get(i).getCmnd(),
+                arrKH.get(i).getDiaChi()
+            });           
+        }
     }//GEN-LAST:event_btnKhachHangThanhVienActionPerformed
 
     private void btnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhongHatActionPerformed
@@ -778,6 +879,35 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnPhongHat.setBackground(NVColor.btn_When_Clicked);
         pnPhongHat.setVisible(true);
         
+        clearAllDataTable(mTable_PhongHat);
+        
+        BPhongHat bPhongHat = new BPhongHat();
+        ArrayList<PhongHat> arrPH = null;
+        
+        BLoaiPhongHat bLoaiPhongHat = new BLoaiPhongHat();
+        
+        try {
+            arrPH = bPhongHat.layThongTinTatCaPhongHat();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        for(int i = 0; i < arrPH.size(); i++){
+            LoaiPhongHat lph = new LoaiPhongHat();
+            try {
+                lph = bLoaiPhongHat.layThongTinLoaiPhongHatTheoMa(arrPH.get(i).getMaLoaiPhong());
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            mTable_PhongHat.addRow(new Object[]{
+                arrPH.get(i).getMaPhong(),
+                lph.getTenLoai(),
+                arrPH.get(i).getTinhTrang(),
+                lph.getSucChua(),
+                lph.getGiaPhong()
+            });           
+        }
     }//GEN-LAST:event_btnPhongHatActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
