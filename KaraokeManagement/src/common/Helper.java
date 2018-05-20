@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.DonThanhToan;
 import model.KhuyenMai;
+import model.NguoiDung;
+import model.NhanVien;
 import model.ThanhVien;
 
 /**
@@ -48,5 +50,18 @@ public class Helper {
         thanhVien.setDiaChi(rs.getNString("DIACHI"));
         thanhVien.setCmnd(rs.getString("CMND"));
         thanhVien.setSdt(rs.getString("SDT"));
+    }
+    
+    public void setNguoiDung(NguoiDung nguoiDung, ResultSet rs) throws SQLException {
+        nguoiDung.setTenDangNhap(rs.getString("TENTK"));
+        nguoiDung.setMatKhau(rs.getString("MATKHAU"));
+        nguoiDung.setMaNhanVien(rs.getInt("MANV"));
+        nguoiDung.setChucVu(rs.getString("CHUCVU"));
+    }
+    
+    public void setNhanVien(NhanVien nhanVien, ResultSet rs) throws SQLException {
+        nhanVien.setMaNhanVien(rs.getInt("MANV"));
+        nhanVien.setHoten(rs.getString("HOTEN"));
+        nhanVien.setChucVu(rs.getString("CHUCVU"));
     }
 }

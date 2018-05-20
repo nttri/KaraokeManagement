@@ -13,6 +13,17 @@ public class NguoiDung {
     protected int maNhanVien;
     protected String tenDangNhap;
     protected String matKhau;
+    protected String chucVu;
+
+    public String getChucVu() {
+        return chucVu;
+    }
+
+    public void setChucVu(String chucVu) {
+        this.chucVu = chucVu;
+    }
+    
+    
 
     public int getMaNhanVien() {
         return maNhanVien;
@@ -38,15 +49,15 @@ public class NguoiDung {
         this.matKhau = matKhau;
     }
 
-    public NguoiDung(int maNhanVien, String tenDangNhap, String matKhau) {
+    public NguoiDung() {
+        
+    }
+
+    public NguoiDung(int maNhanVien, String tenDangNhap, String matKhau, String chucVu) {
         this.maNhanVien = maNhanVien;
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
-    }
-
-    @Override
-    public String toString() {
-        return "NguoiDung{" + "maNhanVien=" + maNhanVien + ", tenDangNhap=" + tenDangNhap + ", matKhau=" + matKhau + '}';
+        this.chucVu = chucVu;
     }
 
     
