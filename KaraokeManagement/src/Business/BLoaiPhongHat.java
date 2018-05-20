@@ -62,7 +62,7 @@ public class BLoaiPhongHat extends Business {
         return arrLoaiPhongHat;
     }
     
-    public LoaiPhongHat layThongTinLoaiPhongHatTheoMa(String maLoaiPhong) throws SQLException {
+    public LoaiPhongHat layThongTinLoaiPhongHatTheoMa(int maLoaiPhong) throws SQLException {
         LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
         sql = "layThongTinLoaiPhongHatTheoMa " + maLoaiPhong;
         rs = data.fetchData(sql);
