@@ -11,8 +11,8 @@ import java.util.Date;
  *
  * @author Thoai
  */
-public class ThanhVien {
-    private int maThanhVien;
+public class KhachHang {
+    private int maKH;
     private String hoTen;
     private String gioiTinh;
     private Date ngaySinh;
@@ -20,12 +20,12 @@ public class ThanhVien {
     private String cmnd;
     private String sdt;
     
-    public ThanhVien() {
+    public KhachHang() {
         
     }
 
-    public ThanhVien(int maThanhVien, String hoTen, String gioiTinh, Date ngaySinh, String diaChi, String cmnd, String sdt) {
-        this.maThanhVien = maThanhVien;
+    public KhachHang(int maKH, String hoTen, String gioiTinh, Date ngaySinh, String diaChi, String cmnd, String sdt) {
+        this.maKH = maKH;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
         this.ngaySinh = ngaySinh;
@@ -34,12 +34,12 @@ public class ThanhVien {
         this.sdt = sdt;
     }
 
-    public int getMaThanhVien() {
-        return maThanhVien;
+    public int getMaKH() {
+        return maKH;
     }
 
-    public void setMaThanhVien(int maThanhVien) {
-        this.maThanhVien = maThanhVien;
+    public void setMaKH(int maKH) {
+        this.maKH = maKH;
     }
 
     public String getHoTen() {
@@ -92,6 +92,6 @@ public class ThanhVien {
 
     @Override
     public String toString() {
-        return "ThanhVien{" + "maThanhVien=" + maThanhVien + ", hoTen=" + hoTen + ", gioiTinh=" + gioiTinh + ", ngaySinh=" + ngaySinh + ", diaChi=" + diaChi + ", cmnd=" + cmnd + ", sdt=" + sdt + '}';
+        return "KhachHang{" + "maKH=" + maKH + ", hoTen=" + hoTen + ", gioiTinh=" + gioiTinh + ", ngaySinh=" + ngaySinh + ", diaChi=" + diaChi + ", cmnd=" + cmnd + ", sdt=" + sdt + '}';
     }
 }

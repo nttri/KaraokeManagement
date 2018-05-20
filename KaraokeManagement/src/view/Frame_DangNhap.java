@@ -219,7 +219,7 @@ public class Frame_DangNhap extends javax.swing.JFrame {
             if (nd.getMaNhanVien() != 0){
                 int maNV = nd.getMaNhanVien();
                 BNhanVien bNV = new BNhanVien();
-                NhanVien nv = bNV.layThongTinNhanVien(maNV);
+                NhanVien nv = bNV.layThongTinNhanVienTheoMaNV(maNV);
                 String chucVu = nd.getChucVu();
                 
                 if (chucVu.equals(MyStrings.Manager)){

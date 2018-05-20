@@ -5,58 +5,59 @@
  */
 package Business;
 
-import DatabaseConnection.DataProcess;
 import common.Helper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.ThanhVien;
+import model.KhachHang;
 
 /**
  *
  * @author Thoai
  */
 public class BKhachHang extends Business{
-
+    String sql;
+    ResultSet rs;
+    
     public BKhachHang(){
         super();
     }
        
-    public ArrayList<ThanhVien> layTatCaThanhVien() throws SQLException {
-        ArrayList<ThanhVien> arrThanhVien = new ArrayList();
-        String sql = "layTatCaThanhVien";
-        ResultSet rs = data.fetchData(sql);
+    public ArrayList<KhachHang> layTatCaKhachHang() throws SQLException {
+        ArrayList<KhachHang> arrKhachHang= new ArrayList();
+        sql = "layTatCaKhachHang";
+        rs = data.fetchData(sql);
         
-        ThanhVien thanhVien = new ThanhVien();
+        KhachHang khachHang = new KhachHang();
         while (rs.next()) {
-            Helper.setThanhVien(thanhVien, rs);
-            arrThanhVien.add(thanhVien);
+            Helper.setKhachHang(khachHang, rs);
+            arrKhachHang.add(khachHang);
         }
-        return arrThanhVien;
+        return arrKhachHang;
     }
     
-    public ThanhVien layThanhVienTheoMa(int maThanhVien) throws SQLException {
-        ThanhVien thanhVien = new ThanhVien();
-        String sql = "layThanhVienTheoMa " + maThanhVien;
-        ResultSet rs = data.fetchData(sql);
+    public KhachHang layKhachHangTheoMa(int maKH) throws SQLException {
+        KhachHang khachHang = new KhachHang();
+        sql = "layKhachHangTheoMa " + maKH;
+        rs = data.fetchData(sql);
         if (rs.next()){
-            Helper.setThanhVien(thanhVien, rs);
+            Helper.setKhachHang(khachHang, rs);
         }         
-        return thanhVien;
+        return khachHang;
     }
     
-    public boolean themThanhVien(String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt) throws SQLException {
-        String sql = "themThanhVien " + hoTen + ", " + gioiTinh + ", " + ngaySinh + ", " + diaChi + ", " + cmnd + ", " + sdt;
+    public boolean themKhachHang(String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt) throws SQLException {
+        sql = "themKhachHang " + hoTen + ", " + gioiTinh + ", " + ngaySinh + ", " + diaChi + ", " + cmnd + ", " + sdt;
         return data.Execute(sql);
     }
     
-    public boolean capNhatThanhVien(int ma, String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt) throws SQLException {
-        String sql = "capNhatThanhVien " + ma + ", "+ hoTen + ", " + gioiTinh + ", " + ngaySinh + ", " + diaChi + ", " + cmnd + ", " + sdt;
+    public boolean capNhatKhachHang(int ma, String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt) throws SQLException {
+        sql = "capNhatKhachHang " + ma + ", "+ hoTen + ", " + gioiTinh + ", " + ngaySinh + ", " + diaChi + ", " + cmnd + ", " + sdt;
         return data.Execute(sql);
     }
     
-    public boolean xoaThanhVien(int ma) {
-        String sql = "xoaThanhVien " + ma;
+    public boolean xoaKhachHang(int ma) {
+        sql = "xoaKhachHang " + ma;
         return data.Execute(sql);
     }
 }
