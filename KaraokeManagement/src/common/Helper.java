@@ -7,6 +7,7 @@ package common;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.DichVu;
 import model.DonThanhToan;
 import model.KhuyenMai;
 import model.NguoiDung;
@@ -84,5 +85,12 @@ public class Helper {
         loaiPhongHat.setMoTa(rs.getString("MOTA"));
         loaiPhongHat.setSucChua(rs.getInt("SUCCHUA"));
         loaiPhongHat.setGiaPhong(rs.getInt("GIAPHONG"));
+    }
+    
+    public static void setDichVu(DichVu dichVu, ResultSet rs) throws SQLException {
+        dichVu.setMaDichVu(rs.getInt("MADV"));
+        dichVu.setMaLoaiDichVu(rs.getInt("MALOAIDV"));
+        dichVu.setTenDichVu(rs.getString("TENDV"));
+        dichVu.setDonGia(rs.getInt("DONGIA"));
     }
 }

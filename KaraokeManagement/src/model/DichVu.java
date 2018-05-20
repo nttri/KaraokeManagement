@@ -46,6 +46,10 @@ public class DichVu {
     public void setDonGia(int donGia) {
         this.donGia = donGia;
     }
+    
+    public DichVu() {
+        
+    }
 
     public DichVu(int maDichVu, int maLoaiDichVu, String tenDichVu, int donGia) {
         this.maDichVu = maDichVu;
