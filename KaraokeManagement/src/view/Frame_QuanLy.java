@@ -78,7 +78,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
                 arrNV.get(i).getSdt(), arrNV.get(i).getLuong()
             });           
         }
-        ///////////////////////////////////
+        ////////////////////////////////////
     }
     
     void setAllPanelDisappear(){
