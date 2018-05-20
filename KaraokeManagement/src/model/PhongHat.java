@@ -11,7 +11,7 @@ package model;
  */
 public class PhongHat {
     private int maPhong;
-    private String maLoaiPhong;
+    private int maLoaiPhong;
     private String tinhTrang;
 
     public int getMaPhong() {
@@ -22,11 +22,11 @@ public class PhongHat {
         this.maPhong = maPhong;
     }
 
-    public String getMaLoaiPhong() {
+    public int getMaLoaiPhong() {
         return maLoaiPhong;
     }
 
-    public void setMaLoaiPhong(String maLoaiPhong) {
+    public void setMaLoaiPhong(int maLoaiPhong) {
         this.maLoaiPhong = maLoaiPhong;
     }
 
@@ -38,7 +38,11 @@ public class PhongHat {
         this.tinhTrang = tinhTrang;
     }
 
-    public PhongHat(int maPhong, String maLoaiPhong, String tinhTrang) {
+    public PhongHat() {
+        
+    }
+    
+    public PhongHat(int maPhong, int maLoaiPhong, String tinhTrang) {
         this.maPhong = maPhong;
         this.maLoaiPhong = maLoaiPhong;
         this.tinhTrang = tinhTrang;

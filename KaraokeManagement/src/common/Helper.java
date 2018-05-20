@@ -11,7 +11,8 @@ import model.DonThanhToan;
 import model.KhuyenMai;
 import model.NguoiDung;
 import model.NhanVien;
-import model.ThanhVien;
+import model.PhongHat;
+import model.KhachHang;
 
 /**
  *
@@ -42,14 +43,14 @@ public class Helper {
         khuyenMai.setThoiGianKT(rs.getDate("THOIGIANKT"));
     }
     
-    public static void setThanhVien(ThanhVien thanhVien, ResultSet rs) throws SQLException {
-        thanhVien.setMaThanhVien(rs.getInt("MAKH"));
-        thanhVien.setHoTen(rs.getNString("HOTEN"));
-        thanhVien.setGioiTinh(rs.getNString("GIOITINH"));
-        thanhVien.setNgaySinh(rs.getDate("NGAYSINH"));
-        thanhVien.setDiaChi(rs.getNString("DIACHI"));
-        thanhVien.setCmnd(rs.getString("CMND"));
-        thanhVien.setSdt(rs.getString("SDT"));
+    public static void setKhachHang(KhachHang khachHang, ResultSet rs) throws SQLException {
+        khachHang.setMaKH(rs.getInt("MAKH"));
+        khachHang.setHoTen(rs.getNString("HOTEN"));
+        khachHang.setGioiTinh(rs.getNString("GIOITINH"));
+        khachHang.setNgaySinh(rs.getDate("NGAYSINH"));
+        khachHang.setDiaChi(rs.getNString("DIACHI"));
+        khachHang.setCmnd(rs.getString("CMND"));
+        khachHang.setSdt(rs.getString("SDT"));
     }
     
     public static void setNguoiDung(NguoiDung nguoiDung, ResultSet rs) throws SQLException {
@@ -68,5 +69,11 @@ public class Helper {
         nhanVien.setSdt(rs.getString("SDT"));
         nhanVien.setNgaySinh(rs.getDate("NGAYSINH"));
         nhanVien.setLuong(rs.getInt("LUONG"));
+    }
+    
+    public static void setPhongHat(PhongHat phongHat, ResultSet rs) throws SQLException {
+        phongHat.setMaPhong(rs.getInt("MAPHONG"));
+        phongHat.setMaLoaiPhong(rs.getInt("MALOAIPHONG"));
+        phongHat.setTinhTrang(rs.getString("TINHTRANG"));
     }
 }

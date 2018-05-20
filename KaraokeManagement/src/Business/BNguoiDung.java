@@ -5,7 +5,6 @@
  */
 package Business;
 
-import DatabaseConnection.DataProcess;
 import common.Helper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,18 +15,25 @@ import model.NguoiDung;
  * @author Thoai
  */
 public class BNguoiDung extends Business{
-
+    String sql;
+    ResultSet rs;
+    
     public BNguoiDung(){
         super();
     }    
     
     public NguoiDung timTaiKhoan(String tenDangNhap, String matKhau) throws SQLException {
-        String sql = "timTaiKhoan " + tenDangNhap + ", " + matKhau;
+        sql = "timTaiKhoan " + tenDangNhap + ", " + matKhau;
         NguoiDung nguoiDung = new NguoiDung();
-        ResultSet rs = data.fetchData(sql);
+        rs = data.fetchData(sql);
         if (rs.next()){
             Helper.setNguoiDung(nguoiDung, rs);
         }
         return nguoiDung;
+    }
+    
+    public boolean capNhatTaiKhoan(String tenDangNhap, String matKhau) throws SQLException {
+        sql = "capNhatTaiKhoan " + tenDangNhap + ", " + matKhau;
+        return data.Execute(sql);
     }
 }

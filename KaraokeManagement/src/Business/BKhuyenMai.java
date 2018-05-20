@@ -9,6 +9,7 @@ import DatabaseConnection.DataProcess;
 import common.Helper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import model.KhuyenMai;
 
 /**
@@ -16,33 +17,48 @@ import model.KhuyenMai;
  * @author Thoai
  */
 public class BKhuyenMai extends Business{
-
+    String sql;
+    ResultSet rs;
+    
     public BKhuyenMai(){
         super();
     }
     
+    public ArrayList<KhuyenMai> layTatCaKhuyenMai() throws SQLException {
+        ArrayList<KhuyenMai> arrKhuyenMai = new ArrayList();
+        sql = "layTatCaKhuyenMai";
+        rs = data.fetchData(sql);
+        
+        KhuyenMai khuyenMai = new KhuyenMai();
+        while(rs.next()) {
+            Helper.setKhuyenMai(khuyenMai, rs);
+            arrKhuyenMai.add(khuyenMai);
+        }
+        return arrKhuyenMai;
+    }
+    
     public KhuyenMai layKhuyenMaiTheoMa(String maKM) throws SQLException {
         KhuyenMai khuyenMai = new KhuyenMai();
-        String sql = "";
-        ResultSet rs = data.fetchData(sql);
+        sql = "layKhuyenMaiTheoMa " + maKM;
+        rs = data.fetchData(sql);
         if (rs.next()){
             Helper.setKhuyenMai(khuyenMai, rs);
         }      
         return khuyenMai;
     }
     
-    public boolean themKhuyenMai(String maKM, String tenKM, int giaTriKM, String thoiGianBD, String thoiGianKT) throws SQLException {
-        String sql = "";
+    public boolean themKhuyenMai(String tenKM, int giaTriKM, String thoiGianBD, String thoiGianKT) throws SQLException {
+        sql = "themKhuyenMai " + tenKM + ", " + giaTriKM + ", " + thoiGianBD + ", " + thoiGianKT;
         return data.Execute(sql);
     }
     
     public boolean capNhatKhuyenMai(String maKM, String tenKM, int giaTriKM, String thoiGianBD, String thoiGianKT) throws SQLException {
-        String sql = "";
+        sql = "capNhatKhuyenMai " + maKM + ", " + tenKM + ", " + giaTriKM + ", " + thoiGianBD + ", " + thoiGianKT;
         return data.Execute(sql);
     }
     
     public boolean xoaKhuyenMai(String maKM) throws SQLException {
-        String sql = "";
+        sql = "xoaKhuyenMai " + maKM;
         return data.Execute(sql);
     }
 }
