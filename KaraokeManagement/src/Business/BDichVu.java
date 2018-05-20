@@ -51,7 +51,7 @@ public class BDichVu extends Business {
     
     public ArrayList<DichVu> layThongTinDichVuTheoTen(String tenDV) throws SQLException {
         ArrayList<DichVu> arrDichVu = new ArrayList<>();
-        sql = "layThongTinDichVuTheoTen " + tenDV;
+        sql = "layThongTinDichVuTheoTen N'" + tenDV + "'";
         rs = data.fetchData(sql);
         
         while(rs.next()) {
@@ -73,12 +73,12 @@ public class BDichVu extends Business {
     }
     
     public boolean themDichVu(String tenLoaiDichVu, int donGia, String tenDichVu) throws SQLException {
-        sql = "themDichVu " + tenLoaiDichVu + ", " + donGia + ", " + tenDichVu;
+        sql = "themDichVu N'" + tenLoaiDichVu + "', " + donGia + ", N'" + tenDichVu + "'";
         return data.Execute(sql);
     }
     
     public boolean capNhatDichVu(int maDichVu, String tenLoaiDichVu, int donGia, String tenDichVu) throws SQLException {
-        sql = "capNhatDichVu " +maDichVu + ", " + tenLoaiDichVu + ", " + donGia + ", " + tenDichVu;
+        sql = "capNhatDichVu " +maDichVu + ", N'" + tenLoaiDichVu + "', " + donGia + ", N'" + tenDichVu + "'";
         return data.Execute(sql);
     }
     

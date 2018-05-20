@@ -47,12 +47,12 @@ public class BKhachHang extends Business{
     }
     
     public boolean themKhachHang(String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt) throws SQLException {
-        sql = "themKhachHang " + hoTen + ", " + gioiTinh + ", " + ngaySinh + ", " + diaChi + ", " + cmnd + ", " + sdt;
+        sql = "themKhachHang N'" + hoTen + "', N'" + gioiTinh + "', " + ngaySinh + ", N'" + diaChi + "', " + cmnd + ", " + sdt;
         return data.Execute(sql);
     }
     
     public boolean capNhatKhachHang(int ma, String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt) throws SQLException {
-        sql = "capNhatKhachHang " + ma + ", "+ hoTen + ", " + gioiTinh + ", " + ngaySinh + ", " + diaChi + ", " + cmnd + ", " + sdt;
+        sql = "capNhatKhachHang " + ma + ", N'"+ hoTen + "', N'" + gioiTinh + "', " + ngaySinh + ", N'" + diaChi + "', " + cmnd + ", " + sdt;
         return data.Execute(sql);
     }
     

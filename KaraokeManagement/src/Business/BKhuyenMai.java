@@ -47,12 +47,12 @@ public class BKhuyenMai extends Business{
     }
     
     public boolean themKhuyenMai(String maKM, String tenKM, int giaTriKM, String thoiGianBD, String thoiGianKT) throws SQLException {
-        sql = "themKhuyenMai " + maKM + ", " + tenKM + ", " + giaTriKM + ", " + thoiGianBD + ", " + thoiGianKT;
+        sql = "themKhuyenMai " + maKM + ", N'" + tenKM + "', " + giaTriKM + ", " + thoiGianBD + ", " + thoiGianKT;
         return data.Execute(sql);
     }
     
     public boolean capNhatKhuyenMai(String maKM, String tenKM, int giaTriKM, String thoiGianBD, String thoiGianKT) throws SQLException {
-        sql = "capNhatKhuyenMai " + maKM + ", " + tenKM + ", " + giaTriKM + ", " + thoiGianBD + ", " + thoiGianKT;
+        sql = "capNhatKhuyenMai " + maKM + ", N'" + tenKM + "', " + giaTriKM + ", " + thoiGianBD + ", " + thoiGianKT;
         return data.Execute(sql);
     }
     

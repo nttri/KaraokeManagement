@@ -72,12 +72,12 @@ public class BLoaiPhongHat extends Business {
     }
     
     public boolean themLoaiPhong(String tenLoai, int giaPhong, int sucChua, String moTa) throws SQLException {
-        sql = "themLoaiPhong " + tenLoai + ", " + giaPhong + ", " + sucChua + ", " + moTa;
+        sql = "themLoaiPhong N'" + tenLoai + "', " + giaPhong + ", " + sucChua + ", N'" + moTa + "'";
         return data.Execute(sql);
     }
     
     public boolean capNhatLoaiPhong(String maLoai, String tenLoai, int giaPhong, int sucChua, String moTa) throws SQLException {
-        sql = "capNhatLoaiPhong " + maLoai + ", " + tenLoai + ", " + giaPhong + ", " + sucChua + ", " + moTa;
+        sql = "capNhatLoaiPhong " + maLoai + ", N'" + tenLoai + "', " + giaPhong + ", " + sucChua + ", N'" + moTa + "'";
         return data.Execute(sql);
     }
     

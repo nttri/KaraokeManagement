@@ -1,7 +1,16 @@
 package view;
 
+import Business.BLoaiPhongHat;
+import Business.BPhongHat;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import model.LoaiPhongHat;
+import model.PhongHat;
 
 /**
  *
@@ -9,14 +18,55 @@ import javax.swing.JTextField;
  */
 public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
 
+    DefaultTableModel dfmPhong;
+
     public Dialog_ThemDonDatPhong(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         customInit();
     }
-    
-    void customInit(){
-        ((JTextField)tfNgay.getDateEditor()).setEditable(false);
+
+    void customInit() {
+        ((JTextField) tfNgay.getDateEditor()).setEditable(false);
+        dfmPhong = (DefaultTableModel) tbPhong.getModel();
+
+        BLoaiPhongHat bLoaiPhongHat = new BLoaiPhongHat();
+        ArrayList<LoaiPhongHat> arrLPH = null;
+
+        try {
+            arrLPH = bLoaiPhongHat.layThongTinTatCaLoaiPhongHat();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (int i = 0; i < arrLPH.size(); i++) {
+            cbbLoaiPhong.addItem(arrLPH.get(i).getTenLoai());
+        }
+
+        BPhongHat bPhongHat = new BPhongHat();
+        ArrayList<PhongHat> arrPH = null;
+
+        try {
+            arrPH = bPhongHat.layThongTinTatCaPhongHat();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (int i = 0; i < arrPH.size(); i++) {
+            if (arrPH.get(i).getTinhTrang().equals("Còn trống")) {
+                LoaiPhongHat lph = new LoaiPhongHat();
+                try {
+                    lph = bLoaiPhongHat.layThongTinLoaiPhongHatTheoMa(arrPH.get(i).getMaLoaiPhong());
+                } catch (SQLException ex) {
+                    Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                dfmPhong.addRow(new Object[]{
+                    arrPH.get(i).getMaPhong(),
+                    lph.getSucChua(),
+                    lph.getGiaPhong()
+                });
+            }
+        }
     }
 
     /**
@@ -57,7 +107,6 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
         jLabel2.setText("Loại phòng");
 
         cbbLoaiPhong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        cbbLoaiPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thường", "VIP", "Sự kiện" }));
 
         tbPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
