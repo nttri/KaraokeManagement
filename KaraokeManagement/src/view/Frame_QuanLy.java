@@ -60,6 +60,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         setAllPanelDisappear();
         jpn_QuanLyNhanVien.setVisible(true);
         
+        //////////////////////////////////////
         // Để tạm ở đây để hiển thị, sẽ được thay thế bằng một đối tượng khác
         BNhanVien bNhanVien = new BNhanVien();
         ArrayList<NhanVien> arrNV = null;
