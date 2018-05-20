@@ -21,7 +21,7 @@ public class DonThanhToan {
     private Date thoiGianBatDau;
     private Date thoiGianKetThuc;
     private String maKhuyenMai;
-    private boolean tinhTrang;
+    private String tinhTrang;
 
     public int getMaDon() {
         return maDon;
@@ -87,11 +87,11 @@ public class DonThanhToan {
         this.maKhuyenMai = maKhuyenMai;
     }
 
-    public boolean isTinhTrang() {
+    public String getTinhTrang() {
         return tinhTrang;
     }
 
-    public void setTinhTrang(boolean tinhTrang) {
+    public void setTinhTrang(String tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
     
@@ -99,7 +99,7 @@ public class DonThanhToan {
         
     }
 
-    public DonThanhToan(int maDon, int maNhanVien, int maKhachHang, int maPhong, int giaPhong, Date thoiGianBatDau, Date thoiGianKetThuc, String maKhuyenMai, boolean tinhTrang) {
+    public DonThanhToan(int maDon, int maNhanVien, int maKhachHang, int maPhong, int giaPhong, Date thoiGianBatDau, Date thoiGianKetThuc, String maKhuyenMai, String tinhTrang) {
         this.maDon = maDon;
         this.maNhanVien = maNhanVien;
         this.maKhachHang = maKhachHang;

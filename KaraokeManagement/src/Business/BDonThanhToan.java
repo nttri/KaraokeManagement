@@ -46,12 +46,12 @@ public class BDonThanhToan extends Business{
         return donThanhToan;
     }
     
-    public boolean themDonThanhToan(int maNV, int maKH, int maPhong, int giaPhong, String thoiGianBD, String thoiGianKT, String maKM, boolean tinhTrang) throws SQLException{
+    public boolean themDonThanhToan(int maNV, int maKH, int maPhong, int giaPhong, String thoiGianBD, String thoiGianKT, String maKM, String tinhTrang) throws SQLException{
         sql = "themDonThanhToan " + maNV + ", " + maKH + ", " + maPhong + ", " + giaPhong + ", " +thoiGianBD + ", " +thoiGianKT + ", " +maKM + ", " + tinhTrang;
         return data.Execute(sql);
     }
     
-    public boolean capNhatDonThanhToan(int maDon, int maNV, int maKH, int maPhong, int giaPhong, String thoiGianBD, String thoiGianKT, String maKM, boolean tinhTrang) throws SQLException {
+    public boolean capNhatDonThanhToan(int maDon, int maNV, int maKH, int maPhong, int giaPhong, String thoiGianBD, String thoiGianKT, String maKM, String tinhTrang) throws SQLException {
         sql = "capNhatDonThanhToan " + maDon + ", " + maNV + ", " + maKH + ", " + maPhong + ", " + giaPhong + ", " +thoiGianBD + ", " +thoiGianKT + ", " +maKM + ", " + tinhTrang;
         return data.Execute(sql);
     }

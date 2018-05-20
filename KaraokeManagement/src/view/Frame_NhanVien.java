@@ -74,19 +74,21 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         }
         
         for(int i = 0; i < arrDon.size(); i++){
-            KhachHang kh = new KhachHang();
-            try {
-                kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
-            } catch (SQLException ex) {
-                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            mTable_DonDatPhong.addRow(new Object[]{
-                arrDon.get(i).getMaDon(),
-                arrDon.get(i).getMaPhong(),
-                arrDon.get(i).getMaKhachHang(),
-                kh.getHoTen(),
-                arrDon.get(i).getThoiGianBatDau()
-            });           
+            if(!arrDon.get(i).isTinhTrang()){
+                KhachHang kh = new KhachHang();
+                try {
+                    kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
+                } catch (SQLException ex) {
+                    Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                mTable_DonDatPhong.addRow(new Object[]{
+                    arrDon.get(i).getMaDon(),
+                    arrDon.get(i).getMaPhong(),
+                    arrDon.get(i).getMaKhachHang(),
+                    kh.getHoTen(),
+                    arrDon.get(i).getThoiGianBatDau()
+                });     
+            }          
         }
     }
     
@@ -827,19 +829,21 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         }
         
         for(int i = 0; i < arrDon.size(); i++){
-            KhachHang kh = new KhachHang();
-            try {
-                kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
-            } catch (SQLException ex) {
-                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            mTable_DonDatPhong.addRow(new Object[]{
-                arrDon.get(i).getMaDon(),
-                arrDon.get(i).getMaPhong(),
-                arrDon.get(i).getMaKhachHang(),
-                kh.getHoTen(),
-                arrDon.get(i).getThoiGianBatDau()
-            });           
+            if(arrDon.get(i).isTinhTrang()){
+                KhachHang kh = new KhachHang();
+                try {
+                    kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
+                } catch (SQLException ex) {
+                    Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                mTable_DonDatPhong.addRow(new Object[]{
+                    arrDon.get(i).getMaDon(),
+                    arrDon.get(i).getMaPhong(),
+                    arrDon.get(i).getMaKhachHang(),
+                    kh.getHoTen(),
+                    arrDon.get(i).getThoiGianBatDau()
+                });     
+            }   
         }
     }//GEN-LAST:event_btnDonDatPhongActionPerformed
 

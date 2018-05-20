@@ -36,7 +36,7 @@ public class Helper {
         donThanhToan.setThoiGianBatDau(rs.getTimestamp("THOIGIANBD"));
         donThanhToan.setThoiGianKetThuc(rs.getTimestamp("THOIGIANKT"));
         donThanhToan.setMaKhuyenMai(rs.getString("MAKM"));
-        donThanhToan.setTinhTrang(rs.getBoolean("TINHTRANG"));
+        donThanhToan.setTinhTrang(rs.getString("TINHTRANG"));
     }
     
     public static void setKhuyenMai(KhuyenMai khuyenMai, ResultSet rs) throws SQLException {
