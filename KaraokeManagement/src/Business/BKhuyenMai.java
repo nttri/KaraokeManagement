@@ -28,8 +28,8 @@ public class BKhuyenMai extends Business{
         sql = "layTatCaKhuyenMai";
         rs = data.fetchData(sql);
         
-        KhuyenMai khuyenMai = new KhuyenMai();
         while(rs.next()) {
+            KhuyenMai khuyenMai = new KhuyenMai();
             Helper.setKhuyenMai(khuyenMai, rs);
             arrKhuyenMai.add(khuyenMai);
         }

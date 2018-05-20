@@ -28,8 +28,8 @@ public class BDichVu extends Business {
         sql = "layThongTinTatCaDichVu";
         rs = data.fetchData(sql);
         
-        DichVu dichVu = new DichVu();
         while(rs.next()) {
+            DichVu dichVu = new DichVu();
             Helper.setDichVu(dichVu, rs);
             arrDichVu.add(dichVu);
         }
@@ -41,8 +41,8 @@ public class BDichVu extends Business {
         sql = "layThongTinDichVuTheoDonGia " + donGia;
         rs = data.fetchData(sql);
         
-        DichVu dichVu = new DichVu();
         while(rs.next()) {
+            DichVu dichVu = new DichVu();
             Helper.setDichVu(dichVu, rs);
             arrDichVu.add(dichVu);
         }
@@ -54,8 +54,8 @@ public class BDichVu extends Business {
         sql = "layThongTinDichVuTheoTen " + tenDV;
         rs = data.fetchData(sql);
         
-        DichVu dichVu = new DichVu();
         while(rs.next()) {
+            DichVu dichVu = new DichVu();
             Helper.setDichVu(dichVu, rs);
             arrDichVu.add(dichVu);
         }

@@ -28,8 +28,8 @@ public class BDonThanhToan extends Business{
         sql = "layTatCaDonThanhToan ";
         rs = data.fetchData(sql);
         
-        DonThanhToan donThanhToan = new DonThanhToan();
         while (rs.next()) {
+            DonThanhToan donThanhToan = new DonThanhToan();
             Helper.setDonThanhToan(donThanhToan, rs);
             arrDonThanhToan.add(donThanhToan);
         }

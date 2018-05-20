@@ -28,8 +28,8 @@ public class BLoaiPhongHat extends Business {
         sql = "layThongTinTatCaLoaiPhongHat";
         rs = data.fetchData(sql);
         
-        LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
         while(rs.next()) {
+            LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
             Helper.setLoaiPhongHat(loaiPhongHat, rs);
             arrLoaiPhongHat.add(loaiPhongHat);
         }
@@ -41,8 +41,8 @@ public class BLoaiPhongHat extends Business {
         sql = "layThongTinLoaiPhongHatTheoSucChua " + sucChua;
         rs = data.fetchData(sql);
         
-        LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
         while(rs.next()) {
+            LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
             Helper.setLoaiPhongHat(loaiPhongHat, rs);
             arrLoaiPhongHat.add(loaiPhongHat);
         }
@@ -54,8 +54,8 @@ public class BLoaiPhongHat extends Business {
         sql = "layThongTinLoaiPhongHatTheoGiaPhong " + giaPhong;
         rs = data.fetchData(sql);
         
-        LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
         while(rs.next()) {
+            LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
             Helper.setLoaiPhongHat(loaiPhongHat, rs);
             arrLoaiPhongHat.add(loaiPhongHat);
         }

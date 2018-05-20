@@ -28,8 +28,8 @@ public class BNhanVien extends Business{
         sql = "layThongTinTatCaNhanVien";
         rs = data.fetchData(sql);
         
-        NhanVien nhanVien = new NhanVien();
         while(rs.next()) {
+            NhanVien nhanVien = new NhanVien();
             Helper.setNhanVien(nhanVien, rs);
             arrNhanVien.add(nhanVien);
         }
@@ -51,8 +51,8 @@ public class BNhanVien extends Business{
         sql = "layThongTinNhanVienTheoTen " + hoTen;
         rs = data.fetchData(sql);
         
-        NhanVien nhanVien = new NhanVien();
         while(rs.next()) {
+            NhanVien nhanVien = new NhanVien();
             Helper.setNhanVien(nhanVien, rs);
             arrNhanVien.add(nhanVien);
         }

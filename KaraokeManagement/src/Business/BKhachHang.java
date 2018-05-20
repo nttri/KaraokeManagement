@@ -28,8 +28,8 @@ public class BKhachHang extends Business{
         sql = "layTatCaKhachHang";
         rs = data.fetchData(sql);
         
-        KhachHang khachHang = new KhachHang();
         while (rs.next()) {
+            KhachHang khachHang = new KhachHang();
             Helper.setKhachHang(khachHang, rs);
             arrKhachHang.add(khachHang);
         }
