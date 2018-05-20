@@ -51,13 +51,28 @@ public class BDonThanhToan extends Business{
         return data.Execute(sql);
     }
     
+    public boolean themDonDatPhong( int maKH, int maPhong, int giaPhong, String thoiGianBD, String tinhTrang) throws SQLException{
+        sql = "themDonDatPhong " + maKH + ", " + maPhong + ", " + giaPhong + ", " +thoiGianBD + ", N'" + tinhTrang + "'";
+        return data.Execute(sql);
+    }
+    
     public boolean capNhatDonThanhToan(int maDon, int maNV, int maKH, int maPhong, int giaPhong, String thoiGianBD, String thoiGianKT, String maKM, String tinhTrang) throws SQLException {
         sql = "capNhatDonThanhToan " + maDon + ", " + maNV + ", " + maKH + ", " + maPhong + ", " + giaPhong + ", " +thoiGianBD + ", " +thoiGianKT + ", " +maKM + ", N'" + tinhTrang + "'";
         return data.Execute(sql);
     }
     
+    public boolean capNhatDonDatPhong(int maDon, int maKH, int maPhong, int giaPhong, String thoiGianBD, String tinhTrang) throws SQLException {
+        sql = "capNhatDonDatPhong " + maDon + ", " + maKH + ", " + maPhong + ", " + giaPhong + ", " +thoiGianBD + ", N'" + tinhTrang + "'";
+        return data.Execute(sql);
+    }
+    
     public boolean xoaDonThanhToan(int maDon) throws SQLException{
         sql = "xoaDonThanhToan " + maDon;
+        return data.Execute(sql);
+    }
+    
+    public boolean xoaDonDatPhong(int maDon) throws SQLException{
+        sql = "xoaDonDatPhong " + maDon;
         return data.Execute(sql);
     }
 }
