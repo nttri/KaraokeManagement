@@ -743,8 +743,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         }
         for(int i = 0; i < arrDV.size(); i++){
             mTable_DichVu.addRow(new Object[]{
-                arrDV.get(i).getMaDichVu(),  arrDV.get(i).getTenDichVu(), 
-                arrLDV.get(i).getTenLoaiDichVu(), arrDV.get(i).getDonGia()
+                arrDV.get(i).getMaDichVu(),  arrDV.get(i).getDonGia(), 
+                arrLDV.get(i).getTenLoaiDichVu(), arrDV.get(i).getTenDichVu()
             });
         }
     }//GEN-LAST:event_btn_QuanLyDichVuMouseClicked
