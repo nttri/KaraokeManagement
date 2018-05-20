@@ -1,6 +1,7 @@
 package view;
 
 import Business.BDonThanhToan;
+import Business.BKhachHang;
 import Business.BLoaiPhongHat;
 import Business.BPhongHat;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import model.KhachHang;
 import model.LoaiPhongHat;
 import model.PhongHat;
 
@@ -31,7 +33,8 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
     void customInit() {
         ((JTextField) tfNgay.getDateEditor()).setEditable(false);
         dfmPhong = (DefaultTableModel) tbPhong.getModel();
-
+        tbPhong.setRowHeight(30);
+        
         BLoaiPhongHat bLoaiPhongHat = new BLoaiPhongHat();
         ArrayList<LoaiPhongHat> arrLPH = null;
 
@@ -44,6 +47,22 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
         for (int i = 0; i < arrLPH.size(); i++) {
             cbbLoaiPhong.addItem(arrLPH.get(i).getTenLoai());
         }
+        
+        
+        BKhachHang bKhachHang = new BKhachHang();
+        ArrayList<KhachHang> arrKH = null;
+
+        try {
+            arrKH = bKhachHang.layTatCaKhachHang();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (int i = 0; i < arrKH.size(); i++) {
+            Integer maKH = arrKH.get(i).getMaKH();
+            cbbMaKH.addItem(maKH.toString());
+        }
+        
 
         BPhongHat bPhongHat = new BPhongHat();
         ArrayList<PhongHat> arrPH = null;
@@ -86,12 +105,12 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
         tbPhong = new javax.swing.JTable();
         btnTimPhong = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        tfMaKhachHang = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         tfNgay = new com.toedter.calendar.JDateChooser();
         cbbTuLuc = new javax.swing.JComboBox<>();
         btnThem = new javax.swing.JButton();
+        cbbMaKH = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -108,6 +127,7 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
 
         cbbLoaiPhong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        tbPhong.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tbPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -148,9 +168,6 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Mã khách hàng");
 
-        tfMaKhachHang.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tfMaKhachHang.setForeground(new java.awt.Color(10, 125, 39));
-
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Từ lúc");
@@ -175,6 +192,8 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
             }
         });
 
+        cbbMaKH.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -193,7 +212,7 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
                             .addComponent(jLabel6)
                             .addComponent(jLabel3)
                             .addComponent(tfNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                            .addComponent(tfMaKhachHang))
+                            .addComponent(cbbMaKH, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -228,8 +247,8 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfMaKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(cbbMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
                         .addComponent(jLabel6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -237,7 +256,7 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
                         .addComponent(cbbTuLuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54))
         );
@@ -259,20 +278,39 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         BDonThanhToan bDonDatPhong = new BDonThanhToan();
-        int makh = Integer.parseInt(tfMaKhachHang.getText());
+        int makh = Integer.parseInt(cbbMaKH.getSelectedItem().toString());
         
         int r = tbPhong.getSelectedRow();
+        if (r < 0){
+            JOptionPane.showMessageDialog(this,"Hãy chọn 1 phòng");
+            return;
+        }
+        
         int maphong = Integer.parseInt(dfmPhong.getValueAt(r, 0).toString());
         int giaphong = Integer.parseInt(dfmPhong.getValueAt(r, 2).toString());
         
         String date = ((JTextField)tfNgay.getDateEditor().getUiComponent()).getText();
+        
+        if (date.isEmpty()){
+            JOptionPane.showMessageDialog(this,"Hãy chọn ngày");
+            return;
+        }
+        
         String time = cbbTuLuc.getSelectedItem().toString();
         date = date + " " + time + ":00.0";
         
+        boolean res = false;
+        
         try {
-            bDonDatPhong.themDonDatPhong(makh, maphong, giaphong, date, "Còn trống");
+            res = bDonDatPhong.themDonDatPhong(makh, maphong, giaphong, date, "Chưa thanh toán");
         } catch (SQLException ex) {
             Logger.getLogger(Dialog_ThemDonDatPhong.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(res){
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this,"Thêm thất bại");
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -355,6 +393,7 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTimPhong;
     private javax.swing.JComboBox<String> cbbLoaiPhong;
+    private javax.swing.JComboBox<String> cbbMaKH;
     private javax.swing.JComboBox<String> cbbTuLuc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -364,7 +403,6 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane spPhong;
     private javax.swing.JTable tbPhong;
-    private javax.swing.JTextField tfMaKhachHang;
     private com.toedter.calendar.JDateChooser tfNgay;
     // End of variables declaration//GEN-END:variables
 }
