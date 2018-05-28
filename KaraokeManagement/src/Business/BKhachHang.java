@@ -38,7 +38,7 @@ public class BKhachHang extends Business{
     
     public KhachHang layKhachHangTheoMa(int maKH) throws SQLException {
         KhachHang khachHang = new KhachHang();
-        sql = "layKhachHangTheoMa " + maKH;
+        sql = "layKhachHangTheoMa (" + maKH + ")";
         rs = data.fetchData(sql);
         if (rs.next()){
             Helper.setKhachHang(khachHang, rs);
@@ -47,17 +47,17 @@ public class BKhachHang extends Business{
     }
     
     public boolean themKhachHang(String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt) throws SQLException {
-        sql = "themKhachHang N'" + hoTen + "', N'" + gioiTinh + "', " + ngaySinh + ", N'" + diaChi + "', " + cmnd + ", " + sdt;
+        sql = "themKhachHang (N'" + hoTen + "', N'" + gioiTinh + "', '" + ngaySinh + "', N'" + diaChi + "', '" + cmnd + "', '" + sdt + "')";
         return data.Execute(sql);
     }
     
     public boolean capNhatKhachHang(int ma, String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt) throws SQLException {
-        sql = "capNhatKhachHang " + ma + ", N'"+ hoTen + "', N'" + gioiTinh + "', " + ngaySinh + ", N'" + diaChi + "', " + cmnd + ", " + sdt;
+        sql = "capNhatKhachHang (" + ma + ", N'"+ hoTen + "', N'" + gioiTinh + "', '" + ngaySinh + "', N'" + diaChi + "', '" + cmnd + "', '" + sdt + "')";
         return data.Execute(sql);
     }
     
     public boolean xoaKhachHang(int ma) {
-        sql = "xoaKhachHang " + ma;
+        sql = "xoaKhachHang (" + ma + "')";
         return data.Execute(sql);
     }
 }

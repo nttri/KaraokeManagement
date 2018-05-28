@@ -37,7 +37,7 @@ public class BNhanVien extends Business{
     }
 
     public NhanVien layThongTinNhanVienTheoMaNV(int maNV) throws SQLException {
-        sql = "layThongTinNhanVienTheoMaNV " + maNV;
+        sql = "layThongTinNhanVienTheoMaNV (" + maNV + ")";
         NhanVien nhanVien = new NhanVien();
         rs = data.fetchData(sql);
         if (rs.next()){        
@@ -48,7 +48,7 @@ public class BNhanVien extends Business{
     
     public ArrayList<NhanVien> layThongTinNhanVienTheoTen(String hoTen) throws SQLException {
         ArrayList<NhanVien> arrNhanVien = new ArrayList();
-        sql = "layThongTinNhanVienTheoTen N'" + hoTen + "'";
+        sql = "layThongTinNhanVienTheoTen (N'" + hoTen + "')";
         rs = data.fetchData(sql);
         
         while(rs.next()) {
@@ -60,17 +60,17 @@ public class BNhanVien extends Business{
     }
     
     public boolean themNhanVien(String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt, int luong, String tenDangNhap, String matKhau) throws SQLException {
-        sql = "themNhanVien N'" + hoTen + "', N'" + gioiTinh + "', " + ngaySinh + ", N'" + diaChi + "', " + cmnd + ", " + sdt + ", " + luong + ", " + tenDangNhap + ", " + matKhau;
+        sql = "themNhanVien (N'" + hoTen + "', N'" + gioiTinh + "', '" + ngaySinh + "', N'" + diaChi + "', '" + cmnd + "', '" + sdt + "', " + luong + ", '" + tenDangNhap + "', '" + matKhau + "')";
         return data.Execute(sql);
     }
     
     public boolean capNhatNhanVien(int maNV, String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt, int luong, String tenDangNhap, String matKhau) throws SQLException {
-        sql = "capNhatNhanVien " + maNV + ", N'" + hoTen + "', N'" + gioiTinh + "', " + ngaySinh + ", N'" + diaChi + "', " + cmnd + ", " + sdt + ", " + luong + ", " + tenDangNhap + ", " + matKhau;
+        sql = "capNhatNhanVien (" + maNV + ", N'" + hoTen + "', N'" + gioiTinh + "', '" + ngaySinh + "', N'" + diaChi + "', '" + cmnd + "', '" + sdt + "', " + luong + ", '" + tenDangNhap + "', '" + matKhau + "')";
         return data.Execute(sql);
     }
     
     public boolean xoaNhanVien(int maNV) {
-        sql = "xoaNhanVien " + maNV;
+        sql = "xoaNhanVien (" + maNV + ")";
         return data.Execute(sql);
     }
 }

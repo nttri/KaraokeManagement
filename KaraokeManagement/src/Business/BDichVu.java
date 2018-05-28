@@ -38,7 +38,7 @@ public class BDichVu extends Business {
     
     public ArrayList<DichVu> layThongTinDichVuTheoDonGia(int donGia) throws SQLException {
         ArrayList<DichVu> arrDichVu = new ArrayList<>();
-        sql = "layThongTinDichVuTheoDonGia " + donGia;
+        sql = "layThongTinDichVuTheoDonGia (" + donGia + ")";
         rs = data.fetchData(sql);
         
         while(rs.next()) {
@@ -51,7 +51,7 @@ public class BDichVu extends Business {
     
     public ArrayList<DichVu> layThongTinDichVuTheoTen(String tenDV) throws SQLException {
         ArrayList<DichVu> arrDichVu = new ArrayList<>();
-        sql = "layThongTinDichVuTheoTen N'" + tenDV + "'";
+        sql = "layThongTinDichVuTheoTen (N'" + tenDV + "')";
         rs = data.fetchData(sql);
         
         while(rs.next()) {
@@ -64,7 +64,7 @@ public class BDichVu extends Business {
     
     public DichVu layThongTinDichVuTheoMa(int maDV) throws SQLException {
         DichVu dichVu = new DichVu();
-        sql = "layThongTinDichVuTheoMa " + maDV;
+        sql = "layThongTinDichVuTheoMa (" + maDV + ")";
         rs = data.fetchData(sql);
         if (rs.next()) {
             Helper.setDichVu(dichVu, rs);
@@ -73,17 +73,17 @@ public class BDichVu extends Business {
     }
     
     public boolean themDichVu(String tenLoaiDichVu, int donGia, String tenDichVu) throws SQLException {
-        sql = "themDichVu N'" + tenLoaiDichVu + "', " + donGia + ", N'" + tenDichVu + "'";
+        sql = "themDichVu (N'" + tenLoaiDichVu + "', " + donGia + ", N'" + tenDichVu + "')";
         return data.Execute(sql);
     }
     
     public boolean capNhatDichVu(int maDichVu, String tenLoaiDichVu, int donGia, String tenDichVu) throws SQLException {
-        sql = "capNhatDichVu " +maDichVu + ", N'" + tenLoaiDichVu + "', " + donGia + ", N'" + tenDichVu + "'";
+        sql = "capNhatDichVu (" + maDichVu + ", N'" + tenLoaiDichVu + "', " + donGia + ", N'" + tenDichVu + "')";
         return data.Execute(sql);
     }
     
     public boolean xoaDichVu(int maDichVu) throws SQLException {
-        sql = "xoaDichVu " + maDichVu;
+        sql = "xoaDichVu (" + maDichVu + ")";
         return data.Execute(sql);
     }   
 }

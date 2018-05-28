@@ -38,7 +38,7 @@ public class BKhuyenMai extends Business{
     
     public KhuyenMai layKhuyenMaiTheoMa(String maKM) throws SQLException {
         KhuyenMai khuyenMai = new KhuyenMai();
-        sql = "layKhuyenMaiTheoMa " + maKM;
+        sql = "layKhuyenMaiTheoMa (" + maKM + ")";
         rs = data.fetchData(sql);
         if (rs.next()){
             Helper.setKhuyenMai(khuyenMai, rs);
@@ -47,17 +47,17 @@ public class BKhuyenMai extends Business{
     }
     
     public boolean themKhuyenMai(String maKM, String tenKM, int giaTriKM, String thoiGianBD, String thoiGianKT) throws SQLException {
-        sql = "themKhuyenMai " + maKM + ", N'" + tenKM + "', " + giaTriKM + ", " + thoiGianBD + ", " + thoiGianKT;
+        sql = "themKhuyenMai (" + maKM + ", N'" + tenKM + "', " + giaTriKM + ", '" + thoiGianBD + "', '" + thoiGianKT + "')";
         return data.Execute(sql);
     }
     
     public boolean capNhatKhuyenMai(String maKM, String tenKM, int giaTriKM, String thoiGianBD, String thoiGianKT) throws SQLException {
-        sql = "capNhatKhuyenMai " + maKM + ", N'" + tenKM + "', " + giaTriKM + ", " + thoiGianBD + ", " + thoiGianKT;
+        sql = "capNhatKhuyenMai (" + maKM + ", N'" + tenKM + "', " + giaTriKM + ", '" + thoiGianBD + "', '" + thoiGianKT + "')";
         return data.Execute(sql);
     }
     
     public boolean xoaKhuyenMai(String maKM) throws SQLException {
-        sql = "xoaKhuyenMai " + maKM;
+        sql = "xoaKhuyenMai (" + maKM + "')";
         return data.Execute(sql);
     }
 }

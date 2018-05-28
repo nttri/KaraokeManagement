@@ -34,7 +34,7 @@ public class BPhongHat extends Business{
 
     public ArrayList<PhongHat> layThongTinPhongHatTheoTinhTrang(String tinhTrang) throws SQLException {
         ArrayList<PhongHat> arrPhongHat = new ArrayList();
-        sql = "layThongTinPhongHatTheoTinhTrang N'" + tinhTrang + "'";
+        sql = "layThongTinPhongHatTheoTinhTrang (N'" + tinhTrang + "')";
         rs = data.fetchData(sql);
         while (rs.next()) {
             PhongHat phongHat = new PhongHat();
@@ -46,7 +46,7 @@ public class BPhongHat extends Business{
     
     public PhongHat layThongTinPhongHatTheoMa(int maPhong) throws SQLException {
         PhongHat phongHat = new PhongHat();
-        sql = "layThongTinPhongHatTheoMa " + maPhong;
+        sql = "layThongTinPhongHatTheoMa (" + maPhong + ")";
         rs = data.fetchData(sql);
         if (rs.next())
             Helper.setPhongHat(phongHat, rs);
@@ -54,17 +54,17 @@ public class BPhongHat extends Business{
     }
     
     public boolean themPhongHat(int maLoaiPhong, String tinhTrang) throws SQLException {
-        sql = "themPhongHat " + maLoaiPhong + ", N'" + tinhTrang + "'";
+        sql = "themPhongHat (" + maLoaiPhong + ", N'" + tinhTrang + "')";
         return data.Execute(sql);
     }
     
     public boolean capNhatPhongHat(int maPhong, int maLoaiPhong, String tinhTrang) throws SQLException {
-        sql = "capNhatPhongHat " + maPhong + ", " + maLoaiPhong + ", N'" + tinhTrang + "'";
+        sql = "capNhatPhongHat (" + maPhong + ", " + maLoaiPhong + ", N'" + tinhTrang + "')";
         return data.Execute(sql);
     }
     
     public boolean xoaPhongHat(int maPhong) throws SQLException {
-        sql = "xoaPhongHat " + maPhong;
+        sql = "xoaPhongHat (" + maPhong + ")";
         return data.Execute(sql);
     }
 }

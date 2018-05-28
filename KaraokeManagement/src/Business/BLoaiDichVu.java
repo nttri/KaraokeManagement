@@ -38,7 +38,7 @@ public class BLoaiDichVu extends Business {
     
     public LoaiDichVu layThongTinLoaiDichVuTheoMa(int maLoaiDV) throws SQLException {
         LoaiDichVu loaiDichVu = new LoaiDichVu();
-        sql = "layThongTinLoaiDichVuTheoMa " + maLoaiDV;
+        sql = "layThongTinLoaiDichVuTheoMa (" + maLoaiDV + ")";
         rs = data.fetchData(sql);
         
         if (rs.next()) {
@@ -49,7 +49,7 @@ public class BLoaiDichVu extends Business {
     
     public LoaiDichVu layThongTinLoaiDichVuTheoTen(String tenLoaiDV) throws SQLException {
         LoaiDichVu loaiDichVu = new LoaiDichVu();
-        sql = "layThongTinLoaiDichVuTheoTen N'" + tenLoaiDV + "'";
+        sql = "layThongTinLoaiDichVuTheoTen (N'" + tenLoaiDV + "')";
         rs = data.fetchData(sql);
         
         if (rs.next()) {
@@ -59,17 +59,17 @@ public class BLoaiDichVu extends Business {
     }
     
     public boolean themLoaiDichVu(String tenLoai) throws SQLException {
-        sql = "themLoaiDichVu N'" + tenLoai + "'";
+        sql = "themLoaiDichVu (N'" + tenLoai + "')";
         return data.Execute(sql);
     }
     
     public boolean capNhatLoaiDichVu(String maLoai, String tenLoai) throws SQLException {
-        sql = "capNhatDichVu " + maLoai + ", N'" + tenLoai + "'";
+        sql = "capNhatDichVu (" + maLoai + ", N'" + tenLoai + "')";
         return data.Execute(sql);
     }
     
     public boolean xoaLoaiDichVu(String maLoai) throws SQLException {
-        sql = "xoaLoaiDichVu " + maLoai;
+        sql = "xoaLoaiDichVu (" + maLoai + ")";
         return data.Execute(sql);
     }
 }

@@ -38,7 +38,7 @@ public class BLoaiPhongHat extends Business {
     
     public ArrayList<LoaiPhongHat> layThongTinLoaiPhongHatTheoSucChua(int sucChua) throws SQLException {
         ArrayList<LoaiPhongHat> arrLoaiPhongHat = new ArrayList();
-        sql = "layThongTinLoaiPhongHatTheoSucChua " + sucChua;
+        sql = "layThongTinLoaiPhongHatTheoSucChua (" + sucChua + ")";
         rs = data.fetchData(sql);
         
         while(rs.next()) {
@@ -51,7 +51,7 @@ public class BLoaiPhongHat extends Business {
     
     public ArrayList<LoaiPhongHat> layThongTinLoaiPhongHatTheoGiaPhong(int giaPhong) throws SQLException {
         ArrayList<LoaiPhongHat> arrLoaiPhongHat = new ArrayList();
-        sql = "layThongTinLoaiPhongHatTheoGiaPhong " + giaPhong;
+        sql = "layThongTinLoaiPhongHatTheoGiaPhong (" + giaPhong + ")";
         rs = data.fetchData(sql);
         
         while(rs.next()) {
@@ -64,7 +64,7 @@ public class BLoaiPhongHat extends Business {
     
     public LoaiPhongHat layThongTinLoaiPhongHatTheoMa(int maLoaiPhong) throws SQLException {
         LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
-        sql = "layThongTinLoaiPhongHatTheoMa " + maLoaiPhong;
+        sql = "layThongTinLoaiPhongHatTheoMa (" + maLoaiPhong + ")";
         rs = data.fetchData(sql);
         if (rs.next())
             Helper.setLoaiPhongHat(loaiPhongHat, rs);
@@ -72,17 +72,17 @@ public class BLoaiPhongHat extends Business {
     }
     
     public boolean themLoaiPhong(String tenLoai, int giaPhong, int sucChua, String moTa) throws SQLException {
-        sql = "themLoaiPhong N'" + tenLoai + "', " + giaPhong + ", " + sucChua + ", N'" + moTa + "'";
+        sql = "themLoaiPhong (N'" + tenLoai + "', " + giaPhong + ", " + sucChua + ", N'" + moTa + "')";
         return data.Execute(sql);
     }
     
     public boolean capNhatLoaiPhong(String maLoai, String tenLoai, int giaPhong, int sucChua, String moTa) throws SQLException {
-        sql = "capNhatLoaiPhong " + maLoai + ", N'" + tenLoai + "', " + giaPhong + ", " + sucChua + ", N'" + moTa + "'";
+        sql = "capNhatLoaiPhong (" + maLoai + ", N'" + tenLoai + "', " + giaPhong + ", " + sucChua + ", N'" + moTa + "')";
         return data.Execute(sql);
     }
     
     public boolean xoaLoaiPhong(String maLoai) throws SQLException {
-        sql = "xoaLoaiPhong " + maLoai;
+        sql = "xoaLoaiPhong (" + maLoai + ")";
         return data.Execute(sql);
     }
 }

@@ -33,7 +33,7 @@ public class BNguoiDung extends Business{
     }
     
     public boolean capNhatTaiKhoan(String tenDangNhap, String matKhau) throws SQLException {
-        sql = "capNhatTaiKhoan " + tenDangNhap + ", " + matKhau;
+        sql = "capNhatTaiKhoan ('" + tenDangNhap + "', '" + matKhau + "')";
         return data.Execute(sql);
     }
 }
