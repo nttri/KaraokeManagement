@@ -1,5 +1,10 @@
 package view;
 
+import Business.BKhachHang;
+import common.MyStrings;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -9,9 +14,12 @@ import javax.swing.JTextField;
  */
 public class Dialog_ThemKhachHangThanhVien extends javax.swing.JDialog {
 
+    Frame_NhanVien fNhanVien;
+    
     public Dialog_ThemKhachHangThanhVien(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fNhanVien = (Frame_NhanVien) parent;
         customInit();
     }
     
@@ -29,7 +37,7 @@ public class Dialog_ThemKhachHangThanhVien extends javax.swing.JDialog {
         tfHoTen = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        tfGioiTinh = new javax.swing.JComboBox<>();
+        cbbGioiTinh = new javax.swing.JComboBox<>();
         tfNgaySinh = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -64,9 +72,9 @@ public class Dialog_ThemKhachHangThanhVien extends javax.swing.JDialog {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Ngày sinh");
 
-        tfGioiTinh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tfGioiTinh.setForeground(new java.awt.Color(10, 145, 39));
-        tfGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        cbbGioiTinh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cbbGioiTinh.setForeground(new java.awt.Color(10, 145, 39));
+        cbbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
 
         tfNgaySinh.setForeground(new java.awt.Color(10, 145, 39));
         tfNgaySinh.setDateFormatString("dd/MM/yyyy");
@@ -140,7 +148,7 @@ public class Dialog_ThemKhachHangThanhVien extends javax.swing.JDialog {
                                     .addComponent(tfNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel4)
-                                    .addComponent(tfGioiTinh, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(cbbGioiTinh, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(54, 54, 54))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +168,7 @@ public class Dialog_ThemKhachHangThanhVien extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfGioiTinh))
+                    .addComponent(cbbGioiTinh))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -198,7 +206,38 @@ public class Dialog_ThemKhachHangThanhVien extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện tại hệ thống chưa hổ trợ chức năng này.");
+        String hoten = tfHoTen.getText();
+        String gioitinh = cbbGioiTinh.getSelectedItem().toString();
+        String cmnd = tfCMND.getText();
+        String sdt = tfSDT.getText();
+        String diachi = tfDiaChi.getText();
+        String ngaysinh = ((JTextField)tfNgaySinh.getDateEditor().getUiComponent()).getText();
+        
+        if(!hoten.isEmpty() && !diachi.isEmpty() && !ngaysinh.isEmpty()){
+            if(cmnd.length() != 9){
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_CMND);
+                return;
+            }
+            if(sdt.length() < 10 || !sdt.startsWith("0")){
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
+                return;
+            }
+            Boolean res = false;
+            BKhachHang bKhachHang = new BKhachHang();
+            try {
+                res = bKhachHang.themKhachHang(hoten, gioitinh, ngaysinh, diachi, cmnd, sdt);
+            } catch (SQLException ex) {
+                Logger.getLogger(Dialog_ThemKhachHangThanhVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (res) {
+                    this.fNhanVien.refreshPanelKhachHangThanhVien();
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, MyStrings.Add_Failed);
+                }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Fill_Full);
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tfCMNDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCMNDKeyTyped
@@ -262,6 +301,7 @@ public class Dialog_ThemKhachHangThanhVien extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThem;
+    private javax.swing.JComboBox<String> cbbGioiTinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -272,7 +312,6 @@ public class Dialog_ThemKhachHangThanhVien extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField tfCMND;
     private javax.swing.JTextField tfDiaChi;
-    private javax.swing.JComboBox<String> tfGioiTinh;
     private javax.swing.JTextField tfHoTen;
     private com.toedter.calendar.JDateChooser tfNgaySinh;
     private javax.swing.JTextField tfSDT;

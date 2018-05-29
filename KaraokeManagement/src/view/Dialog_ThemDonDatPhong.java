@@ -4,6 +4,7 @@ import Business.BDonThanhToan;
 import Business.BKhachHang;
 import Business.BLoaiPhongHat;
 import Business.BPhongHat;
+import common.MyStrings;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,10 +24,12 @@ import model.PhongHat;
 public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
 
     DefaultTableModel dfmPhong;
+    Frame_NhanVien fNhanVien;
 
     public Dialog_ThemDonDatPhong(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fNhanVien = (Frame_NhanVien) parent;
         customInit();
     }
 
@@ -70,7 +73,7 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
         try {
             arrPH = bPhongHat.layThongTinPhongHatTheoTinhTrang("Còn trống");
         } catch (SQLException ex) {
-            Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Dialog_ThemDonDatPhong.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         for (int i = 0; i < arrPH.size(); i++) {
@@ -78,7 +81,7 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
             try {
                 lph = bLoaiPhongHat.layThongTinLoaiPhongHatTheoMa(arrPH.get(i).getMaLoaiPhong());
             } catch (SQLException ex) {
-                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Dialog_ThemDonDatPhong.class.getName()).log(Level.SEVERE, null, ex);
             }
             dfmPhong.addRow(new Object[]{
                 arrPH.get(i).getMaPhong(),
@@ -282,7 +285,7 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
         
         int r = tbPhong.getSelectedRow();
         if (r < 0){
-            JOptionPane.showMessageDialog(this,"Hãy chọn 1 phòng");
+            JOptionPane.showMessageDialog(this, MyStrings.Please_Choose_Room);
             return;
         }
         
@@ -292,7 +295,7 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
         String date = ((JTextField)tfNgay.getDateEditor().getUiComponent()).getText();
         
         if (date.isEmpty()){
-            JOptionPane.showMessageDialog(this,"Hãy chọn ngày");
+            JOptionPane.showMessageDialog(this, MyStrings.Please_Choose_Date);
             return;
         }
         
@@ -308,9 +311,10 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
         }
         
         if(res){
+            this.fNhanVien.refreshPanelDonDatPhong();
             this.dispose();
         }else{
-            JOptionPane.showMessageDialog(this,"Thêm thất bại");
+            JOptionPane.showMessageDialog(this,MyStrings.Add_Failed);
         }
     }//GEN-LAST:event_btnThemActionPerformed
 

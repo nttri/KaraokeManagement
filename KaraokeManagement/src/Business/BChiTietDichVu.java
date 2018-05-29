@@ -69,7 +69,7 @@ public class BChiTietDichVu extends Business{
         return data.Execute(sql);
     }
      
-    public boolean xoaChiTietDichVu(int maDon, int stt) {
+    public boolean xoaChiTietDichVu(int maDon, int stt) throws SQLException {
         sql = "xoaChiTietDichVu (" + maDon + ", " + stt + ")";
         return data.Execute(sql);
     }

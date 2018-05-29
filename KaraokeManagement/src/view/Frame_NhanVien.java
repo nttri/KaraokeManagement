@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author thanhtri
@@ -19,64 +20,63 @@ import javax.swing.table.DefaultTableModel;
 public class Frame_NhanVien extends javax.swing.JFrame {
 
     static NhanVien NV;
-    
+
     boolean bDonDatPhong = false;
     boolean bDichVu = false;
     boolean bKhachHangThanhVien = false;
     boolean bPhongHat = false;
     boolean bThanhToan = false;
-    
+
     DefaultTableModel mTable_DonDatPhong, mTable_KhachHang, mTable_PhongHat, mTable_DichVu, mTable_ThanhToan;
-    
+
     public Frame_NhanVien() {
         initComponents();
-        
+
         mTable_DonDatPhong = (DefaultTableModel) tbDonDatPhong_pnDonDatPhong.getModel();
         mTable_PhongHat = (DefaultTableModel) tbPhongHat_pnPhongHat.getModel();
         mTable_DichVu = (DefaultTableModel) tbDichVu_pnDichVu.getModel();
         mTable_KhachHang = (DefaultTableModel) tbKhachHangThanhVien.getModel();
         mTable_ThanhToan = (DefaultTableModel) tbThanhToan_pnThanhToan.getModel();
-        
+
         customInit();
     }
-    
-    public Frame_NhanVien(NhanVien nv){
+
+    public Frame_NhanVien(NhanVien nv) {
         this();
         NV = nv;
         jLB_Brand.setText(MyStrings.AppTitle);
         jLB_Name.setText("Chào " + NV.getHoten());
     }
-    
-    
-    void customInit(){
+
+    void customInit() {
         setFalseAllButton();
         bDonDatPhong = true;
-        
+
         setColorAllButton(NVColor.btn_Default);
         btnDonDatPhong.setBackground(NVColor.btn_When_Clicked);
-        
+
         setAllPanelDisappear();
         pnDonDatPhong.setVisible(true);
-        
+
         tbDonDatPhong_pnDonDatPhong.setRowHeight(30);
         tbDichVu_pnDichVu.setRowHeight(30);
         tbKhachHangThanhVien.setRowHeight(30);
         tbPhongHat_pnPhongHat.setRowHeight(30);
         tbThanhToan_pnThanhToan.setRowHeight(30);
-        
+
         BDonThanhToan bDonDatPhong = new BDonThanhToan();
         ArrayList<DonThanhToan> arrDon = null;
-        
+
         BKhachHang bKhachHang = new BKhachHang();
-        
+
         try {
             arrDon = bDonDatPhong.layTatCaDonThanhToan();
         } catch (SQLException ex) {
             Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        for(int i = 0; i < arrDon.size(); i++){
-            if(arrDon.get(i).getTinhTrang().equals("Chưa thanh toán")){
+
+        for (int i = 0; i < arrDon.size(); i++) {
+            if (arrDon.get(i).getTinhTrang().equals("Chưa thanh toán")) {
                 KhachHang kh = new KhachHang();
                 try {
                     kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
@@ -89,26 +89,26 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                     arrDon.get(i).getMaKhachHang(),
                     kh.getHoTen(),
                     arrDon.get(i).getThoiGianBatDau()
-                });     
-            }          
+                });
+            }
         }
     }
-    
-    void clearAllDataTable(DefaultTableModel dtm){
-        for(int i = dtm.getRowCount() - 1; i >=0; i--){
+
+    void clearAllDataTable(DefaultTableModel dtm) {
+        for (int i = dtm.getRowCount() - 1; i >= 0; i--) {
             dtm.removeRow(i);
         }
     }
-    
-    void setAllPanelDisappear(){
+
+    void setAllPanelDisappear() {
         pnDonDatPhong.setVisible(false);
         pnDichVu.setVisible(false);
         pnKhachHangThanhVien.setVisible(false);
         pnPhongHat.setVisible(false);
         pnThanhToan.setVisible(false);
     }
-    
-    void setColorAllButton(Color color ){
+
+    void setColorAllButton(Color color) {
         btnDonDatPhong.setBackground(color);
         btnDichVu.setBackground(color);
         btnKhachHangThanhVien.setBackground(color);
@@ -117,7 +117,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnThoat.setBackground(color);
     }
 
-    void setFalseAllButton(){
+    void setFalseAllButton() {
         bDonDatPhong = false;
         bDichVu = false;
         bKhachHangThanhVien = false;
@@ -125,6 +125,26 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         bThanhToan = false;
     }
     
+    public void refreshPanelDonDatPhong(){
+        btnDonDatPhong.doClick();
+    }
+    
+    public void refreshPanelDichVu(){
+        btnDichVu.doClick();
+    }
+    
+    public void refreshPanelKhachHangThanhVien(){
+        btnKhachHangThanhVien.doClick();
+    }
+    
+    public void refreshPanelPhongHat(){
+        btnPhongHat.doClick();
+    }
+    
+    public void refreshPanelThanhToan(){
+        btnThanhToan.doClick();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -819,22 +839,22 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         bDonDatPhong = true;
         btnDonDatPhong.setBackground(NVColor.btn_When_Clicked);
         pnDonDatPhong.setVisible(true);
-        
+
         clearAllDataTable(mTable_DonDatPhong);
-        
+
         BDonThanhToan bDonDatPhong = new BDonThanhToan();
         ArrayList<DonThanhToan> arrDon = null;
-        
+
         BKhachHang bKhachHang = new BKhachHang();
-        
+
         try {
             arrDon = bDonDatPhong.layTatCaDonThanhToan();
         } catch (SQLException ex) {
             Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        for(int i = 0; i < arrDon.size(); i++){
-            if(arrDon.get(i).getTinhTrang().equals("Chưa thanh toán")){
+
+        for (int i = 0; i < arrDon.size(); i++) {
+            if (arrDon.get(i).getTinhTrang().equals("Chưa thanh toán")) {
                 KhachHang kh = new KhachHang();
                 try {
                     kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
@@ -847,8 +867,8 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                     arrDon.get(i).getMaKhachHang(),
                     kh.getHoTen(),
                     arrDon.get(i).getThoiGianBatDau()
-                });     
-            }   
+                });
+            }
         }
     }//GEN-LAST:event_btnDonDatPhongActionPerformed
 
@@ -856,23 +876,23 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         setFalseAllButton();
         setColorAllButton(NVColor.btn_Default);
         setAllPanelDisappear();
-        bDichVu = true;            
+        bDichVu = true;
         btnDichVu.setBackground(NVColor.btn_When_Clicked);
         pnDichVu.setVisible(true);
-        
+
         clearAllDataTable(mTable_DichVu);
-        
+
         BDichVu bDichVu = new BDichVu();
         ArrayList<DichVu> arrDV = null;
         BLoaiDichVu bLoaiDichVu = new BLoaiDichVu();
-        
+
         try {
             arrDV = bDichVu.layThongTinTatCaDichVu();
         } catch (SQLException ex) {
             Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        for(int i = 0; i < arrDV.size(); i++){
+
+        for (int i = 0; i < arrDV.size(); i++) {
             LoaiDichVu ldv = new LoaiDichVu();
             try {
                 ldv = bLoaiDichVu.layThongTinLoaiDichVuTheoMa(arrDV.get(i).getMaLoaiDichVu());
@@ -884,62 +904,61 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 arrDV.get(i).getMaDichVu(),
                 arrDV.get(i).getTenDichVu(),
                 arrDV.get(i).getDonGia()
-            });           
+            });
         }
     }//GEN-LAST:event_btnDichVuActionPerformed
 
     private void btnKhachHangThanhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangThanhVienActionPerformed
-        setFalseAllButton();        
+        setFalseAllButton();
         setColorAllButton(NVColor.btn_Default);
         setAllPanelDisappear();
         bKhachHangThanhVien = true;
         btnKhachHangThanhVien.setBackground(NVColor.btn_When_Clicked);
         pnKhachHangThanhVien.setVisible(true);
-                
+
         clearAllDataTable(mTable_KhachHang);
-        
+
         BKhachHang bKhachHang = new BKhachHang();
         ArrayList<KhachHang> arrKH = null;
-        
+
         try {
             arrKH = bKhachHang.layTatCaKhachHang();
         } catch (SQLException ex) {
             Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        for(int i = 0; i < arrKH.size(); i++){
+
+        for (int i = 0; i < arrKH.size(); i++) {
             mTable_KhachHang.addRow(new Object[]{
                 arrKH.get(i).getMaKH(),
                 arrKH.get(i).getHoTen(),
                 arrKH.get(i).getCmnd(),
                 arrKH.get(i).getDiaChi()
-            });           
+            });
         }
     }//GEN-LAST:event_btnKhachHangThanhVienActionPerformed
 
     private void btnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhongHatActionPerformed
-        setFalseAllButton();        
+        setFalseAllButton();
         setColorAllButton(NVColor.btn_Default);
         setAllPanelDisappear();
         bPhongHat = true;
         btnPhongHat.setBackground(NVColor.btn_When_Clicked);
         pnPhongHat.setVisible(true);
-        
+
         clearAllDataTable(mTable_PhongHat);
-        
+
         BPhongHat bPhongHat = new BPhongHat();
         ArrayList<PhongHat> arrPH = null;
-        
+
         BLoaiPhongHat bLoaiPhongHat = new BLoaiPhongHat();
-        
+
         try {
             arrPH = bPhongHat.layThongTinTatCaPhongHat();
         } catch (SQLException ex) {
             Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        for(int i = 0; i < arrPH.size(); i++){
+
+        for (int i = 0; i < arrPH.size(); i++) {
             LoaiPhongHat lph = new LoaiPhongHat();
             try {
                 lph = bLoaiPhongHat.layThongTinLoaiPhongHatTheoMa(arrPH.get(i).getMaLoaiPhong());
@@ -952,41 +971,41 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 arrPH.get(i).getTinhTrang(),
                 lph.getSucChua(),
                 lph.getGiaPhong()
-            });           
+            });
         }
     }//GEN-LAST:event_btnPhongHatActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         setFalseAllButton();
-        setAllPanelDisappear();        
+        setAllPanelDisappear();
         setColorAllButton(NVColor.btn_Default);
         bThanhToan = true;
         btnThanhToan.setBackground(NVColor.btn_When_Clicked);
         pnThanhToan.setVisible(true);
-        
+
         clearAllDataTable(mTable_ThanhToan);
-        
+
         BDonThanhToan bDonDatPhong = new BDonThanhToan();
         ArrayList<DonThanhToan> arrDon = null;
-        
+
         BKhachHang bKhachHang = new BKhachHang();
-        
+
         try {
             arrDon = bDonDatPhong.layTatCaDonThanhToan();
         } catch (SQLException ex) {
             Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        for(int i = 0; i < arrDon.size(); i++){
+
+        for (int i = 0; i < arrDon.size(); i++) {
             KhachHang kh = new KhachHang();
             try {
                 kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
             } catch (SQLException ex) {
                 Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(arrDon.get(i).getTinhTrang().equals("Đã thanh toán")){
-                Date bd =  arrDon.get(i).getThoiGianBatDau();
-                Date kt =  arrDon.get(i).getThoiGianKetThuc();
+            if (arrDon.get(i).getTinhTrang().equals("Đã thanh toán")) {
+                Date bd = arrDon.get(i).getThoiGianBatDau();
+                Date kt = arrDon.get(i).getThoiGianKetThuc();
                 long diff = kt.getTime() - bd.getTime();
                 mTable_ThanhToan.addRow(new Object[]{
                     arrDon.get(i).getMaDon(),
@@ -996,9 +1015,9 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                     "-1",
                     arrDon.get(i).getTinhTrang()
                 });
-            }else{
-                Date bd =  arrDon.get(i).getThoiGianBatDau();
-                Date kt =  new Date();
+            } else {
+                Date bd = arrDon.get(i).getThoiGianBatDau();
+                Date kt = new Date();
                 long diff = kt.getTime() - bd.getTime();
                 mTable_ThanhToan.addRow(new Object[]{
                     arrDon.get(i).getMaDon(),
@@ -1009,27 +1028,27 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                     arrDon.get(i).getTinhTrang()
                 });
             }
-            
+
         }
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        
+
         Frame_DangNhap fDangNhap = new Frame_DangNhap();
         this.setVisible(false);
         fDangNhap.setVisible(true);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnThanhToan_pnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToan_pnThanhToanActionPerformed
-        
+
         JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
-        
+
     }//GEN-LAST:event_btnThanhToan_pnThanhToanActionPerformed
 
     private void btnTim_pnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTim_pnThanhToanActionPerformed
-        
+
         JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
-        
+
     }//GEN-LAST:event_btnTim_pnThanhToanActionPerformed
 
     private void btnChinhSua_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSua_pnPhongHatActionPerformed
@@ -1037,7 +1056,25 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChinhSua_pnPhongHatActionPerformed
 
     private void btnXoaPhong_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaPhong_pnPhongHatActionPerformed
-        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
+        int r = tbPhongHat_pnPhongHat.getSelectedRow();
+        if (r != -1) {
+            int maso = Integer.parseInt(mTable_PhongHat.getValueAt(r, 0).toString());
+            BPhongHat bPhongHat = new BPhongHat();
+            Boolean res = false;
+            try {
+                res = bPhongHat.xoaPhongHat(maso);
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(res){
+                mTable_PhongHat.removeRow(r);
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Succeeded);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Select_Row);
+        }
     }//GEN-LAST:event_btnXoaPhong_pnPhongHatActionPerformed
 
     private void btnTaoMoi_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnPhongHatActionPerformed
@@ -1050,7 +1087,25 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChinhSua_pnDonDatPhongActionPerformed
 
     private void btnXoaDon_pnDonDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDon_pnDonDatPhongActionPerformed
-        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
+        int r = tbDonDatPhong_pnDonDatPhong.getSelectedRow();
+        if (r != -1) {
+            int maso = Integer.parseInt(mTable_DonDatPhong.getValueAt(r, 0).toString());
+            BDonThanhToan bDonDatPhong = new BDonThanhToan();
+            Boolean res = false;
+            try {
+                res = bDonDatPhong.xoaDonDatPhong(maso);
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(res){
+                mTable_DonDatPhong.removeRow(r);
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Succeeded);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Select_Row);
+        }
     }//GEN-LAST:event_btnXoaDon_pnDonDatPhongActionPerformed
 
     private void btnTaoMoi_pnDonDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnDonDatPhongActionPerformed
@@ -1063,7 +1118,25 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChinhSua_pnDichVuActionPerformed
 
     private void btnXoa_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnDichVuActionPerformed
-        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
+        int r = tbDichVu_pnDichVu.getSelectedRow();
+        if (r != -1) {
+            int maso = Integer.parseInt(mTable_DichVu.getValueAt(r, 1).toString());
+            BDichVu bDichVu = new BDichVu();
+            Boolean res = false;
+            try {
+                res = bDichVu.xoaDichVu(maso);
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(res){
+                mTable_DichVu.removeRow(r);
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Succeeded);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Select_Row);
+        }
     }//GEN-LAST:event_btnXoa_pnDichVuActionPerformed
 
     private void btnTaoMoi_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnDichVuActionPerformed
@@ -1081,7 +1154,25 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChinhSua_pnKhachHangThanhVienActionPerformed
 
     private void btnXoa_pnKhachHangThanhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnKhachHangThanhVienActionPerformed
-        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
+        int r = tbKhachHangThanhVien.getSelectedRow();
+        if (r != -1) {
+            int maso = Integer.parseInt(mTable_KhachHang.getValueAt(r, 0).toString());
+            BKhachHang bKhachHang = new BKhachHang();
+            Boolean res = false;
+            try {
+                res = bKhachHang.xoaKhachHang(maso);
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(res){
+                mTable_KhachHang.removeRow(r);
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Succeeded);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Select_Row);
+        }
     }//GEN-LAST:event_btnXoa_pnKhachHangThanhVienActionPerformed
 
     private void btnThemLoaiDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiDichVuActionPerformed
@@ -1096,36 +1187,41 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
     private void btnDonDatPhongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDonDatPhongMouseEntered
         // TODO add your handling code here:
-        if (bDonDatPhong == false)
+        if (bDonDatPhong == false) {
             btnDonDatPhong.setBackground(NVColor.btn_When_Entered);
+        }
         btnDonDatPhong.setText(MyStrings.Booking_Bills);
     }//GEN-LAST:event_btnDonDatPhongMouseEntered
 
     private void btnDichVuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDichVuMouseEntered
         // TODO add your handling code here:
-        if (bDichVu == false)
+        if (bDichVu == false) {
             btnDichVu.setBackground(NVColor.btn_When_Entered);
+        }
         btnDichVu.setText(MyStrings.Services);
     }//GEN-LAST:event_btnDichVuMouseEntered
 
     private void btnKhachHangThanhVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangThanhVienMouseEntered
         // TODO add your handling code here:
-        if (bKhachHangThanhVien == false)
+        if (bKhachHangThanhVien == false) {
             btnKhachHangThanhVien.setBackground(NVColor.btn_When_Entered);
+        }
         btnKhachHangThanhVien.setText(MyStrings.Customers);
     }//GEN-LAST:event_btnKhachHangThanhVienMouseEntered
 
     private void btnPhongHatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPhongHatMouseEntered
         // TODO add your handling code here:
-        if (bPhongHat == false)
+        if (bPhongHat == false) {
             btnPhongHat.setBackground(NVColor.btn_When_Entered);
+        }
         btnPhongHat.setText(MyStrings.Singing_Rooms);
     }//GEN-LAST:event_btnPhongHatMouseEntered
 
     private void btnThanhToanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThanhToanMouseEntered
         // TODO add your handling code here:
-        if (bThanhToan == false)
+        if (bThanhToan == false) {
             btnThanhToan.setBackground(NVColor.btn_When_Entered);
+        }
         btnThanhToan.setText(MyStrings.Charged);
     }//GEN-LAST:event_btnThanhToanMouseEntered
 
@@ -1137,36 +1233,41 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
     private void btnDonDatPhongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDonDatPhongMouseExited
         // TODO add your handling code here:
-        if (bDonDatPhong == false)
+        if (bDonDatPhong == false) {
             btnDonDatPhong.setBackground(NVColor.btn_Default);
+        }
         btnDonDatPhong.setText("");
     }//GEN-LAST:event_btnDonDatPhongMouseExited
 
     private void btnDichVuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDichVuMouseExited
         // TODO add your handling code here:
-        if (bDichVu == false)
+        if (bDichVu == false) {
             btnDichVu.setBackground(NVColor.btn_Default);
+        }
         btnDichVu.setText("");
     }//GEN-LAST:event_btnDichVuMouseExited
 
     private void btnKhachHangThanhVienMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangThanhVienMouseExited
         // TODO add your handling code here:
-        if (bKhachHangThanhVien == false)
+        if (bKhachHangThanhVien == false) {
             btnKhachHangThanhVien.setBackground(NVColor.btn_Default);
+        }
         btnKhachHangThanhVien.setText("");
     }//GEN-LAST:event_btnKhachHangThanhVienMouseExited
 
     private void btnPhongHatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPhongHatMouseExited
         // TODO add your handling code here:
-        if (bPhongHat == false)
+        if (bPhongHat == false) {
             btnPhongHat.setBackground(NVColor.btn_Default);
+        }
         btnPhongHat.setText("");
     }//GEN-LAST:event_btnPhongHatMouseExited
 
     private void btnThanhToanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThanhToanMouseExited
         // TODO add your handling code here:
-        if (bThanhToan == false)
+        if (bThanhToan == false) {
             btnThanhToan.setBackground(NVColor.btn_Default);
+        }
         btnThanhToan.setText("");
     }//GEN-LAST:event_btnThanhToanMouseExited
 

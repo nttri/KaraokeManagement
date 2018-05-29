@@ -56,7 +56,7 @@ public class BKhachHang extends Business{
         return data.Execute(sql);
     }
     
-    public boolean xoaKhachHang(int ma) {
+    public boolean xoaKhachHang(int ma) throws SQLException {
         sql = "xoaKhachHang (" + ma + "')";
         return data.Execute(sql);
     }

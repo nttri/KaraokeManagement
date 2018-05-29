@@ -1,6 +1,14 @@
 package view;
 
+import Business.BDichVu;
+import Business.BLoaiDichVu;
+import common.MyStrings;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.LoaiDichVu;
 
 /**
  *
@@ -8,9 +16,28 @@ import javax.swing.JOptionPane;
  */
 public class Dialog_ThemDichVu extends javax.swing.JDialog {
 
+    Frame_NhanVien fNhanVien;
+
     public Dialog_ThemDichVu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fNhanVien = (Frame_NhanVien) parent;
+        customInit();
+    }
+
+    void customInit() {
+        BLoaiDichVu bLoaiDichVu = new BLoaiDichVu();
+        ArrayList<LoaiDichVu> arrLDV = null;
+
+        try {
+            arrLDV = bLoaiDichVu.layThongTinTatCaLoaiDichVu();
+        } catch (SQLException ex) {
+            Logger.getLogger(Dialog_ThemDichVu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (int i = 0; i < arrLDV.size(); i++) {
+            cbbTenLoaiDichVu.addItem(arrLDV.get(i).getTenLoaiDichVu());
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -25,7 +52,7 @@ public class Dialog_ThemDichVu extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         tfDonGia = new javax.swing.JTextField();
         btnThem = new javax.swing.JButton();
-        cbbTenLoaiPhong = new javax.swing.JComboBox<>();
+        cbbTenLoaiDichVu = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -69,7 +96,7 @@ public class Dialog_ThemDichVu extends javax.swing.JDialog {
             }
         });
 
-        cbbTenLoaiPhong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cbbTenLoaiDichVu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,7 +114,7 @@ public class Dialog_ThemDichVu extends javax.swing.JDialog {
                             .addComponent(jLabel3)
                             .addComponent(jLabel5)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbbTenLoaiPhong, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbbTenLoaiDichVu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tfDonGia)
                             .addComponent(tfTenDichVu))))
                 .addContainerGap(90, Short.MAX_VALUE))
@@ -100,7 +127,7 @@ public class Dialog_ThemDichVu extends javax.swing.JDialog {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbbTenLoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbbTenLoaiDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -130,15 +157,42 @@ public class Dialog_ThemDichVu extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện tại hệ thống chưa hổ trợ chức năng này.");
+        String strDonGia = tfDonGia.getText();
+        String tenDichVu = tfTenDichVu.getText();
+        String tenLoaiDichVu = cbbTenLoaiDichVu.getSelectedItem().toString();
+        if (!strDonGia.isEmpty() && !tenDichVu.isEmpty()) {
+            int donGia = Integer.parseInt(strDonGia);
+            if (donGia >= 1000) {
+                boolean res = false;
+                BDichVu bDichVu = new BDichVu();
+                try {
+                    res = bDichVu.themDichVu(tenLoaiDichVu, donGia, tenDichVu);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Dialog_ThemDichVu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                if (res) {
+                    this.fNhanVien.refreshPanelDichVu();
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, MyStrings.Add_Failed);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Price_Must_Bigger);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Fill_Full);
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tfDonGiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDonGiaKeyTyped
         char checkChar = evt.getKeyChar();
-        if(!Character.isDigit(checkChar))
+        if (!Character.isDigit(checkChar)) {
             evt.consume();
-        if(tfDonGia.getText().length()>7)
+        }
+        if (tfDonGia.getText().length() > 7) {
             evt.consume();
+        }
     }//GEN-LAST:event_tfDonGiaKeyTyped
 
     /**
@@ -186,7 +240,7 @@ public class Dialog_ThemDichVu extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThem;
-    private javax.swing.JComboBox<String> cbbTenLoaiPhong;
+    private javax.swing.JComboBox<String> cbbTenLoaiDichVu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;

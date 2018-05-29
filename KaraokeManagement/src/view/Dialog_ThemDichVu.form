@@ -57,7 +57,7 @@
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel1" max="32767" attributes="0"/>
-                              <Component id="cbbTenLoaiPhong" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cbbTenLoaiDichVu" alignment="0" max="32767" attributes="0"/>
                               <Component id="tfDonGia" alignment="0" max="32767" attributes="0"/>
                               <Component id="tfTenDichVu" alignment="0" max="32767" attributes="0"/>
                           </Group>
@@ -75,7 +75,7 @@
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cbbTenLoaiPhong" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbbTenLoaiDichVu" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -178,7 +178,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cbbTenLoaiPhong">
+        <Component class="javax.swing.JComboBox" name="cbbTenLoaiDichVu">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="0"/>

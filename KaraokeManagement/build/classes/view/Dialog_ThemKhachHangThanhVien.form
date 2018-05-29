@@ -71,7 +71,7 @@
                                       <Component id="tfNgaySinh" pref="200" max="32767" attributes="0"/>
                                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tfGioiTinh" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="cbbGioiTinh" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -101,7 +101,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfHoTen" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfGioiTinh" alignment="3" max="32767" attributes="0"/>
+                      <Component id="cbbGioiTinh" alignment="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -185,7 +185,7 @@
             <Property name="text" type="java.lang.String" value="Ng&#xe0;y sinh"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="tfGioiTinh">
+        <Component class="javax.swing.JComboBox" name="cbbGioiTinh">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="0"/>

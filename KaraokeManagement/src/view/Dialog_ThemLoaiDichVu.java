@@ -1,9 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
+
+import Business.BLoaiDichVu;
+import common.MyStrings;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.LoaiDichVu;
 
 /**
  *
@@ -11,9 +14,6 @@ package view;
  */
 public class Dialog_ThemLoaiDichVu extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Dialog_ThemLoaiDichVu
-     */
     public Dialog_ThemLoaiDichVu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -54,6 +54,11 @@ public class Dialog_ThemLoaiDichVu extends javax.swing.JDialog {
         btnThem.setForeground(new java.awt.Color(10, 125, 39));
         btnThem.setText("THÊM");
         btnThem.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,6 +108,36 @@ public class Dialog_ThemLoaiDichVu extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        String tenLoaiDV = tfTenLoai.getText();
+        BLoaiDichVu bLoaiDV = new BLoaiDichVu();
+        LoaiDichVu loaiDV = new LoaiDichVu();
+        if (!tenLoaiDV.isEmpty()) {
+            try {
+                loaiDV = bLoaiDV.layThongTinLoaiDichVuTheoTen(tenLoaiDV);
+            } catch (SQLException ex) {
+                Logger.getLogger(Dialog_ThemLoaiDichVu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (loaiDV.getMaLoaiDichVu() < 300) {   // chưa tồn tại
+                Boolean res = false;
+                try {
+                    res = bLoaiDV.themLoaiDichVu(tenLoaiDV);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Dialog_ThemLoaiDichVu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if(res){
+                    JOptionPane.showMessageDialog(rootPane, MyStrings.Add_Succeeded);
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, MyStrings.Add_Failed);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Data_Already_Existed);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Fill_Full);
+        }
+    }//GEN-LAST:event_btnThemActionPerformed
 
     /**
      * @param args the command line arguments

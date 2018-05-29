@@ -31,6 +31,19 @@ public class MyStrings {
     public static String Charged = "THANH TOÁN";
     
     public static String No_Features = "Tính năng này hiện chưa được hỗ trợ!";
+    public static String Add_Succeeded = "Bạn đã thêm thành công!";
+    public static String Add_Failed = "Bạn đã thêm thất bại. Hãy thử lại!";
+    public static String Delete_Succeeded = "Bạn đã xóa thành công!";
+    public static String Delete_Failed = "Bạn đã xóa thất bại!";
+    public static String Data_Already_Existed = "Dữ liệu đã tồn tại!";
+    public static String Price_Must_Bigger = "Đơn giá phải trên 1.000 VND!";
+    public static String Invalid_CMND = "Số chứng minh nhân dân không hợp lệ!";
+    public static String Invalid_Phone = "Số điện thoại không hợp lệ!";
     
+    public static String Please_Select_Row = "Hãy chọn 1 dòng để thực hiện thao tác!";
+    public static String Please_Fill_Full = "Hãy điền đầy đủ thông tin!";
+    public static String Please_Choose_Date = "Hãy điền đầy đủ thông tin!";
+    public static String Please_Choose_Room = "Hãy chọn 1 phòng!";
+    public static String Please_Choose_1 = "";
     
 }
