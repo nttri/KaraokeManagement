@@ -33,6 +33,8 @@ public class MyStrings {
     public static String No_Features = "Tính năng này hiện chưa được hỗ trợ!";
     public static String Add_Succeeded = "Bạn đã thêm thành công!";
     public static String Add_Failed = "Bạn đã thêm thất bại. Hãy thử lại!";
+    public static String Edit_Succeeded = "Bạn đã cập nhật thành công!";
+    public static String Edit_Failed = "Bạn đã cập nhật thất bại. Hãy thử lại!";
     public static String Delete_Succeeded = "Bạn đã xóa thành công!";
     public static String Delete_Failed = "Bạn đã xóa thất bại!";
     public static String Data_Already_Existed = "Dữ liệu đã tồn tại!";

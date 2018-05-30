@@ -58,6 +58,11 @@ public class BPhongHat extends Business{
         return data.Execute(sql);
     }
     
+    public boolean themPhongHatTheoTenLoaiPhong(String tenLoaiPhong, String tinhTrang) throws SQLException {
+        sql = "themPhongHatTheoTenLoai (N'" + tenLoaiPhong + "', N'" + tinhTrang + "')";
+        return data.Execute(sql);
+    }
+    
     public boolean capNhatPhongHat(int maPhong, int maLoaiPhong, String tinhTrang) throws SQLException {
         sql = "capNhatPhongHat (" + maPhong + ", " + maLoaiPhong + ", N'" + tinhTrang + "')";
         return data.Execute(sql);

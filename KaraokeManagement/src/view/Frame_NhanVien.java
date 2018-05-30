@@ -124,24 +124,24 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         bPhongHat = false;
         bThanhToan = false;
     }
-    
-    public void refreshPanelDonDatPhong(){
+
+    public void refreshPanelDonDatPhong() {
         btnDonDatPhong.doClick();
     }
-    
-    public void refreshPanelDichVu(){
+
+    public void refreshPanelDichVu() {
         btnDichVu.doClick();
     }
-    
-    public void refreshPanelKhachHangThanhVien(){
+
+    public void refreshPanelKhachHangThanhVien() {
         btnKhachHangThanhVien.doClick();
     }
-    
-    public void refreshPanelPhongHat(){
+
+    public void refreshPanelPhongHat() {
         btnPhongHat.doClick();
     }
-    
-    public void refreshPanelThanhToan(){
+
+    public void refreshPanelThanhToan() {
         btnThanhToan.doClick();
     }
 
@@ -164,14 +164,12 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         spDonDatPhong_pnDonDatPhong = new javax.swing.JScrollPane();
         tbDonDatPhong_pnDonDatPhong = new javax.swing.JTable();
         btnTaoMoi_pnDonDatPhong = new javax.swing.JButton();
-        btnChinhSua_pnDonDatPhong = new javax.swing.JButton();
         btnXoaDon_pnDonDatPhong = new javax.swing.JButton();
         pnDichVu = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         spDichVu_pnDichVu = new javax.swing.JScrollPane();
         tbDichVu_pnDichVu = new javax.swing.JTable();
         btnTaoMoi_pnDichVu = new javax.swing.JButton();
-        btnChinhSua_pnDichVu = new javax.swing.JButton();
         btnXoa_pnDichVu = new javax.swing.JButton();
         btnThemLoaiDichVu = new javax.swing.JButton();
         pnKhachHangThanhVien = new javax.swing.JPanel();
@@ -179,15 +177,11 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         spKhachHangThanhVien = new javax.swing.JScrollPane();
         tbKhachHangThanhVien = new javax.swing.JTable();
         btnTaoMoi_pnKhachHangThanhVien = new javax.swing.JButton();
-        btnChinhSua_pnKhachHangThanhVien = new javax.swing.JButton();
-        btnXoa_pnKhachHangThanhVien = new javax.swing.JButton();
         pnPhongHat = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         spPhongHat_pnPhongHat = new javax.swing.JScrollPane();
         tbPhongHat_pnPhongHat = new javax.swing.JTable();
         btnTaoMoi_pnPhongHat = new javax.swing.JButton();
-        btnChinhSua_pnPhongHat = new javax.swing.JButton();
-        btnXoaPhong_pnPhongHat = new javax.swing.JButton();
         btnThemLoaiPhongHat = new javax.swing.JButton();
         pnThanhToan = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -380,6 +374,11 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbDonDatPhong_pnDonDatPhong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbDonDatPhong_pnDonDatPhongMouseClicked(evt);
+            }
+        });
         spDonDatPhong_pnDonDatPhong.setViewportView(tbDonDatPhong_pnDonDatPhong);
         if (tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumnCount() > 0) {
             tbDonDatPhong_pnDonDatPhong.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -405,20 +404,6 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         });
         pnDonDatPhong.add(btnTaoMoi_pnDonDatPhong);
         btnTaoMoi_pnDonDatPhong.setBounds(42, 585, 200, 48);
-
-        btnChinhSua_pnDonDatPhong.setBackground(new java.awt.Color(102, 102, 102));
-        btnChinhSua_pnDonDatPhong.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnChinhSua_pnDonDatPhong.setForeground(new java.awt.Color(255, 255, 255));
-        btnChinhSua_pnDonDatPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_edit.png"))); // NOI18N
-        btnChinhSua_pnDonDatPhong.setText("CHỈNH SỬA");
-        btnChinhSua_pnDonDatPhong.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnChinhSua_pnDonDatPhong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChinhSua_pnDonDatPhongActionPerformed(evt);
-            }
-        });
-        pnDonDatPhong.add(btnChinhSua_pnDonDatPhong);
-        btnChinhSua_pnDonDatPhong.setBounds(440, 585, 200, 48);
 
         btnXoaDon_pnDonDatPhong.setBackground(new java.awt.Color(204, 0, 0));
         btnXoaDon_pnDonDatPhong.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -468,6 +453,11 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbDichVu_pnDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbDichVu_pnDichVuMouseClicked(evt);
+            }
+        });
         spDichVu_pnDichVu.setViewportView(tbDichVu_pnDichVu);
 
         pnDichVu.add(spDichVu_pnDichVu);
@@ -486,20 +476,6 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         });
         pnDichVu.add(btnTaoMoi_pnDichVu);
         btnTaoMoi_pnDichVu.setBounds(42, 585, 200, 48);
-
-        btnChinhSua_pnDichVu.setBackground(new java.awt.Color(102, 102, 102));
-        btnChinhSua_pnDichVu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnChinhSua_pnDichVu.setForeground(new java.awt.Color(255, 255, 255));
-        btnChinhSua_pnDichVu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_edit.png"))); // NOI18N
-        btnChinhSua_pnDichVu.setText("CHỈNH SỬA");
-        btnChinhSua_pnDichVu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnChinhSua_pnDichVu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChinhSua_pnDichVuActionPerformed(evt);
-            }
-        });
-        pnDichVu.add(btnChinhSua_pnDichVu);
-        btnChinhSua_pnDichVu.setBounds(440, 585, 200, 48);
 
         btnXoa_pnDichVu.setBackground(new java.awt.Color(204, 0, 0));
         btnXoa_pnDichVu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -564,6 +540,11 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbKhachHangThanhVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbKhachHangThanhVienMouseClicked(evt);
+            }
+        });
         spKhachHangThanhVien.setViewportView(tbKhachHangThanhVien);
         if (tbKhachHangThanhVien.getColumnModel().getColumnCount() > 0) {
             tbKhachHangThanhVien.getColumnModel().getColumn(0).setPreferredWidth(120);
@@ -588,34 +569,6 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         });
         pnKhachHangThanhVien.add(btnTaoMoi_pnKhachHangThanhVien);
         btnTaoMoi_pnKhachHangThanhVien.setBounds(42, 585, 200, 48);
-
-        btnChinhSua_pnKhachHangThanhVien.setBackground(new java.awt.Color(102, 102, 102));
-        btnChinhSua_pnKhachHangThanhVien.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnChinhSua_pnKhachHangThanhVien.setForeground(new java.awt.Color(255, 255, 255));
-        btnChinhSua_pnKhachHangThanhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_edit.png"))); // NOI18N
-        btnChinhSua_pnKhachHangThanhVien.setText("CHỈNH SỬA");
-        btnChinhSua_pnKhachHangThanhVien.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnChinhSua_pnKhachHangThanhVien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChinhSua_pnKhachHangThanhVienActionPerformed(evt);
-            }
-        });
-        pnKhachHangThanhVien.add(btnChinhSua_pnKhachHangThanhVien);
-        btnChinhSua_pnKhachHangThanhVien.setBounds(440, 585, 200, 48);
-
-        btnXoa_pnKhachHangThanhVien.setBackground(new java.awt.Color(204, 0, 0));
-        btnXoa_pnKhachHangThanhVien.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnXoa_pnKhachHangThanhVien.setForeground(new java.awt.Color(255, 255, 255));
-        btnXoa_pnKhachHangThanhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_remove.png"))); // NOI18N
-        btnXoa_pnKhachHangThanhVien.setText("XÓA");
-        btnXoa_pnKhachHangThanhVien.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnXoa_pnKhachHangThanhVien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoa_pnKhachHangThanhVienActionPerformed(evt);
-            }
-        });
-        pnKhachHangThanhVien.add(btnXoa_pnKhachHangThanhVien);
-        btnXoa_pnKhachHangThanhVien.setBounds(828, 585, 200, 48);
 
         pnPhongHat.setBackground(new java.awt.Color(10, 125, 39));
         pnPhongHat.setMinimumSize(new java.awt.Dimension(1070, 680));
@@ -652,6 +605,11 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbPhongHat_pnPhongHat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbPhongHat_pnPhongHatMouseClicked(evt);
+            }
+        });
         spPhongHat_pnPhongHat.setViewportView(tbPhongHat_pnPhongHat);
         if (tbPhongHat_pnPhongHat.getColumnModel().getColumnCount() > 0) {
             tbPhongHat_pnPhongHat.getColumnModel().getColumn(0).setPreferredWidth(120);
@@ -676,34 +634,6 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         });
         pnPhongHat.add(btnTaoMoi_pnPhongHat);
         btnTaoMoi_pnPhongHat.setBounds(42, 585, 200, 48);
-
-        btnChinhSua_pnPhongHat.setBackground(new java.awt.Color(102, 102, 102));
-        btnChinhSua_pnPhongHat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnChinhSua_pnPhongHat.setForeground(new java.awt.Color(255, 255, 255));
-        btnChinhSua_pnPhongHat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_edit.png"))); // NOI18N
-        btnChinhSua_pnPhongHat.setText("CHỈNH SỬA");
-        btnChinhSua_pnPhongHat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnChinhSua_pnPhongHat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChinhSua_pnPhongHatActionPerformed(evt);
-            }
-        });
-        pnPhongHat.add(btnChinhSua_pnPhongHat);
-        btnChinhSua_pnPhongHat.setBounds(440, 585, 200, 48);
-
-        btnXoaPhong_pnPhongHat.setBackground(new java.awt.Color(204, 0, 0));
-        btnXoaPhong_pnPhongHat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnXoaPhong_pnPhongHat.setForeground(new java.awt.Color(255, 255, 255));
-        btnXoaPhong_pnPhongHat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_remove.png"))); // NOI18N
-        btnXoaPhong_pnPhongHat.setText("XÓA PHÒNG");
-        btnXoaPhong_pnPhongHat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnXoaPhong_pnPhongHat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaPhong_pnPhongHatActionPerformed(evt);
-            }
-        });
-        pnPhongHat.add(btnXoaPhong_pnPhongHat);
-        btnXoaPhong_pnPhongHat.setBounds(828, 585, 200, 48);
 
         btnThemLoaiPhongHat.setBackground(new java.awt.Color(51, 51, 51));
         btnThemLoaiPhongHat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -1051,40 +981,10 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnTim_pnThanhToanActionPerformed
 
-    private void btnChinhSua_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSua_pnPhongHatActionPerformed
-        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
-    }//GEN-LAST:event_btnChinhSua_pnPhongHatActionPerformed
-
-    private void btnXoaPhong_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaPhong_pnPhongHatActionPerformed
-        int r = tbPhongHat_pnPhongHat.getSelectedRow();
-        if (r != -1) {
-            int maso = Integer.parseInt(mTable_PhongHat.getValueAt(r, 0).toString());
-            BPhongHat bPhongHat = new BPhongHat();
-            Boolean res = false;
-            try {
-                res = bPhongHat.xoaPhongHat(maso);
-            } catch (SQLException ex) {
-                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if(res){
-                mTable_PhongHat.removeRow(r);
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Succeeded);
-            }else{
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
-            }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Select_Row);
-        }
-    }//GEN-LAST:event_btnXoaPhong_pnPhongHatActionPerformed
-
     private void btnTaoMoi_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnPhongHatActionPerformed
         Dialog_ThemPhongHat dThemPhongHat = new Dialog_ThemPhongHat(this, rootPaneCheckingEnabled);
         dThemPhongHat.setVisible(true);
     }//GEN-LAST:event_btnTaoMoi_pnPhongHatActionPerformed
-
-    private void btnChinhSua_pnDonDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSua_pnDonDatPhongActionPerformed
-        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
-    }//GEN-LAST:event_btnChinhSua_pnDonDatPhongActionPerformed
 
     private void btnXoaDon_pnDonDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDon_pnDonDatPhongActionPerformed
         int r = tbDonDatPhong_pnDonDatPhong.getSelectedRow();
@@ -1097,10 +997,10 @@ public class Frame_NhanVien extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(res){
+            if (res) {
                 mTable_DonDatPhong.removeRow(r);
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Succeeded);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
             }
         } else {
@@ -1113,10 +1013,6 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         dThemDonDatPhong.setVisible(true);
     }//GEN-LAST:event_btnTaoMoi_pnDonDatPhongActionPerformed
 
-    private void btnChinhSua_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSua_pnDichVuActionPerformed
-        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
-    }//GEN-LAST:event_btnChinhSua_pnDichVuActionPerformed
-
     private void btnXoa_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnDichVuActionPerformed
         int r = tbDichVu_pnDichVu.getSelectedRow();
         if (r != -1) {
@@ -1128,10 +1024,10 @@ public class Frame_NhanVien extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(res){
+            if (res) {
                 mTable_DichVu.removeRow(r);
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Succeeded);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
             }
         } else {
@@ -1148,32 +1044,6 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         Dialog_ThemKhachHangThanhVien dThemThanhVienKhachHang = new Dialog_ThemKhachHangThanhVien(this, rootPaneCheckingEnabled);
         dThemThanhVienKhachHang.setVisible(true);
     }//GEN-LAST:event_btnTaoMoi_pnKhachHangThanhVienActionPerformed
-
-    private void btnChinhSua_pnKhachHangThanhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSua_pnKhachHangThanhVienActionPerformed
-        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
-    }//GEN-LAST:event_btnChinhSua_pnKhachHangThanhVienActionPerformed
-
-    private void btnXoa_pnKhachHangThanhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnKhachHangThanhVienActionPerformed
-        int r = tbKhachHangThanhVien.getSelectedRow();
-        if (r != -1) {
-            int maso = Integer.parseInt(mTable_KhachHang.getValueAt(r, 0).toString());
-            BKhachHang bKhachHang = new BKhachHang();
-            Boolean res = false;
-            try {
-                res = bKhachHang.xoaKhachHang(maso);
-            } catch (SQLException ex) {
-                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if(res){
-                mTable_KhachHang.removeRow(r);
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Succeeded);
-            }else{
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
-            }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Select_Row);
-        }
-    }//GEN-LAST:event_btnXoa_pnKhachHangThanhVienActionPerformed
 
     private void btnThemLoaiDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiDichVuActionPerformed
         Dialog_ThemLoaiDichVu dThemLoaiDichVu = new Dialog_ThemLoaiDichVu(this, rootPaneCheckingEnabled);
@@ -1277,47 +1147,88 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnThoat.setText("");
     }//GEN-LAST:event_btnThoatMouseExited
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void tbDonDatPhong_pnDonDatPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDonDatPhong_pnDonDatPhongMouseClicked
+        if (evt.getClickCount() == 2) {
+            int r = tbDonDatPhong_pnDonDatPhong.getSelectedRow();
+            if (r != -1) {
+                BDonThanhToan bDonDatPhong = new BDonThanhToan();
+                DonThanhToan donDatPhong = new DonThanhToan();
+                int maso = Integer.parseInt(mTable_DonDatPhong.getValueAt(r, 0).toString());
+                try {
+                    donDatPhong = bDonDatPhong.layDonThanhToanTheoMaDon(maso);
+                    Dialog_SuaDonDatPhong dSuaDonDatPhong = new Dialog_SuaDonDatPhong(this, rootPaneCheckingEnabled, donDatPhong);
+                    dSuaDonDatPhong.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Select_Row);
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frame_NhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frame_NhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frame_NhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frame_NhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
+    }//GEN-LAST:event_tbDonDatPhong_pnDonDatPhongMouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Frame_NhanVien().setVisible(true);
+    private void tbDichVu_pnDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDichVu_pnDichVuMouseClicked
+        if (evt.getClickCount() == 2) {
+            int r = tbDichVu_pnDichVu.getSelectedRow();
+            if (r != -1) {
+                BDichVu bDichVu = new BDichVu();
+                DichVu dv = new DichVu();
+                int maso = Integer.parseInt(mTable_DichVu.getValueAt(r, 1).toString());
+                try {
+                    dv = bDichVu.layThongTinDichVuTheoMa(maso);
+                    Dialog_SuaDichVu dSuaDichVu = new Dialog_SuaDichVu(this, rootPaneCheckingEnabled, dv);
+                    dSuaDichVu.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Select_Row);
             }
-        });
-    }
+        }
+    }//GEN-LAST:event_tbDichVu_pnDichVuMouseClicked
+
+    private void tbKhachHangThanhVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhachHangThanhVienMouseClicked
+        if (evt.getClickCount() == 2) {
+            int r = tbKhachHangThanhVien.getSelectedRow();
+            if (r != -1) {
+                BKhachHang bKhachHang = new BKhachHang();
+                KhachHang kh = new KhachHang();
+                int maso = Integer.parseInt(mTable_KhachHang.getValueAt(r, 0).toString());
+                try {
+                    kh = bKhachHang.layKhachHangTheoMa(maso);
+                    Dialog_SuaKhachHangThanhVien dSuaKHThanhVien = new Dialog_SuaKhachHangThanhVien(this, rootPaneCheckingEnabled, kh);
+                    dSuaKHThanhVien.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Select_Row);
+            }
+        }
+    }//GEN-LAST:event_tbKhachHangThanhVienMouseClicked
+
+    private void tbPhongHat_pnPhongHatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPhongHat_pnPhongHatMouseClicked
+        if (evt.getClickCount() == 2) {
+            int r = tbPhongHat_pnPhongHat.getSelectedRow();
+            if (r != -1) {
+                BPhongHat bPhongHat = new BPhongHat();
+                PhongHat phong = new PhongHat();
+                int maso = Integer.parseInt(mTable_PhongHat.getValueAt(r, 0).toString());
+                try {
+                    phong = bPhongHat.layThongTinPhongHatTheoMa(maso);
+                    Dialog_SuaPhongHat dSuaPhongHat = new Dialog_SuaPhongHat(this, rootPaneCheckingEnabled, phong);
+                    dSuaPhongHat.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Select_Row);
+            }
+        }
+    }//GEN-LAST:event_tbPhongHat_pnPhongHatMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnChinhSua_pnDichVu;
-    private javax.swing.JButton btnChinhSua_pnDonDatPhong;
-    private javax.swing.JButton btnChinhSua_pnKhachHangThanhVien;
-    private javax.swing.JButton btnChinhSua_pnPhongHat;
     private javax.swing.JButton btnDichVu;
     private javax.swing.JButton btnDonDatPhong;
     private javax.swing.JButton btnKhachHangThanhVien;
@@ -1333,9 +1244,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnTim_pnThanhToan;
     private javax.swing.JButton btnXoaDon_pnDonDatPhong;
-    private javax.swing.JButton btnXoaPhong_pnPhongHat;
     private javax.swing.JButton btnXoa_pnDichVu;
-    private javax.swing.JButton btnXoa_pnKhachHangThanhVien;
     private javax.swing.JLabel jLB_Brand;
     private javax.swing.JLabel jLB_Name;
     private javax.swing.JLabel jLabel2;
