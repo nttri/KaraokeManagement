@@ -3,6 +3,10 @@ package view;
 import Business.BKhachHang;
 import common.MyStrings;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -39,7 +43,29 @@ public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
         tfDiaChi.setText(gKhachHang.getDiaChi());
         tfSDT.setText(gKhachHang.getSdt());
     }
-
+    
+        Boolean isOldEnough(String input){
+        Date _today = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(_today);
+        int _namHienTai = cal.get(Calendar.YEAR);
+        
+        Date _ngaySinh = new Date();
+        try {
+            _ngaySinh = sdf.parse(input);
+        } catch (ParseException ex) {
+            //
+        }
+        cal.setTime(_ngaySinh);
+        int _namSinh = cal.get(Calendar.YEAR);
+        
+        if(_namHienTai - _namSinh < 16){
+            return false;
+        }
+        return true;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -242,6 +268,10 @@ public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
             }
             if(sdt.length() == 11 && !sdt.startsWith("01")){
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
+                return;
+            }
+            if(!isOldEnough(ngaysinh)){
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Birthday);
                 return;
             }
             Boolean res = false;

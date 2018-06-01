@@ -6,8 +6,11 @@ import Business.BLoaiPhongHat;
 import Business.BPhongHat;
 import common.MyStrings;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -288,10 +291,6 @@ public class Dialog_SuaDonDatPhong extends javax.swing.JDialog {
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         BDonThanhToan bDonDatPhong = new BDonThanhToan();
         
-        int makh = Integer.parseInt(cbbMaKH.getSelectedItem().toString());
-        int maphong = Integer.parseInt(tfMaPhong.getText());
-        int giaphong = gDonDatPhong.getGiaPhong();
-        
         String date = ((JTextField)tfNgay.getDateEditor().getUiComponent()).getText();
         
         if (date.isEmpty()){
@@ -299,8 +298,19 @@ public class Dialog_SuaDonDatPhong extends javax.swing.JDialog {
             return;
         }
         
+        int makh = Integer.parseInt(cbbMaKH.getSelectedItem().toString());
+        int maphong = Integer.parseInt(tfMaPhong.getText());
+        int giaphong = gDonDatPhong.getGiaPhong();
         String time = cbbTuLuc.getSelectedItem().toString();
         date = date + " " + time + ":00.0";
+        
+        LocalDateTime today = LocalDateTime.now();
+        String sToday = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.s", Locale.ENGLISH).format(today);
+
+        if(date.compareTo(sToday) <= 0){
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Start_Time);
+            return;
+        }
         
         boolean res = false;
         

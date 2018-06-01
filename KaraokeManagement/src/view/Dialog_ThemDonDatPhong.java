@@ -6,8 +6,11 @@ import Business.BLoaiPhongHat;
 import Business.BPhongHat;
 import common.MyStrings;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -38,7 +41,7 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
         ((JTextField) tfNgay.getDateEditor()).setEditable(false);
         dfmPhong = (DefaultTableModel) tbPhong.getModel();
         tbPhong.setRowHeight(30);
-        
+
         BLoaiPhongHat bLoaiPhongHat = new BLoaiPhongHat();
         ArrayList<LoaiPhongHat> arrLPH = null;
 
@@ -51,8 +54,7 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
         for (int i = 0; i < arrLPH.size(); i++) {
             cbbLoaiPhong.addItem(arrLPH.get(i).getTenLoai());
         }
-        
-        
+
         BKhachHang bKhachHang = new BKhachHang();
         ArrayList<KhachHang> arrKH = null;
 
@@ -66,7 +68,6 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
             Integer maKH = arrKH.get(i).getMaKH();
             cbbMaKH.addItem(maKH.toString());
         }
-        
 
         BPhongHat bPhongHat = new BPhongHat();
         ArrayList<PhongHat> arrPH = null;
@@ -305,47 +306,54 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         BDonThanhToan bDonDatPhong = new BDonThanhToan();
         int makh = Integer.parseInt(cbbMaKH.getSelectedItem().toString());
-        
+
         int r = tbPhong.getSelectedRow();
-        if (r < 0){
+        if (r < 0) {
             JOptionPane.showMessageDialog(this, MyStrings.Please_Choose_Room);
             return;
         }
-        
-        int maphong = Integer.parseInt(dfmPhong.getValueAt(r, 0).toString());
-        int giaphong = Integer.parseInt(dfmPhong.getValueAt(r, 2).toString());
-        
-        String date = ((JTextField)tfNgay.getDateEditor().getUiComponent()).getText();
-        
-        if (date.isEmpty()){
+
+        String date = ((JTextField) tfNgay.getDateEditor().getUiComponent()).getText();
+
+        if (date.isEmpty()) {
             JOptionPane.showMessageDialog(this, MyStrings.Please_Choose_Date);
             return;
         }
-        
+
+        int maphong = Integer.parseInt(dfmPhong.getValueAt(r, 0).toString());
+        int giaphong = Integer.parseInt(dfmPhong.getValueAt(r, 2).toString());
         String time = cbbTuLuc.getSelectedItem().toString();
         date = date + " " + time + ":00.0";
+
+        LocalDateTime today = LocalDateTime.now();
+        String sToday = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.s", Locale.ENGLISH).format(today);
+
+        if(date.compareTo(sToday) <= 0){
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Start_Time);
+            return;
+        }
         
         boolean res = false;
-        
+
         try {
             res = bDonDatPhong.themDonDatPhong(makh, maphong, giaphong, date, "Chưa thanh toán");
         } catch (SQLException ex) {
             Logger.getLogger(Dialog_ThemDonDatPhong.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if(res){
+
+        if (res) {
             this.fNhanVien.refreshPanelDonDatPhong();
             this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(this,MyStrings.Add_Failed);
+        } else {
+            JOptionPane.showMessageDialog(this, MyStrings.Add_Failed);
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnTimPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimPhongActionPerformed
-        for(int i = dfmPhong.getRowCount() - 1; i >=0; i--){
+        for (int i = dfmPhong.getRowCount() - 1; i >= 0; i--) {
             dfmPhong.removeRow(i);
         }
-        
+
         BPhongHat bPhongHat = new BPhongHat();
         ArrayList<PhongHat> arrPH = null;
         BLoaiPhongHat bLoaiPhongHat = new BLoaiPhongHat();
@@ -364,7 +372,7 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
             } catch (SQLException ex) {
                 Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (lph.getTenLoai().equals(loai)){
+            if (lph.getTenLoai().equals(loai)) {
                 dfmPhong.addRow(new Object[]{
                     arrPH.get(i).getMaPhong(),
                     lph.getSucChua(),
@@ -376,7 +384,7 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
 
     private void tbPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPhongMouseClicked
         int r = tbPhong.getSelectedRow();
-        if (r != -1){
+        if (r != -1) {
             String maphong = dfmPhong.getValueAt(r, 0).toString();
             tfMaPhong.setText(maphong);
         }

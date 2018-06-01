@@ -41,6 +41,8 @@ public class MyStrings {
     public static String Price_Must_Bigger = "Đơn giá phải trên 1.000 VND!";
     public static String Invalid_CMND = "Số chứng minh nhân dân không hợp lệ!";
     public static String Invalid_Phone = "Số điện thoại không hợp lệ!";
+    public static String Invalid_Birthday = "Khách hàng thành viên phải đủ 16 tuổi!";
+    public static String Invalid_Start_Time = "Thời gian đặt phòng không hợp lệ!";
     
     public static String Please_Select_Row = "Hãy chọn 1 dòng để thực hiện thao tác!";
     public static String Please_Fill_Full = "Hãy điền đầy đủ thông tin!";
