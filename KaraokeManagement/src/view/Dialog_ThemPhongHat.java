@@ -1,6 +1,5 @@
 package view;
 
-import Business.BDichVu;
 import Business.BLoaiPhongHat;
 import Business.BPhongHat;
 import common.MyStrings;
