@@ -20,7 +20,7 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
     DichVu gDichVu;
     Frame_NhanVien fNhanVien;
 
-    public Dialog_SuaDichVu(java.awt.Frame parent, boolean modal,DichVu dv) {
+    public Dialog_SuaDichVu(java.awt.Frame parent, boolean modal, DichVu dv) {
         super(parent, modal);
         initComponents();
         fNhanVien = (Frame_NhanVien) parent;
@@ -41,6 +41,21 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
         for (int i = 0; i < arrLDV.size(); i++) {
             cbbTenLoaiDichVu.addItem(arrLDV.get(i).getTenLoaiDichVu());
         }
+        showData();
+    }
+
+    private void showData() {
+        int maLoaiDV = gDichVu.getMaLoaiDichVu();
+        BLoaiDichVu bLoaiDV = new BLoaiDichVu();
+        LoaiDichVu loaiDV;
+        try {
+            loaiDV = bLoaiDV.layThongTinLoaiDichVuTheoMa(maLoaiDV);
+            cbbTenLoaiDichVu.setSelectedItem(loaiDV.getTenLoaiDichVu());
+            tfDonGia.setText(Integer.toString(gDichVu.getDonGia()));
+            tfTenDichVu.setText(gDichVu.getTenDichVu());
+        } catch (SQLException ex) {
+            Logger.getLogger(Dialog_SuaDichVu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -54,7 +69,7 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
         tfTenDichVu = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         tfDonGia = new javax.swing.JTextField();
-        btnThem = new javax.swing.JButton();
+        btnLuu = new javax.swing.JButton();
         cbbTenLoaiDichVu = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -90,13 +105,13 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
             }
         });
 
-        btnThem.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnThem.setForeground(new java.awt.Color(10, 145, 39));
-        btnThem.setText("LƯU");
-        btnThem.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
+        btnLuu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnLuu.setForeground(new java.awt.Color(10, 145, 39));
+        btnLuu.setText("LƯU");
+        btnLuu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+                btnLuuActionPerformed(evt);
             }
         });
 
@@ -113,7 +128,7 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(170, 170, 170)
-                            .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(87, 87, 87)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -142,7 +157,7 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfTenDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
         );
 
@@ -161,7 +176,7 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         String strDonGia = tfDonGia.getText();
         String tenDichVu = tfTenDichVu.getText();
         String tenLoaiDichVu = cbbTenLoaiDichVu.getSelectedItem().toString();
@@ -171,7 +186,7 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
                 boolean res = false;
                 BDichVu bDichVu = new BDichVu();
                 try {
-                    res = bDichVu.themDichVu(tenLoaiDichVu, donGia, tenDichVu);
+                    res = bDichVu.capNhatDichVu(gDichVu.getMaDichVu(), tenLoaiDichVu, donGia, tenDichVu);
                 } catch (SQLException ex) {
                     Logger.getLogger(Dialog_SuaDichVu.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -180,7 +195,7 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
                     this.fNhanVien.refreshPanelDichVu();
                     this.dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, MyStrings.Add_Failed);
+                    JOptionPane.showMessageDialog(this, MyStrings.Edit_Failed);
                 }
             } else {
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Price_Must_Bigger);
@@ -188,7 +203,7 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Fill_Full);
         }
-    }//GEN-LAST:event_btnThemActionPerformed
+    }//GEN-LAST:event_btnLuuActionPerformed
 
     private void tfDonGiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDonGiaKeyTyped
         char checkChar = evt.getKeyChar();
@@ -202,7 +217,7 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnLuu;
     private javax.swing.JComboBox<String> cbbTenLoaiDichVu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

@@ -77,7 +77,7 @@ public class Dialog_ThemKhachHangThanhVien extends javax.swing.JDialog {
         cbbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
 
         tfNgaySinh.setForeground(new java.awt.Color(10, 145, 39));
-        tfNgaySinh.setDateFormatString("dd/MM/yyyy");
+        tfNgaySinh.setDateFormatString("yyyy-MM-dd");
         tfNgaySinh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -218,7 +218,15 @@ public class Dialog_ThemKhachHangThanhVien extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_CMND);
                 return;
             }
-            if(sdt.length() < 10 || !sdt.startsWith("0")){
+            if(sdt.length() < 10){
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
+                return;
+            }
+            if(sdt.length() == 10 && !sdt.startsWith("09")){
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
+                return;
+            }
+            if(sdt.length() == 11 && !sdt.startsWith("01")){
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
                 return;
             }

@@ -28,6 +28,16 @@ public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
     
     void customInit(){
         ((JTextField)tfNgaySinh.getDateEditor()).setEditable(false);
+        showData();
+    }
+    
+    private void showData(){
+        tfHoTen.setText(gKhachHang.getHoTen());
+        cbbGioiTinh.setSelectedItem(gKhachHang.isGioiTinh());
+        tfCMND.setText(gKhachHang.getCmnd());
+        ((JTextField) tfNgaySinh.getDateEditor()).setText(gKhachHang.getNgaySinh().toString());
+        tfDiaChi.setText(gKhachHang.getDiaChi());
+        tfSDT.setText(gKhachHang.getSdt());
     }
 
     @SuppressWarnings("unchecked")
@@ -48,7 +58,7 @@ public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
         tfSDT = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         tfDiaChi = new javax.swing.JTextField();
-        btnThem = new javax.swing.JButton();
+        btnLuu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -58,7 +68,8 @@ public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 33)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("THÊM KHÁCH HÀNG THÀNH VIÊN");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("KHÁCH HÀNG THÀNH VIÊN");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -80,7 +91,7 @@ public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
         cbbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
 
         tfNgaySinh.setForeground(new java.awt.Color(10, 145, 39));
-        tfNgaySinh.setDateFormatString("dd/MM/yyyy");
+        tfNgaySinh.setDateFormatString("yyyy-MM-dd");
         tfNgaySinh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -115,13 +126,13 @@ public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
         tfDiaChi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tfDiaChi.setForeground(new java.awt.Color(10, 145, 39));
 
-        btnThem.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnThem.setForeground(new java.awt.Color(10, 145, 39));
-        btnThem.setText("THÊM");
-        btnThem.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
+        btnLuu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnLuu.setForeground(new java.awt.Color(10, 145, 39));
+        btnLuu.setText("LƯU");
+        btnLuu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+                btnLuuActionPerformed(evt);
             }
         });
 
@@ -137,7 +148,7 @@ public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(tfDiaChi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
@@ -189,7 +200,7 @@ public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
                     .addComponent(tfSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
 
@@ -208,7 +219,7 @@ public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         String hoten = tfHoTen.getText();
         String gioitinh = cbbGioiTinh.getSelectedItem().toString();
         String cmnd = tfCMND.getText();
@@ -221,14 +232,22 @@ public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_CMND);
                 return;
             }
-            if(sdt.length() < 10 || !sdt.startsWith("0")){
+            if(sdt.length() < 10){
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
+                return;
+            }
+            if(sdt.length() == 10 && !sdt.startsWith("09")){
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
+                return;
+            }
+            if(sdt.length() == 11 && !sdt.startsWith("01")){
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
                 return;
             }
             Boolean res = false;
             BKhachHang bKhachHang = new BKhachHang();
             try {
-                res = bKhachHang.themKhachHang(hoten, gioitinh, ngaysinh, diachi, cmnd, sdt);
+                res = bKhachHang.capNhatKhachHang(gKhachHang.getMaKH(), hoten, gioitinh, ngaysinh, diachi, cmnd, sdt);
             } catch (SQLException ex) {
                 Logger.getLogger(Dialog_SuaKhachHangThanhVien.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -236,12 +255,12 @@ public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
                     this.fNhanVien.refreshPanelKhachHangThanhVien();
                     this.dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, MyStrings.Add_Failed);
+                    JOptionPane.showMessageDialog(this, MyStrings.Edit_Failed);
                 }
         }else{
             JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Fill_Full);
         }
-    }//GEN-LAST:event_btnThemActionPerformed
+    }//GEN-LAST:event_btnLuuActionPerformed
 
     private void tfCMNDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCMNDKeyTyped
         char checkChar = evt.getKeyChar();
@@ -261,7 +280,7 @@ public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnLuu;
     private javax.swing.JComboBox<String> cbbGioiTinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
