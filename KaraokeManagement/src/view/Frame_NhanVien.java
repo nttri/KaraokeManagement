@@ -76,7 +76,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         }
 
         for (int i = 0; i < arrDon.size(); i++) {
-            if (arrDon.get(i).getTinhTrang().equals("Chưa thanh toán")) {
+            if (arrDon.get(i).getTinhTrang().equals("Đang sử dụng")) {
                 KhachHang kh = new KhachHang();
                 try {
                     kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
@@ -784,7 +784,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         }
 
         for (int i = 0; i < arrDon.size(); i++) {
-            if (arrDon.get(i).getTinhTrang().equals("Chưa thanh toán")) {
+            if (arrDon.get(i).getTinhTrang().equals("Đang sử dụng")) {
                 KhachHang kh = new KhachHang();
                 try {
                     kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());

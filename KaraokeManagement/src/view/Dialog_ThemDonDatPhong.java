@@ -324,8 +324,10 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
         String time = cbbTuLuc.getSelectedItem().toString();
         date = date + " " + time + ":00.0";
 
-        LocalDateTime today = LocalDateTime.now();
-        String sToday = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.s", Locale.ENGLISH).format(today);
+        LocalDateTime datetime = LocalDateTime.now();
+        String sDay = datetime.toString().substring(0, 10);
+        String sTime = datetime.toString().substring(11,21);
+        String sToday = sDay + " " + sTime;
 
         if(date.compareTo(sToday) <= 0){
             JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Start_Time);
@@ -335,7 +337,7 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
         boolean res = false;
 
         try {
-            res = bDonDatPhong.themDonDatPhong(makh, maphong, giaphong, date, "Chưa thanh toán");
+            res = bDonDatPhong.themDonDatPhong(makh, maphong, giaphong, date, "Đang sử dụng");
         } catch (SQLException ex) {
             Logger.getLogger(Dialog_ThemDonDatPhong.class.getName()).log(Level.SEVERE, null, ex);
         }
