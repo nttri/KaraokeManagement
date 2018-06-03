@@ -1,5 +1,10 @@
 package view;
 
+import Business.BLoaiPhongHat;
+import common.MyStrings;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -169,7 +174,41 @@ public class Dialog_ThemLoaiPhongHat extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Hiện tại hệ thống chưa hổ trợ chức năng này.");
+        
+        String loaiPhong = tfLoaiPhong.getText();
+        String sDonGia = tfDonGia.getText();
+        String sSucChua = tfSucChua.getText();
+        String moTa = tfMoTa.getText();
+        
+        if(!loaiPhong.isEmpty() && !sDonGia.isEmpty() && !sSucChua.isEmpty() && !moTa.isEmpty()){
+            BLoaiPhongHat bLoaiPH = new BLoaiPhongHat();
+            
+            int donGia = Integer.parseInt(sDonGia);
+            int sucChua = Integer.parseInt(sSucChua);
+            
+            if(donGia < 50000){
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Room_Price);
+                return;
+            }
+            if(sucChua > 200){
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Room_Volume);
+                return;
+            }
+            
+            Boolean res = false;
+            try {
+                res = bLoaiPH.themLoaiPhong(loaiPhong, donGia, sucChua, moTa);
+            } catch (SQLException ex) {
+                Logger.getLogger(Dialog_ThemLoaiPhongHat.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(res){
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Add_Succeeded);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Add_Failed);
+            }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Fill_Full);
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tfDonGiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDonGiaKeyTyped
@@ -184,7 +223,7 @@ public class Dialog_ThemLoaiPhongHat extends javax.swing.JDialog {
         char checkChar = evt.getKeyChar();
         if(!Character.isDigit(checkChar))
             evt.consume();
-        if(tfSucChua.getText().length()>1)
+        if(tfSucChua.getText().length()>2)
             evt.consume();
     }//GEN-LAST:event_tfSucChuaKeyTyped
 

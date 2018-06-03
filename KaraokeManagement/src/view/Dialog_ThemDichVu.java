@@ -178,7 +178,7 @@ public class Dialog_ThemDichVu extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, MyStrings.Add_Failed);
                 }
             } else {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Price_Must_Bigger);
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Service_Price);
             }
         } else {
             JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Fill_Full);

@@ -198,7 +198,7 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, MyStrings.Edit_Failed);
                 }
             } else {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Price_Must_Bigger);
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Service_Price);
             }
         } else {
             JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Fill_Full);
