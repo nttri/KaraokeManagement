@@ -36,6 +36,32 @@ public class BDonThanhToan extends Business{
         return arrDonThanhToan;
     }
     
+    public ArrayList<DonThanhToan> layDonThanhToanTheoTinhTrang(String tinhTrang) throws SQLException {
+        ArrayList<DonThanhToan> arrDonThanhToan = new ArrayList();
+        sql = "layDonThanhToanTheoTinhTrang (N'" + tinhTrang + "')";
+        rs = data.fetchData(sql);
+        
+        while (rs.next()) {
+            DonThanhToan donThanhToan = new DonThanhToan();
+            Helper.setDonThanhToan(donThanhToan, rs);
+            arrDonThanhToan.add(donThanhToan);
+        }
+        return arrDonThanhToan;
+    }
+    
+    public ArrayList<DonThanhToan> layDonThanhToanTheoMaKHVaTinhTrang(int maKH, String tinhTrang) throws SQLException {
+        ArrayList<DonThanhToan> arrDonThanhToan = new ArrayList();
+        sql = "layDonThanhToanTheoMaKHVaTinhTrang (" + maKH + ", N'" + tinhTrang + "')";
+        rs = data.fetchData(sql);
+        
+        while (rs.next()) {
+            DonThanhToan donThanhToan = new DonThanhToan();
+            Helper.setDonThanhToan(donThanhToan, rs);
+            arrDonThanhToan.add(donThanhToan);
+        }
+        return arrDonThanhToan;
+    }
+    
     public DonThanhToan layDonThanhToanTheoMaDon(int maDon) throws SQLException {
         DonThanhToan donThanhToan = new DonThanhToan();
         sql = "layDonThanhToanTheoMaDon (" + maDon + ")";
