@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -101,6 +102,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }
 
     void setAllPanelDisappear() {
+        pnThongTinCaNhan.setVisible(false);
         pnDonDatPhong.setVisible(false);
         pnDichVu.setVisible(false);
         pnKhachHangThanhVien.setVisible(false);
@@ -159,6 +161,25 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnPhongHat = new javax.swing.JButton();
         btnThanhToan = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
+        pnThongTinCaNhan = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        lblMaNV = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        tfHoTen = new javax.swing.JTextField();
+        cbbGioiTinh = new javax.swing.JComboBox<>();
+        tfNgaySinh = new com.toedter.calendar.JDateChooser();
+        tfCMND = new javax.swing.JTextField();
+        tfSDT = new javax.swing.JTextField();
+        tfDiaChi = new javax.swing.JTextField();
+        tfLuong = new javax.swing.JTextField();
+        btnChinhSua_pnThongTinCaNhan = new javax.swing.JButton();
+        btnLuu_pnThongTinCaNhan = new javax.swing.JButton();
         pnDonDatPhong = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         spDonDatPhong_pnDonDatPhong = new javax.swing.JScrollPane();
@@ -344,6 +365,115 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         });
         jPanel2.add(btnThoat);
         btnThoat.setBounds(0, 510, 210, 70);
+
+        pnThongTinCaNhan.setBackground(new java.awt.Color(10, 125, 39));
+        pnThongTinCaNhan.setMinimumSize(new java.awt.Dimension(1070, 680));
+        pnThongTinCaNhan.setPreferredSize(new java.awt.Dimension(1070, 680));
+        pnThongTinCaNhan.setLayout(null);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 44)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("THÔNG TIN CÁ NHÂN");
+        pnThongTinCaNhan.add(jLabel8);
+        jLabel8.setBounds(40, 13, 490, 54);
+
+        lblMaNV.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        lblMaNV.setForeground(new java.awt.Color(204, 204, 204));
+        lblMaNV.setText("Mã nhân viên:");
+        pnThongTinCaNhan.add(lblMaNV);
+        lblMaNV.setBounds(750, 25, 300, 40);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Họ tên nhân viên");
+        pnThongTinCaNhan.add(jLabel1);
+        jLabel1.setBounds(40, 140, 121, 20);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Giới tính");
+        pnThongTinCaNhan.add(jLabel9);
+        jLabel9.setBounds(40, 200, 60, 20);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Ngày sinh");
+        pnThongTinCaNhan.add(jLabel10);
+        jLabel10.setBounds(40, 260, 70, 20);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Số CMND");
+        pnThongTinCaNhan.add(jLabel11);
+        jLabel11.setBounds(40, 320, 67, 20);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Số điện thoại");
+        pnThongTinCaNhan.add(jLabel12);
+        jLabel12.setBounds(40, 380, 93, 20);
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Địa chỉ");
+        pnThongTinCaNhan.add(jLabel13);
+        jLabel13.setBounds(40, 440, 48, 20);
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel14.setText("Lương");
+        pnThongTinCaNhan.add(jLabel14);
+        jLabel14.setBounds(40, 500, 45, 20);
+
+        tfHoTen.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        pnThongTinCaNhan.add(tfHoTen);
+        tfHoTen.setBounds(200, 133, 310, 34);
+
+        cbbGioiTinh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cbbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        pnThongTinCaNhan.add(cbbGioiTinh);
+        cbbGioiTinh.setBounds(200, 192, 150, 34);
+
+        tfNgaySinh.setDateFormatString("yyyy-MM-dd");
+        tfNgaySinh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        pnThongTinCaNhan.add(tfNgaySinh);
+        tfNgaySinh.setBounds(200, 252, 150, 34);
+
+        tfCMND.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        pnThongTinCaNhan.add(tfCMND);
+        tfCMND.setBounds(200, 312, 150, 34);
+
+        tfSDT.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        pnThongTinCaNhan.add(tfSDT);
+        tfSDT.setBounds(200, 372, 150, 34);
+
+        tfDiaChi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        pnThongTinCaNhan.add(tfDiaChi);
+        tfDiaChi.setBounds(200, 432, 590, 34);
+
+        tfLuong.setEditable(false);
+        tfLuong.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        tfLuong.setForeground(new java.awt.Color(0, 204, 0));
+        pnThongTinCaNhan.add(tfLuong);
+        tfLuong.setBounds(200, 492, 150, 34);
+
+        btnChinhSua_pnThongTinCaNhan.setBackground(new java.awt.Color(102, 102, 102));
+        btnChinhSua_pnThongTinCaNhan.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        btnChinhSua_pnThongTinCaNhan.setForeground(new java.awt.Color(255, 255, 255));
+        btnChinhSua_pnThongTinCaNhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_edit.png"))); // NOI18N
+        btnChinhSua_pnThongTinCaNhan.setText("Chỉnh sửa");
+        btnChinhSua_pnThongTinCaNhan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnThongTinCaNhan.add(btnChinhSua_pnThongTinCaNhan);
+        btnChinhSua_pnThongTinCaNhan.setBounds(185, 585, 180, 50);
+
+        btnLuu_pnThongTinCaNhan.setBackground(new java.awt.Color(0, 153, 153));
+        btnLuu_pnThongTinCaNhan.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        btnLuu_pnThongTinCaNhan.setForeground(new java.awt.Color(255, 255, 255));
+        btnLuu_pnThongTinCaNhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_save.png"))); // NOI18N
+        btnLuu_pnThongTinCaNhan.setText("Lưu");
+        btnLuu_pnThongTinCaNhan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnThongTinCaNhan.add(btnLuu_pnThongTinCaNhan);
+        btnLuu_pnThongTinCaNhan.setBounds(735, 585, 180, 50);
 
         pnDonDatPhong.setBackground(new java.awt.Color(10, 125, 39));
         pnDonDatPhong.setMinimumSize(new java.awt.Dimension(1070, 680));
@@ -746,9 +876,10 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnDonDatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnThongTinCaNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnPhongHat, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnKhachHangThanhVien, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pnKhachHangThanhVien, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnPhongHat, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -758,9 +889,10 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(pnDonDatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(pnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnThongTinCaNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(pnDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(pnPhongHat, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(pnKhachHangThanhVien, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnPhongHat, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -1292,14 +1424,37 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         setColorAllButton(NVColor.btn_Default);
         setFalseAllButton();
         setAllPanelDisappear();
+        
+        pnThongTinCaNhan.setVisible(true);
+        
+        ((JTextField) tfNgaySinh.getDateEditor()).setEditable(false);
+        btnChinhSua_pnThongTinCaNhan.setEnabled(true);
+        btnLuu_pnThongTinCaNhan.setEnabled(false);
+        tfHoTen.setEditable(false);
+        cbbGioiTinh.setEnabled(false);
+        tfCMND.setEditable(false);
+        tfSDT.setEditable(false);
+        tfDiaChi.setEditable(false);
+        
+        int maNV = NV.getMaNhanVien();
+        Date ngaySinh = NV.getNgaySinh();
+        tfHoTen.setText(NV.getHoten());
+        cbbGioiTinh.setSelectedItem(NV.getGioiTinh());
+        ((JTextField) tfNgaySinh.getDateEditor().getUiComponent()).setText(ngaySinh.toString());
+        tfCMND.setText(NV.getCmnd());
+        tfSDT.setText(NV.getSdt());
+        tfDiaChi.setText(NV.getDiaChi());
+        tfLuong.setText(Integer.toString(NV.getLuong()));
 
     }//GEN-LAST:event_jLB_NameMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChinhSua_pnThongTinCaNhan;
     private javax.swing.JButton btnDichVu;
     private javax.swing.JButton btnDonDatPhong;
     private javax.swing.JButton btnKhachHangThanhVien;
+    private javax.swing.JButton btnLuu_pnThongTinCaNhan;
     private javax.swing.JButton btnPhongHat;
     private javax.swing.JButton btnTaoMoi_pnDichVu;
     private javax.swing.JButton btnTaoMoi_pnDonDatPhong;
@@ -1313,21 +1468,32 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btnTim_pnThanhToan;
     private javax.swing.JButton btnXoaDon_pnDonDatPhong;
     private javax.swing.JButton btnXoa_pnDichVu;
+    private javax.swing.JComboBox<String> cbbGioiTinh;
     private javax.swing.JLabel jLB_Brand;
     private javax.swing.JLabel jLB_Name;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblMaNV;
     private javax.swing.JPanel pnDichVu;
     private javax.swing.JPanel pnDonDatPhong;
     private javax.swing.JPanel pnKhachHangThanhVien;
     private javax.swing.JPanel pnPhongHat;
     private javax.swing.JPanel pnThanhToan;
+    private javax.swing.JPanel pnThongTinCaNhan;
     private javax.swing.JScrollPane spDichVu_pnDichVu;
     private javax.swing.JScrollPane spDonDatPhong_pnDonDatPhong;
     private javax.swing.JScrollPane spKhachHangThanhVien;
@@ -1338,6 +1504,12 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     private javax.swing.JTable tbKhachHangThanhVien;
     private javax.swing.JTable tbPhongHat_pnPhongHat;
     private javax.swing.JTable tbThanhToan_pnThanhToan;
+    private javax.swing.JTextField tfCMND;
+    private javax.swing.JTextField tfDiaChi;
+    private javax.swing.JTextField tfHoTen;
+    private javax.swing.JTextField tfLuong;
+    private com.toedter.calendar.JDateChooser tfNgaySinh;
+    private javax.swing.JTextField tfSDT;
     private javax.swing.JTextField tfTim_pnThanhToan;
     // End of variables declaration//GEN-END:variables
 }
