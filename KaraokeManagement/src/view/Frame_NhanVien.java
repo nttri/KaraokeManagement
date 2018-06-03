@@ -213,6 +213,11 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         jLB_Name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLB_Name.setText("Chào");
         jLB_Name.setToolTipText("");
+        jLB_Name.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLB_NameMouseClicked(evt);
+            }
+        });
         jPanel1.add(jLB_Name);
         jLB_Name.setBounds(0, 75, 210, 25);
 
@@ -928,34 +933,90 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
         for (int i = 0; i < arrDon.size(); i++) {
             KhachHang kh = new KhachHang();
+            LoaiPhongHat loaiPH = new LoaiPhongHat();
+            BLoaiPhongHat bLoaiPH = new BLoaiPhongHat();
+            PhongHat phongHat = new PhongHat();
+            BPhongHat bPhongHat = new BPhongHat();
+
             try {
                 kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
             } catch (SQLException ex) {
                 Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+            int maDon = arrDon.get(i).getMaDon();
+            int maPhong = arrDon.get(i).getMaPhong();
+            String tenKH = kh.getHoTen();
+            String tinhTrang = arrDon.get(i).getTinhTrang();
+            long soGioSuDung = 0;
+            long tienPhong = 0;
+            long tienDichVu = 0;
+            long tongTien = 0;
+
+            try {
+                phongHat = bPhongHat.layThongTinPhongHatTheoMa(maPhong);
+                loaiPH = bLoaiPH.layThongTinLoaiPhongHatTheoMa(phongHat.getMaLoaiPhong());
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             if (arrDon.get(i).getTinhTrang().equals("Đã thanh toán")) {
                 Date bd = arrDon.get(i).getThoiGianBatDau();
                 Date kt = arrDon.get(i).getThoiGianKetThuc();
                 long diff = kt.getTime() - bd.getTime();
+                
+                soGioSuDung = TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);
+                tienPhong = loaiPH.getGiaPhong() * soGioSuDung;
+                tongTien = tienPhong + tienDichVu;
+                
                 mTable_ThanhToan.addRow(new Object[]{
-                    arrDon.get(i).getMaDon(),
-                    arrDon.get(i).getMaPhong(),
-                    TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS) + " giờ",
-                    kh.getHoTen(),
-                    "-1",
-                    arrDon.get(i).getTinhTrang()
+                    maDon,
+                    maPhong,
+                    soGioSuDung + " giờ",
+                    tenKH,
+                    tongTien,
+                    tinhTrang
                 });
-            } else {
+            } else if (arrDon.get(i).getTinhTrang().equals("Đang sử dụng")) {
                 Date bd = arrDon.get(i).getThoiGianBatDau();
                 Date kt = new Date();
                 long diff = kt.getTime() - bd.getTime();
+
+                if (diff <= 0) { // thời gian hiện tại < thời gian đặt phòng
+                    mTable_ThanhToan.addRow(new Object[]{
+                        maDon,
+                        maPhong,
+                        "0 giờ",
+                        tenKH,
+                        "0",
+                        tinhTrang
+                    });
+                } else {
+                    soGioSuDung = TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);
+                    tienPhong = loaiPH.getGiaPhong() * soGioSuDung;
+                    tongTien = tienPhong + tienDichVu;
+                    
+                    mTable_ThanhToan.addRow(new Object[]{
+                        maDon,
+                        maPhong,
+                        soGioSuDung + " giờ",
+                        tenKH,
+                        tongTien,
+                        tinhTrang
+                    });
+                }
+            } else {
+                tienPhong = loaiPH.getGiaPhong();
+                tongTien = tienPhong + tienDichVu;
+                
                 mTable_ThanhToan.addRow(new Object[]{
-                    arrDon.get(i).getMaDon(),
-                    arrDon.get(i).getMaPhong(),
-                    TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS) + " giờ",
-                    kh.getHoTen(),
-                    "-1",
-                    arrDon.get(i).getTinhTrang()
+                    maDon,
+                    maPhong,
+                    "1 giờ",
+                    tenKH,
+                    tongTien,
+                    tinhTrang
                 });
             }
 
@@ -1226,6 +1287,13 @@ public class Frame_NhanVien extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tbPhongHat_pnPhongHatMouseClicked
+
+    private void jLB_NameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLB_NameMouseClicked
+        setColorAllButton(NVColor.btn_Default);
+        setFalseAllButton();
+        setAllPanelDisappear();
+
+    }//GEN-LAST:event_jLB_NameMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
