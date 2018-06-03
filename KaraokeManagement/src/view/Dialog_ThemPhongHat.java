@@ -42,6 +42,20 @@ public class Dialog_ThemPhongHat extends javax.swing.JDialog {
         tfDonGia.setEditable(false);
         tfSucChua.setEditable(false);
         tfMoTa.setEditable(false);
+        showData(arrLPH.get(0).getMaLoaiPhong());
+    }
+    
+    void showData(int ma){
+        BLoaiPhongHat bLoaiPhongHat = new BLoaiPhongHat();
+        LoaiPhongHat loaiPH = new LoaiPhongHat();
+        try {
+            loaiPH = bLoaiPhongHat.layThongTinLoaiPhongHatTheoMa(ma);
+        } catch (SQLException ex) {
+            Logger.getLogger(Dialog_ThemPhongHat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tfDonGia.setText(Integer.toString(loaiPH.getGiaPhong()));
+        tfSucChua.setText(Integer.toString(loaiPH.getSucChua()));
+        tfMoTa.setText(loaiPH.getMoTa());
     }
 
     @SuppressWarnings("unchecked")
@@ -81,6 +95,11 @@ public class Dialog_ThemPhongHat extends javax.swing.JDialog {
 
         cbbLoaiPhong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cbbLoaiPhong.setForeground(new java.awt.Color(10, 125, 39));
+        cbbLoaiPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbLoaiPhongActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -229,6 +248,20 @@ public class Dialog_ThemPhongHat extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, MyStrings.Add_Failed);
         }
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void cbbLoaiPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbLoaiPhongActionPerformed
+        String tenLoai = cbbLoaiPhong.getSelectedItem().toString();
+        BLoaiPhongHat bLoaiPhongHat = new BLoaiPhongHat();
+        LoaiPhongHat loaiPH = new LoaiPhongHat();
+        try {
+            loaiPH = bLoaiPhongHat.layThongTinLoaiPhongHatTheoTen(tenLoai);
+        } catch (SQLException ex) {
+            Logger.getLogger(Dialog_ThemPhongHat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tfDonGia.setText(Integer.toString(loaiPH.getGiaPhong()));
+        tfSucChua.setText(Integer.toString(loaiPH.getSucChua()));
+        tfMoTa.setText(loaiPH.getMoTa());
+    }//GEN-LAST:event_cbbLoaiPhongActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -62,6 +62,15 @@ public class BLoaiPhongHat extends Business {
         return arrLoaiPhongHat;
     }
     
+    public LoaiPhongHat layThongTinLoaiPhongHatTheoTen(String tenLoai) throws SQLException {
+        LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
+        sql = "layThongTinLoaiPhongHatTheoTen (N'" + tenLoai + "')";
+        rs = data.fetchData(sql);
+        if (rs.next())
+            Helper.setLoaiPhongHat(loaiPhongHat, rs);
+        return loaiPhongHat;
+    }
+    
     public LoaiPhongHat layThongTinLoaiPhongHatTheoMa(int maLoaiPhong) throws SQLException {
         LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
         sql = "layThongTinLoaiPhongHatTheoMa (" + maLoaiPhong + ")";
