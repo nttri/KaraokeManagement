@@ -16,12 +16,19 @@ import model.LoaiDichVu;
  */
 public class Dialog_ThemDichVu extends javax.swing.JDialog {
 
+    String gRootType;
     Frame_NhanVien fNhanVien;
+    Frame_QuanLy fQuanLy;
 
-    public Dialog_ThemDichVu(java.awt.Frame parent, boolean modal) {
+    public Dialog_ThemDichVu(java.awt.Frame parent, boolean modal, String fromFrameType) {
         super(parent, modal);
         initComponents();
-        fNhanVien = (Frame_NhanVien) parent;
+        if(fromFrameType.equals("NV")){
+            fNhanVien = (Frame_NhanVien) parent;
+        }else{
+            fQuanLy = (Frame_QuanLy) parent;
+        }
+        gRootType = fromFrameType;
         customInit();
     }
 
@@ -172,7 +179,11 @@ public class Dialog_ThemDichVu extends javax.swing.JDialog {
                 }
 
                 if (res) {
-                    this.fNhanVien.refreshPanelDichVu();
+                    if(gRootType.equals("NV")){
+                        this.fNhanVien.refreshPanelDichVu();
+                    }else{
+                        // frame quản lý điền vào đây
+                    }
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, MyStrings.Add_Failed);

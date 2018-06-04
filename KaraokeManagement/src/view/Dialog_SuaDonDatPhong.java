@@ -27,13 +27,20 @@ import model.PhongHat;
 public class Dialog_SuaDonDatPhong extends javax.swing.JDialog {
 
     DefaultTableModel dfmPhong;
+    String gRootType;
     Frame_NhanVien fNhanVien;
+    Frame_QuanLy fQuanLy;
     DonThanhToan gDonDatPhong;
 
-    public Dialog_SuaDonDatPhong(java.awt.Frame parent, boolean modal, DonThanhToan donDatPhong) {
+    public Dialog_SuaDonDatPhong(java.awt.Frame parent, boolean modal, DonThanhToan donDatPhong, String fromFrameType) {
         super(parent, modal);
         initComponents();
-        fNhanVien = (Frame_NhanVien) parent;
+        if (fromFrameType.equals("NV")) {
+            fNhanVien = (Frame_NhanVien) parent;
+        } else {
+            fQuanLy = (Frame_QuanLy) parent;
+        }
+        gRootType = fromFrameType;
         gDonDatPhong = donDatPhong;
         customInit();
     }
@@ -43,7 +50,7 @@ public class Dialog_SuaDonDatPhong extends javax.swing.JDialog {
         ((JTextField) tfNgay.getDateEditor()).setEditable(false);
         dfmPhong = (DefaultTableModel) tbPhong.getModel();
         tbPhong.setRowHeight(30);
-        
+
         BLoaiPhongHat bLoaiPhongHat = new BLoaiPhongHat();
         ArrayList<LoaiPhongHat> arrLPH = null;
         BKhachHang bKhachHang = new BKhachHang();
@@ -59,7 +66,7 @@ public class Dialog_SuaDonDatPhong extends javax.swing.JDialog {
             Integer maKH = arrKH.get(i).getMaKH();
             cbbMaKH.addItem(maKH.toString());
         }
-        
+
         BPhongHat bPhongHat = new BPhongHat();
         ArrayList<PhongHat> arrPH = null;
 
@@ -84,23 +91,23 @@ public class Dialog_SuaDonDatPhong extends javax.swing.JDialog {
         }
         showData();
     }
-    
-    private void showData(){
+
+    private void showData() {
         Integer maPhong = gDonDatPhong.getMaPhong();
         Integer maKH = gDonDatPhong.getMaKhachHang();
         String tgbd = gDonDatPhong.getThoiGianBatDau().toString();
         String ngayBD = tgbd.substring(0, 10);
         String gioBD = tgbd.substring(11, 16);
-        
+
         tfMaPhong.setText(maPhong.toString());
         ((JTextField) tfNgay.getDateEditor()).setText(ngayBD);
-        for(int i = 0; i < cbbMaKH.getItemCount(); i++){
-            if(cbbMaKH.getItemAt(i).toString().equals(maKH.toString())){
+        for (int i = 0; i < cbbMaKH.getItemCount(); i++) {
+            if (cbbMaKH.getItemAt(i).toString().equals(maKH.toString())) {
                 cbbMaKH.setSelectedIndex(i);
             }
         }
-        for(int i = 0; i < cbbTuLuc.getItemCount(); i++){
-            if(cbbTuLuc.getItemAt(i).toString().equals(gioBD)){
+        for (int i = 0; i < cbbTuLuc.getItemCount(); i++) {
+            if (cbbTuLuc.getItemAt(i).toString().equals(gioBD)) {
                 cbbTuLuc.setSelectedIndex(i);
             }
         }
@@ -289,49 +296,53 @@ public class Dialog_SuaDonDatPhong extends javax.swing.JDialog {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         BDonThanhToan bDonDatPhong = new BDonThanhToan();
-        
-        String date = ((JTextField)tfNgay.getDateEditor().getUiComponent()).getText();
-        
-        if (date.isEmpty()){
+
+        String date = ((JTextField) tfNgay.getDateEditor().getUiComponent()).getText();
+
+        if (date.isEmpty()) {
             JOptionPane.showMessageDialog(this, MyStrings.Please_Choose_Date);
             return;
         }
-        
+
         int makh = Integer.parseInt(cbbMaKH.getSelectedItem().toString());
         int maphong = Integer.parseInt(tfMaPhong.getText());
         int giaphong = gDonDatPhong.getGiaPhong();
         String time = cbbTuLuc.getSelectedItem().toString();
         date = date + " " + time + ":00.0";
-        
+
         LocalDateTime datetime = LocalDateTime.now();
         String sDay = datetime.toString().substring(0, 10);
-        String sTime = datetime.toString().substring(11,21);
+        String sTime = datetime.toString().substring(11, 21);
         String sToday = sDay + " " + sTime;
 
-        if(date.compareTo(sToday) <= 0){
+        if (date.compareTo(sToday) <= 0) {
             JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Start_Time);
             return;
         }
-        
+
         boolean res = false;
-        
+
         try {
             res = bDonDatPhong.capNhatDonDatPhong(gDonDatPhong.getMaDon(), makh, maphong, giaphong, date, "Đang sử dụng");
         } catch (SQLException ex) {
             Logger.getLogger(Dialog_SuaDonDatPhong.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if(res){
-            this.fNhanVien.refreshPanelDonDatPhong();
+
+        if (res) {
+            if (gRootType.equals("NV")) {
+                this.fNhanVien.refreshPanelDonDatPhong();
+            } else {
+                // frame quản lý điền vào đây
+            }
             this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(this,MyStrings.Edit_Failed);
+        } else {
+            JOptionPane.showMessageDialog(this, MyStrings.Edit_Failed);
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void tbPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPhongMouseClicked
         int r = tbPhong.getSelectedRow();
-        if (r != -1){
+        if (r != -1) {
             String maphong = dfmPhong.getValueAt(r, 0).toString();
             tfMaPhong.setText(maphong);
             int donGia = Integer.parseInt(dfmPhong.getValueAt(r, 2).toString());

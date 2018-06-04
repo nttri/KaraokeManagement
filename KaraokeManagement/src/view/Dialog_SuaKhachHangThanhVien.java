@@ -19,13 +19,20 @@ import model.KhachHang;
  */
 public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
 
+    String gRootType;
     Frame_NhanVien fNhanVien;
+    Frame_QuanLy fQuanLy;
     KhachHang gKhachHang;
     
-    public Dialog_SuaKhachHangThanhVien(java.awt.Frame parent, boolean modal, KhachHang kh) {
+    public Dialog_SuaKhachHangThanhVien(java.awt.Frame parent, boolean modal, KhachHang kh, String fromFrameType) {
         super(parent, modal);
         initComponents();
-        fNhanVien = (Frame_NhanVien) parent;
+        if(fromFrameType.equals("NV")){
+            fNhanVien = (Frame_NhanVien) parent;
+        }else{
+            fQuanLy = (Frame_QuanLy) parent;
+        }
+        gRootType = fromFrameType;
         gKhachHang = kh;
         customInit();
     }
@@ -282,7 +289,11 @@ public class Dialog_SuaKhachHangThanhVien extends javax.swing.JDialog {
                 Logger.getLogger(Dialog_SuaKhachHangThanhVien.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (res) {
-                    this.fNhanVien.refreshPanelKhachHangThanhVien();
+                    if(gRootType.equals("NV")){
+                        this.fNhanVien.refreshPanelKhachHangThanhVien();
+                    }else{
+                        // frame quản lý điền vào đây
+                    }   
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, MyStrings.Edit_Failed);

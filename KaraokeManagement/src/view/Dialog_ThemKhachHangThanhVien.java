@@ -18,12 +18,19 @@ import javax.swing.JTextField;
  */
 public class Dialog_ThemKhachHangThanhVien extends javax.swing.JDialog {
 
+    String gRootType;
     Frame_NhanVien fNhanVien;
+    Frame_QuanLy fQuanLy;
     
-    public Dialog_ThemKhachHangThanhVien(java.awt.Frame parent, boolean modal) {
+    public Dialog_ThemKhachHangThanhVien(java.awt.Frame parent, boolean modal, String fromFrameType) {
         super(parent, modal);
         initComponents();
-        fNhanVien = (Frame_NhanVien) parent;
+        if(fromFrameType.equals("NV")){
+            fNhanVien = (Frame_NhanVien) parent;
+        }else{
+            fQuanLy = (Frame_QuanLy) parent;
+        }
+        gRootType = fromFrameType;
         customInit();
     }
     
@@ -269,7 +276,11 @@ public class Dialog_ThemKhachHangThanhVien extends javax.swing.JDialog {
                 Logger.getLogger(Dialog_ThemKhachHangThanhVien.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (res) {
-                    this.fNhanVien.refreshPanelKhachHangThanhVien();
+                    if(gRootType.equals("NV")){
+                        this.fNhanVien.refreshPanelKhachHangThanhVien();
+                    }else{
+                        // frame quản lý điền vào đây
+                    }          
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, MyStrings.Add_Failed);

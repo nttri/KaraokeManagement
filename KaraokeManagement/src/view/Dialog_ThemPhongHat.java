@@ -16,12 +16,19 @@ import model.LoaiPhongHat;
  */
 public class Dialog_ThemPhongHat extends javax.swing.JDialog {
 
+    String gRootType;
     Frame_NhanVien fNhanVien;
+    Frame_QuanLy fQuanLy;
 
-    public Dialog_ThemPhongHat(java.awt.Frame parent, boolean modal) {
+    public Dialog_ThemPhongHat(java.awt.Frame parent, boolean modal, String fromFrameType) {
         super(parent, modal);
         initComponents();
-        fNhanVien = (Frame_NhanVien) parent;
+        if (fromFrameType.equals("NV")) {
+            fNhanVien = (Frame_NhanVien) parent;
+        } else {
+            fQuanLy = (Frame_QuanLy) parent;
+        }
+        gRootType = fromFrameType;
         customInit();
     }
 
@@ -38,14 +45,14 @@ public class Dialog_ThemPhongHat extends javax.swing.JDialog {
         for (int i = 0; i < arrLPH.size(); i++) {
             cbbLoaiPhong.addItem(arrLPH.get(i).getTenLoai());
         }
-        
+
         tfDonGia.setEditable(false);
         tfSucChua.setEditable(false);
         tfMoTa.setEditable(false);
         showData(arrLPH.get(0).getMaLoaiPhong());
     }
-    
-    void showData(int ma){
+
+    void showData(int ma) {
         BLoaiPhongHat bLoaiPhongHat = new BLoaiPhongHat();
         LoaiPhongHat loaiPH = new LoaiPhongHat();
         try {
@@ -242,7 +249,11 @@ public class Dialog_ThemPhongHat extends javax.swing.JDialog {
         }
 
         if (res) {
-            this.fNhanVien.refreshPanelPhongHat();
+            if (gRootType.equals("NV")) {
+                this.fNhanVien.refreshPanelPhongHat();
+            } else {
+                // frame quản lý điền vào đây
+            }
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, MyStrings.Add_Failed);

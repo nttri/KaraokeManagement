@@ -26,12 +26,19 @@ import model.PhongHat;
 public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
 
     DefaultTableModel dfmPhong;
+    String gRootType;
     Frame_NhanVien fNhanVien;
+    Frame_QuanLy fQuanLy;
 
-    public Dialog_ThemDonDatPhong(java.awt.Frame parent, boolean modal) {
+    public Dialog_ThemDonDatPhong(java.awt.Frame parent, boolean modal, String fromFrameType) {
         super(parent, modal);
         initComponents();
-        fNhanVien = (Frame_NhanVien) parent;
+        if (fromFrameType.equals("NV")) {
+            fNhanVien = (Frame_NhanVien) parent;
+        } else {
+            fQuanLy = (Frame_QuanLy) parent;
+        }
+        gRootType = fromFrameType;
         customInit();
     }
 
@@ -326,14 +333,14 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
 
         LocalDateTime datetime = LocalDateTime.now();
         String sDay = datetime.toString().substring(0, 10);
-        String sTime = datetime.toString().substring(11,21);
+        String sTime = datetime.toString().substring(11, 21);
         String sToday = sDay + " " + sTime;
 
-        if(date.compareTo(sToday) <= 0){
+        if (date.compareTo(sToday) <= 0) {
             JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Start_Time);
             return;
         }
-        
+
         boolean res = false;
 
         try {
@@ -343,7 +350,11 @@ public class Dialog_ThemDonDatPhong extends javax.swing.JDialog {
         }
 
         if (res) {
-            this.fNhanVien.refreshPanelDonDatPhong();
+            if (gRootType.equals("NV")) {
+                this.fNhanVien.refreshPanelDonDatPhong();
+            } else {
+                // frame quản lý điền vào đây
+            }
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, MyStrings.Add_Failed);

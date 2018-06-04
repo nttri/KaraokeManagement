@@ -1203,7 +1203,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTim_pnThanhToanActionPerformed
 
     private void btnTaoMoi_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnPhongHatActionPerformed
-        Dialog_ThemPhongHat dThemPhongHat = new Dialog_ThemPhongHat(this, rootPaneCheckingEnabled);
+        Dialog_ThemPhongHat dThemPhongHat = new Dialog_ThemPhongHat(this, rootPaneCheckingEnabled, "NV");
         dThemPhongHat.setVisible(true);
     }//GEN-LAST:event_btnTaoMoi_pnPhongHatActionPerformed
 
@@ -1230,7 +1230,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaDon_pnDonDatPhongActionPerformed
 
     private void btnTaoMoi_pnDonDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnDonDatPhongActionPerformed
-        Dialog_ThemDonDatPhong dThemDonDatPhong = new Dialog_ThemDonDatPhong(this, rootPaneCheckingEnabled);
+        Dialog_ThemDonDatPhong dThemDonDatPhong = new Dialog_ThemDonDatPhong(this, rootPaneCheckingEnabled, "NV");
         dThemDonDatPhong.setVisible(true);
     }//GEN-LAST:event_btnTaoMoi_pnDonDatPhongActionPerformed
 
@@ -1257,12 +1257,12 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoa_pnDichVuActionPerformed
 
     private void btnTaoMoi_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnDichVuActionPerformed
-        Dialog_ThemDichVu dThemDichVu = new Dialog_ThemDichVu(this, rootPaneCheckingEnabled);
+        Dialog_ThemDichVu dThemDichVu = new Dialog_ThemDichVu(this, rootPaneCheckingEnabled, "NV");
         dThemDichVu.setVisible(true);
     }//GEN-LAST:event_btnTaoMoi_pnDichVuActionPerformed
 
     private void btnTaoMoi_pnKhachHangThanhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnKhachHangThanhVienActionPerformed
-        Dialog_ThemKhachHangThanhVien dThemThanhVienKhachHang = new Dialog_ThemKhachHangThanhVien(this, rootPaneCheckingEnabled);
+        Dialog_ThemKhachHangThanhVien dThemThanhVienKhachHang = new Dialog_ThemKhachHangThanhVien(this, rootPaneCheckingEnabled, "NV");
         dThemThanhVienKhachHang.setVisible(true);
     }//GEN-LAST:event_btnTaoMoi_pnKhachHangThanhVienActionPerformed
 
@@ -1377,7 +1377,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 int maso = Integer.parseInt(mTable_DonDatPhong.getValueAt(r, 0).toString());
                 try {
                     donDatPhong = bDonDatPhong.layDonThanhToanTheoMaDon(maso);
-                    Dialog_SuaDonDatPhong dSuaDonDatPhong = new Dialog_SuaDonDatPhong(this, rootPaneCheckingEnabled, donDatPhong);
+                    Dialog_SuaDonDatPhong dSuaDonDatPhong = new Dialog_SuaDonDatPhong(this, rootPaneCheckingEnabled, donDatPhong, "NV");
                     dSuaDonDatPhong.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
@@ -1397,7 +1397,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 int maso = Integer.parseInt(mTable_DichVu.getValueAt(r, 1).toString());
                 try {
                     dv = bDichVu.layThongTinDichVuTheoMa(maso);
-                    Dialog_SuaDichVu dSuaDichVu = new Dialog_SuaDichVu(this, rootPaneCheckingEnabled, dv);
+                    Dialog_SuaDichVu dSuaDichVu = new Dialog_SuaDichVu(this, rootPaneCheckingEnabled, dv, "NV");
                     dSuaDichVu.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
@@ -1417,7 +1417,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 int maso = Integer.parseInt(mTable_KhachHang.getValueAt(r, 0).toString());
                 try {
                     kh = bKhachHang.layKhachHangTheoMa(maso);
-                    Dialog_SuaKhachHangThanhVien dSuaKHThanhVien = new Dialog_SuaKhachHangThanhVien(this, rootPaneCheckingEnabled, kh);
+                    Dialog_SuaKhachHangThanhVien dSuaKHThanhVien = new Dialog_SuaKhachHangThanhVien(this, rootPaneCheckingEnabled, kh, "NV");
                     dSuaKHThanhVien.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
@@ -1437,7 +1437,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 int maso = Integer.parseInt(mTable_PhongHat.getValueAt(r, 0).toString());
                 try {
                     phong = bPhongHat.layThongTinPhongHatTheoMa(maso);
-                    Dialog_SuaPhongHat dSuaPhongHat = new Dialog_SuaPhongHat(this, rootPaneCheckingEnabled, phong);
+                    Dialog_SuaPhongHat dSuaPhongHat = new Dialog_SuaPhongHat(this, rootPaneCheckingEnabled, phong, "NV");
                     dSuaPhongHat.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);

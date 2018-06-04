@@ -18,16 +18,23 @@ import model.PhongHat;
 public class Dialog_SuaPhongHat extends javax.swing.JDialog {
 
     PhongHat gPhongHat;
+    String gRootType;
     Frame_NhanVien fNhanVien;
-    
-    public Dialog_SuaPhongHat(java.awt.Frame parent, boolean modal, PhongHat phong) {
+    Frame_QuanLy fQuanLy;
+
+    public Dialog_SuaPhongHat(java.awt.Frame parent, boolean modal, PhongHat phong, String fromFrameType) {
         super(parent, modal);
         initComponents();
-        fNhanVien = (Frame_NhanVien) parent;
+        if (fromFrameType.equals("NV")) {
+            fNhanVien = (Frame_NhanVien) parent;
+        } else {
+            fQuanLy = (Frame_QuanLy) parent;
+        }
+        gRootType = fromFrameType;
         gPhongHat = phong;
         customInit();
     }
-    
+
     void customInit() {
         BLoaiPhongHat bLoaiPhongHat = new BLoaiPhongHat();
         ArrayList<LoaiPhongHat> arrLPH = null;
@@ -41,14 +48,14 @@ public class Dialog_SuaPhongHat extends javax.swing.JDialog {
         for (int i = 0; i < arrLPH.size(); i++) {
             cbbLoaiPhong.addItem(arrLPH.get(i).getTenLoai());
         }
-        
+
         tfDonGia.setEditable(false);
         tfSucChua.setEditable(false);
         tfMoTa.setEditable(false);
         showData();
     }
-    
-    private void showData(){
+
+    private void showData() {
         int maLoaiPhong = gPhongHat.getMaLoaiPhong();
         BLoaiPhongHat bLoaiPH = new BLoaiPhongHat();
         LoaiPhongHat loaiPH = new LoaiPhongHat();
@@ -253,7 +260,11 @@ public class Dialog_SuaPhongHat extends javax.swing.JDialog {
         }
 
         if (res) {
-            this.fNhanVien.refreshPanelPhongHat();
+            if (gRootType.equals("NV")) {
+                this.fNhanVien.refreshPanelPhongHat();
+            } else {
+                // frame quản lý điền vào đây
+            }
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, MyStrings.Edit_Failed);
