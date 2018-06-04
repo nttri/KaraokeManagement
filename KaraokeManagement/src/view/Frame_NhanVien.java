@@ -1192,9 +1192,22 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnThanhToan_pnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToan_pnThanhToanActionPerformed
+        int r = tbThanhToan_pnThanhToan.getSelectedRow();
+        if (r != -1) {
+            int madon = Integer.parseInt(mTable_ThanhToan.getValueAt(r, 0).toString());
+            BDonThanhToan bDonTT = new BDonThanhToan();
+            DonThanhToan donTT = new DonThanhToan();
 
-        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
-
+            try {
+                donTT = bDonTT.layDonThanhToanTheoMaDon(madon);
+                Dialog_ChiTietThanhToan dThanhToan = new Dialog_ChiTietThanhToan(this, rootPaneCheckingEnabled, donTT, "NV");
+                dThanhToan.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Select_Row);
+        }
     }//GEN-LAST:event_btnThanhToan_pnThanhToanActionPerformed
 
     private void btnTim_pnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTim_pnThanhToanActionPerformed
