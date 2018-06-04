@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -1210,14 +1211,31 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     private void btnXoaDon_pnDonDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDon_pnDonDatPhongActionPerformed
         int r = tbDonDatPhong_pnDonDatPhong.getSelectedRow();
         if (r != -1) {
+            LocalDateTime datetime = LocalDateTime.now();
+            String sDay = datetime.toString().substring(0, 10);
+            String sTime = datetime.toString().substring(11, 21);
+            String sToday = sDay + " " + sTime;
+            String bookTime = mTable_DonDatPhong.getValueAt(r, 4).toString();
+
             int maso = Integer.parseInt(mTable_DonDatPhong.getValueAt(r, 0).toString());
             BDonThanhToan bDonDatPhong = new BDonThanhToan();
             Boolean res = false;
-            try {
-                res = bDonDatPhong.xoaDonDatPhong(maso);
-            } catch (SQLException ex) {
-                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+
+            if (bookTime.compareTo(sToday) > 0) { // hủy trước h đặt phòng, xóa đơn
+                try {
+                    res = bDonDatPhong.xoaDonDatPhong(maso);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {  // hủy sau giờ đặt phòng, sẽ ghi tiền nợ là 1 tiếng tiền phòng
+                int maKH = Integer.parseInt(mTable_DonDatPhong.getValueAt(r, 2).toString());
+                try {
+                    res = bDonDatPhong.capNhatTinhTrangDonThanhToan(maso, maKH, "Chưa thanh toán");
+                } catch (SQLException ex) {
+                    Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+
             if (res) {
                 mTable_DonDatPhong.removeRow(r);
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Succeeded);
