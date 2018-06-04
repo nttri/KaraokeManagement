@@ -440,10 +440,20 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         tfNgaySinh.setBounds(200, 252, 150, 34);
 
         tfCMND.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tfCMND.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfCMNDKeyTyped(evt);
+            }
+        });
         pnThongTinCaNhan.add(tfCMND);
         tfCMND.setBounds(200, 312, 150, 34);
 
         tfSDT.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tfSDT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfSDTKeyTyped(evt);
+            }
+        });
         pnThongTinCaNhan.add(tfSDT);
         tfSDT.setBounds(200, 372, 150, 34);
 
@@ -463,6 +473,11 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnChinhSua_pnThongTinCaNhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_edit.png"))); // NOI18N
         btnChinhSua_pnThongTinCaNhan.setText("Chỉnh sửa");
         btnChinhSua_pnThongTinCaNhan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnChinhSua_pnThongTinCaNhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChinhSua_pnThongTinCaNhanActionPerformed(evt);
+            }
+        });
         pnThongTinCaNhan.add(btnChinhSua_pnThongTinCaNhan);
         btnChinhSua_pnThongTinCaNhan.setBounds(185, 585, 180, 50);
 
@@ -472,6 +487,11 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnLuu_pnThongTinCaNhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_save.png"))); // NOI18N
         btnLuu_pnThongTinCaNhan.setText("Lưu");
         btnLuu_pnThongTinCaNhan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnLuu_pnThongTinCaNhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLuu_pnThongTinCaNhanActionPerformed(evt);
+            }
+        });
         pnThongTinCaNhan.add(btnLuu_pnThongTinCaNhan);
         btnLuu_pnThongTinCaNhan.setBounds(735, 585, 180, 50);
 
@@ -1437,7 +1457,9 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         tfDiaChi.setEditable(false);
         
         int maNV = NV.getMaNhanVien();
+        String sMaNV = Integer.toString(maNV);
         Date ngaySinh = NV.getNgaySinh();
+        lblMaNV.setText("Mã nhân viên: " + sMaNV);
         tfHoTen.setText(NV.getHoten());
         cbbGioiTinh.setSelectedItem(NV.getGioiTinh());
         ((JTextField) tfNgaySinh.getDateEditor().getUiComponent()).setText(ngaySinh.toString());
@@ -1445,8 +1467,55 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         tfSDT.setText(NV.getSdt());
         tfDiaChi.setText(NV.getDiaChi());
         tfLuong.setText(Integer.toString(NV.getLuong()));
-
     }//GEN-LAST:event_jLB_NameMouseClicked
+
+    private void btnLuu_pnThongTinCaNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuu_pnThongTinCaNhanActionPerformed
+        
+        String hoTen = tfHoTen.getText();
+        String gioiTinh = cbbGioiTinh.getSelectedItem().toString();
+        String ngaySinh = ((JTextField) tfNgaySinh.getDateEditor().getUiComponent()).getText();
+        String cmnd = tfCMND.getText();
+        String sdt = tfSDT.getText();
+        String diaChi = tfDiaChi.getText();
+        
+        
+        
+        tfHoTen.setEditable(false);
+        cbbGioiTinh.setEnabled(false);
+        tfCMND.setEditable(false);
+        tfSDT.setEditable(false);
+        tfDiaChi.setEditable(false);
+        btnChinhSua_pnThongTinCaNhan.setEnabled(true);
+        btnLuu_pnThongTinCaNhan.setEnabled(false);
+    }//GEN-LAST:event_btnLuu_pnThongTinCaNhanActionPerformed
+
+    private void btnChinhSua_pnThongTinCaNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSua_pnThongTinCaNhanActionPerformed
+        
+        btnChinhSua_pnThongTinCaNhan.setEnabled(false);
+        btnLuu_pnThongTinCaNhan.setEnabled(true);
+        
+        tfHoTen.setEditable(true);
+        cbbGioiTinh.setEnabled(true);
+        tfCMND.setEditable(true);
+        tfSDT.setEditable(true);
+        tfDiaChi.setEditable(true);
+    }//GEN-LAST:event_btnChinhSua_pnThongTinCaNhanActionPerformed
+
+    private void tfCMNDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCMNDKeyTyped
+        char checkChar = evt.getKeyChar();
+        if(!Character.isDigit(checkChar))
+            evt.consume();
+        if(tfCMND.getText().length()>8)
+            evt.consume();
+    }//GEN-LAST:event_tfCMNDKeyTyped
+
+    private void tfSDTKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSDTKeyTyped
+        char checkChar = evt.getKeyChar();
+        if(!Character.isDigit(checkChar))
+            evt.consume();
+        if(tfSDT.getText().length()>10)
+            evt.consume();
+    }//GEN-LAST:event_tfSDTKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
