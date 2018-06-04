@@ -64,8 +64,8 @@ public class BNhanVien extends Business{
         return data.Execute(sql);
     }
     
-    public boolean capNhatNhanVien(int maNV, String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt, int luong, String tenDangNhap, String matKhau) throws SQLException {
-        sql = "capNhatNhanVien (" + maNV + ", N'" + hoTen + "', N'" + gioiTinh + "', '" + ngaySinh + "', N'" + diaChi + "', '" + cmnd + "', '" + sdt + "', " + luong + ", '" + tenDangNhap + "', '" + matKhau + "')";
+    public boolean capNhatNhanVien(int maNV, String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt, int luong) throws SQLException {
+        sql = "capNhatNhanVien (" + maNV + ", N'" + hoTen + "', N'" + gioiTinh + "', '" + ngaySinh + "', N'" + diaChi + "', '" + cmnd + "', '" + sdt + "', " + luong + ")";
         return data.Execute(sql);
     }
     

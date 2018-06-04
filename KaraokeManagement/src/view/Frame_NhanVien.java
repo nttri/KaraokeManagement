@@ -5,7 +5,10 @@ import common.*;
 import model.*;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -180,6 +183,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         tfLuong = new javax.swing.JTextField();
         btnChinhSua_pnThongTinCaNhan = new javax.swing.JButton();
         btnLuu_pnThongTinCaNhan = new javax.swing.JButton();
+        lblAvatar = new javax.swing.JLabel();
         pnDonDatPhong = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         spDonDatPhong_pnDonDatPhong = new javax.swing.JScrollPane();
@@ -381,7 +385,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         lblMaNV.setForeground(new java.awt.Color(204, 204, 204));
         lblMaNV.setText("Mã nhân viên:");
         pnThongTinCaNhan.add(lblMaNV);
-        lblMaNV.setBounds(750, 25, 300, 40);
+        lblMaNV.setBounds(760, 330, 270, 40);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -494,6 +498,10 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         });
         pnThongTinCaNhan.add(btnLuu_pnThongTinCaNhan);
         btnLuu_pnThongTinCaNhan.setBounds(735, 585, 180, 50);
+
+        lblAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/ava.png"))); // NOI18N
+        pnThongTinCaNhan.add(lblAvatar);
+        lblAvatar.setBounds(750, 60, 256, 256);
 
         pnDonDatPhong.setBackground(new java.awt.Color(10, 125, 39));
         pnDonDatPhong.setMinimumSize(new java.awt.Dimension(1070, 680));
@@ -1117,11 +1125,11 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 Date bd = arrDon.get(i).getThoiGianBatDau();
                 Date kt = arrDon.get(i).getThoiGianKetThuc();
                 long diff = kt.getTime() - bd.getTime();
-                
+
                 soGioSuDung = TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);
                 tienPhong = loaiPH.getGiaPhong() * soGioSuDung;
                 tongTien = tienPhong + tienDichVu;
-                
+
                 mTable_ThanhToan.addRow(new Object[]{
                     maDon,
                     maPhong,
@@ -1148,7 +1156,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                     soGioSuDung = TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);
                     tienPhong = loaiPH.getGiaPhong() * soGioSuDung;
                     tongTien = tienPhong + tienDichVu;
-                    
+
                     mTable_ThanhToan.addRow(new Object[]{
                         maDon,
                         maPhong,
@@ -1161,7 +1169,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
             } else {
                 tienPhong = loaiPH.getGiaPhong();
                 tongTien = tienPhong + tienDichVu;
-                
+
                 mTable_ThanhToan.addRow(new Object[]{
                     maDon,
                     maPhong,
@@ -1444,9 +1452,9 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         setColorAllButton(NVColor.btn_Default);
         setFalseAllButton();
         setAllPanelDisappear();
-        
+
         pnThongTinCaNhan.setVisible(true);
-        
+
         ((JTextField) tfNgaySinh.getDateEditor()).setEditable(false);
         btnChinhSua_pnThongTinCaNhan.setEnabled(true);
         btnLuu_pnThongTinCaNhan.setEnabled(false);
@@ -1455,7 +1463,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         tfCMND.setEditable(false);
         tfSDT.setEditable(false);
         tfDiaChi.setEditable(false);
-        
+
         int maNV = NV.getMaNhanVien();
         String sMaNV = Integer.toString(maNV);
         Date ngaySinh = NV.getNgaySinh();
@@ -1469,31 +1477,95 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         tfLuong.setText(Integer.toString(NV.getLuong()));
     }//GEN-LAST:event_jLB_NameMouseClicked
 
+    Boolean isOldEnough(String input) {
+        Date _today = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(_today);
+        int _namHienTai = cal.get(Calendar.YEAR);
+
+        Date _ngaySinh = new Date();
+        try {
+            _ngaySinh = sdf.parse(input);
+        } catch (ParseException ex) {
+            //
+        }
+        cal.setTime(_ngaySinh);
+        int _namSinh = cal.get(Calendar.YEAR);
+
+        if (_namHienTai - _namSinh < 16) {
+            return false;
+        }
+        return true;
+    }
+
     private void btnLuu_pnThongTinCaNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuu_pnThongTinCaNhanActionPerformed
-        
+
         String hoTen = tfHoTen.getText();
         String gioiTinh = cbbGioiTinh.getSelectedItem().toString();
         String ngaySinh = ((JTextField) tfNgaySinh.getDateEditor().getUiComponent()).getText();
         String cmnd = tfCMND.getText();
         String sdt = tfSDT.getText();
         String diaChi = tfDiaChi.getText();
-        
-        
-        
-        tfHoTen.setEditable(false);
-        cbbGioiTinh.setEnabled(false);
-        tfCMND.setEditable(false);
-        tfSDT.setEditable(false);
-        tfDiaChi.setEditable(false);
-        btnChinhSua_pnThongTinCaNhan.setEnabled(true);
-        btnLuu_pnThongTinCaNhan.setEnabled(false);
+
+        if (!hoTen.isEmpty() && !diaChi.isEmpty() && !ngaySinh.isEmpty()) {
+            if (cmnd.length() != 9) {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_CMND);
+                return;
+            }
+            if (sdt.length() < 10) {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
+                return;
+            }
+            if (sdt.length() == 10 && !sdt.startsWith("09")) {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
+                return;
+            }
+            if (sdt.length() == 11 && !sdt.startsWith("01")) {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
+                return;
+            }
+            if (!isOldEnough(ngaySinh)) {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Birthday);
+                return;
+            }
+
+            Boolean res = false;
+            BNhanVien bNhanVien = new BNhanVien();
+            try {
+                res = bNhanVien.capNhatNhanVien(NV.getMaNhanVien(), hoTen, gioiTinh, ngaySinh, diaChi, cmnd, sdt, NV.getLuong());
+                tfHoTen.setEditable(false);
+                cbbGioiTinh.setEnabled(false);
+                tfCMND.setEditable(false);
+                tfSDT.setEditable(false);
+                tfDiaChi.setEditable(false);
+                btnChinhSua_pnThongTinCaNhan.setEnabled(true);
+                btnLuu_pnThongTinCaNhan.setEnabled(false);
+            } catch (SQLException ex) {
+                Logger.getLogger(Dialog_ThemKhachHangThanhVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (!res) {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Add_Failed);
+            }
+
+            NhanVien nv = new NhanVien();
+            try {
+                nv = bNhanVien.layThongTinNhanVienTheoMaNV(NV.getMaNhanVien());
+                NV = nv;
+                jLB_Name.setText(NV.getHoten());
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Fill_Full);
+        }
     }//GEN-LAST:event_btnLuu_pnThongTinCaNhanActionPerformed
 
     private void btnChinhSua_pnThongTinCaNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSua_pnThongTinCaNhanActionPerformed
-        
+
         btnChinhSua_pnThongTinCaNhan.setEnabled(false);
         btnLuu_pnThongTinCaNhan.setEnabled(true);
-        
+
         tfHoTen.setEditable(true);
         cbbGioiTinh.setEnabled(true);
         tfCMND.setEditable(true);
@@ -1503,18 +1575,22 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
     private void tfCMNDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCMNDKeyTyped
         char checkChar = evt.getKeyChar();
-        if(!Character.isDigit(checkChar))
+        if (!Character.isDigit(checkChar)) {
             evt.consume();
-        if(tfCMND.getText().length()>8)
+        }
+        if (tfCMND.getText().length() > 8) {
             evt.consume();
+        }
     }//GEN-LAST:event_tfCMNDKeyTyped
 
     private void tfSDTKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSDTKeyTyped
         char checkChar = evt.getKeyChar();
-        if(!Character.isDigit(checkChar))
+        if (!Character.isDigit(checkChar)) {
             evt.consume();
-        if(tfSDT.getText().length()>10)
+        }
+        if (tfSDT.getText().length() > 10) {
             evt.consume();
+        }
     }//GEN-LAST:event_tfSDTKeyTyped
 
 
@@ -1556,6 +1632,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblAvatar;
     private javax.swing.JLabel lblMaNV;
     private javax.swing.JPanel pnDichVu;
     private javax.swing.JPanel pnDonDatPhong;
