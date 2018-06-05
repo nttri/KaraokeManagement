@@ -50,7 +50,7 @@ public class MyStrings {
     public static String Please_Fill_Full = "Hãy điền đầy đủ thông tin!";
     public static String Please_Choose_Date = "Hãy điền đầy đủ thông tin!";
     public static String Please_Choose_Room = "Hãy chọn 1 phòng!";
-    public static String Please_Choose_1 = "";
+    public static String Please_Choose_Service = "Hãy chọn 1 dịch vụ";
     
     public static String Bill_Not_Payed = "Chưa thanh toán";
     public static String Bill_Payed = "Đã thanh toán";
@@ -58,5 +58,7 @@ public class MyStrings {
     
     public static String Pay_Succeeded = "Thanh toán thành công!";
     public static String Pay_Failed = "Thanh toán thất bại!";
+    
+    public static String Number_Must_Positive = "Số lượng phải lớn hơn 0";
     
 }
