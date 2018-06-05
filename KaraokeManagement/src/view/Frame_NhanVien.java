@@ -199,6 +199,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         btnTaoMoi_pnDichVu = new javax.swing.JButton();
         btnXoa_pnDichVu = new javax.swing.JButton();
         btnThemLoaiDichVu = new javax.swing.JButton();
+        btnGoiDichVu = new javax.swing.JButton();
         pnKhachHangThanhVien = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         spKhachHangThanhVien = new javax.swing.JScrollPane();
@@ -669,6 +670,19 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         });
         pnDichVu.add(btnThemLoaiDichVu);
         btnThemLoaiDichVu.setBounds(728, 20, 300, 48);
+
+        btnGoiDichVu.setBackground(new java.awt.Color(153, 0, 153));
+        btnGoiDichVu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnGoiDichVu.setForeground(new java.awt.Color(255, 255, 255));
+        btnGoiDichVu.setText("GỌI DỊCH VỤ");
+        btnGoiDichVu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnGoiDichVu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGoiDichVuActionPerformed(evt);
+            }
+        });
+        pnDichVu.add(btnGoiDichVu);
+        btnGoiDichVu.setBounds(450, 585, 200, 48);
 
         pnKhachHangThanhVien.setBackground(new java.awt.Color(10, 125, 39));
         pnKhachHangThanhVien.setMinimumSize(new java.awt.Dimension(1070, 680));
@@ -1637,11 +1651,17 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tfSDTKeyTyped
 
+    private void btnGoiDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoiDichVuActionPerformed
+        Dialog_GoiDichVu dGoiDichVu = new Dialog_GoiDichVu(this, rootPaneCheckingEnabled, MyStrings.Staff);
+        dGoiDichVu.setVisible(true);
+    }//GEN-LAST:event_btnGoiDichVuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChinhSua_pnThongTinCaNhan;
     private javax.swing.JButton btnDichVu;
     private javax.swing.JButton btnDonDatPhong;
+    private javax.swing.JButton btnGoiDichVu;
     private javax.swing.JButton btnKhachHangThanhVien;
     private javax.swing.JButton btnLuu_pnThongTinCaNhan;
     private javax.swing.JButton btnPhongHat;
