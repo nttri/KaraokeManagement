@@ -394,6 +394,7 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnOKMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOKActionPerformed"/>
           </Events>
         </Component>
@@ -418,6 +419,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="XEM M&#x1eac;T KH&#x1ea8;U"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnXemMKMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

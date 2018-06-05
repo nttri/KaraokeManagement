@@ -153,6 +153,11 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
         btnOK.setForeground(new java.awt.Color(10, 145, 39));
         btnOK.setText("OK");
         btnOK.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnOK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOKMouseClicked(evt);
+            }
+        });
         btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOKActionPerformed(evt);
@@ -166,6 +171,11 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
         btnXemMK.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnXemMK.setForeground(new java.awt.Color(10, 145, 39));
         btnXemMK.setText("XEM MẬT KHẨU");
+        btnXemMK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnXemMKMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -280,8 +290,22 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnOKActionPerformed
+
+    private void btnOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOKMouseClicked
+    }//GEN-LAST:event_btnOKMouseClicked
+
+    private void btnXemMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXemMKMouseClicked
+        if (btnXemMK.getText().equals("XEM MẬT KHẨU")){
+            btnXemMK.setText("ẨN MẬT KHẨU");
+            tfMatKhau.setEchoChar((char)0);
+        }
+        else {
+            btnXemMK.setText("XEM MẬT KHẨU");
+            tfMatKhau.setEchoChar('*');
+        }       
+    }//GEN-LAST:event_btnXemMKMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

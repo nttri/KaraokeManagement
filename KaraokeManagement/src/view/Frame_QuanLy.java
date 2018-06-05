@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -46,7 +47,6 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         mTable_PhongHat = (DefaultTableModel) tbPhongHat_pnQuanLyPhongHat.getModel();
         mTable_DichVu = (DefaultTableModel) tbDichVu_pnQuanLyDichVu.getModel();
         //...
-        customInit();
     }
 
     public Frame_QuanLy(NhanVien ql){
@@ -54,6 +54,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         QL = ql;
         jLB_Brand.setText(MyStrings.AppTitle);
         jLB_Name.setText("Chào " + QL.getHoten());
+        customInit();
     }
     void customInit(){
         setFalseAllButton();
@@ -75,7 +76,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        Predicate<NhanVien> qlPredicate = p->p.getMaNhanVien() == QL.getMaNhanVien();
+        arrNV.removeIf(qlPredicate);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         for(int i = 0; i < arrNV.size(); i++){
             mTable_NhanVien.addRow(new Object[]{
@@ -789,7 +791,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        Predicate<NhanVien> qlPredicate = p->p.getMaNhanVien() == QL.getMaNhanVien();
+        arrNV.removeIf(qlPredicate);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         for(int i = 0; i < arrNV.size(); i++){
             mTable_NhanVien.addRow(new Object[]{
@@ -1140,7 +1143,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
                 NhanVien nhanVien = new NhanVien();
                 int maNV = Integer.parseInt(mTable_NhanVien.getValueAt(r, 0).toString());
                 try {
-                    nhanVien = bNhanVien.layThongTinNhanVienTheoMaNV(maNV);
+                    nhanVien = bNhanVien.layThongTinNhanVienTheoMaNV_TaiKhoan(maNV);
                     Dialog_XemNhanVien dXemNhanVien = new Dialog_XemNhanVien(this, rootPaneCheckingEnabled, nhanVien);
                     dXemNhanVien.setVisible(true);
                 } catch (SQLException ex) {
