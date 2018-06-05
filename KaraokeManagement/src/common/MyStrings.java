@@ -52,4 +52,8 @@ public class MyStrings {
     public static String Please_Choose_Room = "Hãy chọn 1 phòng!";
     public static String Please_Choose_1 = "";
     
+    public static String Bill_Not_Payed = "Chưa thanh toán";
+    public static String Bill_Payed = "Đã thanh toán";
+    public static String Bill_Is_Using = "Đang sử dụng";
+    
 }

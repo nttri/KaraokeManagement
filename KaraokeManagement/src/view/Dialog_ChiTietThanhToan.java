@@ -33,6 +33,11 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
     DonThanhToan gDonThanhToan;
     Boolean gLayTienThieu = true;
     String gTrangThaiThanhToan = "";
+
+    long tongTienDichVu = 0;
+    long tongTienPhong = 0;
+    long tongTienPhongThieu = 0;
+    long tongCong = 0;
     long gSoGio = 0;
 
     DefaultTableModel mTable_DichVu, mTable_TienPhongThieu;
@@ -57,18 +62,18 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
 
     void checkRoomStatus() {
         String trangThai = gDonThanhToan.getTinhTrang();
-        if (trangThai.equals("Chưa thanh toán")) {
+        if (trangThai.equals(MyStrings.Bill_Not_Payed)) {
             gSoGio = 1;
             gLayTienThieu = false;
-            gTrangThaiThanhToan = "Chưa thanh toán";
-        } else if (trangThai.equals("Đã thanh toán")) {
+            gTrangThaiThanhToan = MyStrings.Bill_Not_Payed;
+        } else if (trangThai.equals(MyStrings.Bill_Payed)) {
             Date bd = gDonThanhToan.getThoiGianBatDau();
             Date kt = gDonThanhToan.getThoiGianKetThuc();
             long diff = kt.getTime() - bd.getTime();
             gSoGio = TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);
             gLayTienThieu = false;
             btnThanhToan.setVisible(false);
-            gTrangThaiThanhToan = "Đã thanh toán";
+            gTrangThaiThanhToan = MyStrings.Bill_Payed;
         } else {
             Date bd = gDonThanhToan.getThoiGianBatDau();
             String ngayBD = bd.toString();
@@ -91,18 +96,12 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
                     gSoGio++;
                 }
                 gLayTienThieu = true;
-                gTrangThaiThanhToan = "Đang dùng";
+                gTrangThaiThanhToan = MyStrings.Bill_Is_Using;
             }
         }
     }
 
     void customInit() {
-
-        long tongTienDichVu = 0;
-        long tongTienPhong = 0;
-        long tongTienPhongThieu = 0;
-        long tongCong = 0;
-
         int maDonTT = gDonThanhToan.getMaDon();
         int maPhong = gDonThanhToan.getMaPhong();
         int maKH = gDonThanhToan.getMaKhachHang();
@@ -114,7 +113,7 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
         lblNgayBatDau.setText(ngayBD.toString());
 
         //Xử lý phần dịch vụ
-        if (gTrangThaiThanhToan.equals("Đang dùng") || gTrangThaiThanhToan.equals("Đã thanh toán")) {
+        if (gTrangThaiThanhToan.equals(MyStrings.Bill_Is_Using) || gTrangThaiThanhToan.equals(MyStrings.Bill_Payed)) {
             BChiTietDichVu bChiTietDV = new BChiTietDichVu();
             BDichVu bDichVu = new BDichVu();
             ArrayList<ChiTietDichVu> arrDonDV = null;
@@ -171,20 +170,20 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
         lblTongTienPhong.setText(Long.toString(tongTienPhong));
 
         //Xử lý phần tiền phòng chưa trả (nếu có)
-        if (gTrangThaiThanhToan.equals("Đang dùng")) {
+        if (gTrangThaiThanhToan.equals(MyStrings.Bill_Is_Using)) {
             BDonThanhToan bDonTT = new BDonThanhToan();
             ArrayList<DonThanhToan> arrDonTT = null;
 
             try {
-                arrDonTT = bDonTT.layDonThanhToanTheoMaKHVaTinhTrang(maKH, "Chưa thanh toán");
+                arrDonTT = bDonTT.layDonThanhToanTheoMaKHVaTinhTrang(maKH, MyStrings.Bill_Not_Payed);
                 for (int i = 0; i < arrDonTT.size(); i++) {
                     int _maphong = arrDonTT.get(i).getMaPhong();
                     PhongHat _phonghat = new PhongHat();
                     LoaiPhongHat _loaiPH = new LoaiPhongHat();
-                    
+
                     _phonghat = bPhongHat.layThongTinPhongHatTheoMa(_maphong);
                     _loaiPH = bLoaiPH.layThongTinLoaiPhongHatTheoMa(_phonghat.getMaLoaiPhong());
-                    
+
                     mTable_TienPhongThieu.addRow(new Object[]{
                         arrDonTT.get(i).getMaDon(),
                         _loaiPH.getTenLoai(),
@@ -435,6 +434,11 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
         btnThanhToan.setForeground(new java.awt.Color(10, 125, 39));
         btnThanhToan.setText("THANH TOÁN");
         btnThanhToan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThanhToanActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnThanhToan);
         btnThanhToan.setBounds(870, 675, 200, 50);
 
@@ -494,6 +498,11 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+
+
+    }//GEN-LAST:event_btnThanhToanActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

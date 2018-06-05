@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -81,7 +82,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         }
 
         for (int i = 0; i < arrDon.size(); i++) {
-            if (arrDon.get(i).getTinhTrang().equals("Đang sử dụng")) {
+            if (arrDon.get(i).getTinhTrang().equals(MyStrings.Bill_Is_Using)) {
                 KhachHang kh = new KhachHang();
                 try {
                     kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
@@ -851,7 +852,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã đơn đặt phòng", "Mã phòng", "Thời gian đã dùng", "Người đặt", "Tổng cộng", "Tình trạng"
+                "Mã đơn đặt phòng", "Mã phòng", "Thời gian đã dùng", "Người đặt", "Ngày đặt", "Tình trạng"
             }
         ) {
             Class[] types = new Class [] {
@@ -874,9 +875,9 @@ public class Frame_NhanVien extends javax.swing.JFrame {
             tbThanhToan_pnThanhToan.getColumnModel().getColumn(0).setPreferredWidth(120);
             tbThanhToan_pnThanhToan.getColumnModel().getColumn(1).setPreferredWidth(60);
             tbThanhToan_pnThanhToan.getColumnModel().getColumn(2).setPreferredWidth(120);
-            tbThanhToan_pnThanhToan.getColumnModel().getColumn(3).setPreferredWidth(280);
-            tbThanhToan_pnThanhToan.getColumnModel().getColumn(4).setPreferredWidth(140);
-            tbThanhToan_pnThanhToan.getColumnModel().getColumn(5).setPreferredWidth(180);
+            tbThanhToan_pnThanhToan.getColumnModel().getColumn(3).setPreferredWidth(210);
+            tbThanhToan_pnThanhToan.getColumnModel().getColumn(4).setPreferredWidth(240);
+            tbThanhToan_pnThanhToan.getColumnModel().getColumn(5).setPreferredWidth(150);
         }
 
         pnThanhToan.add(spThanhToan_pnThanhToan);
@@ -950,7 +951,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         }
 
         for (int i = 0; i < arrDon.size(); i++) {
-            if (arrDon.get(i).getTinhTrang().equals("Đang sử dụng")) {
+            if (arrDon.get(i).getTinhTrang().equals(MyStrings.Bill_Is_Using)) {
                 KhachHang kh = new KhachHang();
                 try {
                     kh = bKhachHang.layKhachHangTheoMa(arrDon.get(i).getMaKhachHang());
@@ -1122,7 +1123,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            if (arrDon.get(i).getTinhTrang().equals("Đã thanh toán")) {
+            if (arrDon.get(i).getTinhTrang().equals(MyStrings.Bill_Payed)) {
                 Date bd = arrDon.get(i).getThoiGianBatDau();
                 Date kt = arrDon.get(i).getThoiGianKetThuc();
                 long diff = kt.getTime() - bd.getTime();
@@ -1136,10 +1137,10 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                     maPhong,
                     soGioSuDung + " giờ",
                     tenKH,
-                    tongTien,
+                    bd.toString(),
                     tinhTrang
                 });
-            } else if (arrDon.get(i).getTinhTrang().equals("Đang sử dụng")) {
+            } else if (arrDon.get(i).getTinhTrang().equals(MyStrings.Bill_Is_Using)) {
                 Date bd = arrDon.get(i).getThoiGianBatDau();
                 Date kt = new Date();
                 long diff = kt.getTime() - bd.getTime();
@@ -1150,7 +1151,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                         maPhong,
                         "0 giờ",
                         tenKH,
-                        "0",
+                        bd.toString(),
                         tinhTrang
                     });
                 } else {
@@ -1163,7 +1164,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                         maPhong,
                         soGioSuDung + " giờ",
                         tenKH,
-                        tongTien,
+                        bd.toString(),
                         tinhTrang
                     });
                 }
@@ -1176,7 +1177,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                     maPhong,
                     "1 giờ",
                     tenKH,
-                    tongTien,
+                    arrDon.get(i).getThoiGianBatDau().toString(),
                     tinhTrang
                 });
             }
@@ -1200,7 +1201,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
             try {
                 donTT = bDonTT.layDonThanhToanTheoMaDon(madon);
-                Dialog_ChiTietThanhToan dThanhToan = new Dialog_ChiTietThanhToan(this, rootPaneCheckingEnabled, donTT, "NV");
+                Dialog_ChiTietThanhToan dThanhToan = new Dialog_ChiTietThanhToan(this, rootPaneCheckingEnabled, donTT, MyStrings.Staff);
                 dThanhToan.setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
@@ -1217,7 +1218,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTim_pnThanhToanActionPerformed
 
     private void btnTaoMoi_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnPhongHatActionPerformed
-        Dialog_ThemPhongHat dThemPhongHat = new Dialog_ThemPhongHat(this, rootPaneCheckingEnabled, "NV");
+        Dialog_ThemPhongHat dThemPhongHat = new Dialog_ThemPhongHat(this, rootPaneCheckingEnabled, MyStrings.Staff);
         dThemPhongHat.setVisible(true);
     }//GEN-LAST:event_btnTaoMoi_pnPhongHatActionPerformed
 
@@ -1241,9 +1242,19 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                     Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {  // hủy sau giờ đặt phòng, sẽ ghi tiền nợ là 1 tiếng tiền phòng
-                int maKH = Integer.parseInt(mTable_DonDatPhong.getValueAt(r, 2).toString());
+                int maNV = NV.getMaNhanVien();
+                
+                BChiTietDichVu bCTDV = new BChiTietDichVu();
+                ArrayList<ChiTietDichVu> dsCTDV = new ArrayList<ChiTietDichVu>();
+                
                 try {
-                    res = bDonDatPhong.capNhatTinhTrangDonThanhToan(maso, maKH, "Chưa thanh toán");
+                    dsCTDV = bCTDV.layThongTinChiTietDichVuTheoMaDon(maso);
+                    // kiểm tra tránh nhân viên xóa nhầm đơn khách đang dùng
+                    if(dsCTDV.size() > 0){
+                        JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
+                        return;
+                    }
+                    res = bDonDatPhong.capNhatTinhTrangDonThanhToan(maso, maNV, MyStrings.Bill_Not_Payed);
                 } catch (SQLException ex) {
                     Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1261,7 +1272,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaDon_pnDonDatPhongActionPerformed
 
     private void btnTaoMoi_pnDonDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnDonDatPhongActionPerformed
-        Dialog_ThemDonDatPhong dThemDonDatPhong = new Dialog_ThemDonDatPhong(this, rootPaneCheckingEnabled, "NV");
+        Dialog_ThemDonDatPhong dThemDonDatPhong = new Dialog_ThemDonDatPhong(this, rootPaneCheckingEnabled, MyStrings.Staff);
         dThemDonDatPhong.setVisible(true);
     }//GEN-LAST:event_btnTaoMoi_pnDonDatPhongActionPerformed
 
@@ -1288,12 +1299,12 @@ public class Frame_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoa_pnDichVuActionPerformed
 
     private void btnTaoMoi_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnDichVuActionPerformed
-        Dialog_ThemDichVu dThemDichVu = new Dialog_ThemDichVu(this, rootPaneCheckingEnabled, "NV");
+        Dialog_ThemDichVu dThemDichVu = new Dialog_ThemDichVu(this, rootPaneCheckingEnabled, MyStrings.Staff);
         dThemDichVu.setVisible(true);
     }//GEN-LAST:event_btnTaoMoi_pnDichVuActionPerformed
 
     private void btnTaoMoi_pnKhachHangThanhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnKhachHangThanhVienActionPerformed
-        Dialog_ThemKhachHangThanhVien dThemThanhVienKhachHang = new Dialog_ThemKhachHangThanhVien(this, rootPaneCheckingEnabled, "NV");
+        Dialog_ThemKhachHangThanhVien dThemThanhVienKhachHang = new Dialog_ThemKhachHangThanhVien(this, rootPaneCheckingEnabled, MyStrings.Staff);
         dThemThanhVienKhachHang.setVisible(true);
     }//GEN-LAST:event_btnTaoMoi_pnKhachHangThanhVienActionPerformed
 
@@ -1408,7 +1419,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 int maso = Integer.parseInt(mTable_DonDatPhong.getValueAt(r, 0).toString());
                 try {
                     donDatPhong = bDonDatPhong.layDonThanhToanTheoMaDon(maso);
-                    Dialog_SuaDonDatPhong dSuaDonDatPhong = new Dialog_SuaDonDatPhong(this, rootPaneCheckingEnabled, donDatPhong, "NV");
+                    Dialog_SuaDonDatPhong dSuaDonDatPhong = new Dialog_SuaDonDatPhong(this, rootPaneCheckingEnabled, donDatPhong, MyStrings.Staff);
                     dSuaDonDatPhong.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
@@ -1428,7 +1439,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 int maso = Integer.parseInt(mTable_DichVu.getValueAt(r, 1).toString());
                 try {
                     dv = bDichVu.layThongTinDichVuTheoMa(maso);
-                    Dialog_SuaDichVu dSuaDichVu = new Dialog_SuaDichVu(this, rootPaneCheckingEnabled, dv, "NV");
+                    Dialog_SuaDichVu dSuaDichVu = new Dialog_SuaDichVu(this, rootPaneCheckingEnabled, dv, MyStrings.Staff);
                     dSuaDichVu.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
@@ -1448,7 +1459,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 int maso = Integer.parseInt(mTable_KhachHang.getValueAt(r, 0).toString());
                 try {
                     kh = bKhachHang.layKhachHangTheoMa(maso);
-                    Dialog_SuaKhachHangThanhVien dSuaKHThanhVien = new Dialog_SuaKhachHangThanhVien(this, rootPaneCheckingEnabled, kh, "NV");
+                    Dialog_SuaKhachHangThanhVien dSuaKHThanhVien = new Dialog_SuaKhachHangThanhVien(this, rootPaneCheckingEnabled, kh, MyStrings.Staff);
                     dSuaKHThanhVien.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
@@ -1468,7 +1479,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 int maso = Integer.parseInt(mTable_PhongHat.getValueAt(r, 0).toString());
                 try {
                     phong = bPhongHat.layThongTinPhongHatTheoMa(maso);
-                    Dialog_SuaPhongHat dSuaPhongHat = new Dialog_SuaPhongHat(this, rootPaneCheckingEnabled, phong, "NV");
+                    Dialog_SuaPhongHat dSuaPhongHat = new Dialog_SuaPhongHat(this, rootPaneCheckingEnabled, phong, MyStrings.Staff);
                     dSuaPhongHat.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
@@ -1487,6 +1498,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         pnThongTinCaNhan.setVisible(true);
 
         ((JTextField) tfNgaySinh.getDateEditor()).setEditable(false);
+        tfNgaySinh.getCalendarButton().setEnabled(false);
         btnChinhSua_pnThongTinCaNhan.setEnabled(true);
         btnLuu_pnThongTinCaNhan.setEnabled(false);
         tfHoTen.setEditable(false);
@@ -1570,6 +1582,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 tfCMND.setEditable(false);
                 tfSDT.setEditable(false);
                 tfDiaChi.setEditable(false);
+                tfNgaySinh.getCalendarButton().setEnabled(false);
                 btnChinhSua_pnThongTinCaNhan.setEnabled(true);
                 btnLuu_pnThongTinCaNhan.setEnabled(false);
             } catch (SQLException ex) {
@@ -1596,7 +1609,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
         btnChinhSua_pnThongTinCaNhan.setEnabled(false);
         btnLuu_pnThongTinCaNhan.setEnabled(true);
-
+        tfNgaySinh.getCalendarButton().setEnabled(true);
         tfHoTen.setEditable(true);
         cbbGioiTinh.setEnabled(true);
         tfCMND.setEditable(true);
