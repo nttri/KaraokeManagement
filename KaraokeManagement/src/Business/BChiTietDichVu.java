@@ -59,8 +59,8 @@ public class BChiTietDichVu extends Business{
         return arrChiTietDichVu;
     }
     
-    public boolean themChiTietDichVu(int maDon, int maDV, int donGia, int soLuong) throws SQLException {
-        sql = "themChiTietDichVu (" + maDon + ", " + maDV + ", " + donGia + ", " + soLuong + ")";
+    public boolean themChiTietDichVu(int maDon, int stt, int maDV, int donGia, int soLuong) throws SQLException {
+        sql = "themChiTietDichVu (" + maDon + ", " + stt + ", " + maDV + ", " + donGia + ", " + soLuong + ")";
         return data.Execute(sql);
     }
     
