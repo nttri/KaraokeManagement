@@ -682,7 +682,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
             }
         });
         pnDichVu.add(btnGoiDichVu);
-        btnGoiDichVu.setBounds(450, 585, 200, 48);
+        btnGoiDichVu.setBounds(440, 585, 200, 48);
 
         pnKhachHangThanhVien.setBackground(new java.awt.Color(10, 125, 39));
         pnKhachHangThanhVien.setMinimumSize(new java.awt.Dimension(1070, 680));
