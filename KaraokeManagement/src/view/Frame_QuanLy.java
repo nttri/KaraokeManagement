@@ -1029,6 +1029,9 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             if (rs){
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Succeeded);
             }
+            else{
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
+            }
         }
         
         updateQuanLyNhanVien();
@@ -1041,7 +1044,26 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaoMoi_pnPhongHatActionPerformed
 
     private void btnXoaPhong_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaPhong_pnPhongHatActionPerformed
-        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
+        int r = tbPhongHat_pnQuanLyPhongHat.getSelectedRow();
+        int input = JOptionPane.showConfirmDialog(rootPane, "Bạn thực sự muốn xóa phòng hát này?", "Xác nhận", JOptionPane.OK_CANCEL_OPTION);
+        if (input == 0){ // OK
+            BPhongHat bPhongHat = new BPhongHat();
+            int maPH = Integer.parseInt(mTable_PhongHat.getValueAt(r, 0).toString());
+            boolean rs = true;
+            try {
+                rs = bPhongHat.xoaPhongHat(maPH);
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (rs){
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Succeeded);
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
+            }
+        }
+        
+        updateQuanLyPhongHat();
     }//GEN-LAST:event_btnXoaPhong_pnPhongHatActionPerformed
 
     private void btnThemLoaiPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiPhongHatActionPerformed
@@ -1056,7 +1078,26 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaoMoi_pnDichVuActionPerformed
 
     private void btnXoa_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnDichVuActionPerformed
-        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
+        int r = tbDichVu_pnQuanLyDichVu.getSelectedRow();
+        int input = JOptionPane.showConfirmDialog(rootPane, "Bạn thực sự muốn xóa dịch vụ này?", "Xác nhận", JOptionPane.OK_CANCEL_OPTION);
+        if (input == 0){ // OK
+            BDichVu bDichVu = new BDichVu();
+            int maDV = Integer.parseInt(mTable_DichVu.getValueAt(r, 0).toString());
+            boolean rs = true;
+            try {
+                rs = bDichVu.xoaDichVu(maDV);
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (rs){
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Succeeded);
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
+            }
+        }
+        
+        updateQuanLyDichVu();
     }//GEN-LAST:event_btnXoa_pnDichVuActionPerformed
 
     private void btnThemLoaiDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiDichVuActionPerformed
