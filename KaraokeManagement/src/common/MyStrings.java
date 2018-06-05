@@ -56,4 +56,7 @@ public class MyStrings {
     public static String Bill_Payed = "Đã thanh toán";
     public static String Bill_Is_Using = "Đang sử dụng";
     
+    public static String Pay_Succeeded = "Thanh toán thành công!";
+    public static String Pay_Failed = "Thanh toán thất bại!";
+    
 }
