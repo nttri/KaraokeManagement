@@ -62,18 +62,18 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
 
     void checkRoomStatus() {
         String trangThai = gDonThanhToan.getTinhTrang();
-        if (trangThai.equals("Chưa thanh toán")) {
+        if (trangThai.equals(MyStrings.Bill_Not_Payed)) {
             gSoGio = 1;
             gLayTienThieu = false;
-            gTrangThaiThanhToan = "Chưa thanh toán";
-        } else if (trangThai.equals("Đã thanh toán")) {
+            gTrangThaiThanhToan = MyStrings.Bill_Not_Payed;
+        } else if (trangThai.equals(MyStrings.Bill_Payed)) {
             Date bd = gDonThanhToan.getThoiGianBatDau();
             Date kt = gDonThanhToan.getThoiGianKetThuc();
             long diff = kt.getTime() - bd.getTime();
             gSoGio = TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);
             gLayTienThieu = false;
             btnThanhToan.setVisible(false);
-            gTrangThaiThanhToan = "Đã thanh toán";
+            gTrangThaiThanhToan = MyStrings.Bill_Payed;
         } else {
             Date bd = gDonThanhToan.getThoiGianBatDau();
             String ngayBD = bd.toString();
@@ -96,7 +96,7 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
                     gSoGio++;
                 }
                 gLayTienThieu = true;
-                gTrangThaiThanhToan = "Đang dùng";
+                gTrangThaiThanhToan = MyStrings.Bill_Is_Using;
             }
         }
     }
@@ -113,7 +113,7 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
         lblNgayBatDau.setText(ngayBD.toString());
 
         //Xử lý phần dịch vụ
-        if (gTrangThaiThanhToan.equals("Đang dùng") || gTrangThaiThanhToan.equals("Đã thanh toán")) {
+        if (gTrangThaiThanhToan.equals(MyStrings.Bill_Is_Using) || gTrangThaiThanhToan.equals(MyStrings.Bill_Payed)) {
             BChiTietDichVu bChiTietDV = new BChiTietDichVu();
             BDichVu bDichVu = new BDichVu();
             ArrayList<ChiTietDichVu> arrDonDV = null;
@@ -170,12 +170,12 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
         lblTongTienPhong.setText(Long.toString(tongTienPhong));
 
         //Xử lý phần tiền phòng chưa trả (nếu có)
-        if (gTrangThaiThanhToan.equals("Đang dùng")) {
+        if (gTrangThaiThanhToan.equals(MyStrings.Bill_Is_Using)) {
             BDonThanhToan bDonTT = new BDonThanhToan();
             ArrayList<DonThanhToan> arrDonTT = null;
 
             try {
-                arrDonTT = bDonTT.layDonThanhToanTheoMaKHVaTinhTrang(maKH, "Chưa thanh toán");
+                arrDonTT = bDonTT.layDonThanhToanTheoMaKHVaTinhTrang(maKH, MyStrings.Bill_Not_Payed);
                 for (int i = 0; i < arrDonTT.size(); i++) {
                     int _maphong = arrDonTT.get(i).getMaPhong();
                     PhongHat _phonghat = new PhongHat();
