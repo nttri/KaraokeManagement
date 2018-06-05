@@ -1016,7 +1016,22 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
     private void btnXoa_pnQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnQuanLyNhanVienActionPerformed
         int r = tbDanhSachNhanVien_pnQuanLyNhanVien.getSelectedRow();
-        JOptionPane.showConfirmDialog(rootPane, "Bạn thực sự muốn xóa nhân viên này?", "Xác nhận", JOptionPane.OK_CANCEL_OPTION);
+        int input = JOptionPane.showConfirmDialog(rootPane, "Bạn thực sự muốn xóa nhân viên này?", "Xác nhận", JOptionPane.OK_CANCEL_OPTION);
+        if (input == 0){ // OK
+            BNhanVien bNhanVien = new BNhanVien();
+            int maNV = Integer.parseInt(mTable_NhanVien.getValueAt(r, 0).toString());
+            boolean rs = true;
+            try {
+                rs = bNhanVien.xoaNhanVien(maNV);
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (rs){
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Succeeded);
+            }
+        }
+        
+        updateQuanLyNhanVien();
     }//GEN-LAST:event_btnXoa_pnQuanLyNhanVienActionPerformed
 
     private void btnTaoMoi_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnPhongHatActionPerformed
