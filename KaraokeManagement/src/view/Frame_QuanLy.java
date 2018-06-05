@@ -111,6 +111,10 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         bQuanLyPhongHat = false;
         bQuanLyDichVu = false;
         bQuanLyDoanhThu = false;
+        
+        btnXoa_pnQuanLyNhanVien.setEnabled(false);
+        btnXoaPhong_pnPhongHat.setEnabled(false);
+        btnXoa_pnDichVu.setEnabled(false);
     }
     
     void clearAllDataTable(DefaultTableModel dtm){
@@ -121,7 +125,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     
     void updateQuanLyNhanVien(){
         clearAllDataTable(mTable_NhanVien);
-
+        btnXoa_pnQuanLyNhanVien.setEnabled(false);
+        
         BNhanVien bNhanVien = new BNhanVien();
         ArrayList<NhanVien> arrNV = null;
         
@@ -144,7 +149,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     
     void updateQuanLyPhongHat(){
         clearAllDataTable(mTable_PhongHat);
-                
+        btnXoaPhong_pnPhongHat.setEnabled(false);
+        
         BPhongHat bPhongHat = new BPhongHat();
         ArrayList<PhongHat> arrPH = null;       
         try {
@@ -174,6 +180,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     
     void updateQuanLyDichVu(){
         clearAllDataTable(mTable_DichVu);
+        btnXoa_pnDichVu.setEnabled(false);
         
         BDichVu bDichVu = new BDichVu();
         ArrayList<DichVu> arrDV = null;        
@@ -627,6 +634,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnXoa_pnQuanLyNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_remove.png"))); // NOI18N
         btnXoa_pnQuanLyNhanVien.setText("XÓA");
         btnXoa_pnQuanLyNhanVien.setBorder(null);
+        btnXoa_pnQuanLyNhanVien.setEnabled(false);
         btnXoa_pnQuanLyNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoa_pnQuanLyNhanVienActionPerformed(evt);
@@ -717,6 +725,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnXoaPhong_pnPhongHat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_remove.png"))); // NOI18N
         btnXoaPhong_pnPhongHat.setText("XÓA PHÒNG");
         btnXoaPhong_pnPhongHat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnXoaPhong_pnPhongHat.setEnabled(false);
         btnXoaPhong_pnPhongHat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaPhong_pnPhongHatActionPerformed(evt);
@@ -811,6 +820,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnXoa_pnDichVu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_remove.png"))); // NOI18N
         btnXoa_pnDichVu.setText("XÓA");
         btnXoa_pnDichVu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnXoa_pnDichVu.setEnabled(false);
+        btnXoa_pnDichVu.setFocusCycleRoot(true);
         btnXoa_pnDichVu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoa_pnDichVuActionPerformed(evt);
@@ -1004,7 +1015,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaoMoi_pnQuanLyNhanVienActionPerformed
 
     private void btnXoa_pnQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnQuanLyNhanVienActionPerformed
-        JOptionPane.showMessageDialog(rootPane, MyStrings.No_Features);
+        int r = tbDanhSachNhanVien_pnQuanLyNhanVien.getSelectedRow();
+        JOptionPane.showConfirmDialog(rootPane, "Bạn thực sự muốn xóa nhân viên này?", "Xác nhận", JOptionPane.OK_CANCEL_OPTION);
     }//GEN-LAST:event_btnXoa_pnQuanLyNhanVienActionPerformed
 
     private void btnTaoMoi_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnPhongHatActionPerformed
@@ -1160,11 +1172,13 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_jLB_NameMouseClicked
 
     private void tbDanhSachNhanVien_pnQuanLyNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDanhSachNhanVien_pnQuanLyNhanVienMouseClicked
-        if (evt.getClickCount() == 2) {
-            int r = tbDanhSachNhanVien_pnQuanLyNhanVien.getSelectedRow();
-            if (r != -1) {
+        int r = tbDanhSachNhanVien_pnQuanLyNhanVien.getSelectedRow();
+        if (r != -1){
+            btnXoa_pnQuanLyNhanVien.setEnabled(true);
+
+            if (evt.getClickCount() == 2) {
                 BNhanVien bNhanVien = new BNhanVien();
-                NhanVien nhanVien = new NhanVien();
+                NhanVien nhanVien = null;
                 int maNV = Integer.parseInt(mTable_NhanVien.getValueAt(r, 0).toString());
                 try {
                     nhanVien = bNhanVien.layThongTinNhanVienTheoMaNV_TaiKhoan(maNV);
@@ -1173,8 +1187,6 @@ public class Frame_QuanLy extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Select_Row);
             }
         }
     }//GEN-LAST:event_tbDanhSachNhanVien_pnQuanLyNhanVienMouseClicked

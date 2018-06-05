@@ -295,8 +295,7 @@ public class Dialog_ThemNhanVien extends javax.swing.JDialog {
                 this.dispose();
             }
 
-        }
-        
+        }       
     }//GEN-LAST:event_btnThemActionPerformed
 
     Boolean isOldEnough(String input) {
