@@ -7,8 +7,11 @@ import Business.BLoaiPhongHat;
 import Business.BPhongHat;
 import common.MyStrings;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -501,7 +504,109 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
 
+        BDonThanhToan bDonTT = new BDonThanhToan();
+        DonThanhToan donTT = new DonThanhToan();
+        boolean res = false;
+        Date bd = gDonThanhToan.getThoiGianBatDau();
+        String ngayBD = bd.toString();
 
+        if (gTrangThaiThanhToan.equals(MyStrings.Bill_Is_Using)) { // trường hợp thanh toán chính thống
+            // cập nhật thanh toán đơn chính
+            LocalDateTime datetime = LocalDateTime.now();
+            String sDay = datetime.toString().substring(0, 10);
+            String sTime = datetime.toString().substring(11, 21);
+            String sTimeNow = sDay + " " + sTime;
+
+            try {
+                res = bDonTT.capNhatDonThanhToan(
+                        gDonThanhToan.getMaDon(),
+                        fNhanVien.NV.getMaNhanVien(),
+                        gDonThanhToan.getMaKhachHang(),
+                        gDonThanhToan.getMaPhong(),
+                        Integer.parseInt(lblDonGia.getText()),
+                        gDonThanhToan.getThoiGianBatDau().toString(),
+                        sTimeNow,
+                        "",
+                        MyStrings.Bill_Payed
+                );
+
+                if (!res) {
+                    JOptionPane.showMessageDialog(rootPane, MyStrings.Pay_Failed);
+                    return;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Dialog_ChiTietThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            }
+
+            // cập nhật thanh toán các đơn phụ (nếu có)
+            ArrayList<DonThanhToan> arrDonTT = null;
+            BPhongHat bPhongHat = new BPhongHat();
+            BLoaiPhongHat bLoaiPH = new BLoaiPhongHat();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(bd);
+            cal.add(Calendar.HOUR_OF_DAY, 1);
+            Date kt = cal.getTime();
+            String ngayKT = kt.toString();
+            try {
+                arrDonTT = bDonTT.layDonThanhToanTheoMaKHVaTinhTrang(gDonThanhToan.getMaKhachHang(), MyStrings.Bill_Not_Payed);
+                for (int i = 0; i < arrDonTT.size(); i++) {
+                    res = bDonTT.capNhatDonThanhToan(
+                            arrDonTT.get(i).getMaDon(),
+                            arrDonTT.get(i).getMaNhanVien(),
+                            gDonThanhToan.getMaKhachHang(),
+                            arrDonTT.get(i).getMaPhong(),
+                            arrDonTT.get(i).getGiaPhong(),
+                            ngayBD,
+                            ngayKT,
+                            "",
+                            MyStrings.Bill_Payed
+                    );
+                    if (!res) {
+                        JOptionPane.showMessageDialog(rootPane, MyStrings.Pay_Failed);
+                        return;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Dialog_ChiTietThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            }
+
+        } else { //trường hợp thanh toán cho hóa đơn lần trước
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(bd);
+            cal.add(Calendar.HOUR_OF_DAY, 1);
+            String kt = cal.getTime().toString();
+            String head = ngayBD.substring(0, 11);
+            String body = kt.substring(11,19);
+            String ngayKT = head + body + ".0";
+
+            try {
+                res = bDonTT.capNhatDonThanhToan(
+                        gDonThanhToan.getMaDon(), 
+                        gDonThanhToan.getMaNhanVien(), 
+                        gDonThanhToan.getMaKhachHang(), 
+                        gDonThanhToan.getMaPhong(), 
+                        gDonThanhToan.getGiaPhong(), 
+                        ngayBD, 
+                        ngayKT, 
+                        "", 
+                        MyStrings.Bill_Payed
+                );
+                if (!res) {
+                        JOptionPane.showMessageDialog(rootPane, MyStrings.Pay_Failed);
+                        return;
+                    }
+            } catch (SQLException ex) {
+                Logger.getLogger(Dialog_ChiTietThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        if (res) {
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Pay_Succeeded);
+            this.dispose();
+            fNhanVien.refreshPanelThanhToan();
+        }
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
 
