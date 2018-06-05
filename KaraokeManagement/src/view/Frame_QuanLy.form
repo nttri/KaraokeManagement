@@ -702,6 +702,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbDanhSachNhanVien_pnQuanLyNhanVienMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -903,6 +906,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbPhongHat_pnQuanLyPhongHatMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1055,6 +1061,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbDichVu_pnQuanLyDichVuMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

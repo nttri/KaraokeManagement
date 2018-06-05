@@ -492,6 +492,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             }
         });
         tbDanhSachNhanVien_pnQuanLyNhanVien.setRowHeight(24);
+        tbDanhSachNhanVien_pnQuanLyNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbDanhSachNhanVien_pnQuanLyNhanVienMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbDanhSachNhanVien_pnQuanLyNhanVien);
         if (tbDanhSachNhanVien_pnQuanLyNhanVien.getColumnModel().getColumnCount() > 0) {
             tbDanhSachNhanVien_pnQuanLyNhanVien.getColumnModel().getColumn(0).setMinWidth(80);
@@ -596,6 +601,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             }
         });
         tbPhongHat_pnQuanLyPhongHat.setRowHeight(24);
+        tbPhongHat_pnQuanLyPhongHat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbPhongHat_pnQuanLyPhongHatMouseClicked(evt);
+            }
+        });
         spPhongHat_pnPhongHat.setViewportView(tbPhongHat_pnQuanLyPhongHat);
         if (tbPhongHat_pnQuanLyPhongHat.getColumnModel().getColumnCount() > 0) {
             tbPhongHat_pnQuanLyPhongHat.getColumnModel().getColumn(0).setMinWidth(80);
@@ -679,6 +689,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             }
         });
         tbDichVu_pnQuanLyDichVu.setRowHeight(24);
+        tbDichVu_pnQuanLyDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbDichVu_pnQuanLyDichVuMouseClicked(evt);
+            }
+        });
         spDichVu_pnDichVu.setViewportView(tbDichVu_pnQuanLyDichVu);
         if (tbDichVu_pnQuanLyDichVu.getColumnModel().getColumnCount() > 0) {
             tbDichVu_pnQuanLyDichVu.getColumnModel().getColumn(0).setMinWidth(100);
@@ -1116,6 +1131,34 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         tfSDT.setText(QL.getSdt());
         tfDiaChi.setText(QL.getDiaChi());
     }//GEN-LAST:event_jLB_NameMouseClicked
+
+    private void tbDanhSachNhanVien_pnQuanLyNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDanhSachNhanVien_pnQuanLyNhanVienMouseClicked
+        if (evt.getClickCount() == 2) {
+            int r = tbDanhSachNhanVien_pnQuanLyNhanVien.getSelectedRow();
+            if (r != -1) {
+                BNhanVien bNhanVien = new BNhanVien();
+                NhanVien nhanVien = new NhanVien();
+                int maNV = Integer.parseInt(mTable_NhanVien.getValueAt(r, 0).toString());
+                try {
+                    nhanVien = bNhanVien.layThongTinNhanVienTheoMaNV(maNV);
+                    Dialog_XemNhanVien dXemNhanVien = new Dialog_XemNhanVien(this, rootPaneCheckingEnabled);
+                    dXemNhanVien.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Select_Row);
+            }
+        }
+    }//GEN-LAST:event_tbDanhSachNhanVien_pnQuanLyNhanVienMouseClicked
+
+    private void tbPhongHat_pnQuanLyPhongHatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPhongHat_pnQuanLyPhongHatMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbPhongHat_pnQuanLyPhongHatMouseClicked
+
+    private void tbDichVu_pnQuanLyDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDichVu_pnQuanLyDichVuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbDichVu_pnQuanLyDichVuMouseClicked
 
     Boolean isOldEnough(String input) {
         Date _today = new Date();
