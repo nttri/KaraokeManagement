@@ -1016,7 +1016,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
     private void btnXoa_pnQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnQuanLyNhanVienActionPerformed
         int r = tbDanhSachNhanVien_pnQuanLyNhanVien.getSelectedRow();
-        int input = JOptionPane.showConfirmDialog(rootPane, "Bạn thực sự muốn xóa nhân viên này?", "Xác nhận", JOptionPane.OK_CANCEL_OPTION);
+        int input = JOptionPane.showConfirmDialog(rootPane, MyStrings.Confirm_Delete_Staff, MyStrings.Confirm, JOptionPane.OK_CANCEL_OPTION);
         if (input == 0){ // OK
             BNhanVien bNhanVien = new BNhanVien();
             int maNV = Integer.parseInt(mTable_NhanVien.getValueAt(r, 0).toString());
@@ -1045,7 +1045,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
     private void btnXoaPhong_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaPhong_pnPhongHatActionPerformed
         int r = tbPhongHat_pnQuanLyPhongHat.getSelectedRow();
-        int input = JOptionPane.showConfirmDialog(rootPane, "Bạn thực sự muốn xóa phòng hát này?", "Xác nhận", JOptionPane.OK_CANCEL_OPTION);
+        int input = JOptionPane.showConfirmDialog(rootPane, MyStrings.Confirm_Delete_Singing_Room, MyStrings.Confirm, JOptionPane.OK_CANCEL_OPTION);
         if (input == 0){ // OK
             BPhongHat bPhongHat = new BPhongHat();
             int maPH = Integer.parseInt(mTable_PhongHat.getValueAt(r, 0).toString());
@@ -1079,7 +1079,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
     private void btnXoa_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnDichVuActionPerformed
         int r = tbDichVu_pnQuanLyDichVu.getSelectedRow();
-        int input = JOptionPane.showConfirmDialog(rootPane, "Bạn thực sự muốn xóa dịch vụ này?", "Xác nhận", JOptionPane.OK_CANCEL_OPTION);
+        int input = JOptionPane.showConfirmDialog(rootPane, MyStrings.Confirm_Delete_Service, MyStrings.Confirm, JOptionPane.OK_CANCEL_OPTION);
         if (input == 0){ // OK
             BDichVu bDichVu = new BDichVu();
             int maDV = Integer.parseInt(mTable_DichVu.getValueAt(r, 0).toString());

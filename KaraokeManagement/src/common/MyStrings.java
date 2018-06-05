@@ -61,4 +61,8 @@ public class MyStrings {
     
     public static String Number_Must_Positive = "Số lượng phải lớn hơn 0";
     
+    public static String Confirm = "Xác nhận!";
+    public static String Confirm_Delete_Staff = "Bạn thực sự muốn xóa nhân viên này?";
+    public static String Confirm_Delete_Singing_Room = "Bạn thực sự muốn xóa phòng hát này?";
+    public static String Confirm_Delete_Service = "Bạn thực sự muốn xóa dịch vụ này?";
 }
