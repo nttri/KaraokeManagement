@@ -1046,13 +1046,14 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
         String hoTen = tfHoTen.getText();
         String gioiTinh = cbbGioiTinh.getSelectedItem().toString();
-        String ngaySinh = ((JTextField) tfNgaySinh.getDateEditor().getUiComponent()).getText();
+        Date txtNgaySinh = tfNgaySinh.getDate();  
+        String ngaySinh = new SimpleDateFormat("yyyy-MM-dd").format(txtNgaySinh);
         String cmnd = tfCMND.getText();
         String sdt = tfSDT.getText();
         String diaChi = tfDiaChi.getText();
 
         if (!hoTen.isEmpty() && !diaChi.isEmpty() && !ngaySinh.isEmpty()) {
-            if (cmnd.length() != 9 || cmnd.length() != 12) {
+            if (cmnd.length() != 9 && cmnd.length() != 12) {
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_CMND);
                 return;
             }
