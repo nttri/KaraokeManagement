@@ -88,7 +88,7 @@ public class BDonThanhToan extends Business{
     }
     
     public boolean capNhatTinhTrangDonThanhToan(int maDon, int maNV, String tinhTrang) throws SQLException {
-        sql = "capNhatTinhTrangDonThanhToan (" + maDon + ", " + maNV + "', N'" + tinhTrang + "')";
+        sql = "capNhatTinhTrangDonThanhToan (" + maDon + ", " + maNV + ", N'" + tinhTrang + "')";
         return data.Execute(sql);
     }
     

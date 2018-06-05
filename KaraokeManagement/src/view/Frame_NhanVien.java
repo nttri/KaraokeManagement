@@ -1241,9 +1241,19 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                     Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {  // hủy sau giờ đặt phòng, sẽ ghi tiền nợ là 1 tiếng tiền phòng
-                int maKH = Integer.parseInt(mTable_DonDatPhong.getValueAt(r, 2).toString());
+                int maNV = NV.getMaNhanVien();
+                
+                BChiTietDichVu bCTDV = new BChiTietDichVu();
+                ArrayList<ChiTietDichVu> dsCTDV = new ArrayList<ChiTietDichVu>();
+                
                 try {
-                    res = bDonDatPhong.capNhatTinhTrangDonThanhToan(maso, maKH, "Chưa thanh toán");
+                    dsCTDV = bCTDV.layThongTinChiTietDichVuTheoMaDon(maso);
+                    // kiểm tra tránh nhân viên xóa nhầm đơn khách đang dùng
+                    if(dsCTDV.size() > 0){
+                        JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
+                        return;
+                    }
+                    res = bDonDatPhong.capNhatTinhTrangDonThanhToan(maso, maNV, "Chưa thanh toán");
                 } catch (SQLException ex) {
                     Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
                 }
