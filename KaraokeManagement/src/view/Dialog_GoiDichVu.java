@@ -1,7 +1,21 @@
 package view;
 
+import Business.BDichVu;
+import Business.BDonThanhToan;
+import Business.BLoaiDichVu;
+import common.MyStrings;
 import common.NVColor;
 import common.QLColor;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import model.DichVu;
+import model.DonThanhToan;
+import model.LoaiDichVu;
 
 /**
  *
@@ -12,25 +26,89 @@ public class Dialog_GoiDichVu extends javax.swing.JDialog {
     String gRootType;
     Frame_NhanVien fNhanVien;
     Frame_QuanLy fQuanLy;
-    
+    DefaultTableModel m_TableDV;
+
     public Dialog_GoiDichVu(java.awt.Frame parent, boolean modal, String fromFrameType) {
         super(parent, modal);
         initComponents();
-        if(fromFrameType.equals("NV")){
+        if (fromFrameType.equals("NV")) {
             fNhanVien = (Frame_NhanVien) parent;
             jPanel1.setBackground(NVColor.background);
-        }else{
+        } else {
             fQuanLy = (Frame_QuanLy) parent;
             jPanel1.setBackground(QLColor.background);
         }
         gRootType = fromFrameType;
+        m_TableDV = (DefaultTableModel) tbDichVu.getModel();
         customInit();
     }
 
-    void customInit(){
+    void customInit() {
+        tbDichVu.setRowHeight(28);
+        int maLoaiDV = 0;
+
+        // đổ dữ liệu những đơn đặt phòng đang thật sự sử dụng
+        BDonThanhToan bDonDatPhong = new BDonThanhToan();
+        ArrayList<DonThanhToan> arrDon = null;
+
+        try {
+            arrDon = bDonDatPhong.layTatCaDonThanhToan();
+        } catch (SQLException ex) {
+            Logger.getLogger(Dialog_GoiDichVu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (int i = 0; i < arrDon.size(); i++) {
+            Date bd = arrDon.get(i).getThoiGianBatDau();
+            String ngayBD = bd.toString();
+            LocalDateTime datetime = LocalDateTime.now();
+            String sDay = datetime.toString().substring(0, 10);
+            String sTime = datetime.toString().substring(11, 21);
+            String sTimeNow = sDay + " " + sTime;
+            
+            if (arrDon.get(i).getTinhTrang().equals(MyStrings.Bill_Is_Using) && sTimeNow.compareTo(ngayBD) > 0) {
+                cbbMaDon.addItem(Integer.toString(arrDon.get(i).getMaDon()));
+            }
+        }
         
+        // đổ dữ liệu loại dịch vụ lên combobox
+        BLoaiDichVu bLoaiDichVu = new BLoaiDichVu();
+        BDichVu bDichVu = new BDichVu();
+        ArrayList<DichVu> arrDV = null;
+        ArrayList<LoaiDichVu> arrLDV = null;
+
+        try {
+            arrLDV = bLoaiDichVu.layThongTinTatCaLoaiDichVu();
+            arrDV = bDichVu.layThongTinTatCaDichVu();
+            maLoaiDV = arrLDV.get(0).getMaLoaiDichVu();
+        } catch (SQLException ex) {
+            Logger.getLogger(Dialog_GoiDichVu.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+
+        for (int i = 0; i < arrLDV.size(); i++) {
+            cbbLoaiDichVu.addItem(arrLDV.get(i).getTenLoaiDichVu());
+        }
+
+        // đổ dữ liệu các dịch vụ lên table
+        refreshTable();
+        for (int i = 0; i < arrDV.size(); i++) {
+            if (arrDV.get(i).getMaLoaiDichVu() == maLoaiDV) {
+                m_TableDV.addRow(new Object[]{
+                    arrDV.get(i).getMaDichVu(),
+                    arrDV.get(i).getTenDichVu(),
+                    arrDV.get(i).getDonGia()
+                });
+            }
+        }
+
     }
     
+    void refreshTable(){
+        for (int i = m_TableDV.getRowCount() - 1; i >= 0; i--) {
+            m_TableDV.removeRow(i);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,8 +127,9 @@ public class Dialog_GoiDichVu extends javax.swing.JDialog {
         btnDat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 68, 80));
+        jPanel1.setBackground(new java.awt.Color(102, 0, 102));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -78,6 +157,7 @@ public class Dialog_GoiDichVu extends javax.swing.JDialog {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Dịch vụ");
 
+        tbDichVu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbDichVu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -112,9 +192,9 @@ public class Dialog_GoiDichVu extends javax.swing.JDialog {
             }
         });
 
-        btnDat.setBackground(new java.awt.Color(0, 204, 204));
+        btnDat.setBackground(new java.awt.Color(153, 0, 153));
         btnDat.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        btnDat.setForeground(new java.awt.Color(0, 68, 80));
+        btnDat.setForeground(new java.awt.Color(255, 255, 255));
         btnDat.setText("ĐẶT");
         btnDat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnDat.addActionListener(new java.awt.event.ActionListener() {
@@ -191,14 +271,44 @@ public class Dialog_GoiDichVu extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbbLoaiDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbLoaiDichVuActionPerformed
-        // TODO add your handling code here:
+        refreshTable();
+        String tenLoaiDV = cbbLoaiDichVu.getSelectedItem().toString();
+        BLoaiDichVu bLoaiDichVu = new BLoaiDichVu();
+        BDichVu bDichVu = new BDichVu();
+        LoaiDichVu loaiDV = new LoaiDichVu();
+        ArrayList<DichVu> arrDV = null;
+        
+        try {
+            loaiDV =  bLoaiDichVu.layThongTinLoaiDichVuTheoTen(tenLoaiDV);
+            arrDV = bDichVu.layThongTinTatCaDichVu();
+        } catch (SQLException ex) {
+            Logger.getLogger(Dialog_GoiDichVu.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        
+        for (int i = 0; i < arrDV.size(); i++) {
+            if (arrDV.get(i).getMaLoaiDichVu() == loaiDV.getMaLoaiDichVu()) {
+                m_TableDV.addRow(new Object[]{
+                    arrDV.get(i).getMaDichVu(),
+                    arrDV.get(i).getTenDichVu(),
+                    arrDV.get(i).getDonGia()
+                });
+            }
+        }
     }//GEN-LAST:event_cbbLoaiDichVuActionPerformed
 
     private void tfSoLuongKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSoLuongKeyTyped
-        // TODO add your handling code here:
+        char checkChar = evt.getKeyChar();
+        if (!Character.isDigit(checkChar)) {
+            evt.consume();
+        }
+        if (tfSoLuong.getText().length() > 2) {
+            evt.consume();
+        }
     }//GEN-LAST:event_tfSoLuongKeyTyped
 
     private void btnDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatActionPerformed
