@@ -1037,6 +1037,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
         tfHoTen.setEditable(true);
         cbbGioiTinh.setEnabled(true);
+        tfNgaySinh.getCalendarButton().setEnabled(true);
         tfCMND.setEditable(true);
         tfSDT.setEditable(true);
         tfDiaChi.setEditable(true);
@@ -1111,6 +1112,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jpn_ThongTinCaNhan.setVisible(true);
 
         ((JTextField) tfNgaySinh.getDateEditor()).setEditable(false);
+        tfNgaySinh.getCalendarButton().setEnabled(false);
         btnChinhSua_pnThongTinCaNhan.setEnabled(true);
         btnLuu_pnThongTinCaNhan.setEnabled(false);
         tfHoTen.setEditable(false);
@@ -1121,12 +1123,10 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
         int maQL = QL.getMaNhanVien();
         String sMaQL = Integer.toString(maQL);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        String ngaySinh = sdf.format(QL.getNgaySinh());
         lblMaNV.setText("Mã quản lý: " + sMaQL);
         tfHoTen.setText(QL.getHoten());
         cbbGioiTinh.setSelectedItem(QL.getGioiTinh());
-        ((JTextField) tfNgaySinh.getDateEditor().getUiComponent()).setText(ngaySinh);
+        tfNgaySinh.setDate(QL.getNgaySinh());
         tfCMND.setText(QL.getCmnd());
         tfSDT.setText(QL.getSdt());
         tfDiaChi.setText(QL.getDiaChi());
