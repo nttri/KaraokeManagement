@@ -1,5 +1,6 @@
 package view;
 
+import Business.BChiTietDichVu;
 import Business.BDichVu;
 import Business.BDonThanhToan;
 import Business.BLoaiDichVu;
@@ -12,7 +13,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.ChiTietDichVu;
 import model.DichVu;
 import model.DonThanhToan;
 import model.LoaiDichVu;
@@ -64,12 +67,12 @@ public class Dialog_GoiDichVu extends javax.swing.JDialog {
             String sDay = datetime.toString().substring(0, 10);
             String sTime = datetime.toString().substring(11, 21);
             String sTimeNow = sDay + " " + sTime;
-            
+
             if (arrDon.get(i).getTinhTrang().equals(MyStrings.Bill_Is_Using) && sTimeNow.compareTo(ngayBD) > 0) {
                 cbbMaDon.addItem(Integer.toString(arrDon.get(i).getMaDon()));
             }
         }
-        
+
         // đổ dữ liệu loại dịch vụ lên combobox
         BLoaiDichVu bLoaiDichVu = new BLoaiDichVu();
         BDichVu bDichVu = new BDichVu();
@@ -102,8 +105,8 @@ public class Dialog_GoiDichVu extends javax.swing.JDialog {
         }
 
     }
-    
-    void refreshTable(){
+
+    void refreshTable() {
         for (int i = m_TableDV.getRowCount() - 1; i >= 0; i--) {
             m_TableDV.removeRow(i);
         }
@@ -147,6 +150,7 @@ public class Dialog_GoiDichVu extends javax.swing.JDialog {
         cbbMaDon.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         tfSoLuong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tfSoLuong.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tfSoLuong.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfSoLuongKeyTyped(evt);
@@ -281,15 +285,15 @@ public class Dialog_GoiDichVu extends javax.swing.JDialog {
         BDichVu bDichVu = new BDichVu();
         LoaiDichVu loaiDV = new LoaiDichVu();
         ArrayList<DichVu> arrDV = null;
-        
+
         try {
-            loaiDV =  bLoaiDichVu.layThongTinLoaiDichVuTheoTen(tenLoaiDV);
+            loaiDV = bLoaiDichVu.layThongTinLoaiDichVuTheoTen(tenLoaiDV);
             arrDV = bDichVu.layThongTinTatCaDichVu();
         } catch (SQLException ex) {
             Logger.getLogger(Dialog_GoiDichVu.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
-        
+
         for (int i = 0; i < arrDV.size(); i++) {
             if (arrDV.get(i).getMaLoaiDichVu() == loaiDV.getMaLoaiDichVu()) {
                 m_TableDV.addRow(new Object[]{
@@ -312,7 +316,44 @@ public class Dialog_GoiDichVu extends javax.swing.JDialog {
     }//GEN-LAST:event_tfSoLuongKeyTyped
 
     private void btnDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatActionPerformed
-        // TODO add your handling code here:
+
+        String sl = tfSoLuong.getText();
+        int r = tbDichVu.getSelectedRow();
+        boolean res = false;
+        
+        if (r < 0) {
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Choose_Service);
+            return;
+        }
+
+        if (!sl.isEmpty()) {
+            int soLuong = Integer.parseInt(sl);
+            if (soLuong > 0) {
+                int maDon = Integer.parseInt(cbbMaDon.getSelectedItem().toString());
+                int maDV = Integer.parseInt(m_TableDV.getValueAt(r, 0).toString());
+                String tenDV = m_TableDV.getValueAt(r, 1).toString();
+                int donGia = Integer.parseInt(m_TableDV.getValueAt(r, 2).toString());
+                
+                BChiTietDichVu bCTDV = new BChiTietDichVu();
+                ArrayList<ChiTietDichVu> arrCTDV = new ArrayList<ChiTietDichVu>();
+                
+                try {
+                    arrCTDV = bCTDV.layThongTinChiTietDichVuTheoMaDon(maDon);
+                    int stt = arrCTDV.size() + 1;
+                    res = bCTDV.themChiTietDichVu(maDon, stt, maDV, donGia, soLuong);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Dialog_GoiDichVu.class.getName()).log(Level.SEVERE, null, ex);
+                    return;
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Number_Must_Positive);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Fill_Full);
+        }
+        if(res){
+            this.dispose();
+        }
     }//GEN-LAST:event_btnDatActionPerformed
 
 
