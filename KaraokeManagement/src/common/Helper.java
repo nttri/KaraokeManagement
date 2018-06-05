@@ -75,6 +75,19 @@ public class Helper {
         nhanVien.setLuong(rs.getInt("LUONG"));
     }
     
+    public static void setNhanVien_TaiKhoan(NhanVien nhanVien, ResultSet rs) throws SQLException {
+        nhanVien.setMaNhanVien(rs.getInt("MANV"));
+        nhanVien.setHoten(rs.getString("HOTEN"));
+        nhanVien.setGioiTinh(rs.getString("GIOITINH"));
+        nhanVien.setDiaChi(rs.getString("DIACHI"));
+        nhanVien.setCmnd(rs.getString("CMND"));
+        nhanVien.setSdt(rs.getString("SDT"));
+        nhanVien.setNgaySinh(rs.getDate("NGAYSINH"));
+        nhanVien.setLuong(rs.getInt("LUONG"));
+        nhanVien.setTenDangNhap(rs.getString("TENTK"));
+        nhanVien.setMatKhau(rs.getString("MATKHAU"));
+    }
+    
     public static void setPhongHat(PhongHat phongHat, ResultSet rs) throws SQLException {
         phongHat.setMaPhong(rs.getInt("MAPHONG"));
         phongHat.setMaLoaiPhong(rs.getInt("MALOAIPHONG"));

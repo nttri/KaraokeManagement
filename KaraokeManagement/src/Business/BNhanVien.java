@@ -47,11 +47,11 @@ public class BNhanVien extends Business{
     }
     
     public NhanVien layThongTinNhanVienTheoMaNV_TaiKhoan(int maNV) throws SQLException{
-        sql = "layThongTinNhanVienTheoMaNV (" + maNV + ")";
+        sql = "layThongTinNhanVienTheoMaNV_TaiKhoan (" + maNV + ")";
         NhanVien nhanVien = new NhanVien();
         rs = data.fetchData(sql);
         if (rs.next()){        
-            Helper.setNhanVien(nhanVien, rs);
+            Helper.setNhanVien_TaiKhoan(nhanVien, rs);
         }
         return nhanVien;
     }
