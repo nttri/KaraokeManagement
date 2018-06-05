@@ -59,4 +59,6 @@ public class MyStrings {
     public static String Pay_Succeeded = "Thanh toán thành công!";
     public static String Pay_Failed = "Thanh toán thất bại!";
     
+    public static String Number_Must_Positive = "Số lượng phải lớn hơn 0";
+    
 }
