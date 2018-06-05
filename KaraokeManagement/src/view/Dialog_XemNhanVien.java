@@ -33,6 +33,7 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
         tfCMND.setText(nv.getCmnd());
         tfSDT.setText(nv.getSdt());
         tfDiaChi.setText(nv.getDiaChi());
+        tfLuong.setText(String.valueOf(nv.getLuong()));
         tfTenDangNhap.setText(nv.getTenDangNhap());
         tfMatKhau.setText(nv.getMatKhau());
     }
@@ -65,7 +66,7 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
         tfTenDangNhap = new javax.swing.JTextField();
         tfMatKhau = new javax.swing.JPasswordField();
         btnOK = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        tfLuong = new javax.swing.JTextField();
         btnXemMK = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -164,9 +165,9 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
             }
         });
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(10, 145, 39));
-        jTextField1.setEnabled(false);
+        tfLuong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tfLuong.setForeground(new java.awt.Color(10, 145, 39));
+        tfLuong.setEnabled(false);
 
         btnXemMK.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnXemMK.setForeground(new java.awt.Color(10, 145, 39));
@@ -209,7 +210,7 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
                             .addComponent(tfMatKhau)
                             .addComponent(tfSDT, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tfNgaySinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1)
+                            .addComponent(tfLuong)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
@@ -239,7 +240,7 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
                 .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -322,11 +323,11 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField tfCMND;
     private javax.swing.JTextField tfDiaChi;
     private javax.swing.JComboBox<String> tfGioiTinh;
     private javax.swing.JTextField tfHoTen;
+    private javax.swing.JTextField tfLuong;
     private javax.swing.JPasswordField tfMatKhau;
     private com.toedter.calendar.JDateChooser tfNgaySinh;
     private javax.swing.JTextField tfSDT;

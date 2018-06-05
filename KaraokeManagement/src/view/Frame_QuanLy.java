@@ -62,6 +62,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         
         setColorAllButton(QLColor.btn_Default);
         btn_QuanLyNhanVien.setBackground(QLColor.btn_When_Clicked);
+        btn_QuanLyNhanVien.setText(MyStrings.Management_Staffs);
         
         setAllPanelDisappear();
         jpn_QuanLyNhanVien.setVisible(true);
@@ -116,6 +117,91 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         for(int i = dtm.getRowCount() - 1; i >=0; i--){
             dtm.removeRow(i);
         }
+    }
+    
+    void updateQuanLyNhanVien(){
+        clearAllDataTable(mTable_NhanVien);
+
+        BNhanVien bNhanVien = new BNhanVien();
+        ArrayList<NhanVien> arrNV = null;
+        
+        try {
+            arrNV = bNhanVien.layThongTinTatCaNhanVien();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Predicate<NhanVien> qlPredicate = p->p.getMaNhanVien() == QL.getMaNhanVien();
+        arrNV.removeIf(qlPredicate);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        for(int i = 0; i < arrNV.size(); i++){
+            mTable_NhanVien.addRow(new Object[]{
+                arrNV.get(i).getMaNhanVien(), arrNV.get(i).getHoten(), arrNV.get(i).getGioiTinh(),
+                sdf.format(arrNV.get(i).getNgaySinh()), arrNV.get(i).getDiaChi(), arrNV.get(i).getCmnd(),
+                arrNV.get(i).getSdt(), arrNV.get(i).getLuong()           
+            });            
+        }
+    }
+    
+    void updateQuanLyPhongHat(){
+        clearAllDataTable(mTable_PhongHat);
+                
+        BPhongHat bPhongHat = new BPhongHat();
+        ArrayList<PhongHat> arrPH = null;       
+        try {
+            arrPH = bPhongHat.layThongTinTatCaPhongHat();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        BLoaiPhongHat bLoaiPH = new BLoaiPhongHat();
+        ArrayList<LoaiPhongHat> arrLPH = new ArrayList();
+        
+        for(int i = 0; i < arrPH.size(); i++){
+            try {
+                arrLPH.add(bLoaiPH.layThongTinLoaiPhongHatTheoMa(arrPH.get(i).getMaLoaiPhong()));
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+               
+        for(int i = 0; i < arrPH.size(); i++){
+            mTable_PhongHat.addRow(new Object[]{
+                arrPH.get(i).getMaPhong(), arrLPH.get(i).getTenLoai(), arrPH.get(i).getTinhTrang(), 
+                arrLPH.get(i).getSucChua(), arrLPH.get(i).getGiaPhong(), arrLPH.get(i).getMoTa()                
+            });
+        }
+    }
+    
+    void updateQuanLyDichVu(){
+        clearAllDataTable(mTable_DichVu);
+        
+        BDichVu bDichVu = new BDichVu();
+        ArrayList<DichVu> arrDV = null;        
+        try {
+            arrDV = bDichVu.layThongTinTatCaDichVu();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        BLoaiDichVu bLoaiDV = new BLoaiDichVu();
+        ArrayList<LoaiDichVu> arrLDV = new ArrayList();
+        for(int i = 0; i < arrDV.size(); i++){
+            try {
+                arrLDV.add(bLoaiDV.layThongTinLoaiDichVuTheoMa(arrDV.get(i).getMaLoaiDichVu()));
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        for(int i = 0; i < arrDV.size(); i++){
+            mTable_DichVu.addRow(new Object[]{
+                arrDV.get(i).getMaDichVu(), arrDV.get(i).getTenDichVu(),
+                arrDV.get(i).getDonGia(), arrLDV.get(i).getTenLoaiDichVu()
+            });
+        }
+    }
+    
+    void updateQuanLyDoanhThu(){
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -781,27 +867,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         bQuanLyNhanVien = true;
         btn_QuanLyNhanVien.setBackground(QLColor.btn_When_Clicked);
         jpn_QuanLyNhanVien.setVisible(true);
-        clearAllDataTable(mTable_NhanVien);
         
-        BNhanVien bNhanVien = new BNhanVien();
-        ArrayList<NhanVien> arrNV = null;
-        
-        try {
-            arrNV = bNhanVien.layThongTinTatCaNhanVien();
-        } catch (SQLException ex) {
-            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Predicate<NhanVien> qlPredicate = p->p.getMaNhanVien() == QL.getMaNhanVien();
-        arrNV.removeIf(qlPredicate);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        for(int i = 0; i < arrNV.size(); i++){
-            mTable_NhanVien.addRow(new Object[]{
-                arrNV.get(i).getMaNhanVien(), arrNV.get(i).getHoten(), arrNV.get(i).getGioiTinh(),
-                sdf.format(arrNV.get(i).getNgaySinh()), arrNV.get(i).getDiaChi(), arrNV.get(i).getCmnd(),
-                arrNV.get(i).getSdt(), arrNV.get(i).getLuong()           
-            });            
-        }
-       
+        updateQuanLyNhanVien();      
     }//GEN-LAST:event_btn_QuanLyNhanVienMouseClicked
 
     private void btn_QuanLyNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyNhanVienMouseEntered
@@ -814,9 +881,10 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
     private void btn_QuanLyNhanVienMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyNhanVienMouseExited
         // TODO add your handling code here:
-        if (bQuanLyNhanVien == false)
+        if (bQuanLyNhanVien == false){
             btn_QuanLyNhanVien.setBackground(QLColor.btn_Default);
-        btn_QuanLyNhanVien.setText("");
+            btn_QuanLyNhanVien.setText("");
+        }
     }//GEN-LAST:event_btn_QuanLyNhanVienMouseExited
 
     private void btn_QuanLyPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuanLyPhongHatActionPerformed
@@ -831,33 +899,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         bQuanLyPhongHat = true;
         btn_QuanLyPhongHat.setBackground(QLColor.btn_When_Clicked);
         jpn_QuanLyPhongHat.setVisible(true);
-        clearAllDataTable(mTable_PhongHat);
         
-        BPhongHat bPhongHat = new BPhongHat();
-        ArrayList<PhongHat> arrPH = null;       
-        try {
-            arrPH = bPhongHat.layThongTinTatCaPhongHat();
-        } catch (SQLException ex) {
-            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        BLoaiPhongHat bLoaiPH = new BLoaiPhongHat();
-        ArrayList<LoaiPhongHat> arrLPH = new ArrayList();
-        
-        for(int i = 0; i < arrPH.size(); i++){
-            try {
-                arrLPH.add(bLoaiPH.layThongTinLoaiPhongHatTheoMa(arrPH.get(i).getMaLoaiPhong()));
-            } catch (SQLException ex) {
-                Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-               
-        for(int i = 0; i < arrPH.size(); i++){
-            mTable_PhongHat.addRow(new Object[]{
-                arrPH.get(i).getMaPhong(), arrLPH.get(i).getTenLoai(), arrPH.get(i).getTinhTrang(), 
-                arrLPH.get(i).getSucChua(), arrLPH.get(i).getGiaPhong(), arrLPH.get(i).getMoTa()                
-            });
-        }
+        updateQuanLyPhongHat();       
     }//GEN-LAST:event_btn_QuanLyPhongHatMouseClicked
 
     private void btn_QuanLyPhongHatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyPhongHatMouseEntered
@@ -869,9 +912,10 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
     private void btn_QuanLyPhongHatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyPhongHatMouseExited
         // TODO add your handling code here:
-        if (bQuanLyPhongHat == false)
+        if (bQuanLyPhongHat == false){
             btn_QuanLyPhongHat.setBackground(QLColor.btn_Default);
-        btn_QuanLyPhongHat.setText("");
+            btn_QuanLyPhongHat.setText("");
+        }
     }//GEN-LAST:event_btn_QuanLyPhongHatMouseExited
 
     private void btn_QuanLyDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuanLyDichVuActionPerformed
@@ -886,31 +930,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         bQuanLyDichVu = true;
         btn_QuanLyDichVu.setBackground(QLColor.btn_When_Clicked);
         jpn_QuanLyDichVu.setVisible(true);
-        clearAllDataTable(mTable_DichVu);
         
-        BDichVu bDichVu = new BDichVu();
-        ArrayList<DichVu> arrDV = null;        
-        try {
-            arrDV = bDichVu.layThongTinTatCaDichVu();
-        } catch (SQLException ex) {
-            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        BLoaiDichVu bLoaiDV = new BLoaiDichVu();
-        ArrayList<LoaiDichVu> arrLDV = new ArrayList();
-        for(int i = 0; i < arrDV.size(); i++){
-            try {
-                arrLDV.add(bLoaiDV.layThongTinLoaiDichVuTheoMa(arrDV.get(i).getMaLoaiDichVu()));
-            } catch (SQLException ex) {
-                Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        for(int i = 0; i < arrDV.size(); i++){
-            mTable_DichVu.addRow(new Object[]{
-                arrDV.get(i).getMaDichVu(), arrDV.get(i).getTenDichVu(),
-                arrDV.get(i).getDonGia(), arrLDV.get(i).getTenLoaiDichVu()
-            });
-        }
+        updateQuanLyDichVu();
     }//GEN-LAST:event_btn_QuanLyDichVuMouseClicked
 
     private void btn_QuanLyDichVuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyDichVuMouseEntered
@@ -922,9 +943,10 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
     private void btn_QuanLyDichVuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyDichVuMouseExited
         // TODO add your handling code here:
-        if (bQuanLyDichVu == false)
+        if (bQuanLyDichVu == false){
             btn_QuanLyDichVu.setBackground(QLColor.btn_Default);
-        btn_QuanLyDichVu.setText("");
+            btn_QuanLyDichVu.setText("");
+        }
     }//GEN-LAST:event_btn_QuanLyDichVuMouseExited
 
     private void btn_QuanLyDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuanLyDoanhThuActionPerformed
@@ -950,9 +972,10 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
     private void btn_QuanLyDoanhThuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyDoanhThuMouseExited
         // TODO add your handling code here:
-        if (bQuanLyDoanhThu == false)
+        if (bQuanLyDoanhThu == false){
             btn_QuanLyDoanhThu.setBackground(QLColor.btn_Default);
-        btn_QuanLyDoanhThu.setText("");
+            btn_QuanLyDoanhThu.setText("");
+        }
     }//GEN-LAST:event_btn_QuanLyDoanhThuMouseExited
 
     private void btn_ThoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThoatMouseClicked
@@ -977,6 +1000,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private void btnTaoMoi_pnQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnQuanLyNhanVienActionPerformed
         Dialog_ThemNhanVien dThemNhanVien = new Dialog_ThemNhanVien(this, rootPaneCheckingEnabled);
         dThemNhanVien.setVisible(true);
+        updateQuanLyNhanVien();
     }//GEN-LAST:event_btnTaoMoi_pnQuanLyNhanVienActionPerformed
 
     private void btnXoa_pnQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnQuanLyNhanVienActionPerformed

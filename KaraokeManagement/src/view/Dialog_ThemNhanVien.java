@@ -1,5 +1,18 @@
 package view;
 
+import Business.BNhanVien;
+import common.MyStrings;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.NhanVien;
+import static view.Frame_QuanLy.QL;
+
 /**
  *
  * @author thanhtri
@@ -35,7 +48,7 @@ public class Dialog_ThemNhanVien extends javax.swing.JDialog {
         tfTenDangNhap = new javax.swing.JTextField();
         tfMatKhau = new javax.swing.JPasswordField();
         btnThem = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        tfLuong = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -119,8 +132,8 @@ public class Dialog_ThemNhanVien extends javax.swing.JDialog {
             }
         });
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(10, 145, 39));
+        tfLuong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tfLuong.setForeground(new java.awt.Color(10, 145, 39));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -163,7 +176,7 @@ public class Dialog_ThemNhanVien extends javax.swing.JDialog {
                                     .addComponent(tfMatKhau)
                                     .addComponent(tfSDT, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(tfNgaySinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField1)
+                                    .addComponent(tfLuong)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel9)
@@ -185,7 +198,7 @@ public class Dialog_ThemNhanVien extends javax.swing.JDialog {
                 .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -235,10 +248,79 @@ public class Dialog_ThemNhanVien extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
+        String hoTen = tfHoTen.getText();
+        String gioiTinh = tfGioiTinh.getSelectedItem().toString();
+        String ngaySinh = new SimpleDateFormat("yyyy-MM-dd").format(tfNgaySinh.getDate());
+        String cmnd = tfCMND.getText();
+        String sdt = tfSDT.getText();
+        String diaChi = tfDiaChi.getText();
+        int luong = Integer.parseInt(tfLuong.getText());
+        String tenTK = tfTenDangNhap.getText();
+        String matKhau = tfMatKhau.getText();
+        
+        if (!hoTen.isEmpty() && !diaChi.isEmpty() && !ngaySinh.isEmpty()) {
+            if (cmnd.length() != 9 && cmnd.length() != 12) {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_CMND);
+                return;
+            }
+            if (sdt.length() < 10) {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
+                return;
+            }
+            if (sdt.length() == 10 && !sdt.startsWith("09")) {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
+                return;
+            }
+            if (sdt.length() == 11 && !sdt.startsWith("01")) {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
+                return;
+            }
+            if (!isOldEnough(ngaySinh)) {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Birthday);
+                return;
+            }
+            
+            Boolean res = false;
+            BNhanVien bNhanVien = new BNhanVien();
+            try {
+                res = bNhanVien.themNhanVien(hoTen, gioiTinh, ngaySinh, diaChi, cmnd, sdt, luong, tenTK, matKhau);
+            } catch (SQLException ex) {
+                Logger.getLogger(Dialog_ThemKhachHangThanhVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (!res) {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Add_Failed);
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Add_Succeeded);
+                this.dispose();
+            }
+
+        }
+        
     }//GEN-LAST:event_btnThemActionPerformed
 
+    Boolean isOldEnough(String input) {
+        Date _today = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(_today);
+        int _namHienTai = cal.get(Calendar.YEAR);
 
+        Date _ngaySinh = new Date();
+        try {
+            _ngaySinh = sdf.parse(input);
+        } catch (ParseException ex) {
+            //
+        }
+        cal.setTime(_ngaySinh);
+        int _namSinh = cal.get(Calendar.YEAR);
+
+        if (_namHienTai - _namSinh < 18) {
+            return false;
+        }
+        return true;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThem;
     private javax.swing.JLabel jLabel1;
@@ -252,11 +334,11 @@ public class Dialog_ThemNhanVien extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField tfCMND;
     private javax.swing.JTextField tfDiaChi;
     private javax.swing.JComboBox<String> tfGioiTinh;
     private javax.swing.JTextField tfHoTen;
+    private javax.swing.JTextField tfLuong;
     private javax.swing.JPasswordField tfMatKhau;
     private com.toedter.calendar.JDateChooser tfNgaySinh;
     private javax.swing.JTextField tfSDT;
