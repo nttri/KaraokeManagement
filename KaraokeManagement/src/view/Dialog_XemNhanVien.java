@@ -5,20 +5,37 @@
  */
 package view;
 
+import javax.swing.JTextField;
+import model.NhanVien;
+
 /**
  *
  * @author Tu
  */
 public class Dialog_XemNhanVien extends javax.swing.JDialog {
 
+    NhanVien nv;
     /**
      * Creates new form Dialog_SuaNhanVien
      */
-    public Dialog_XemNhanVien(java.awt.Frame parent, boolean modal) {
+    public Dialog_XemNhanVien(java.awt.Frame parent, boolean modal, NhanVien nhanVien) {
         super(parent, modal);
         initComponents();
+        nv = nhanVien;
+        customInit();
     }
 
+    void customInit(){       
+        jLB_NV.setText("NHÂN VIÊN " + String.valueOf(nv.getMaNhanVien()));
+        tfHoTen.setText(nv.getHoten());
+        tfGioiTinh.setSelectedItem(nv.getGioiTinh());
+        tfNgaySinh.setDate(nv.getNgaySinh());
+        tfCMND.setText(nv.getCmnd());
+        tfSDT.setText(nv.getSdt());
+        tfDiaChi.setText(nv.getDiaChi());
+        tfTenDangNhap.setText(nv.getTenDangNhap());
+        tfMatKhau.setText(nv.getMatKhau());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,9 +64,9 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
         jLabel11 = new javax.swing.JLabel();
         tfTenDangNhap = new javax.swing.JTextField();
         tfMatKhau = new javax.swing.JPasswordField();
-        btnThem = new javax.swing.JButton();
+        btnOK = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnXemMK = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -58,7 +75,7 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
 
         jLB_NV.setFont(new java.awt.Font("Tahoma", 1, 33)); // NOI18N
         jLB_NV.setForeground(new java.awt.Color(255, 255, 255));
-        jLB_NV.setText("NHÂN VIÊN");
+        jLB_NV.setText("NHÂN VIÊN 000");
         jLB_NV.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -132,13 +149,13 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
         tfMatKhau.setForeground(new java.awt.Color(10, 145, 39));
         tfMatKhau.setEnabled(false);
 
-        btnThem.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnThem.setForeground(new java.awt.Color(10, 145, 39));
-        btnThem.setText("OK");
-        btnThem.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
+        btnOK.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnOK.setForeground(new java.awt.Color(10, 145, 39));
+        btnOK.setText("OK");
+        btnOK.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+                btnOKActionPerformed(evt);
             }
         });
 
@@ -146,9 +163,9 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
         jTextField1.setForeground(new java.awt.Color(10, 145, 39));
         jTextField1.setEnabled(false);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(10, 145, 39));
-        jButton1.setText("XEM MẬT KHẨU");
+        btnXemMK.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnXemMK.setForeground(new java.awt.Color(10, 145, 39));
+        btnXemMK.setText("XEM MẬT KHẨU");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -191,13 +208,13 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
                                     .addComponent(jLabel5))
                                 .addGap(0, 135, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLB_NV, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(135, 135, 135))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnXemMK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLB_NV)
+                        .addGap(135, 135, 135)))
                 .addGap(48, 48, 48))
         );
         jPanel1Layout.setVerticalGroup(
@@ -243,8 +260,8 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
                     .addComponent(tfMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                    .addComponent(btnXemMK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnOK, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -262,56 +279,14 @@ public class Dialog_XemNhanVien extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnThemActionPerformed
+    }//GEN-LAST:event_btnOKActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dialog_XemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dialog_XemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dialog_XemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dialog_XemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Dialog_XemNhanVien dialog = new Dialog_XemNhanVien(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnThem;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnOK;
+    private javax.swing.JButton btnXemMK;
     private javax.swing.JLabel jLB_NV;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

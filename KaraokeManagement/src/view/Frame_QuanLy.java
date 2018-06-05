@@ -1141,7 +1141,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
                 int maNV = Integer.parseInt(mTable_NhanVien.getValueAt(r, 0).toString());
                 try {
                     nhanVien = bNhanVien.layThongTinNhanVienTheoMaNV(maNV);
-                    Dialog_XemNhanVien dXemNhanVien = new Dialog_XemNhanVien(this, rootPaneCheckingEnabled);
+                    Dialog_XemNhanVien dXemNhanVien = new Dialog_XemNhanVien(this, rootPaneCheckingEnabled, nhanVien);
                     dXemNhanVien.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Frame_NhanVien.class.getName()).log(Level.SEVERE, null, ex);
