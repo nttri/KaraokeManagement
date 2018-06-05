@@ -46,6 +46,16 @@ public class BNhanVien extends Business{
         return nhanVien;
     }
     
+    public NhanVien layThongTinNhanVienTheoMaNV_TaiKhoan(int maNV) throws SQLException{
+        sql = "layThongTinNhanVienTheoMaNV (" + maNV + ")";
+        NhanVien nhanVien = new NhanVien();
+        rs = data.fetchData(sql);
+        if (rs.next()){        
+            Helper.setNhanVien(nhanVien, rs);
+        }
+        return nhanVien;
+    }
+    
     public ArrayList<NhanVien> layThongTinNhanVienTheoTen(String hoTen) throws SQLException {
         ArrayList<NhanVien> arrNhanVien = new ArrayList();
         sql = "layThongTinNhanVienTheoTen (N'" + hoTen + "')";
