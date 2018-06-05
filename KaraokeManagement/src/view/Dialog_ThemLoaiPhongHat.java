@@ -43,7 +43,7 @@ public class Dialog_ThemLoaiPhongHat extends javax.swing.JDialog {
         setMinimumSize(new java.awt.Dimension(475, 500));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(10, 125, 39));
+        jPanel1.setBackground(new java.awt.Color(0, 68, 80));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 33)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

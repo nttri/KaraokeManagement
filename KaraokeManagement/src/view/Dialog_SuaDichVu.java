@@ -2,7 +2,7 @@ package view;
 
 import Business.BDichVu;
 import Business.BLoaiDichVu;
-import common.MyStrings;
+import common.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -27,8 +27,10 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
         initComponents();
         if(fromFrameType.equals("NV")){
             fNhanVien = (Frame_NhanVien) parent;
+            jPanel1.setBackground(NVColor.background);
         }else{
             fQuanLy = (Frame_QuanLy) parent;
+            jPanel1.setBackground(QLColor.background);
         }
         gRootType = fromFrameType;
         gDichVu = dv;

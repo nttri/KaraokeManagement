@@ -1,7 +1,7 @@
 package view;
 
 import Business.BLoaiDichVu;
-import common.MyStrings;
+import common.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +37,7 @@ public class Dialog_ThemLoaiDichVu extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(10, 125, 39));
+        jPanel1.setBackground(new java.awt.Color(0, 68, 80));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
