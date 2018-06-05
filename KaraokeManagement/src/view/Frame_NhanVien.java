@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -851,7 +852,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã đơn đặt phòng", "Mã phòng", "Thời gian đã dùng", "Người đặt", "Tổng cộng", "Tình trạng"
+                "Mã đơn đặt phòng", "Mã phòng", "Thời gian đã dùng", "Người đặt", "Ngày đặt", "Tình trạng"
             }
         ) {
             Class[] types = new Class [] {
@@ -874,9 +875,9 @@ public class Frame_NhanVien extends javax.swing.JFrame {
             tbThanhToan_pnThanhToan.getColumnModel().getColumn(0).setPreferredWidth(120);
             tbThanhToan_pnThanhToan.getColumnModel().getColumn(1).setPreferredWidth(60);
             tbThanhToan_pnThanhToan.getColumnModel().getColumn(2).setPreferredWidth(120);
-            tbThanhToan_pnThanhToan.getColumnModel().getColumn(3).setPreferredWidth(280);
-            tbThanhToan_pnThanhToan.getColumnModel().getColumn(4).setPreferredWidth(140);
-            tbThanhToan_pnThanhToan.getColumnModel().getColumn(5).setPreferredWidth(180);
+            tbThanhToan_pnThanhToan.getColumnModel().getColumn(3).setPreferredWidth(210);
+            tbThanhToan_pnThanhToan.getColumnModel().getColumn(4).setPreferredWidth(240);
+            tbThanhToan_pnThanhToan.getColumnModel().getColumn(5).setPreferredWidth(150);
         }
 
         pnThanhToan.add(spThanhToan_pnThanhToan);
@@ -1136,7 +1137,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                     maPhong,
                     soGioSuDung + " giờ",
                     tenKH,
-                    tongTien,
+                    bd.toString(),
                     tinhTrang
                 });
             } else if (arrDon.get(i).getTinhTrang().equals("Đang sử dụng")) {
@@ -1150,7 +1151,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                         maPhong,
                         "0 giờ",
                         tenKH,
-                        "0",
+                        bd.toString(),
                         tinhTrang
                     });
                 } else {
@@ -1163,7 +1164,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                         maPhong,
                         soGioSuDung + " giờ",
                         tenKH,
-                        tongTien,
+                        bd.toString(),
                         tinhTrang
                     });
                 }
@@ -1176,7 +1177,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                     maPhong,
                     "1 giờ",
                     tenKH,
-                    tongTien,
+                    arrDon.get(i).getThoiGianBatDau().toString(),
                     tinhTrang
                 });
             }
@@ -1497,6 +1498,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         pnThongTinCaNhan.setVisible(true);
 
         ((JTextField) tfNgaySinh.getDateEditor()).setEditable(false);
+        tfNgaySinh.getCalendarButton().setEnabled(false);
         btnChinhSua_pnThongTinCaNhan.setEnabled(true);
         btnLuu_pnThongTinCaNhan.setEnabled(false);
         tfHoTen.setEditable(false);
@@ -1580,6 +1582,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
                 tfCMND.setEditable(false);
                 tfSDT.setEditable(false);
                 tfDiaChi.setEditable(false);
+                tfNgaySinh.getCalendarButton().setEnabled(false);
                 btnChinhSua_pnThongTinCaNhan.setEnabled(true);
                 btnLuu_pnThongTinCaNhan.setEnabled(false);
             } catch (SQLException ex) {
@@ -1606,7 +1609,7 @@ public class Frame_NhanVien extends javax.swing.JFrame {
 
         btnChinhSua_pnThongTinCaNhan.setEnabled(false);
         btnLuu_pnThongTinCaNhan.setEnabled(true);
-
+        tfNgaySinh.getCalendarButton().setEnabled(true);
         tfHoTen.setEditable(true);
         cbbGioiTinh.setEnabled(true);
         tfCMND.setEditable(true);

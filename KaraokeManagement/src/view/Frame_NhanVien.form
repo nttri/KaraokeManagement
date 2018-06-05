@@ -1351,7 +1351,7 @@
                     <Column editable="false" title="M&#xe3; ph&#xf2;ng" type="java.lang.String"/>
                     <Column editable="false" title="Th&#x1edd;i gian &#x111;&#xe3; d&#xf9;ng" type="java.lang.String"/>
                     <Column editable="false" title="Ng&#x1b0;&#x1edd;i &#x111;&#x1eb7;t" type="java.lang.String"/>
-                    <Column editable="false" title="T&#x1ed5;ng c&#x1ed9;ng" type="java.lang.String"/>
+                    <Column editable="false" title="Ng&#xe0;y &#x111;&#x1eb7;t" type="java.lang.String"/>
                     <Column editable="false" title="T&#xec;nh tr&#x1ea1;ng" type="java.lang.String"/>
                   </Table>
                 </Property>
@@ -1372,17 +1372,17 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="280" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="210" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="140" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="240" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="180" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="150" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
