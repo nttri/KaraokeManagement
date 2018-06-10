@@ -5,10 +5,13 @@
  */
 package Business;
 
+import DAO.DAOLoaiPhongHat;
 import common.Helper;
+import common.MyStrings;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.LoaiPhongHat;
 
 /**
@@ -16,82 +19,60 @@ import model.LoaiPhongHat;
  * @author Thoai
  */
 public class BLoaiPhongHat extends Business {
+
     String sql;
     ResultSet rs;
+    DAOLoaiPhongHat DLoaiPhongHat = new DAOLoaiPhongHat();
 
     public BLoaiPhongHat() {
         super();
     }
-    
+
     public ArrayList<LoaiPhongHat> layThongTinTatCaLoaiPhongHat() throws SQLException {
-        ArrayList<LoaiPhongHat> arrLoaiPhongHat = new ArrayList();
-        sql = "layThongTinTatCaLoaiPhongHat";
-        rs = data.fetchData(sql);
-        
-        while(rs.next()) {
-            LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
-            Helper.setLoaiPhongHat(loaiPhongHat, rs);
-            arrLoaiPhongHat.add(loaiPhongHat);
-        }
-        return arrLoaiPhongHat;
+        return DLoaiPhongHat.layThongTinTatCaLoaiPhongHat();
     }
-    
+
     public ArrayList<LoaiPhongHat> layThongTinLoaiPhongHatTheoSucChua(int sucChua) throws SQLException {
-        ArrayList<LoaiPhongHat> arrLoaiPhongHat = new ArrayList();
-        sql = "layThongTinLoaiPhongHatTheoSucChua (" + sucChua + ")";
-        rs = data.fetchData(sql);
-        
-        while(rs.next()) {
-            LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
-            Helper.setLoaiPhongHat(loaiPhongHat, rs);
-            arrLoaiPhongHat.add(loaiPhongHat);
-        }
-        return arrLoaiPhongHat;
+        return DLoaiPhongHat.layThongTinLoaiPhongHatTheoSucChua(sucChua);
     }
-    
+
     public ArrayList<LoaiPhongHat> layThongTinLoaiPhongHatTheoGiaPhong(int giaPhong) throws SQLException {
-        ArrayList<LoaiPhongHat> arrLoaiPhongHat = new ArrayList();
-        sql = "layThongTinLoaiPhongHatTheoGiaPhong (" + giaPhong + ")";
-        rs = data.fetchData(sql);
-        
-        while(rs.next()) {
-            LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
-            Helper.setLoaiPhongHat(loaiPhongHat, rs);
-            arrLoaiPhongHat.add(loaiPhongHat);
-        }
-        return arrLoaiPhongHat;
+        return DLoaiPhongHat.layThongTinLoaiPhongHatTheoGiaPhong(giaPhong);
     }
-    
+
     public LoaiPhongHat layThongTinLoaiPhongHatTheoTen(String tenLoai) throws SQLException {
-        LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
-        sql = "layThongTinLoaiPhongHatTheoTen (N'" + tenLoai + "')";
-        rs = data.fetchData(sql);
-        if (rs.next())
-            Helper.setLoaiPhongHat(loaiPhongHat, rs);
-        return loaiPhongHat;
+        return DLoaiPhongHat.layThongTinLoaiPhongHatTheoTen(tenLoai);
     }
-    
+
     public LoaiPhongHat layThongTinLoaiPhongHatTheoMa(int maLoaiPhong) throws SQLException {
-        LoaiPhongHat loaiPhongHat = new LoaiPhongHat();
-        sql = "layThongTinLoaiPhongHatTheoMa (" + maLoaiPhong + ")";
-        rs = data.fetchData(sql);
-        if (rs.next())
-            Helper.setLoaiPhongHat(loaiPhongHat, rs);
-        return loaiPhongHat;
+        return DLoaiPhongHat.layThongTinLoaiPhongHatTheoMa(maLoaiPhong);
     }
-    
+
     public boolean themLoaiPhong(String tenLoai, int giaPhong, int sucChua, String moTa) throws SQLException {
-        sql = "themLoaiPhong (N'" + tenLoai + "', " + giaPhong + ", " + sucChua + ", N'" + moTa + "')";
-        return data.Execute(sql);
+        if (giaPhong < 50000) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Room_Price);
+            return false;
+        }
+        if (sucChua > 200) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Room_Volume);
+            return false;
+        }
+        return DLoaiPhongHat.themLoaiPhong(tenLoai, giaPhong, sucChua, moTa);
     }
-    
+
     public boolean capNhatLoaiPhong(String maLoai, String tenLoai, int giaPhong, int sucChua, String moTa) throws SQLException {
-        sql = "capNhatLoaiPhong (" + maLoai + ", N'" + tenLoai + "', " + giaPhong + ", " + sucChua + ", N'" + moTa + "')";
-        return data.Execute(sql);
+        if (giaPhong < 50000) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Room_Price);
+            return false;
+        }
+        if (sucChua > 200) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Room_Volume);
+            return false;
+        }
+        return DLoaiPhongHat.capNhatLoaiPhong(maLoai, tenLoai, giaPhong, sucChua, moTa);
     }
-    
+
     public boolean xoaLoaiPhong(String maLoai) throws SQLException {
-        sql = "xoaLoaiPhong (" + maLoai + ")";
-        return data.Execute(sql);
+        return DLoaiPhongHat.xoaLoaiPhong(maLoai);
     }
 }
