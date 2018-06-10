@@ -309,21 +309,10 @@ public class Dialog_SuaDonDatPhong extends javax.swing.JDialog {
         int giaphong = gDonDatPhong.getGiaPhong();
         String time = cbbTuLuc.getSelectedItem().toString();
         date = date + " " + time + ":00.0";
-
-        LocalDateTime datetime = LocalDateTime.now();
-        String sDay = datetime.toString().substring(0, 10);
-        String sTime = datetime.toString().substring(11, 21);
-        String sToday = sDay + " " + sTime;
-
-        if (date.compareTo(sToday) <= 0) {
-            JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Start_Time);
-            return;
-        }
-
         boolean res = false;
 
         try {
-            res = bDonDatPhong.capNhatDonDatPhong(gDonDatPhong.getMaDon(), makh, maphong, giaphong, date, "Đang sử dụng");
+            res = bDonDatPhong.capNhatDonDatPhong(gDonDatPhong.getMaDon(), makh, maphong, giaphong, date, MyStrings.Bill_Is_Using);
         } catch (SQLException ex) {
             Logger.getLogger(Dialog_SuaDonDatPhong.class.getName()).log(Level.SEVERE, null, ex);
         }

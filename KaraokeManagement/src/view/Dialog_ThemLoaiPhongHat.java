@@ -182,20 +182,10 @@ public class Dialog_ThemLoaiPhongHat extends javax.swing.JDialog {
         
         if(!loaiPhong.isEmpty() && !sDonGia.isEmpty() && !sSucChua.isEmpty() && !moTa.isEmpty()){
             BLoaiPhongHat bLoaiPH = new BLoaiPhongHat();
-            
             int donGia = Integer.parseInt(sDonGia);
             int sucChua = Integer.parseInt(sSucChua);
-            
-            if(donGia < 50000){
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Room_Price);
-                return;
-            }
-            if(sucChua > 200){
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Room_Volume);
-                return;
-            }
-            
             Boolean res = false;
+            
             try {
                 res = bLoaiPH.themLoaiPhong(loaiPhong, donGia, sucChua, moTa);
             } catch (SQLException ex) {

@@ -254,34 +254,15 @@ public class Dialog_ThemNhanVien extends javax.swing.JDialog {
         String cmnd = tfCMND.getText();
         String sdt = tfSDT.getText();
         String diaChi = tfDiaChi.getText();
-        int luong = Integer.parseInt(tfLuong.getText());
+        String sLuong = tfLuong.getText();
+        
         String tenTK = tfTenDangNhap.getText();
         String matKhau = tfMatKhau.getText();
         
-        if (!hoTen.isEmpty() && !diaChi.isEmpty() && !ngaySinh.isEmpty()) {
-            if (cmnd.length() != 9 && cmnd.length() != 12) {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_CMND);
-                return;
-            }
-            if (sdt.length() < 10) {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
-                return;
-            }
-            if (sdt.length() == 10 && !sdt.startsWith("09")) {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
-                return;
-            }
-            if (sdt.length() == 11 && !sdt.startsWith("01")) {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
-                return;
-            }
-            if (!isOldEnough(ngaySinh)) {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Birthday);
-                return;
-            }
-            
+        if (!hoTen.isEmpty() && !diaChi.isEmpty() && !ngaySinh.isEmpty() && !sLuong.isEmpty()) {
             Boolean res = false;
             BNhanVien bNhanVien = new BNhanVien();
+            int luong = Integer.parseInt(sLuong);
             try {
                 res = bNhanVien.themNhanVien(hoTen, gioiTinh, ngaySinh, diaChi, cmnd, sdt, luong, tenTK, matKhau);
             } catch (SQLException ex) {
@@ -298,27 +279,7 @@ public class Dialog_ThemNhanVien extends javax.swing.JDialog {
         }       
     }//GEN-LAST:event_btnThemActionPerformed
 
-    Boolean isOldEnough(String input) {
-        Date _today = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(_today);
-        int _namHienTai = cal.get(Calendar.YEAR);
-
-        Date _ngaySinh = new Date();
-        try {
-            _ngaySinh = sdf.parse(input);
-        } catch (ParseException ex) {
-            //
-        }
-        cal.setTime(_ngaySinh);
-        int _namSinh = cal.get(Calendar.YEAR);
-
-        if (_namHienTai - _namSinh < 18) {
-            return false;
-        }
-        return true;
-    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThem;

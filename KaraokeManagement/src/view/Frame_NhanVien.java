@@ -1534,28 +1534,6 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         tfLuong.setText(Integer.toString(NV.getLuong()));
     }//GEN-LAST:event_jLB_NameMouseClicked
 
-    Boolean isOldEnough(String input) {
-        Date _today = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(_today);
-        int _namHienTai = cal.get(Calendar.YEAR);
-
-        Date _ngaySinh = new Date();
-        try {
-            _ngaySinh = sdf.parse(input);
-        } catch (ParseException ex) {
-            //
-        }
-        cal.setTime(_ngaySinh);
-        int _namSinh = cal.get(Calendar.YEAR);
-
-        if (_namHienTai - _namSinh < 16) {
-            return false;
-        }
-        return true;
-    }
-
     private void btnLuu_pnThongTinCaNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuu_pnThongTinCaNhanActionPerformed
 
         String hoTen = tfHoTen.getText();
@@ -1566,27 +1544,6 @@ public class Frame_NhanVien extends javax.swing.JFrame {
         String diaChi = tfDiaChi.getText();
 
         if (!hoTen.isEmpty() && !diaChi.isEmpty() && !ngaySinh.isEmpty()) {
-            if (cmnd.length() != 9) {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_CMND);
-                return;
-            }
-            if (sdt.length() < 10) {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
-                return;
-            }
-            if (sdt.length() == 10 && !sdt.startsWith("09")) {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
-                return;
-            }
-            if (sdt.length() == 11 && !sdt.startsWith("01")) {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
-                return;
-            }
-            if (!isOldEnough(ngaySinh)) {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Birthday);
-                return;
-            }
-
             Boolean res = false;
             BNhanVien bNhanVien = new BNhanVien();
             try {

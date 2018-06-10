@@ -112,27 +112,17 @@ public class Dialog_ThemLoaiDichVu extends javax.swing.JDialog {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         String tenLoaiDV = tfTenLoai.getText();
         BLoaiDichVu bLoaiDV = new BLoaiDichVu();
-        LoaiDichVu loaiDV = new LoaiDichVu();
         if (!tenLoaiDV.isEmpty()) {
+            Boolean res = false;
             try {
-                loaiDV = bLoaiDV.layThongTinLoaiDichVuTheoTen(tenLoaiDV);
+                res = bLoaiDV.themLoaiDichVu(tenLoaiDV);
             } catch (SQLException ex) {
                 Logger.getLogger(Dialog_ThemLoaiDichVu.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (loaiDV.getMaLoaiDichVu() < 300) {   // chưa tồn tại
-                Boolean res = false;
-                try {
-                    res = bLoaiDV.themLoaiDichVu(tenLoaiDV);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Dialog_ThemLoaiDichVu.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                if(res){
-                    JOptionPane.showMessageDialog(rootPane, MyStrings.Add_Succeeded);
-                }else{
-                    JOptionPane.showMessageDialog(rootPane, MyStrings.Add_Failed);
-                }
+            if (res) {
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Add_Succeeded);
             } else {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Data_Already_Existed);
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Add_Failed);
             }
         } else {
             JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Fill_Full);

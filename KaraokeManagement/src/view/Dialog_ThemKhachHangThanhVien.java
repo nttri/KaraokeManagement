@@ -38,27 +38,7 @@ public class Dialog_ThemKhachHangThanhVien extends javax.swing.JDialog {
         ((JTextField)tfNgaySinh.getDateEditor()).setEditable(false);
     }
     
-    Boolean isOldEnough(String input){
-        Date _today = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(_today);
-        int _namHienTai = cal.get(Calendar.YEAR);
-        
-        Date _ngaySinh = new Date();
-        try {
-            _ngaySinh = sdf.parse(input);
-        } catch (ParseException ex) {
-            //
-        }
-        cal.setTime(_ngaySinh);
-        int _namSinh = cal.get(Calendar.YEAR);
-        
-        if(_namHienTai - _namSinh < 16){
-            return false;
-        }
-        return true;
-    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -247,26 +227,6 @@ public class Dialog_ThemKhachHangThanhVien extends javax.swing.JDialog {
         String ngaysinh = ((JTextField)tfNgaySinh.getDateEditor().getUiComponent()).getText();
         
         if(!hoten.isEmpty() && !diachi.isEmpty() && !ngaysinh.isEmpty()){
-            if(cmnd.length() != 9){
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_CMND);
-                return;
-            }
-            if(sdt.length() < 10){
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
-                return;
-            }
-            if(sdt.length() == 10 && !sdt.startsWith("09")){
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
-                return;
-            }
-            if(sdt.length() == 11 && !sdt.startsWith("01")){
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Phone);
-                return;
-            }
-            if(!isOldEnough(ngaysinh)){
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Birthday);
-                return;
-            }
             
             Boolean res = false;
             BKhachHang bKhachHang = new BKhachHang();
