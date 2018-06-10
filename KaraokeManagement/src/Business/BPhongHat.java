@@ -5,6 +5,7 @@
  */
 package Business;
 
+import DAO.DAOPhongHat;
 import common.Helper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,58 +19,33 @@ import model.PhongHat;
 public class BPhongHat extends Business{
     String sql;
     ResultSet rs;
+    DAOPhongHat DPhongHat = new DAOPhongHat();
     
     public ArrayList<PhongHat> layThongTinTatCaPhongHat() throws SQLException {
-        ArrayList<PhongHat> arrPhongHat = new ArrayList();
-        sql = "layThongTinTatCaPhongHat";
-        rs = data.fetchData(sql);
-        
-        while(rs.next()) {
-            PhongHat phongHat = new PhongHat();
-            Helper.setPhongHat(phongHat, rs);
-            arrPhongHat.add(phongHat);
-        }
-        return arrPhongHat;
+        return DPhongHat.layThongTinTatCaPhongHat();
     }
 
     public ArrayList<PhongHat> layThongTinPhongHatTheoTinhTrang(String tinhTrang) throws SQLException {
-        ArrayList<PhongHat> arrPhongHat = new ArrayList();
-        sql = "layThongTinPhongHatTheoTinhTrang (N'" + tinhTrang + "')";
-        rs = data.fetchData(sql);
-        while (rs.next()) {
-            PhongHat phongHat = new PhongHat();
-            Helper.setPhongHat(phongHat, rs);
-            arrPhongHat.add(phongHat);
-        }
-        return arrPhongHat;
+        return DPhongHat.layThongTinPhongHatTheoTinhTrang(tinhTrang);
     }
     
     public PhongHat layThongTinPhongHatTheoMa(int maPhong) throws SQLException {
-        PhongHat phongHat = new PhongHat();
-        sql = "layThongTinPhongHatTheoMa (" + maPhong + ")";
-        rs = data.fetchData(sql);
-        if (rs.next())
-            Helper.setPhongHat(phongHat, rs);
-        return phongHat;
+        return DPhongHat.layThongTinPhongHatTheoMa(maPhong);
     }
     
     public boolean themPhongHat(int maLoaiPhong, String tinhTrang) throws SQLException {
-        sql = "themPhongHat (" + maLoaiPhong + ", N'" + tinhTrang + "')";
-        return data.Execute(sql);
+        return DPhongHat.themPhongHat(maLoaiPhong, tinhTrang);
     }
     
     public boolean themPhongHatTheoTenLoaiPhong(String tenLoaiPhong, String tinhTrang) throws SQLException {
-        sql = "themPhongHatTheoTenLoai (N'" + tenLoaiPhong + "', N'" + tinhTrang + "')";
-        return data.Execute(sql);
+        return DPhongHat.themPhongHatTheoTenLoaiPhong(tenLoaiPhong, tinhTrang);
     }
     
     public boolean capNhatPhongHat(int maPhong, int maLoaiPhong, String tinhTrang) throws SQLException {
-        sql = "capNhatPhongHat (" + maPhong + ", " + maLoaiPhong + ", N'" + tinhTrang + "')";
-        return data.Execute(sql);
+        return DPhongHat.capNhatPhongHat(maPhong, maLoaiPhong, tinhTrang);
     }
     
     public boolean xoaPhongHat(int maPhong) throws SQLException {
-        sql = "xoaPhongHat (" + maPhong + ")";
-        return data.Execute(sql);
+        return DPhongHat.xoaPhongHat(maPhong);                
     }
 }
