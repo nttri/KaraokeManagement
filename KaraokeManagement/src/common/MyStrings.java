@@ -45,6 +45,7 @@ public class MyStrings {
     public static String Invalid_Start_Time = "Thời gian đặt phòng không hợp lệ!";
     public static String Invalid_Room_Price = "Giá phòng tối thiểu là 50.000 vnd!";
     public static String Invalid_Room_Volume = "Sức chứa tối đa là 200 người!";
+    public static String Salary_Must_Higher = "Lương phải trên 100.000 VND";
     
     public static String Please_Select_Row = "Hãy chọn 1 dòng để thực hiện thao tác!";
     public static String Please_Fill_Full = "Hãy điền đầy đủ thông tin!";
