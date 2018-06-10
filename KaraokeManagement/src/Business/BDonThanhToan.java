@@ -5,10 +5,14 @@
  */
 package Business;
 
+import DAO.DAODonThanhToan;
 import common.Helper;
+import common.MyStrings;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.DonThanhToan;
 
 /**
@@ -18,92 +22,63 @@ import model.DonThanhToan;
 public class BDonThanhToan extends Business{
     String sql;
     ResultSet rs;
+    DAODonThanhToan DDonThanhToan = new DAODonThanhToan();
     
     public BDonThanhToan(){
         super();
     }
     
     public ArrayList<DonThanhToan> layTatCaDonThanhToan() throws SQLException {
-        ArrayList<DonThanhToan> arrDonThanhToan = new ArrayList();
-        sql = "layTatCaDonThanhToan ";
-        rs = data.fetchData(sql);
-        
-        while (rs.next()) {
-            DonThanhToan donThanhToan = new DonThanhToan();
-            Helper.setDonThanhToan(donThanhToan, rs);
-            arrDonThanhToan.add(donThanhToan);
-        }
-        return arrDonThanhToan;
+        return DDonThanhToan.layTatCaDonThanhToan();
     }
     
     public ArrayList<DonThanhToan> layDonThanhToanTheoTinhTrang(String tinhTrang) throws SQLException {
-        ArrayList<DonThanhToan> arrDonThanhToan = new ArrayList();
-        sql = "layDonThanhToanTheoTinhTrang (N'" + tinhTrang + "')";
-        rs = data.fetchData(sql);
-        
-        while (rs.next()) {
-            DonThanhToan donThanhToan = new DonThanhToan();
-            Helper.setDonThanhToan(donThanhToan, rs);
-            arrDonThanhToan.add(donThanhToan);
-        }
-        return arrDonThanhToan;
+        return DDonThanhToan.layDonThanhToanTheoTinhTrang(tinhTrang);
     }
     
     public ArrayList<DonThanhToan> layDonThanhToanTheoMaKHVaTinhTrang(int maKH, String tinhTrang) throws SQLException {
-        ArrayList<DonThanhToan> arrDonThanhToan = new ArrayList();
-        sql = "layDonThanhToanTheoMaKHVaTinhTrang (" + maKH + ", N'" + tinhTrang + "')";
-        rs = data.fetchData(sql);
-        
-        while (rs.next()) {
-            DonThanhToan donThanhToan = new DonThanhToan();
-            Helper.setDonThanhToan(donThanhToan, rs);
-            arrDonThanhToan.add(donThanhToan);
-        }
-        return arrDonThanhToan;
+        return DDonThanhToan.layDonThanhToanTheoMaKHVaTinhTrang(maKH, tinhTrang);
     }
     
     public DonThanhToan layDonThanhToanTheoMaDon(int maDon) throws SQLException {
-        DonThanhToan donThanhToan = new DonThanhToan();
-        sql = "layDonThanhToanTheoMaDon (" + maDon + ")";
-        rs = data.fetchData(sql);
-        if (rs.next()){
-            Helper.setDonThanhToan(donThanhToan, rs);
-        }         
-        return donThanhToan;
-    }
-    
-    public boolean themDonThanhToan(int maNV, int maKH, int maPhong, int giaPhong, String thoiGianBD, String thoiGianKT, String maKM, String tinhTrang) throws SQLException{
-        sql = "themDonThanhToan (" + maNV + ", " + maKH + ", " + maPhong + ", " + giaPhong + ", '" +thoiGianBD + "', '" +thoiGianKT + "', '" +maKM + "', N'" + tinhTrang + "')";
-        return data.Execute(sql);
+        return DDonThanhToan.layDonThanhToanTheoMaDon(maDon);
     }
     
     public boolean themDonDatPhong( int maKH, int maPhong, int giaPhong, String thoiGianBD, String tinhTrang) throws SQLException{
-        sql = "themDonDatPhong (" + maKH + ", " + maPhong + ", " + giaPhong + ", '" +thoiGianBD + "', N'" + tinhTrang + "')";
-        return data.Execute(sql);
+        LocalDateTime datetime = LocalDateTime.now();
+        String sDay = datetime.toString().substring(0, 10);
+        String sTime = datetime.toString().substring(11, 21);
+        String sToday = sDay + " " + sTime;
+
+        if (thoiGianBD.compareTo(sToday) <= 0) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Start_Time);
+            return false;
+        }
+        return DDonThanhToan.themDonDatPhong(maKH, maPhong, giaPhong, thoiGianBD, tinhTrang);
     }
     
     public boolean capNhatDonThanhToan(int maDon, int maNV, int maKH, int maPhong, int giaPhong, String thoiGianBD, String thoiGianKT, String maKM, String tinhTrang) throws SQLException {
-        sql = "capNhatDonThanhToan (" + maDon + ", " + maNV + ", " + maKH + ", " + maPhong + ", " + giaPhong + ", '" +thoiGianBD + "', '" +thoiGianKT + "', '" +maKM + "', N'" + tinhTrang + "')";
-        return data.Execute(sql);
+        return DDonThanhToan.capNhatDonThanhToan(maDon, maNV, maKH, maPhong, giaPhong, thoiGianBD, thoiGianKT, maKM, tinhTrang);
     }
     
     public boolean capNhatTinhTrangDonThanhToan(int maDon, int maNV, String tinhTrang) throws SQLException {
-        sql = "capNhatTinhTrangDonThanhToan (" + maDon + ", " + maNV + ", N'" + tinhTrang + "')";
-        return data.Execute(sql);
+        return DDonThanhToan.capNhatTinhTrangDonThanhToan(maDon, maNV, tinhTrang);
     }
     
     public boolean capNhatDonDatPhong(int maDon, int maKH, int maPhong, int giaPhong, String thoiGianBD, String tinhTrang) throws SQLException {
-        sql = "capNhatDonDatPhong (" + maDon + ", " + maKH + ", " + maPhong + ", " + giaPhong + ", '" +thoiGianBD + "', N'" + tinhTrang + "')";
-        return data.Execute(sql);
-    }
-    
-    public boolean xoaDonThanhToan(int maDon) throws SQLException{
-        sql = "xoaDonThanhToan (" + maDon + ")";
-        return data.Execute(sql);
+        LocalDateTime datetime = LocalDateTime.now();
+        String sDay = datetime.toString().substring(0, 10);
+        String sTime = datetime.toString().substring(11, 21);
+        String sToday = sDay + " " + sTime;
+
+        if (thoiGianBD.compareTo(sToday) <= 0) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Start_Time);
+            return false;
+        }
+        return DDonThanhToan.capNhatDonDatPhong(maDon, maKH, maPhong, giaPhong, thoiGianBD, tinhTrang);
     }
     
     public boolean xoaDonDatPhong(int maDon) throws SQLException{
-        sql = "xoaDonDatPhong (" + maDon + ")";
-        return data.Execute(sql);
+        return DDonThanhToan.xoaDonDatPhong(maDon);
     }
 }
