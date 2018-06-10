@@ -5,10 +5,13 @@
  */
 package Business;
 
+import DAO.DAODichVu;
 import common.Helper;
+import common.MyStrings;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.DichVu;
 
 /**
@@ -18,72 +21,45 @@ import model.DichVu;
 public class BDichVu extends Business {
     String sql;
     ResultSet rs;
+    DAODichVu DDichVu = new DAODichVu();
 
     public BDichVu() {
         super();
     }
     
     public ArrayList<DichVu> layThongTinTatCaDichVu() throws SQLException {
-        ArrayList<DichVu> arrDichVu = new ArrayList<>();
-        sql = "layThongTinTatCaDichVu";
-        rs = data.fetchData(sql);
-        
-        while(rs.next()) {
-            DichVu dichVu = new DichVu();
-            Helper.setDichVu(dichVu, rs);
-            arrDichVu.add(dichVu);
-        }
-        return arrDichVu;
+        return DDichVu.layThongTinTatCaDichVu();
     }
     
     public ArrayList<DichVu> layThongTinDichVuTheoDonGia(int donGia) throws SQLException {
-        ArrayList<DichVu> arrDichVu = new ArrayList<>();
-        sql = "layThongTinDichVuTheoDonGia (" + donGia + ")";
-        rs = data.fetchData(sql);
-        
-        while(rs.next()) {
-            DichVu dichVu = new DichVu();
-            Helper.setDichVu(dichVu, rs);
-            arrDichVu.add(dichVu);
-        }
-        return arrDichVu;
+        return DDichVu.layThongTinDichVuTheoDonGia(donGia);
     }
     
     public ArrayList<DichVu> layThongTinDichVuTheoTen(String tenDV) throws SQLException {
-        ArrayList<DichVu> arrDichVu = new ArrayList<>();
-        sql = "layThongTinDichVuTheoTen (N'" + tenDV + "')";
-        rs = data.fetchData(sql);
-        
-        while(rs.next()) {
-            DichVu dichVu = new DichVu();
-            Helper.setDichVu(dichVu, rs);
-            arrDichVu.add(dichVu);
-        }
-        return arrDichVu;
+        return DDichVu.layThongTinDichVuTheoTen(tenDV);
     }
     
     public DichVu layThongTinDichVuTheoMa(int maDV) throws SQLException {
-        DichVu dichVu = new DichVu();
-        sql = "layThongTinDichVuTheoMa (" + maDV + ")";
-        rs = data.fetchData(sql);
-        if (rs.next()) {
-            Helper.setDichVu(dichVu, rs);
-        }
-        return dichVu;
+        return DDichVu.layThongTinDichVuTheoMa(maDV);
     }
     
     public boolean themDichVu(String tenLoaiDichVu, int donGia, String tenDichVu) throws SQLException {
-        sql = "themDichVu (N'" + tenLoaiDichVu + "', " + donGia + ", N'" + tenDichVu + "')";
-        return data.Execute(sql);
+        if(donGia < 1000){
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Service_Price);
+            return false;
+        }
+        return DDichVu.themDichVu(tenLoaiDichVu, donGia, tenDichVu);
     }
     
     public boolean capNhatDichVu(int maDichVu, String tenLoaiDichVu, int donGia, String tenDichVu) throws SQLException {
-        sql = "capNhatDichVu (" + maDichVu + ", N'" + tenLoaiDichVu + "', " + donGia + ", N'" + tenDichVu + "')";
-        return data.Execute(sql);
+        if(donGia < 1000){
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Service_Price);
+            return false;
+        }
+        return DDichVu.capNhatDichVu(maDichVu, tenLoaiDichVu, donGia, tenDichVu);
     }
     
     public boolean xoaDichVu(int maDichVu) throws SQLException {
-        sql = "xoaDichVu (" + maDichVu + ")";
-        return data.Execute(sql);
+        return DDichVu.xoaDichVu(maDichVu);
     }   
 }
