@@ -5,6 +5,7 @@
  */
 package Business;
 
+import DAO.DAOKhuyenMai;
 import common.Helper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,46 +19,35 @@ import model.KhuyenMai;
 public class BKhuyenMai extends Business{
     String sql;
     ResultSet rs;
+    DAOKhuyenMai DKhuyenMai = new DAOKhuyenMai();
     
     public BKhuyenMai(){
         super();
     }
     
     public ArrayList<KhuyenMai> layTatCaKhuyenMai() throws SQLException {
-        ArrayList<KhuyenMai> arrKhuyenMai = new ArrayList();
-        sql = "layTatCaKhuyenMai";
-        rs = data.fetchData(sql);
-        
-        while(rs.next()) {
-            KhuyenMai khuyenMai = new KhuyenMai();
-            Helper.setKhuyenMai(khuyenMai, rs);
-            arrKhuyenMai.add(khuyenMai);
-        }
-        return arrKhuyenMai;
+        return DKhuyenMai.layTatCaKhuyenMai();
     }
     
     public KhuyenMai layKhuyenMaiTheoMa(String maKM) throws SQLException {
-        KhuyenMai khuyenMai = new KhuyenMai();
-        sql = "layKhuyenMaiTheoMa (" + maKM + ")";
-        rs = data.fetchData(sql);
-        if (rs.next()){
-            Helper.setKhuyenMai(khuyenMai, rs);
-        }      
-        return khuyenMai;
+        return DKhuyenMai.layKhuyenMaiTheoMa(maKM);
     }
     
     public boolean themKhuyenMai(String maKM, String tenKM, int giaTriKM, String thoiGianBD, String thoiGianKT) throws SQLException {
-        sql = "themKhuyenMai (" + maKM + ", N'" + tenKM + "', " + giaTriKM + ", '" + thoiGianBD + "', '" + thoiGianKT + "')";
-        return data.Execute(sql);
+        if(giaTriKM < 1000){
+            return false;
+        }
+        return DKhuyenMai.themKhuyenMai(maKM, tenKM, giaTriKM, thoiGianBD, thoiGianKT);
     }
     
     public boolean capNhatKhuyenMai(String maKM, String tenKM, int giaTriKM, String thoiGianBD, String thoiGianKT) throws SQLException {
-        sql = "capNhatKhuyenMai (" + maKM + ", N'" + tenKM + "', " + giaTriKM + ", '" + thoiGianBD + "', '" + thoiGianKT + "')";
-        return data.Execute(sql);
+        if(giaTriKM < 1000){
+            return false;
+        }
+        return DKhuyenMai.capNhatKhuyenMai(maKM, tenKM, giaTriKM, thoiGianBD, thoiGianKT);
     }
     
     public boolean xoaKhuyenMai(String maKM) throws SQLException {
-        sql = "xoaKhuyenMai (" + maKM + "')";
-        return data.Execute(sql);
+        return DKhuyenMai.xoaKhuyenMai(maKM);
     }
 }
