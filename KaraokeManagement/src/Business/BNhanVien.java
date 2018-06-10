@@ -5,82 +5,128 @@
  */
 package Business;
 
+import DAO.DAONhanVien;
 import common.Helper;
+import common.MyStrings;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import model.NhanVien;
 
 /**
  *
  * @author Thoai
  */
-public class BNhanVien extends Business{
+public class BNhanVien extends Business {
+
     String sql;
     ResultSet rs;
-    
-    public BNhanVien(){
+    DAONhanVien DNhanVien = new DAONhanVien();
+
+    public BNhanVien() {
         super();
     }
-    
+
     public ArrayList<NhanVien> layThongTinTatCaNhanVien() throws SQLException {
-        ArrayList<NhanVien> arrNhanVien = new ArrayList();
-        sql = "layThongTinTatCaNhanVien";
-        rs = data.fetchData(sql);
-        
-        while(rs.next()) {
-            NhanVien nhanVien = new NhanVien();
-            Helper.setNhanVien(nhanVien, rs);
-            arrNhanVien.add(nhanVien);
-        }
-        return arrNhanVien;
+        return DNhanVien.layThongTinTatCaNhanVien();
     }
 
     public NhanVien layThongTinNhanVienTheoMaNV(int maNV) throws SQLException {
-        sql = "layThongTinNhanVienTheoMaNV (" + maNV + ")";
-        NhanVien nhanVien = new NhanVien();
-        rs = data.fetchData(sql);
-        if (rs.next()){        
-            Helper.setNhanVien(nhanVien, rs);
-        }
-        return nhanVien;
+        return DNhanVien.layThongTinNhanVienTheoMaNV(maNV);
     }
-    
-    public NhanVien layThongTinNhanVienTheoMaNV_TaiKhoan(int maNV) throws SQLException{
-        sql = "layThongTinNhanVienTheoMaNV_TaiKhoan (" + maNV + ")";
-        NhanVien nhanVien = new NhanVien();
-        rs = data.fetchData(sql);
-        if (rs.next()){        
-            Helper.setNhanVien_TaiKhoan(nhanVien, rs);
-        }
-        return nhanVien;
+
+    public NhanVien layThongTinNhanVienTheoMaNV_TaiKhoan(int maNV) throws SQLException {
+        return DNhanVien.layThongTinNhanVienTheoMaNV_TaiKhoan(maNV);
     }
-    
+
     public ArrayList<NhanVien> layThongTinNhanVienTheoTen(String hoTen) throws SQLException {
-        ArrayList<NhanVien> arrNhanVien = new ArrayList();
-        sql = "layThongTinNhanVienTheoTen (N'" + hoTen + "')";
-        rs = data.fetchData(sql);
-        
-        while(rs.next()) {
-            NhanVien nhanVien = new NhanVien();
-            Helper.setNhanVien(nhanVien, rs);
-            arrNhanVien.add(nhanVien);
+        return DNhanVien.layThongTinNhanVienTheoTen(hoTen);
+    }
+
+    Boolean isOldEnough(String input) {
+        Date _today = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(_today);
+        int _namHienTai = cal.get(Calendar.YEAR);
+
+        Date _ngaySinh = new Date();
+        try {
+            _ngaySinh = sdf.parse(input);
+        } catch (ParseException ex) {
+            //
         }
-        return arrNhanVien;
+        cal.setTime(_ngaySinh);
+        int _namSinh = cal.get(Calendar.YEAR);
+
+        if (_namHienTai - _namSinh < 18) {
+            return false;
+        }
+        return true;
     }
-    
+
     public boolean themNhanVien(String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt, int luong, String tenDangNhap, String matKhau) throws SQLException {
-        sql = "themNhanVien (N'" + hoTen + "', N'" + gioiTinh + "', '" + ngaySinh + "', N'" + diaChi + "', '" + cmnd + "', '" + sdt + "', " + luong + ", '" + tenDangNhap + "', '" + matKhau + "')";
-        return data.Execute(sql);
+        if (cmnd.length() != 9 && cmnd.length() != 12) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_CMND);
+            return false;
+        }
+        if (sdt.length() < 10) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Phone);
+            return false;
+        }
+        if (sdt.length() == 10 && !sdt.startsWith("09")) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Phone);
+            return false;
+        }
+        if (sdt.length() == 11 && !sdt.startsWith("01")) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Phone);
+            return false;
+        }
+        if (!isOldEnough(ngaySinh)) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Birthday);
+            return false;
+        }
+        if(luong < 100000){
+            JOptionPane.showMessageDialog(null, MyStrings.Salary_Must_Higher);
+            return false;
+        }
+        return DNhanVien.themNhanVien(hoTen, gioiTinh, ngaySinh, diaChi, cmnd, sdt, luong, tenDangNhap, matKhau);
     }
-    
+
     public boolean capNhatNhanVien(int maNV, String hoTen, String gioiTinh, String ngaySinh, String diaChi, String cmnd, String sdt, int luong) throws SQLException {
-        sql = "capNhatNhanVien (" + maNV + ", N'" + hoTen + "', N'" + gioiTinh + "', '" + ngaySinh + "', N'" + diaChi + "', '" + cmnd + "', '" + sdt + "', " + luong + ")";
-        return data.Execute(sql);
+        if (cmnd.length() != 9 && cmnd.length() != 12) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_CMND);
+            return false;
+        }
+        if (sdt.length() < 10) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Phone);
+            return false;
+        }
+        if (sdt.length() == 10 && !sdt.startsWith("09")) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Phone);
+            return false;
+        }
+        if (sdt.length() == 11 && !sdt.startsWith("01")) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Phone);
+            return false;
+        }
+        if (!isOldEnough(ngaySinh)) {
+            JOptionPane.showMessageDialog(null, MyStrings.Invalid_Birthday);
+            return false;
+        }
+        if(luong < 100000){
+            JOptionPane.showMessageDialog(null, MyStrings.Salary_Must_Higher);
+            return false;
+        }
+        return DNhanVien.capNhatNhanVien(maNV, hoTen, gioiTinh, ngaySinh, diaChi, cmnd, sdt, luong);
     }
-    
+
     public boolean xoaNhanVien(int maNV) throws SQLException {
-        sql = "xoaNhanVien (" + maNV + ")";
-        return data.Execute(sql);
+        return DNhanVien.xoaNhanVien(maNV);
     }
 }
