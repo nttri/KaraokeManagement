@@ -9,7 +9,7 @@ import DAO.DAONguoiDung;
 import common.Helper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.NguoiDung;
+import DTO.NguoiDung;
 
 /**
  *

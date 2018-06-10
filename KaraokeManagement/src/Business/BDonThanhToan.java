@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import model.DonThanhToan;
+import DTO.DonThanhToan;
 
 /**
  *

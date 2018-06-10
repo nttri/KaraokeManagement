@@ -7,16 +7,16 @@ package common;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.ChiTietDichVu;
-import model.DichVu;
-import model.DonThanhToan;
-import model.KhuyenMai;
-import model.NguoiDung;
-import model.NhanVien;
-import model.PhongHat;
-import model.KhachHang;
-import model.LoaiDichVu;
-import model.LoaiPhongHat;
+import DTO.ChiTietDichVu;
+import DTO.DichVu;
+import DTO.DonThanhToan;
+import DTO.KhuyenMai;
+import DTO.NguoiDung;
+import DTO.NhanVien;
+import DTO.PhongHat;
+import DTO.KhachHang;
+import DTO.LoaiDichVu;
+import DTO.LoaiPhongHat;
 
 /**
  *
