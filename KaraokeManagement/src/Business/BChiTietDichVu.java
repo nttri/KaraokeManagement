@@ -5,6 +5,7 @@
  */
 package Business;
 
+import DAO.DAOChiTietDichVu;
 import common.Helper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,59 +19,48 @@ import model.ChiTietDichVu;
 public class BChiTietDichVu extends Business{
     String sql;
     ResultSet rs;
+    DAOChiTietDichVu DChiTietDichVu = new DAOChiTietDichVu();
     
     public BChiTietDichVu() {
         super();
     }
     
     public ArrayList<ChiTietDichVu> layThongTinTatCaChiTietDichVu() throws SQLException {
-        ArrayList<ChiTietDichVu> arrChiTietDichVu = new ArrayList<>();
-        sql = "layThongTinTatCaChiTietDichVu";
-        rs = data.fetchData(sql);
-        
-        while(rs.next()) {
-            ChiTietDichVu chiTietDichVu = new ChiTietDichVu();
-            Helper.setChiTietDichVu(chiTietDichVu, rs);
-            arrChiTietDichVu.add(chiTietDichVu);
-        }
-        return arrChiTietDichVu;
+        return DChiTietDichVu.layThongTinTatCaChiTietDichVu();
     }
     
     public ChiTietDichVu layThongTinChiTietDichVuTheoMaDonVaSTT(int maDon, int STT) throws SQLException {
-        ChiTietDichVu chiTietDichVu = new ChiTietDichVu();
-        sql = "layThongTinChiTietDichVuTheoMaDonVaSTT (" + maDon + ", " + STT + ")";
-        rs = data.fetchData(sql);
-        if (rs.next()) {
-            Helper.setChiTietDichVu(chiTietDichVu, rs);
+        if (maDon < 1 || STT < 0){
+            return null;
         }
-        return chiTietDichVu;
+        return DChiTietDichVu.layThongTinChiTietDichVuTheoMaDonVaSTT(maDon, STT);
     }
     
     public ArrayList<ChiTietDichVu> layThongTinChiTietDichVuTheoMaDon(int maDon) throws SQLException {
-        ArrayList<ChiTietDichVu> arrChiTietDichVu = new ArrayList<>();
-        sql = "layThongTinChiTietDichVuTheoMaDon (" + maDon + ")";
-        rs = data.fetchData(sql);
-        
-        while(rs.next()) {
-            ChiTietDichVu chiTietDichVu = new ChiTietDichVu();
-            Helper.setChiTietDichVu(chiTietDichVu, rs);
-            arrChiTietDichVu.add(chiTietDichVu);
+        if (maDon < 1){
+            return null;
         }
-        return arrChiTietDichVu;
+        return DChiTietDichVu.layThongTinChiTietDichVuTheoMaDon(maDon);
     }
     
     public boolean themChiTietDichVu(int maDon, int stt, int maDV, int donGia, int soLuong) throws SQLException {
-        sql = "themChiTietDichVu (" + maDon + ", " + stt + ", " + maDV + ", " + donGia + ", " + soLuong + ")";
-        return data.Execute(sql);
+        if(maDon < 1 || stt < 0 || maDV < 3000 || donGia < 1000 || soLuong < 1){
+            return false;
+        }
+        return DChiTietDichVu.themChiTietDichVu(maDon, stt, maDV, donGia, soLuong);
     }
     
      public boolean capNhatChiTietDichVu(int maDon, int stt, int maDV, int donGia, int soLuong) throws SQLException {
-        sql = "capNhatChiTietDichVu (" + maDon + ", " + stt + ", " + maDV + ", " + donGia + ", " + soLuong + ")";
-        return data.Execute(sql);
+        if(maDon < 1 || stt < 0 || maDV < 3000 || donGia < 1000 || soLuong < 1){
+            return false;
+        }
+        return DChiTietDichVu.capNhatChiTietDichVu(maDon, stt, maDV, donGia, soLuong);
     }
      
     public boolean xoaChiTietDichVu(int maDon, int stt) throws SQLException {
-        sql = "xoaChiTietDichVu (" + maDon + ", " + stt + ")";
-        return data.Execute(sql);
+        if (maDon < 1 || stt < 0){
+            return false;
+        }
+        return DChiTietDichVu.xoaChiTietDichVu(maDon, stt);
     }
 }
