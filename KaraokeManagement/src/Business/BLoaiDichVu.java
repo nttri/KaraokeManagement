@@ -5,10 +5,13 @@
  */
 package Business;
 
+import DAO.DAOLoaiDichVu;
 import common.Helper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.LoaiDichVu;
 
 /**
@@ -16,60 +19,46 @@ import model.LoaiDichVu;
  * @author Thoai
  */
 public class BLoaiDichVu extends Business {
+
     String sql;
     ResultSet rs;
-    
+    DAOLoaiDichVu DLoaiDichVu = new DAOLoaiDichVu();
+
     public BLoaiDichVu() {
         super();
     }
-    
+
     public ArrayList<LoaiDichVu> layThongTinTatCaLoaiDichVu() throws SQLException {
-        ArrayList<LoaiDichVu> arrLoaiDichVu = new ArrayList<>();
-        sql = "layThongTinTatCaLoaiDichVu";
-        rs = data.fetchData(sql);
-        
-        while(rs.next()) {
-            LoaiDichVu loaiDichVu = new LoaiDichVu();
-            Helper.setLoaiDichVu(loaiDichVu, rs);
-            arrLoaiDichVu.add(loaiDichVu);
-        }
-        return arrLoaiDichVu;
+        return DLoaiDichVu.layThongTinTatCaLoaiDichVu();
     }
-    
+
     public LoaiDichVu layThongTinLoaiDichVuTheoMa(int maLoaiDV) throws SQLException {
-        LoaiDichVu loaiDichVu = new LoaiDichVu();
-        sql = "layThongTinLoaiDichVuTheoMa (" + maLoaiDV + ")";
-        rs = data.fetchData(sql);
-        
-        if (rs.next()) {
-            Helper.setLoaiDichVu(loaiDichVu, rs);
-        }
-        return loaiDichVu;
+        return DLoaiDichVu.layThongTinLoaiDichVuTheoMa(maLoaiDV);
     }
-    
+
     public LoaiDichVu layThongTinLoaiDichVuTheoTen(String tenLoaiDV) throws SQLException {
-        LoaiDichVu loaiDichVu = new LoaiDichVu();
-        sql = "layThongTinLoaiDichVuTheoTen (N'" + tenLoaiDV + "')";
-        rs = data.fetchData(sql);
-        
-        if (rs.next()) {
-            Helper.setLoaiDichVu(loaiDichVu, rs);
-        }
-        return loaiDichVu;
+        return DLoaiDichVu.layThongTinLoaiDichVuTheoTen(tenLoaiDV);
     }
-    
+
     public boolean themLoaiDichVu(String tenLoai) throws SQLException {
-        sql = "themLoaiDichVu (N'" + tenLoai + "')";
-        return data.Execute(sql);
+        BLoaiDichVu bLoaiDV = new BLoaiDichVu();
+        LoaiDichVu loaiDV = new LoaiDichVu();
+        try {
+            loaiDV = bLoaiDV.layThongTinLoaiDichVuTheoTen(tenLoai);
+        } catch (SQLException ex) {
+            Logger.getLogger(BLoaiDichVu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (loaiDV.getMaLoaiDichVu() > 300) {   // đã tồn tại
+            return false;
+        }
+        return DLoaiDichVu.themLoaiDichVu(tenLoai);
     }
-    
+
     public boolean capNhatLoaiDichVu(String maLoai, String tenLoai) throws SQLException {
-        sql = "capNhatDichVu (" + maLoai + ", N'" + tenLoai + "')";
-        return data.Execute(sql);
+        return DLoaiDichVu.capNhatLoaiDichVu(maLoai, tenLoai);
     }
-    
+
     public boolean xoaLoaiDichVu(String maLoai) throws SQLException {
-        sql = "xoaLoaiDichVu (" + maLoai + ")";
-        return data.Execute(sql);
+        return DLoaiDichVu.xoaLoaiDichVu(maLoai);
     }
 }
