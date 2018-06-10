@@ -5,6 +5,7 @@
  */
 package Business;
 
+import DAO.DAONguoiDung;
 import common.Helper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,23 +18,17 @@ import model.NguoiDung;
 public class BNguoiDung extends Business{
     String sql;
     ResultSet rs;
+    DAONguoiDung DNguoiDung = new DAONguoiDung();
     
     public BNguoiDung(){
         super();
     }    
     
     public NguoiDung timTaiKhoan(String tenDangNhap, String matKhau) throws SQLException {
-        sql = "timTaiKhoan " + tenDangNhap + ", " + matKhau;
-        NguoiDung nguoiDung = new NguoiDung();
-        rs = data.fetchData(sql);
-        if (rs.next()){
-            Helper.setNguoiDung(nguoiDung, rs);
-        }
-        return nguoiDung;
+        return DNguoiDung.timTaiKhoan(tenDangNhap, matKhau);
     }
     
     public boolean capNhatTaiKhoan(String tenDangNhap, String matKhau) throws SQLException {
-        sql = "capNhatTaiKhoan ('" + tenDangNhap + "', '" + matKhau + "')";
-        return data.Execute(sql);
+        return DNguoiDung.capNhatTaiKhoan(tenDangNhap, matKhau);
     }
 }
