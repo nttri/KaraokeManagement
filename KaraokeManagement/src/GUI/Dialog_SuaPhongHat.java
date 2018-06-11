@@ -68,7 +68,7 @@ public class Dialog_SuaPhongHat extends javax.swing.JDialog {
         } catch (SQLException ex) {
             Logger.getLogger(Dialog_SuaDichVu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        jLB_PH.setText("PHÒNG HÁT " + Integer.toString(gPhongHat.getMaLoaiPhong()));
+        jLB_PH.setText("PHÒNG HÁT " + Integer.toString(gPhongHat.getMaPhong()));
         tfDonGia.setText(Integer.toString(loaiPH.getGiaPhong()));
         tfSucChua.setText(Integer.toString(loaiPH.getSucChua()));
         tfMoTa.setText(loaiPH.getMoTa());
