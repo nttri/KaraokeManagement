@@ -14,8 +14,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import static java.time.LocalDateTime.now;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -229,12 +231,14 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         
         ArrayList<Integer> arrTongTien = new ArrayList<Integer>();
         for(int i = 0; i < arrDTT.size(); i++){
-            arrTongTien.add(tinhTongTienThanhToan(arrDTT.get(i).getMaDon()));
-            
-            mTable_DoanhThu_DonThanhToan.addRow(new Object[]{
-                arrDTT.get(i).getMaDon(), arrDTT.get(i).getMaNhanVien(), arrDTT.get(i).getMaKhachHang(),
-                arrDTT.get(i).getMaPhong(), arrTongTien.get(i)
-            });
+            if (arrDTT.get(i).getTinhTrang().equals(MyStrings.Bill_Payed)){
+                int tongTien = tinhTongTienThanhToan(arrDTT.get(i).getMaDon());
+                arrTongTien.add(tongTien);
+                mTable_DoanhThu_DonThanhToan.addRow(new Object[]{
+                    arrDTT.get(i).getMaDon(), arrDTT.get(i).getMaNhanVien(), arrDTT.get(i).getMaKhachHang(),
+                    arrDTT.get(i).getMaPhong(), tongTien
+                });
+            }
         }
         int tongDoanhThu = arrTongTien.stream().mapToInt(a -> a).sum();
         jTF_TongDoanhThu.setText(Integer.toString(tongDoanhThu));
@@ -258,24 +262,14 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        
-        ArrayList<Integer> arrSL = new ArrayList();
-        for(int i = 0; i < arrPH.size(); i++){
-            arrSL.add(0);
-        }
-        for(int i = 0; i < arrDTT.size(); i++){
-            for (int j = 0; j < arrPH.size(); j++){
-                if (arrPH.get(j).getMaPhong() == arrDTT.get(i).getMaPhong()){
-                    arrSL.set(j, arrSL.get(j) + 1);
-                    break;
-                }
-            }
-        }
         
         BLoaiPhongHat bLoaiPH = new BLoaiPhongHat();
-        ArrayList<LoaiPhongHat> arrLPH = new ArrayList();        
+        ArrayList<LoaiPhongHat> arrLPH = new ArrayList(); 
+        ArrayList<Integer> arrSL = new ArrayList();
+        ArrayList<Integer> arrGioSD = new ArrayList();
         for(int i = 0; i < arrPH.size(); i++){
+            arrSL.add(0);
+            arrGioSD.add(0);
             try {
                 arrLPH.add(bLoaiPH.layThongTinLoaiPhongHatTheoMa(arrPH.get(i).getMaLoaiPhong()));
             } catch (SQLException ex) {
@@ -283,10 +277,27 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             }
         }
         
+        for(int i = 0; i < arrDTT.size(); i++){
+            for (int j = 0; j < arrPH.size(); j++){
+                if (arrPH.get(j).getMaPhong() == arrDTT.get(i).getMaPhong()){
+                    arrSL.set(j, arrSL.get(j) + 1);
+                    
+                    Date bd = arrDTT.get(i).getThoiGianBatDau();
+                    Date kt = arrDTT.get(i).getThoiGianKetThuc();
+                    if (kt != null){
+                        long diff = kt.getTime() - bd.getTime();
+                        int soGioSuDung = (int)TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);
+                        arrGioSD.set(j, arrGioSD.get(j) + soGioSuDung);
+                    }
+                    break;
+                }
+            }
+        }               
+        
         for(int i = 0; i < arrPH.size(); i++){
             mTable_DoanhThu_PhongHat.addRow(new Object[]{
                 arrPH.get(i).getMaPhong(), arrLPH.get(i).getTenLoai(), 
-                arrLPH.get(i).getGiaPhong(), arrSL.get(i)
+                arrLPH.get(i).getGiaPhong(), arrSL.get(i), arrGioSD.get(i)
             });
         }      
     }
@@ -294,6 +305,59 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     void updateQuanLyDoanhThu_DichVu(String ngayBD, String ngayKT){
         clearAllDataTable(mTable_DoanhThu_DichVu);
         
+        BDonThanhToan bDonThanhToan = new BDonThanhToan();
+        ArrayList<DonThanhToan> arrDTT = null;
+        try {
+            arrDTT = bDonThanhToan.layDonThanhToanTheoThoiGian(ngayBD, ngayKT);
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        BDichVu bDichVu = new BDichVu();
+        ArrayList<DichVu> arrDV = null;
+        try {
+            arrDV = bDichVu.layThongTinTatCaDichVu();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        BLoaiDichVu bLDV = new BLoaiDichVu();
+        ArrayList<LoaiDichVu> arrLDV = new ArrayList();
+        ArrayList<Integer> arrSL = new ArrayList();
+        for(int i = 0; i < arrDV.size(); i++){
+            arrSL.add(0);
+            
+            try {
+                arrLDV.add(bLDV.layThongTinLoaiDichVuTheoMa(arrDV.get(i).getMaLoaiDichVu()));
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        for(int i = 0; i < arrDTT.size(); i++){
+            BChiTietDichVu bCTDV = new BChiTietDichVu();
+            ArrayList<ChiTietDichVu> arrCTDV = new ArrayList();
+            try {
+                arrCTDV = bCTDV.layThongTinChiTietDichVuTheoMaDon(arrDTT.get(i).getMaDon());
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            for (int j = 0; j < arrCTDV.size(); j++){
+                for(int k = 0; k < arrDV.size(); k++){
+                    if (arrDV.get(k).getMaDichVu()== arrCTDV.get(j).getMaDichVu()){
+                        arrSL.set(k, arrSL.get(k) + arrCTDV.get(j).getSoLuong());
+                        break;
+                    }
+                }
+            }
+        }
+        
+        for(int i = 0; i < arrDV.size(); i++){
+            mTable_DoanhThu_DichVu.addRow(new Object[]{
+                arrDV.get(i).getTenDichVu(), arrLDV.get(i).getTenLoaiDichVu(), arrSL.get(i)
+            });
+        }
     }
     
     int tinhTongTienThanhToan(int maDTT){
@@ -1052,9 +1116,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             }
         });
         tbDonThanhToan_pnQuanLyDoanhThu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tbDonThanhToan_pnQuanLyDoanhThu.setGridColor(new java.awt.Color(0, 102, 102));
-        tbDonThanhToan_pnQuanLyDoanhThu.setInheritsPopupMenu(true);
-        tbDonThanhToan_pnQuanLyDoanhThu.setRowHeight(20);
+        tbDonThanhToan_pnQuanLyDoanhThu.setRowHeight(24);
         jScrollPane7.setViewportView(tbDonThanhToan_pnQuanLyDoanhThu);
 
         jTabbedPane5.addTab("Đơn thanh toán", jScrollPane7);
@@ -1062,22 +1124,21 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jPanel12.setBackground(new java.awt.Color(0, 120, 120));
         jPanel12.setLayout(null);
 
-        tbPhongHat_pnQuanLyDoanhThu.setBackground(new java.awt.Color(0, 90, 90));
-        tbPhongHat_pnQuanLyDoanhThu.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        tbPhongHat_pnQuanLyDoanhThu.setForeground(new java.awt.Color(255, 255, 255));
+        tbPhongHat_pnQuanLyDoanhThu.setBackground(new java.awt.Color(240, 240, 240));
+        tbPhongHat_pnQuanLyDoanhThu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tbPhongHat_pnQuanLyDoanhThu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã phòng hát", "Loại phòng", "Đơn giá", "Số lần sử dụng"
+                "Mã phòng hát", "Loại phòng", "Đơn giá", "Số lần sử dụng", "Số giờ sử dụng"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1089,21 +1150,19 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             }
         });
         tbPhongHat_pnQuanLyDoanhThu.setToolTipText("");
-        tbPhongHat_pnQuanLyDoanhThu.setGridColor(new java.awt.Color(255, 255, 255));
-        tbPhongHat_pnQuanLyDoanhThu.setRowHeight(20);
+        tbPhongHat_pnQuanLyDoanhThu.setRowHeight(24);
         jScrollPane8.setViewportView(tbPhongHat_pnQuanLyDoanhThu);
 
         jPanel12.add(jScrollPane8);
-        jScrollPane8.setBounds(0, 0, 1010, 280);
+        jScrollPane8.setBounds(0, 0, 1010, 270);
 
         jTabbedPane5.addTab("Phòng hát", jPanel12);
 
         jPanel13.setBackground(new java.awt.Color(0, 120, 120));
         jPanel13.setLayout(null);
 
-        tbDichVu_pnQuanLyDoanhThu.setBackground(new java.awt.Color(0, 90, 90));
-        tbDichVu_pnQuanLyDoanhThu.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        tbDichVu_pnQuanLyDoanhThu.setForeground(new java.awt.Color(255, 255, 255));
+        tbDichVu_pnQuanLyDoanhThu.setBackground(new java.awt.Color(240, 240, 240));
+        tbDichVu_pnQuanLyDoanhThu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tbDichVu_pnQuanLyDoanhThu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1129,7 +1188,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         });
         tbDichVu_pnQuanLyDoanhThu.setToolTipText("");
         tbDichVu_pnQuanLyDoanhThu.setGridColor(new java.awt.Color(255, 255, 255));
-        tbDichVu_pnQuanLyDoanhThu.setRowHeight(20);
+        tbDichVu_pnQuanLyDoanhThu.setRowHeight(24);
         jScrollPane9.setViewportView(tbDichVu_pnQuanLyDoanhThu);
 
         jPanel13.add(jScrollPane9);
@@ -1140,11 +1199,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jpn_QuanLyDoanhThu.add(jTabbedPane5);
         jTabbedPane5.setBounds(40, 220, 1010, 310);
 
-        jLB_TongDoanhThu.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLB_TongDoanhThu.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLB_TongDoanhThu.setForeground(new java.awt.Color(255, 255, 255));
         jLB_TongDoanhThu.setText("Tổng doanh thu:");
         jpn_QuanLyDoanhThu.add(jLB_TongDoanhThu);
-        jLB_TongDoanhThu.setBounds(670, 560, 150, 30);
+        jLB_TongDoanhThu.setBounds(650, 560, 170, 30);
 
         jTF_TongDoanhThu.setBackground(new java.awt.Color(0, 120, 120));
         jTF_TongDoanhThu.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
