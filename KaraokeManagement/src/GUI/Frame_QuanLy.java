@@ -1252,7 +1252,22 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_tbDanhSachNhanVien_pnQuanLyNhanVienMouseClicked
 
     private void tbPhongHat_pnQuanLyPhongHatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPhongHat_pnQuanLyPhongHatMouseClicked
-        // TODO add your handling code here:
+        int r = tbPhongHat_pnQuanLyPhongHat.getSelectedRow();
+        if (r != -1){
+            btnXoaPhong_pnPhongHat.setEnabled(true);
+            
+            if (evt.getClickCount() == 2){
+                BPhongHat bPhongHat = new BPhongHat();
+                PhongHat phongHat = null;
+                int maPH = Integer.parseInt(mTable_PhongHat.getValueAt(r, 0).toString());
+                try {
+                    phongHat = bPhongHat.layThongTinPhongHatTheoMa(maPH);
+                    //Dialog_SuaPhongHat dSuaPhongHat = new Dialog_SuaPhongHat(this,)
+                } catch (SQLException ex) {
+                    Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }//GEN-LAST:event_tbPhongHat_pnQuanLyPhongHatMouseClicked
 
     private void tbDichVu_pnQuanLyDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDichVu_pnQuanLyDichVuMouseClicked

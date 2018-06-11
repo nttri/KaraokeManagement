@@ -68,6 +68,7 @@ public class Dialog_SuaPhongHat extends javax.swing.JDialog {
         } catch (SQLException ex) {
             Logger.getLogger(Dialog_SuaDichVu.class.getName()).log(Level.SEVERE, null, ex);
         }
+        jLB_PH.setText("PHÒNG HÁT " + Integer.toString(gPhongHat.getMaLoaiPhong()));
         tfDonGia.setText(Integer.toString(loaiPH.getGiaPhong()));
         tfSucChua.setText(Integer.toString(loaiPH.getSucChua()));
         tfMoTa.setText(loaiPH.getMoTa());
@@ -78,7 +79,7 @@ public class Dialog_SuaPhongHat extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLB_PH = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cbbLoaiPhong = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
@@ -99,10 +100,10 @@ public class Dialog_SuaPhongHat extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(10, 125, 39));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("PHÒNG HÁT");
+        jLB_PH.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLB_PH.setForeground(new java.awt.Color(255, 255, 255));
+        jLB_PH.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLB_PH.setText("PHÒNG HÁT 000");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -166,7 +167,7 @@ public class Dialog_SuaPhongHat extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLB_PH, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -200,7 +201,7 @@ public class Dialog_SuaPhongHat extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLB_PH)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -292,7 +293,7 @@ public class Dialog_SuaPhongHat extends javax.swing.JDialog {
     private javax.swing.JButton btnLuu;
     private javax.swing.JComboBox<String> cbbLoaiPhong;
     private javax.swing.JComboBox<String> cbbTinhTrang;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLB_PH;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
