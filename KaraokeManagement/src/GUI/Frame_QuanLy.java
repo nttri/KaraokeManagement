@@ -196,16 +196,28 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }
     
     void updateQuanLyDoanhThu(){
-        updateQuanLyDoanhThu_DonThanhToan();
-        updateQuanLyDoanhThu_PhongHat();
-        updateQuanLyDoanhThu_DichVu();
+        int Loai = cbb_DieuKienLoc.getSelectedIndex();
+        String NgayBD = "", NgayKT = "";
+        if(Loai == 0 || Loai == 1 ){
+            NgayBD = Integer.toString(jDC_NgayBatDau.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayBatDau.getDate().getMonth()+1)+"-"+Integer.toString(jDC_NgayBatDau.getDate().getDate());
+            NgayKT = Integer.toString(jDC_NgayKetThuc.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayKetThuc.getDate().getMonth()+1)+"-"+Integer.toString(jDC_NgayKetThuc.getDate().getDate());
+        }
+        else if(Loai==2){
+            NgayBD = Integer.toString(jDC_NgayBatDau.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayBatDau.getDate().getMonth()+1)+"-01";
+            NgayKT = Integer.toString(jDC_NgayKetThuc.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayKetThuc.getDate().getMonth()+1)+"-"+Integer.toString(this.MaxDay(jDC_NgayKetThuc.getDate().getMonth()+1, jDC_NgayKetThuc.getDate().getYear()+1900));
+        }
+        else if(Loai == 3){
+            NgayBD = Integer.toString(jDC_NgayBatDau.getDate().getYear()+1900)+"-01-01";
+            NgayKT = Integer.toString(jDC_NgayKetThuc.getDate().getYear()+1900)+"-12-31";
+        }
+        
+        updateQuanLyDoanhThu_DonThanhToan(NgayBD, NgayKT);
+        updateQuanLyDoanhThu_PhongHat(NgayBD, NgayKT);
+        updateQuanLyDoanhThu_DichVu(NgayBD, NgayKT);
     }
     
-    void updateQuanLyDoanhThu_DonThanhToan(){
+    void updateQuanLyDoanhThu_DonThanhToan(String ngayBD, String ngayKT){
         clearAllDataTable(mTable_DoanhThu_DonThanhToan);
-        
-        String ngayBD = new SimpleDateFormat("yyyy-MM-dd").format(jDC_NgayBatDau.getDate());
-        String ngayKT = new SimpleDateFormat("yyyy-MM-dd").format(jDC_NgayKetThuc.getDate());
         
         BDonThanhToan bDonThanhToan = new BDonThanhToan();
         ArrayList<DonThanhToan> arrDTT = null;
@@ -228,12 +240,12 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jTF_TongDoanhThu.setText(Integer.toString(tongDoanhThu));
     }
     
-    void updateQuanLyDoanhThu_PhongHat(){
+    void updateQuanLyDoanhThu_PhongHat(String ngayBD, String ngayKT){
         clearAllDataTable(mTable_DoanhThu_PhongHat);
         
     }
     
-    void updateQuanLyDoanhThu_DichVu(){
+    void updateQuanLyDoanhThu_DichVu(String ngayBD, String ngayKT){
         clearAllDataTable(mTable_DoanhThu_DichVu);
         
     }
@@ -1092,11 +1104,6 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jTF_TongDoanhThu.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jTF_TongDoanhThu.setForeground(new java.awt.Color(255, 255, 255));
         jTF_TongDoanhThu.setName("jbn_"); // NOI18N
-        jTF_TongDoanhThu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTF_TongDoanhThuActionPerformed(evt);
-            }
-        });
         jpn_QuanLyDoanhThu.add(jTF_TongDoanhThu);
         jTF_TongDoanhThu.setBounds(850, 560, 180, 31);
 
@@ -1532,28 +1539,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_tbDichVu_pnQuanLyDichVuMouseClicked
 
     private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
-        int Loai = cbb_DieuKienLoc.getSelectedIndex();
-        int Tien = 0;
-        String NgayBD = "", NgayKT = "";
-        if(Loai == 1){
-            NgayBD = Integer.toString(jDC_NgayBatDau.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayBatDau.getDate().getMonth()+1)+"-"+Integer.toString(jDC_NgayBatDau.getDate().getDate());
-            NgayKT = Integer.toString(jDC_NgayKetThuc.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayKetThuc.getDate().getMonth()+1)+"-"+Integer.toString(jDC_NgayKetThuc.getDate().getDate());
-        }
-        else if(Loai==2){
-            NgayBD = Integer.toString(jDC_NgayBatDau.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayBatDau.getDate().getMonth()+1)+"-01";
-            NgayKT = Integer.toString(jDC_NgayKetThuc.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayKetThuc.getDate().getMonth()+1)+"-"+Integer.toString(this.MaxDay(jDC_NgayKetThuc.getDate().getMonth()+1, jDC_NgayKetThuc.getDate().getYear()+1900));
-        }
-        else if(Loai == 3){
-            NgayBD = Integer.toString(jDC_NgayBatDau.getDate().getYear()+1900)+"-01-01";
-            NgayKT = Integer.toString(jDC_NgayKetThuc.getDate().getYear()+1900)+"-12-31";
-        }
-
         updateQuanLyDoanhThu();       
     }//GEN-LAST:event_btn_TimKiemActionPerformed
-
-    private void jTF_TongDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_TongDoanhThuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTF_TongDoanhThuActionPerformed
 
     Boolean isOldEnough(String input) {
         Date _today = new Date();
