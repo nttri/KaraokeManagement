@@ -243,6 +243,52 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     void updateQuanLyDoanhThu_PhongHat(String ngayBD, String ngayKT){
         clearAllDataTable(mTable_DoanhThu_PhongHat);
         
+        BDonThanhToan bDonThanhToan = new BDonThanhToan();
+        ArrayList<DonThanhToan> arrDTT = null;
+        try {
+            arrDTT = bDonThanhToan.layDonThanhToanTheoThoiGian(ngayBD, ngayKT);
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        BPhongHat bPhongHat = new BPhongHat();
+        ArrayList<PhongHat> arrPH = new ArrayList();
+        try {
+            arrPH = bPhongHat.layThongTinTatCaPhongHat();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        ArrayList<Integer> arrSL = new ArrayList();
+        for(int i = 0; i < arrPH.size(); i++){
+            arrSL.add(0);
+        }
+        for(int i = 0; i < arrDTT.size(); i++){
+            for (int j = 0; j < arrPH.size(); j++){
+                if (arrPH.get(j).getMaPhong() == arrDTT.get(i).getMaPhong()){
+                    arrSL.set(j, arrSL.get(j) + 1);
+                    break;
+                }
+            }
+        }
+        
+        BLoaiPhongHat bLoaiPH = new BLoaiPhongHat();
+        ArrayList<LoaiPhongHat> arrLPH = new ArrayList();        
+        for(int i = 0; i < arrPH.size(); i++){
+            try {
+                arrLPH.add(bLoaiPH.layThongTinLoaiPhongHatTheoMa(arrPH.get(i).getMaLoaiPhong()));
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        for(int i = 0; i < arrPH.size(); i++){
+            mTable_DoanhThu_PhongHat.addRow(new Object[]{
+                arrPH.get(i).getMaPhong(), arrLPH.get(i).getTenLoai(), 
+                arrLPH.get(i).getGiaPhong(), arrSL.get(i)
+            });
+        }      
     }
     
     void updateQuanLyDoanhThu_DichVu(String ngayBD, String ngayKT){
