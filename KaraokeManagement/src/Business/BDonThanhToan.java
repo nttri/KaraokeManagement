@@ -44,6 +44,10 @@ public class BDonThanhToan extends Business{
         return DDonThanhToan.layDonThanhToanTheoMaDon(maDon);
     }
     
+    public ArrayList<DonThanhToan> layDonThanhToanTheoNgay(String ngayBD, String ngayKT) throws SQLException{
+        return DDonThanhToan.layDonThanhToanTheoThoiGian(ngayBD, ngayKT);
+    }
+    
     public boolean themDonDatPhong( int maKH, int maPhong, int giaPhong, String thoiGianBD, String tinhTrang) throws SQLException{
         LocalDateTime datetime = LocalDateTime.now();
         String sDay = datetime.toString().substring(0, 10);

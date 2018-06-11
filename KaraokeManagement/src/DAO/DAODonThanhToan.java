@@ -72,6 +72,19 @@ public class DAODonThanhToan extends DAO{
         return donThanhToan;
     }
     
+    public ArrayList<DonThanhToan> layDonThanhToanTheoThoiGian(String ngayBD, String ngayKT) throws SQLException{
+        ArrayList<DonThanhToan> arrDonThanhToan = new ArrayList();
+        sql = "layDonThanhToanTheoThoiGian " + ngayBD + ", " + ngayKT;
+        rs = data.fetchData(sql);
+        
+        while (rs.next()) {
+            DonThanhToan donThanhToan = new DonThanhToan();
+            Helper.setDonThanhToan(donThanhToan, rs);
+            arrDonThanhToan.add(donThanhToan);
+        }
+        return arrDonThanhToan;
+    }
+    
     public boolean themDonThanhToan(int maNV, int maKH, int maPhong, int giaPhong, String thoiGianBD, String thoiGianKT, String maKM, String tinhTrang) throws SQLException{
         sql = "themDonThanhToan (" + maNV + ", " + maKH + ", " + maPhong + ", " + giaPhong + ", '" +thoiGianBD + "', '" +thoiGianKT + "', '" +maKM + "', N'" + tinhTrang + "')";
         return data.Execute(sql);
