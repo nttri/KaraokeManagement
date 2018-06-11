@@ -929,9 +929,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="X&#xd3;A PH&#xd2;NG"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                <EtchetBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
@@ -1115,9 +1113,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="X&#xd3;A"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                <EtchetBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusCycleRoot" type="boolean" value="true"/>

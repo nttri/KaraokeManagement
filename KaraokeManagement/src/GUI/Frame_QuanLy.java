@@ -728,7 +728,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnXoaPhong_pnPhongHat.setForeground(new java.awt.Color(255, 255, 255));
         btnXoaPhong_pnPhongHat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_remove.png"))); // NOI18N
         btnXoaPhong_pnPhongHat.setText("XÓA PHÒNG");
-        btnXoaPhong_pnPhongHat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnXoaPhong_pnPhongHat.setBorder(null);
         btnXoaPhong_pnPhongHat.setEnabled(false);
         btnXoaPhong_pnPhongHat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -823,7 +823,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnXoa_pnDichVu.setForeground(new java.awt.Color(255, 255, 255));
         btnXoa_pnDichVu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_remove.png"))); // NOI18N
         btnXoa_pnDichVu.setText("XÓA");
-        btnXoa_pnDichVu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnXoa_pnDichVu.setBorder(null);
         btnXoa_pnDichVu.setEnabled(false);
         btnXoa_pnDichVu.setFocusCycleRoot(true);
         btnXoa_pnDichVu.addActionListener(new java.awt.event.ActionListener() {
