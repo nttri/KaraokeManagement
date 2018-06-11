@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import static java.time.LocalDateTime.now;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -48,8 +49,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         mTable_PhongHat = (DefaultTableModel) tbPhongHat_pnQuanLyPhongHat.getModel();
         mTable_DichVu = (DefaultTableModel) tbDichVu_pnQuanLyDichVu.getModel();
         mTable_DoanhThu_DonThanhToan = (DefaultTableModel) tbDonThanhToan_pnQuanLyDoanhThu.getModel();
-        mTable_DoanhThu_PhongHat = (DefaultTableModel) tbDonThanhToan_pnQuanLyDoanhThu.getModel();
-        mTable_DoanhThu_DichVu = (DefaultTableModel) tbDonThanhToan_pnQuanLyDoanhThu.getModel();
+        mTable_DoanhThu_PhongHat = (DefaultTableModel) tbPhongHat_pnQuanLyDoanhThu.getModel();
+        mTable_DoanhThu_DichVu = (DefaultTableModel) tbDichVu_pnQuanLyDoanhThu.getModel();
     }
 
     public Frame_QuanLy(NhanVien ql){
@@ -71,25 +72,9 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jpn_QuanLyNhanVien.setVisible(true);
         
         //////////////////////////////////////
-        // Để tạm ở đây để hiển thị, sẽ được thay thế bằng một đối tượng khác
-        BNhanVien bNhanVien = new BNhanVien();
-        ArrayList<NhanVien> arrNV = null;
-        
-        try {
-            arrNV = bNhanVien.layThongTinTatCaNhanVien();
-        } catch (SQLException ex) {
-            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Predicate<NhanVien> qlPredicate = p->p.getMaNhanVien() == QL.getMaNhanVien();
-        arrNV.removeIf(qlPredicate);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        for(int i = 0; i < arrNV.size(); i++){
-            mTable_NhanVien.addRow(new Object[]{
-                arrNV.get(i).getMaNhanVien(), arrNV.get(i).getHoten(), arrNV.get(i).getGioiTinh(),
-                sdf.format(arrNV.get(i).getNgaySinh()), arrNV.get(i).getDiaChi(), arrNV.get(i).getCmnd(),
-                arrNV.get(i).getSdt(), arrNV.get(i).getLuong()
-            });           
-        }
+        updateQuanLyNhanVien();
+        jDC_NgayBatDau.setDate(new Date());
+        jDC_NgayKetThuc.setDate(new Date(now().getYear()-1900, 11, 31));
         ////////////////////////////////////
     }
     
@@ -211,8 +196,73 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }
     
     void updateQuanLyDoanhThu(){
+        updateQuanLyDoanhThu_DonThanhToan();
+        updateQuanLyDoanhThu_PhongHat();
+        updateQuanLyDoanhThu_DichVu();
+    }
+    
+    void updateQuanLyDoanhThu_DonThanhToan(){
+        clearAllDataTable(mTable_DoanhThu_DonThanhToan);
+        
+        String ngayBD = new SimpleDateFormat("yyyy-MM-dd").format(jDC_NgayBatDau.getDate());
+        String ngayKT = new SimpleDateFormat("yyyy-MM-dd").format(jDC_NgayKetThuc.getDate());
+        
+        BDonThanhToan bDonThanhToan = new BDonThanhToan();
+        ArrayList<DonThanhToan> arrDTT = null;
+        try {
+            arrDTT = bDonThanhToan.layDonThanhToanTheoThoiGian(ngayBD, ngayKT);
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        ArrayList<Integer> arrTongTien = new ArrayList<Integer>();
+        for(int i = 0; i < arrDTT.size(); i++){
+            arrTongTien.add(tinhTongTienThanhToan(arrDTT.get(i).getMaDon()));
+            
+            mTable_DoanhThu_DonThanhToan.addRow(new Object[]{
+                arrDTT.get(i).getMaDon(), arrDTT.get(i).getMaNhanVien(), arrDTT.get(i).getMaKhachHang(),
+                arrDTT.get(i).getMaPhong(), arrTongTien.get(i)
+            });
+        }
+        int tongDoanhThu = arrTongTien.stream().mapToInt(a -> a).sum();
+        jTF_TongDoanhThu.setText(Integer.toString(tongDoanhThu));
+    }
+    
+    void updateQuanLyDoanhThu_PhongHat(){
+        clearAllDataTable(mTable_DoanhThu_PhongHat);
         
     }
+    
+    void updateQuanLyDoanhThu_DichVu(){
+        clearAllDataTable(mTable_DoanhThu_DichVu);
+        
+    }
+    
+    int tinhTongTienThanhToan(int maDTT){
+        BDonThanhToan bDonThanhToan = new BDonThanhToan();
+        DonThanhToan DTT = null;
+        try {
+            DTT = bDonThanhToan.layDonThanhToanTheoMaDon(maDTT);
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        BChiTietDichVu bChiTietDichVu = new BChiTietDichVu();
+        ArrayList<ChiTietDichVu> arrCTDV = null;
+        try {
+            arrCTDV = bChiTietDichVu.layThongTinChiTietDichVuTheoMaDon(maDTT);
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        int tongTien = DTT.getGiaPhong();
+        for (ChiTietDichVu x : arrCTDV ){
+            tongTien += x.getDonGia() * x.getSoLuong();
+        }
+        
+        return tongTien;
+    }
+            
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -918,22 +968,21 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jTabbedPane5.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane5.setFont(new java.awt.Font("Roboto Lt", 0, 20)); // NOI18N
 
-        tbDonThanhToan_pnQuanLyDoanhThu.setBackground(new java.awt.Color(0, 90, 90));
-        tbDonThanhToan_pnQuanLyDoanhThu.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        tbDonThanhToan_pnQuanLyDoanhThu.setForeground(new java.awt.Color(255, 255, 255));
+        tbDonThanhToan_pnQuanLyDoanhThu.setBackground(new java.awt.Color(240, 240, 240));
+        tbDonThanhToan_pnQuanLyDoanhThu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tbDonThanhToan_pnQuanLyDoanhThu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã đơn", "Người lập hóa đơn", "Ngày lập hóa đơn", "Khách hàng", "Mã khuyến mãi", "Tổng tiền"
+                "Mã đơn", "Nhân viên", "Khách hàng", "Phòng", "Tổng tiền"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1165,6 +1214,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         bQuanLyDoanhThu = true;
         btn_QuanLyDoanhThu.setBackground(QLColor.btn_When_Clicked);
         jpn_QuanLyDoanhThu.setVisible(true);
+        
+        updateQuanLyDoanhThu();
     }//GEN-LAST:event_btn_QuanLyDoanhThuMouseClicked
 
     private void btn_QuanLyDoanhThuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyDoanhThuMouseEntered
@@ -1497,68 +1548,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             NgayKT = Integer.toString(jDC_NgayKetThuc.getDate().getYear()+1900)+"-12-31";
         }
 
-        BDonThanhToan hoadon = new BDonThanhToan();
-        ArrayList<DonThanhToan> arrList = new ArrayList<DonThanhToan>();
-        try {
-            arrList = hoadon.layDonThanhToanTheoThoiGian(NgayBD, NgayKT);
-        } catch (SQLException ex) {
-            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
-        }
-/*
-        int i;
-        for(i = 0; i<arrList.size();i++){
-            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt(arrList.get(i).MAHD, i, 0);
-            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt(arrList.get(i).NguoiLapHD, i, 1);
-            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt(arrList.get(i).NgayLap, i, 2);
-            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt(arrList.get(i).MaKH, i, 3);
-            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt(arrList.get(i).MaKM, i, 4);
-            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt(arrList.get(i).Tong, i, 5);
-            Tien = Tien + Integer.parseInt(arrList.get(i).Tong);
-        }
-        for(i=i;i<JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.getRowCount();i++){
-            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt("", i, 0);
-            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt("", i, 1);
-            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt("", i, 2);
-            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt("", i, 3);
-            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt("", i, 4);
-            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt("", i, 5);
-        }
-
-        BSanPham sanpham = new BSanPham();
-        ArrayList<BSanPham> arrListSP = null;
-        try {
-            arrListSP = sanpham.GetDanhSachSanPhamDaBan(NgayBD, NgayKT);
-        } catch (SQLException ex) {
-            Logger.getLogger(jF_ChuCuaHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        int j;
-        for(j = 0; j<arrListSP.size();j++){
-            table_BangLoai_pn_BangVatNuoi_pn_QLSP1.setValueAt(arrListSP.get(j).TenSP, j, 0);
-            table_BangLoai_pn_BangVatNuoi_pn_QLSP1.setValueAt(arrListSP.get(j).SL, j, 1);
-        }
-        for(j=j;j<table_BangLoai_pn_BangVatNuoi_pn_QLSP1.getRowCount();j++){
-            table_BangLoai_pn_BangVatNuoi_pn_QLSP1.setValueAt("", j, 0);
-            table_BangLoai_pn_BangVatNuoi_pn_QLSP1.setValueAt("", j, 1);
-        }
-
-        BGiong giong = new BGiong();
-        ArrayList<BGiong> arrListGiong = null;
-        try {
-            arrListGiong = giong.GetDanhSachThuCungDaBan(NgayBD, NgayKT);
-        } catch (SQLException ex) {
-            Logger.getLogger(jF_ChuCuaHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        int k;
-        for(k = 0; k<arrListGiong.size();k++){
-            table_BangGiong_pn_BangVatNuoi_pn_QLSP1.setValueAt(arrListGiong.get(k).TenGiong, k, 0);
-            table_BangGiong_pn_BangVatNuoi_pn_QLSP1.setValueAt(arrListGiong.get(k).SL, k, 1);
-        }
-        for(k=k;k<table_BangLoai_pn_BangVatNuoi_pn_QLSP1.getRowCount();k++){
-            table_BangGiong_pn_BangVatNuoi_pn_QLSP1.setValueAt("", k, 0);
-            table_BangGiong_pn_BangVatNuoi_pn_QLSP1.setValueAt("", k, 1);
-        }
-        jNhanVienBanHang_XemHoaDon_Tong.setText(Integer.toString(Tien));
-*/
+        updateQuanLyDoanhThu();       
     }//GEN-LAST:event_btn_TimKiemActionPerformed
 
     private void jTF_TongDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_TongDoanhThuActionPerformed

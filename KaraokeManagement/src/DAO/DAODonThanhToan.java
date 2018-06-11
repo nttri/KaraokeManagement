@@ -74,7 +74,7 @@ public class DAODonThanhToan extends DAO{
     
     public ArrayList<DonThanhToan> layDonThanhToanTheoThoiGian(String ngayBD, String ngayKT) throws SQLException{
         ArrayList<DonThanhToan> arrDonThanhToan = new ArrayList();
-        sql = "layDonThanhToanTheoThoiGian " + ngayBD + ", " + ngayKT;
+        sql = "layDonThanhToanTheoThoiGian '" + ngayBD + "', '" + ngayKT + "'";
         rs = data.fetchData(sql);
         
         while (rs.next()) {
