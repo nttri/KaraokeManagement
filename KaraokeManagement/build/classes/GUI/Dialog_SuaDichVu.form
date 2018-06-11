@@ -60,7 +60,7 @@
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="cbbTenLoaiDichVu" max="32767" attributes="0"/>
-                                  <Component id="jLabel1" alignment="0" pref="265" max="32767" attributes="0"/>
+                                  <Component id="jLB_DV" alignment="0" pref="265" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -73,7 +73,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLB_DV" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -94,7 +94,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="jLB_DV">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -103,7 +103,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="D&#x1eca;CH V&#x1ee4;"/>
+            <Property name="text" type="java.lang.String" value="D&#x1eca;CH V&#x1ee4; 0"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">

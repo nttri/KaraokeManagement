@@ -54,6 +54,7 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
     }
 
     private void showData() {
+        jLB_DV.setText("DỊCH VỤ " + Integer.toString(gDichVu.getMaDichVu()));
         int maLoaiDV = gDichVu.getMaLoaiDichVu();
         BLoaiDichVu bLoaiDV = new BLoaiDichVu();
         LoaiDichVu loaiDV;
@@ -72,7 +73,7 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLB_DV = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         tfTenDichVu = new javax.swing.JTextField();
@@ -86,10 +87,10 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(10, 125, 39));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("DỊCH VỤ");
+        jLB_DV.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLB_DV.setForeground(new java.awt.Color(255, 255, 255));
+        jLB_DV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLB_DV.setText("DỊCH VỤ 0");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -145,14 +146,14 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel5)
                                 .addComponent(cbbTenLoaiDichVu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)))))
+                                .addComponent(jLB_DV, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)))))
                 .addContainerGap(98, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLB_DV)
                 .addGap(31, 31, 31)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -232,7 +233,7 @@ public class Dialog_SuaDichVu extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
     private javax.swing.JComboBox<String> cbbTenLoaiDichVu;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLB_DV;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

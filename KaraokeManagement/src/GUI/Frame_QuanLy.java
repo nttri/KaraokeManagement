@@ -1262,7 +1262,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
                 int maPH = Integer.parseInt(mTable_PhongHat.getValueAt(r, 0).toString());
                 try {
                     phongHat = bPhongHat.layThongTinPhongHatTheoMa(maPH);
-                    //Dialog_SuaPhongHat dSuaPhongHat = new Dialog_SuaPhongHat(this,)
+                    Dialog_SuaPhongHat dSuaPhongHat = new Dialog_SuaPhongHat(this, rootPaneCheckingEnabled, phongHat, MyStrings.Manager);
+                    dSuaPhongHat.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1271,7 +1272,23 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_tbPhongHat_pnQuanLyPhongHatMouseClicked
 
     private void tbDichVu_pnQuanLyDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDichVu_pnQuanLyDichVuMouseClicked
-        // TODO add your handling code here:
+        int r = tbDichVu_pnQuanLyDichVu.getSelectedRow();
+        if (r != -1){
+            btnXoa_pnDichVu.setEnabled(true);
+            
+            if (evt.getClickCount() == 2){
+                BDichVu bDichVu = new BDichVu();
+                DichVu dichVu = null;
+                int maDV = Integer.parseInt(mTable_DichVu.getValueAt(r, 0).toString());
+                try {
+                    dichVu = bDichVu.layThongTinDichVuTheoMa(maDV);
+                    Dialog_SuaDichVu dSuaDichVu = new Dialog_SuaDichVu(this, rootPaneCheckingEnabled, dichVu, MyStrings.Manager);
+                    dSuaDichVu.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }//GEN-LAST:event_tbDichVu_pnQuanLyDichVuMouseClicked
 
     Boolean isOldEnough(String input) {
