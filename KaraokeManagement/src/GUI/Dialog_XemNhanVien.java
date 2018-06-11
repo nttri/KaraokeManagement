@@ -14,28 +14,28 @@ import DTO.NhanVien;
  */
 public class Dialog_XemNhanVien extends javax.swing.JDialog {
 
-    NhanVien nv;
+    NhanVien gNhanVien;
     /**
      * Creates new form Dialog_SuaNhanVien
      */
     public Dialog_XemNhanVien(java.awt.Frame parent, boolean modal, NhanVien nhanVien) {
         super(parent, modal);
         initComponents();
-        nv = nhanVien;
+        gNhanVien = nhanVien;
         customInit();
     }
 
     void customInit(){       
-        jLB_NV.setText("NHÂN VIÊN " + String.valueOf(nv.getMaNhanVien()));
-        tfHoTen.setText(nv.getHoten());
-        tfGioiTinh.setSelectedItem(nv.getGioiTinh());
-        tfNgaySinh.setDate(nv.getNgaySinh());
-        tfCMND.setText(nv.getCmnd());
-        tfSDT.setText(nv.getSdt());
-        tfDiaChi.setText(nv.getDiaChi());
-        tfLuong.setText(String.valueOf(nv.getLuong()));
-        tfTenDangNhap.setText(nv.getTenDangNhap());
-        tfMatKhau.setText(nv.getMatKhau());
+        jLB_NV.setText("NHÂN VIÊN " + String.valueOf(gNhanVien.getMaNhanVien()));
+        tfHoTen.setText(gNhanVien.getHoten());
+        tfGioiTinh.setSelectedItem(gNhanVien.getGioiTinh());
+        tfNgaySinh.setDate(gNhanVien.getNgaySinh());
+        tfCMND.setText(gNhanVien.getCmnd());
+        tfSDT.setText(gNhanVien.getSdt());
+        tfDiaChi.setText(gNhanVien.getDiaChi());
+        tfLuong.setText(String.valueOf(gNhanVien.getLuong()));
+        tfTenDangNhap.setText(gNhanVien.getTenDangNhap());
+        tfMatKhau.setText(gNhanVien.getMatKhau());
     }
     /**
      * This method is called from within the constructor to initialize the form.
