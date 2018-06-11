@@ -44,7 +44,7 @@ public class BDonThanhToan extends Business{
         return DDonThanhToan.layDonThanhToanTheoMaDon(maDon);
     }
     
-    public ArrayList<DonThanhToan> layDonThanhToanTheoNgay(String ngayBD, String ngayKT) throws SQLException{
+    public ArrayList<DonThanhToan> layDonThanhToanTheoThoiGian(String ngayBD, String ngayKT) throws SQLException{
         return DDonThanhToan.layDonThanhToanTheoThoiGian(ngayBD, ngayKT);
     }
     

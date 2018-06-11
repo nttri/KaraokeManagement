@@ -5,11 +5,7 @@
  */
 package GUI;
 
-import DTO.LoaiDichVu;
-import DTO.PhongHat;
-import DTO.DichVu;
-import DTO.NhanVien;
-import DTO.LoaiPhongHat;
+import DTO.*;
 import Business.*;
 import common.*;
 import java.awt.Color;
@@ -40,7 +36,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     boolean bQuanLyDichVu = false;
     boolean bQuanLyDoanhThu = false;
     
-    DefaultTableModel mTable_NhanVien, mTable_PhongHat, mTable_DichVu, mTable_DoanhThu;
+    DefaultTableModel mTable_NhanVien, mTable_PhongHat, mTable_DichVu, mTable_DoanhThu,
+                    mTable_DoanhThu_DonThanhToan, mTable_DoanhThu_PhongHat, mTable_DoanhThu_DichVu;
     
     /**
      * Creates new form Frame_QuanLy
@@ -50,7 +47,9 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         mTable_NhanVien = (DefaultTableModel) tbDanhSachNhanVien_pnQuanLyNhanVien.getModel();
         mTable_PhongHat = (DefaultTableModel) tbPhongHat_pnQuanLyPhongHat.getModel();
         mTable_DichVu = (DefaultTableModel) tbDichVu_pnQuanLyDichVu.getModel();
-        //...
+        mTable_DoanhThu_DonThanhToan = (DefaultTableModel) tbDonThanhToan_pnQuanLyDoanhThu.getModel();
+        mTable_DoanhThu_PhongHat = (DefaultTableModel) tbDonThanhToan_pnQuanLyDoanhThu.getModel();
+        mTable_DoanhThu_DichVu = (DefaultTableModel) tbDonThanhToan_pnQuanLyDoanhThu.getModel();
     }
 
     public Frame_QuanLy(NhanVien ql){
@@ -272,6 +271,23 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnThemLoaiDichVu = new javax.swing.JButton();
         jpn_QuanLyDoanhThu = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jDC_NgayBatDau = new com.toedter.calendar.JDateChooser();
+        jLabel7 = new javax.swing.JLabel();
+        jDC_NgayKetThuc = new com.toedter.calendar.JDateChooser();
+        cbb_DieuKienLoc = new javax.swing.JComboBox<>();
+        btn_TimKiem = new javax.swing.JButton();
+        jTabbedPane5 = new javax.swing.JTabbedPane();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tbDonThanhToan_pnQuanLyDoanhThu = new javax.swing.JTable();
+        jPanel12 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tbPhongHat_pnQuanLyDoanhThu = new javax.swing.JTable();
+        jPanel13 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        tbDichVu_pnQuanLyDoanhThu = new javax.swing.JTable();
+        jLB_TongDoanhThu = new javax.swing.JLabel();
+        jTF_TongDoanhThu = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1280, 708));
@@ -862,6 +878,179 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jpn_QuanLyDoanhThu.add(jLabel5);
         jLabel5.setBounds(40, 30, 560, 70);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Từ");
+        jpn_QuanLyDoanhThu.add(jLabel6);
+        jLabel6.setBounds(40, 110, 40, 29);
+
+        jDC_NgayBatDau.setDateFormatString("dd/MM/yyyy");
+        jDC_NgayBatDau.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jpn_QuanLyDoanhThu.add(jDC_NgayBatDau);
+        jDC_NgayBatDau.setBounds(110, 110, 250, 30);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Đến");
+        jpn_QuanLyDoanhThu.add(jLabel7);
+        jLabel7.setBounds(40, 160, 50, 29);
+
+        jDC_NgayKetThuc.setDateFormatString("dd/MM/yyyy");
+        jDC_NgayKetThuc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jpn_QuanLyDoanhThu.add(jDC_NgayKetThuc);
+        jDC_NgayKetThuc.setBounds(110, 160, 250, 30);
+
+        cbb_DieuKienLoc.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        cbb_DieuKienLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lọc theo ...", "Ngày - Tháng - Năm", "Tháng - Năm", "Năm" }));
+        jpn_QuanLyDoanhThu.add(cbb_DieuKienLoc);
+        cbb_DieuKienLoc.setBounds(670, 110, 200, 30);
+
+        btn_TimKiem.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        btn_TimKiem.setText("Tìm kiếm");
+        btn_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TimKiemActionPerformed(evt);
+            }
+        });
+        jpn_QuanLyDoanhThu.add(btn_TimKiem);
+        btn_TimKiem.setBounds(900, 110, 130, 30);
+
+        jTabbedPane5.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane5.setFont(new java.awt.Font("Roboto Lt", 0, 20)); // NOI18N
+
+        tbDonThanhToan_pnQuanLyDoanhThu.setBackground(new java.awt.Color(0, 90, 90));
+        tbDonThanhToan_pnQuanLyDoanhThu.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        tbDonThanhToan_pnQuanLyDoanhThu.setForeground(new java.awt.Color(255, 255, 255));
+        tbDonThanhToan_pnQuanLyDoanhThu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã đơn", "Người lập hóa đơn", "Ngày lập hóa đơn", "Khách hàng", "Mã khuyến mãi", "Tổng tiền"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbDonThanhToan_pnQuanLyDoanhThu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tbDonThanhToan_pnQuanLyDoanhThu.setGridColor(new java.awt.Color(0, 102, 102));
+        tbDonThanhToan_pnQuanLyDoanhThu.setInheritsPopupMenu(true);
+        tbDonThanhToan_pnQuanLyDoanhThu.setRowHeight(20);
+        jScrollPane7.setViewportView(tbDonThanhToan_pnQuanLyDoanhThu);
+
+        jTabbedPane5.addTab("Đơn thanh toán", jScrollPane7);
+
+        jPanel12.setBackground(new java.awt.Color(0, 120, 120));
+        jPanel12.setLayout(null);
+
+        tbPhongHat_pnQuanLyDoanhThu.setBackground(new java.awt.Color(0, 90, 90));
+        tbPhongHat_pnQuanLyDoanhThu.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        tbPhongHat_pnQuanLyDoanhThu.setForeground(new java.awt.Color(255, 255, 255));
+        tbPhongHat_pnQuanLyDoanhThu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã phòng hát", "Loại phòng", "Đơn giá", "Số lần sử dụng"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbPhongHat_pnQuanLyDoanhThu.setToolTipText("");
+        tbPhongHat_pnQuanLyDoanhThu.setGridColor(new java.awt.Color(255, 255, 255));
+        tbPhongHat_pnQuanLyDoanhThu.setRowHeight(20);
+        jScrollPane8.setViewportView(tbPhongHat_pnQuanLyDoanhThu);
+
+        jPanel12.add(jScrollPane8);
+        jScrollPane8.setBounds(0, 0, 1010, 280);
+
+        jTabbedPane5.addTab("Phòng hát", jPanel12);
+
+        jPanel13.setBackground(new java.awt.Color(0, 120, 120));
+        jPanel13.setLayout(null);
+
+        tbDichVu_pnQuanLyDoanhThu.setBackground(new java.awt.Color(0, 90, 90));
+        tbDichVu_pnQuanLyDoanhThu.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        tbDichVu_pnQuanLyDoanhThu.setForeground(new java.awt.Color(255, 255, 255));
+        tbDichVu_pnQuanLyDoanhThu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tên dịch vụ", "Loại dịch vụ", "Số lượng cung cấp"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbDichVu_pnQuanLyDoanhThu.setToolTipText("");
+        tbDichVu_pnQuanLyDoanhThu.setGridColor(new java.awt.Color(255, 255, 255));
+        tbDichVu_pnQuanLyDoanhThu.setRowHeight(20);
+        jScrollPane9.setViewportView(tbDichVu_pnQuanLyDoanhThu);
+
+        jPanel13.add(jScrollPane9);
+        jScrollPane9.setBounds(0, 0, 1010, 270);
+
+        jTabbedPane5.addTab("Dịch vụ", jPanel13);
+
+        jpn_QuanLyDoanhThu.add(jTabbedPane5);
+        jTabbedPane5.setBounds(40, 220, 1010, 310);
+
+        jLB_TongDoanhThu.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLB_TongDoanhThu.setForeground(new java.awt.Color(255, 255, 255));
+        jLB_TongDoanhThu.setText("Tổng doanh thu:");
+        jpn_QuanLyDoanhThu.add(jLB_TongDoanhThu);
+        jLB_TongDoanhThu.setBounds(670, 560, 150, 30);
+
+        jTF_TongDoanhThu.setBackground(new java.awt.Color(0, 120, 120));
+        jTF_TongDoanhThu.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jTF_TongDoanhThu.setForeground(new java.awt.Color(255, 255, 255));
+        jTF_TongDoanhThu.setName("jbn_"); // NOI18N
+        jTF_TongDoanhThu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_TongDoanhThuActionPerformed(evt);
+            }
+        });
+        jpn_QuanLyDoanhThu.add(jTF_TongDoanhThu);
+        jTF_TongDoanhThu.setBounds(850, 560, 180, 31);
+
         getContentPane().add(jpn_QuanLyDoanhThu);
         jpn_QuanLyDoanhThu.setBounds(210, 0, 1070, 680);
 
@@ -1291,6 +1480,91 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbDichVu_pnQuanLyDichVuMouseClicked
 
+    private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
+        int Loai = cbb_DieuKienLoc.getSelectedIndex();
+        int Tien = 0;
+        String NgayBD = "", NgayKT = "";
+        if(Loai == 1){
+            NgayBD = Integer.toString(jDC_NgayBatDau.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayBatDau.getDate().getMonth()+1)+"-"+Integer.toString(jDC_NgayBatDau.getDate().getDate());
+            NgayKT = Integer.toString(jDC_NgayKetThuc.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayKetThuc.getDate().getMonth()+1)+"-"+Integer.toString(jDC_NgayKetThuc.getDate().getDate());
+        }
+        else if(Loai==2){
+            NgayBD = Integer.toString(jDC_NgayBatDau.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayBatDau.getDate().getMonth()+1)+"-01";
+            NgayKT = Integer.toString(jDC_NgayKetThuc.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayKetThuc.getDate().getMonth()+1)+"-"+Integer.toString(this.MaxDay(jDC_NgayKetThuc.getDate().getMonth()+1, jDC_NgayKetThuc.getDate().getYear()+1900));
+        }
+        else if(Loai == 3){
+            NgayBD = Integer.toString(jDC_NgayBatDau.getDate().getYear()+1900)+"-01-01";
+            NgayKT = Integer.toString(jDC_NgayKetThuc.getDate().getYear()+1900)+"-12-31";
+        }
+
+        BDonThanhToan hoadon = new BDonThanhToan();
+        ArrayList<DonThanhToan> arrList = new ArrayList<DonThanhToan>();
+        try {
+            arrList = hoadon.layDonThanhToanTheoThoiGian(NgayBD, NgayKT);
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+/*
+        int i;
+        for(i = 0; i<arrList.size();i++){
+            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt(arrList.get(i).MAHD, i, 0);
+            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt(arrList.get(i).NguoiLapHD, i, 1);
+            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt(arrList.get(i).NgayLap, i, 2);
+            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt(arrList.get(i).MaKH, i, 3);
+            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt(arrList.get(i).MaKM, i, 4);
+            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt(arrList.get(i).Tong, i, 5);
+            Tien = Tien + Integer.parseInt(arrList.get(i).Tong);
+        }
+        for(i=i;i<JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.getRowCount();i++){
+            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt("", i, 0);
+            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt("", i, 1);
+            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt("", i, 2);
+            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt("", i, 3);
+            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt("", i, 4);
+            JNhanVienBanHang_XemHoaDon_tb_BangHoaDon.setValueAt("", i, 5);
+        }
+
+        BSanPham sanpham = new BSanPham();
+        ArrayList<BSanPham> arrListSP = null;
+        try {
+            arrListSP = sanpham.GetDanhSachSanPhamDaBan(NgayBD, NgayKT);
+        } catch (SQLException ex) {
+            Logger.getLogger(jF_ChuCuaHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int j;
+        for(j = 0; j<arrListSP.size();j++){
+            table_BangLoai_pn_BangVatNuoi_pn_QLSP1.setValueAt(arrListSP.get(j).TenSP, j, 0);
+            table_BangLoai_pn_BangVatNuoi_pn_QLSP1.setValueAt(arrListSP.get(j).SL, j, 1);
+        }
+        for(j=j;j<table_BangLoai_pn_BangVatNuoi_pn_QLSP1.getRowCount();j++){
+            table_BangLoai_pn_BangVatNuoi_pn_QLSP1.setValueAt("", j, 0);
+            table_BangLoai_pn_BangVatNuoi_pn_QLSP1.setValueAt("", j, 1);
+        }
+
+        BGiong giong = new BGiong();
+        ArrayList<BGiong> arrListGiong = null;
+        try {
+            arrListGiong = giong.GetDanhSachThuCungDaBan(NgayBD, NgayKT);
+        } catch (SQLException ex) {
+            Logger.getLogger(jF_ChuCuaHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int k;
+        for(k = 0; k<arrListGiong.size();k++){
+            table_BangGiong_pn_BangVatNuoi_pn_QLSP1.setValueAt(arrListGiong.get(k).TenGiong, k, 0);
+            table_BangGiong_pn_BangVatNuoi_pn_QLSP1.setValueAt(arrListGiong.get(k).SL, k, 1);
+        }
+        for(k=k;k<table_BangLoai_pn_BangVatNuoi_pn_QLSP1.getRowCount();k++){
+            table_BangGiong_pn_BangVatNuoi_pn_QLSP1.setValueAt("", k, 0);
+            table_BangGiong_pn_BangVatNuoi_pn_QLSP1.setValueAt("", k, 1);
+        }
+        jNhanVienBanHang_XemHoaDon_Tong.setText(Integer.toString(Tien));
+*/
+    }//GEN-LAST:event_btn_TimKiemActionPerformed
+
+    private void jTF_TongDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_TongDoanhThuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTF_TongDoanhThuActionPerformed
+
     Boolean isOldEnough(String input) {
         Date _today = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -1312,41 +1586,30 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         }
         return true;
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frame_QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frame_QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex){
-            java.util.logging.Logger.getLogger(Frame_QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frame_QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+    private int MaxDay(int Month, int Year){
+        switch (Month){
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                return 31;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                return 30;
+            case 2:
+                if((Year%4 == 0 && Year%100 != 0) || (Year%400 == 0))
+                    return 29;
+                return 28;
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Frame_QuanLy().setVisible(true);
-            }
-        });
+        return 1;
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChinhSua_pnThongTinCaNhan;
     private javax.swing.JButton btnLuu_pnThongTinCaNhan;
@@ -1363,9 +1626,14 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JButton btn_QuanLyNhanVien;
     private javax.swing.JButton btn_QuanLyPhongHat;
     private javax.swing.JButton btn_Thoat;
+    private javax.swing.JButton btn_TimKiem;
     private javax.swing.JComboBox<String> cbbGioiTinh;
+    private javax.swing.JComboBox<String> cbb_DieuKienLoc;
+    private com.toedter.calendar.JDateChooser jDC_NgayBatDau;
+    private com.toedter.calendar.JDateChooser jDC_NgayKetThuc;
     private javax.swing.JLabel jLB_Brand;
     private javax.swing.JLabel jLB_Name;
+    private javax.swing.JLabel jLB_TongDoanhThu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1375,11 +1643,20 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JTextField jTF_TongDoanhThu;
+    private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JPanel jpn_QuanLyDichVu;
     private javax.swing.JPanel jpn_QuanLyDoanhThu;
     private javax.swing.JPanel jpn_QuanLyNhanVien;
@@ -1391,6 +1668,9 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JScrollPane spPhongHat_pnPhongHat;
     private javax.swing.JTable tbDanhSachNhanVien_pnQuanLyNhanVien;
     private javax.swing.JTable tbDichVu_pnQuanLyDichVu;
+    private javax.swing.JTable tbDichVu_pnQuanLyDoanhThu;
+    private javax.swing.JTable tbDonThanhToan_pnQuanLyDoanhThu;
+    private javax.swing.JTable tbPhongHat_pnQuanLyDoanhThu;
     private javax.swing.JTable tbPhongHat_pnQuanLyPhongHat;
     private javax.swing.JTextField tfCMND;
     private javax.swing.JTextField tfDiaChi;
