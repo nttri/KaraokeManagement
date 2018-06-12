@@ -29,6 +29,10 @@ public class BKhuyenMai extends Business{
         return DKhuyenMai.layTatCaKhuyenMai();
     }
     
+    public ArrayList<KhuyenMai> layKhuyenMaiTheoThoiGian(String hientai) throws SQLException {
+        return DKhuyenMai.layKhuyenMaiTheoThoiGian(hientai);
+    }
+    
     public KhuyenMai layKhuyenMaiTheoMa(String maKM) throws SQLException {
         return DKhuyenMai.layKhuyenMaiTheoMa(maKM);
     }
