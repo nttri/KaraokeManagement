@@ -46,6 +46,19 @@ public class DAOKhuyenMai extends DAO{
         return khuyenMai;
     }
     
+    public ArrayList<KhuyenMai> layKhuyenMaiTheoThoiGian(String hienTai) throws SQLException {
+        ArrayList<KhuyenMai> arrKhuyenMai = new ArrayList();
+        sql = "layKhuyenMaiTheoThoiGian ('" + hienTai + "')";
+        rs = data.fetchData(sql);
+        
+        while(rs.next()) {
+            KhuyenMai khuyenMai = new KhuyenMai();
+            Helper.setKhuyenMai(khuyenMai, rs);
+            arrKhuyenMai.add(khuyenMai);
+        }
+        return arrKhuyenMai;
+    }
+    
     public boolean themKhuyenMai(String maKM, String tenKM, int giaTriKM, String thoiGianBD, String thoiGianKT) throws SQLException {
         sql = "themKhuyenMai (" + maKM + ", N'" + tenKM + "', " + giaTriKM + ", '" + thoiGianBD + "', '" + thoiGianKT + "')";
         return data.Execute(sql);

@@ -95,8 +95,13 @@ public class DAODonThanhToan extends DAO{
         return data.Execute(sql);
     }
     
-    public boolean capNhatDonThanhToan(int maDon, int maNV, int maKH, int maPhong, int giaPhong, String thoiGianBD, String thoiGianKT, String maKM, String tinhTrang) throws SQLException {
-        sql = "capNhatDonThanhToan (" + maDon + ", " + maNV + ", " + maKH + ", " + maPhong + ", " + giaPhong + ", '" +thoiGianBD + "', '" +thoiGianKT + "', '" +maKM + "', N'" + tinhTrang + "')";
+    public boolean capNhatDonThanhToanCoKhuyenMai(int maDon, int maNV, int maKH, int maPhong, int giaPhong, String thoiGianBD, String thoiGianKT, String maKM, String tinhTrang) throws SQLException {
+        sql = "capNhatDonThanhToanCoKhuyenMai (" + maDon + ", " + maNV + ", " + maKH + ", " + maPhong + ", " + giaPhong + ", '" +thoiGianBD + "', '" +thoiGianKT + "', '" +maKM + "', N'" + tinhTrang + "')";
+        return data.Execute(sql);
+    }
+    
+    public boolean capNhatDonThanhToanKhongCoKhuyenMai(int maDon, int maNV, int maKH, int maPhong, int giaPhong, String thoiGianBD, String thoiGianKT, String tinhTrang) throws SQLException {
+        sql = "capNhatDonThanhToanKhongCoKhuyenMai (" + maDon + ", " + maNV + ", " + maKH + ", " + maPhong + ", " + giaPhong + ", '" +thoiGianBD + "', '" +thoiGianKT + "', N'" + tinhTrang + "')";
         return data.Execute(sql);
     }
     
