@@ -62,7 +62,10 @@ public class BDonThanhToan extends Business{
     }
     
     public boolean capNhatDonThanhToan(int maDon, int maNV, int maKH, int maPhong, int giaPhong, String thoiGianBD, String thoiGianKT, String maKM, String tinhTrang) throws SQLException {
-        return DDonThanhToan.capNhatDonThanhToan(maDon, maNV, maKH, maPhong, giaPhong, thoiGianBD, thoiGianKT, maKM, tinhTrang);
+        if(maKM.equals("")){
+            return DDonThanhToan.capNhatDonThanhToanKhongCoKhuyenMai(maDon, maNV, maKH, maPhong, giaPhong, thoiGianBD, thoiGianKT, tinhTrang);
+        }
+        return DDonThanhToan.capNhatDonThanhToanCoKhuyenMai(maDon, maNV, maKH, maPhong, giaPhong, thoiGianBD, thoiGianKT, maKM, tinhTrang);
     }
     
     public boolean capNhatTinhTrangDonThanhToan(int maDon, int maNV, String tinhTrang) throws SQLException {
