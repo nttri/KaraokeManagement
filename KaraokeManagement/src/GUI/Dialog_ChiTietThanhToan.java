@@ -3,6 +3,7 @@ package GUI;
 import Business.BChiTietDichVu;
 import Business.BDichVu;
 import Business.BDonThanhToan;
+import Business.BKhuyenMai;
 import Business.BLoaiPhongHat;
 import Business.BPhongHat;
 import common.MyStrings;
@@ -21,8 +22,10 @@ import javax.swing.table.DefaultTableModel;
 import DTO.ChiTietDichVu;
 import DTO.DichVu;
 import DTO.DonThanhToan;
+import DTO.KhuyenMai;
 import DTO.LoaiPhongHat;
 import DTO.PhongHat;
+import java.time.ZoneId;
 
 /**
  *
@@ -40,6 +43,7 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
     long tongTienDichVu = 0;
     long tongTienPhong = 0;
     long tongTienPhongThieu = 0;
+    long tienKhuyenMai = 0;
     long tongCong = 0;
     long gSoGio = 0;
 
@@ -69,12 +73,20 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
             gSoGio = 1;
             gLayTienThieu = false;
             gTrangThaiThanhToan = MyStrings.Bill_Not_Payed;
+            cbbMaKhuyenMai.setEnabled(false);   // không áp dụng khuyến mãi khi trả thanh toán hóa đơn thiếu
         } else if (trangThai.equals(MyStrings.Bill_Payed)) {
             Date bd = gDonThanhToan.getThoiGianBatDau();
             Date kt = gDonThanhToan.getThoiGianKetThuc();
             long diff = kt.getTime() - bd.getTime();
             gSoGio = TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);
             gLayTienThieu = false;
+            if (gDonThanhToan.getMaKhuyenMai() != null) {
+                if (!gDonThanhToan.getMaKhuyenMai().equals("")) {
+                    cbbMaKhuyenMai.addItem(gDonThanhToan.getMaKhuyenMai());
+                    cbbMaKhuyenMai.setSelectedItem(gDonThanhToan.getMaKhuyenMai());
+                }
+            }
+            cbbMaKhuyenMai.setEnabled(false);
             btnThanhToan.setVisible(false);
             gTrangThaiThanhToan = MyStrings.Bill_Payed;
         } else {
@@ -88,6 +100,7 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
             if (sTimeNow.compareTo(ngayBD) <= 0) { // thanh toán trước ngày đặt phòng (không cho phép)
                 gSoGio = 0;
                 gLayTienThieu = false;
+                cbbMaKhuyenMai.setEnabled(false);
                 btnThanhToan.setVisible(false);
                 gTrangThaiThanhToan = "Chưa tới ngày dùng";
             } else {
@@ -203,7 +216,25 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
         }
         lblTienPhongConThieu.setText(Long.toString(tongTienPhongThieu));
 
-        tongCong = tongTienDichVu + tongTienPhong + tongTienPhongThieu;
+        // xử lý phần mã khuyến mãi
+        BKhuyenMai bKhuyenMai = new BKhuyenMai();
+        LocalDateTime datetime = LocalDateTime.now();
+        String today = datetime.toString().substring(0, 10);
+        ArrayList<KhuyenMai> arrKM = new ArrayList<KhuyenMai>();
+
+        try {
+            arrKM = bKhuyenMai.layKhuyenMaiTheoThoiGian(today);
+        } catch (SQLException ex) {
+            Logger.getLogger(Dialog_ChiTietThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        for (int i = 0; i < arrKM.size(); i++) {
+            cbbMaKhuyenMai.addItem(arrKM.get(i).getMaKM());
+        }
+        lblGiaKhuyenMai.setText(Long.toString(tienKhuyenMai));
+
+        // tính tổng
+        tongCong = tongTienDichVu + tongTienPhong + tongTienPhongThieu - tienKhuyenMai;
         lblTongTien.setText(Long.toString(tongCong));
     }
 
@@ -243,6 +274,11 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
         tbTienPhongThieu = new javax.swing.JTable();
         jLabel14 = new javax.swing.JLabel();
         lblNgayBatDau = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        cbbMaKhuyenMai = new javax.swing.JComboBox<>();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        lblGiaKhuyenMai = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1100, 750));
@@ -485,6 +521,42 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
         jPanel1.add(lblNgayBatDau);
         lblNgayBatDau.setBounds(680, 214, 300, 27);
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel15.setText("Khuyến mãi");
+        jPanel1.add(jLabel15);
+        jLabel15.setBounds(540, 490, 130, 27);
+
+        cbbMaKhuyenMai.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cbbMaKhuyenMai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Không có" }));
+        cbbMaKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbMaKhuyenMaiActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbbMaKhuyenMai);
+        cbbMaKhuyenMai.setBounds(540, 530, 125, 26);
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel16.setText("Giảm");
+        jLabel16.setToolTipText("");
+        jPanel1.add(jLabel16);
+        jLabel16.setBounds(800, 530, 46, 25);
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel17.setText("(vnd)");
+        jPanel1.add(jLabel17);
+        jLabel17.setBounds(1010, 533, 49, 22);
+
+        lblGiaKhuyenMai.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblGiaKhuyenMai.setForeground(new java.awt.Color(255, 102, 102));
+        lblGiaKhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblGiaKhuyenMai.setText("00000000");
+        jPanel1.add(lblGiaKhuyenMai);
+        lblGiaKhuyenMai.setBounds(850, 530, 150, 29);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -509,6 +581,7 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
         boolean res = false;
         Date bd = gDonThanhToan.getThoiGianBatDau();
         String ngayBD = bd.toString();
+        String makm = cbbMaKhuyenMai.getSelectedItem().toString();
 
         if (gTrangThaiThanhToan.equals(MyStrings.Bill_Is_Using)) { // trường hợp thanh toán chính thống
             // cập nhật thanh toán đơn chính
@@ -516,6 +589,9 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
             String sDay = datetime.toString().substring(0, 10);
             String sTime = datetime.toString().substring(11, 21);
             String sTimeNow = sDay + " " + sTime;
+            if (makm.equals("Không có")) {
+                makm = "";
+            }
 
             try {
                 res = bDonTT.capNhatDonThanhToan(
@@ -526,7 +602,7 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
                         Integer.parseInt(lblDonGia.getText()),
                         gDonThanhToan.getThoiGianBatDau().toString(),
                         sTimeNow,
-                        "",
+                        makm,
                         MyStrings.Bill_Payed
                 );
 
@@ -547,7 +623,10 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
             cal.setTime(bd);
             cal.add(Calendar.HOUR_OF_DAY, 1);
             Date kt = cal.getTime();
-            String ngayKT = kt.toString();
+            LocalDateTime ldt = kt.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+            String ngay = ldt.toString().substring(0, 10);
+            String time = ldt.toString().substring(11, 16);
+            String ngayKT = ngay + " " + time + ":00.0";
             try {
                 arrDonTT = bDonTT.layDonThanhToanTheoMaKHVaTinhTrang(gDonThanhToan.getMaKhachHang(), MyStrings.Bill_Not_Payed);
                 for (int i = 0; i < arrDonTT.size(); i++) {
@@ -578,25 +657,25 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
             cal.add(Calendar.HOUR_OF_DAY, 1);
             String kt = cal.getTime().toString();
             String head = ngayBD.substring(0, 11);
-            String body = kt.substring(11,19);
+            String body = kt.substring(11, 19);
             String ngayKT = head + body + ".0";
 
             try {
                 res = bDonTT.capNhatDonThanhToan(
-                        gDonThanhToan.getMaDon(), 
-                        gDonThanhToan.getMaNhanVien(), 
-                        gDonThanhToan.getMaKhachHang(), 
-                        gDonThanhToan.getMaPhong(), 
-                        gDonThanhToan.getGiaPhong(), 
-                        ngayBD, 
-                        ngayKT, 
-                        "", 
+                        gDonThanhToan.getMaDon(),
+                        gDonThanhToan.getMaNhanVien(),
+                        gDonThanhToan.getMaKhachHang(),
+                        gDonThanhToan.getMaPhong(),
+                        gDonThanhToan.getGiaPhong(),
+                        ngayBD,
+                        ngayKT,
+                        "",
                         MyStrings.Bill_Payed
                 );
                 if (!res) {
-                        JOptionPane.showMessageDialog(rootPane, MyStrings.Pay_Failed);
-                        return;
-                    }
+                    JOptionPane.showMessageDialog(rootPane, MyStrings.Pay_Failed);
+                    return;
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(Dialog_ChiTietThanhToan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -609,15 +688,46 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
+    private void cbbMaKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMaKhuyenMaiActionPerformed
+        if (!cbbMaKhuyenMai.getSelectedItem().toString().equals("Không có")) {
+            BKhuyenMai bKhuyenMai = new BKhuyenMai();
+            KhuyenMai km = new KhuyenMai();
+            String makm = cbbMaKhuyenMai.getSelectedItem().toString();
+            try {
+                km = bKhuyenMai.layKhuyenMaiTheoMa(makm);
+            } catch (SQLException ex) {
+                Logger.getLogger(Dialog_ChiTietThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            }
+            tienKhuyenMai = km.getGiaTriKM();
+            lblGiaKhuyenMai.setText(Long.toString(tienKhuyenMai));
+
+            // refresh mục tổng kết
+            tongCong = tongTienDichVu + tongTienPhong + tongTienPhongThieu - tienKhuyenMai;
+            lblTongTien.setText(Long.toString(tongCong));
+        } else {
+            tienKhuyenMai = 0;
+            lblGiaKhuyenMai.setText(Long.toString(tienKhuyenMai));
+
+            // refresh mục tổng kết
+            tongCong = tongTienDichVu + tongTienPhong + tongTienPhongThieu - tienKhuyenMai;
+            lblTongTien.setText(Long.toString(tongCong));
+        }
+    }//GEN-LAST:event_cbbMaKhuyenMaiActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThanhToan;
+    private javax.swing.JComboBox<String> cbbMaKhuyenMai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -631,6 +741,7 @@ public class Dialog_ChiTietThanhToan extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblDonGia;
+    private javax.swing.JLabel lblGiaKhuyenMai;
     private javax.swing.JLabel lblLoaiPhong;
     private javax.swing.JLabel lblMaDon;
     private javax.swing.JLabel lblMaKhachHang;
