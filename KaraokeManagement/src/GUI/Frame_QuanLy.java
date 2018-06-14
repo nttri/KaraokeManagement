@@ -107,6 +107,20 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnXoa_pnDichVu.setEnabled(false);
     }
     
+    void setTextAllButton(){
+        btn_QuanLyNhanVien.setText("");
+        btn_QuanLyPhongHat.setText("");
+        btn_QuanLyDichVu.setText("");
+        btn_QuanLyDoanhThu.setText("");       
+    }
+    
+    void setDefaultAllButtonAndPanel(){
+        setFalseAllButton();
+        setColorAllButton(QLColor.btn_Default);
+        setTextAllButton();
+        setAllPanelDisappear();
+    }
+    
     void clearAllDataTable(DefaultTableModel dtm){
         for(int i = dtm.getRowCount() - 1; i >=0; i--){
             dtm.removeRow(i);
@@ -1248,11 +1262,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
     private void btn_QuanLyNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyNhanVienMouseClicked
         // TODO add your handling code here:
-        setFalseAllButton();
-        setColorAllButton(QLColor.btn_Default);
-        setAllPanelDisappear();
+        setDefaultAllButtonAndPanel();
+        
         bQuanLyNhanVien = true;
         btn_QuanLyNhanVien.setBackground(QLColor.btn_When_Clicked);
+        btn_QuanLyNhanVien.setText(MyStrings.Management_Staffs);
         jpn_QuanLyNhanVien.setVisible(true);
         
         updateQuanLyNhanVien();      
@@ -1262,8 +1276,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (bQuanLyNhanVien == false)
             btn_QuanLyNhanVien.setBackground(QLColor.btn_When_Entered);
-        btn_QuanLyNhanVien.setText(MyStrings.Management_Staffs);
-            
+        btn_QuanLyNhanVien.setText(MyStrings.Management_Staffs);            
     }//GEN-LAST:event_btn_QuanLyNhanVienMouseEntered
 
     private void btn_QuanLyNhanVienMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyNhanVienMouseExited
@@ -1280,11 +1293,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
     private void btn_QuanLyPhongHatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyPhongHatMouseClicked
         // TODO add your handling code here:
-        setFalseAllButton();
-        setColorAllButton(QLColor.btn_Default);
-        setAllPanelDisappear();
+        setDefaultAllButtonAndPanel();
+        
         bQuanLyPhongHat = true;
         btn_QuanLyPhongHat.setBackground(QLColor.btn_When_Clicked);
+        btn_QuanLyPhongHat.setText(MyStrings.Management_Singing_Rooms);
         jpn_QuanLyPhongHat.setVisible(true);
         
         updateQuanLyPhongHat();       
@@ -1311,11 +1324,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
     private void btn_QuanLyDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyDichVuMouseClicked
         // TODO add your handling code here:
-        setFalseAllButton();
-        setColorAllButton(QLColor.btn_Default);
-        setAllPanelDisappear();
+        setDefaultAllButtonAndPanel();
+        
         bQuanLyDichVu = true;
         btn_QuanLyDichVu.setBackground(QLColor.btn_When_Clicked);
+        btn_QuanLyDichVu.setText(MyStrings.Management_Services);
         jpn_QuanLyDichVu.setVisible(true);
         
         updateQuanLyDichVu();
@@ -1342,11 +1355,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
     private void btn_QuanLyDoanhThuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyDoanhThuMouseClicked
         // TODO add your handling code here:
-        setFalseAllButton();
-        setColorAllButton(QLColor.btn_Default);
-        setAllPanelDisappear();
+        setDefaultAllButtonAndPanel();
+        
         bQuanLyDoanhThu = true;
         btn_QuanLyDoanhThu.setBackground(QLColor.btn_When_Clicked);
+        btn_QuanLyDoanhThu.setText(MyStrings.Management_Revenues);
         jpn_QuanLyDoanhThu.setVisible(true);
         
         updateQuanLyDoanhThu();
