@@ -9,6 +9,7 @@ import common.Helper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import DTO.NguoiDung;
+import java.util.ArrayList;
 
 /**
  *
@@ -35,5 +36,17 @@ public class DAONguoiDung extends DAO{
     public boolean capNhatTaiKhoan(String tenDangNhap, String matKhau) throws SQLException {
         sql = "capNhatTaiKhoan ('" + tenDangNhap + "', '" + matKhau + "')";
         return data.Execute(sql);
+    }
+    
+    public int layMaQuanLy() throws SQLException{
+        sql = "layMaQuanLy";
+        ArrayList<NguoiDung> arrND = new ArrayList();
+        rs = data.fetchData(sql);
+        if (rs.next()){
+            NguoiDung nguoiDung = new NguoiDung();
+            Helper.setNguoiDung(nguoiDung, rs);
+            arrND.add(nguoiDung);
+        }
+        return arrND.get(0).getMaNhanVien();
     }
 }

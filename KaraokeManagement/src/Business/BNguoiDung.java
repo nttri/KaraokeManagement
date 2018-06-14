@@ -31,4 +31,8 @@ public class BNguoiDung extends Business{
     public boolean capNhatTaiKhoan(String tenDangNhap, String matKhau) throws SQLException {
         return DNguoiDung.capNhatTaiKhoan(tenDangNhap, matKhau);
     }
+    
+    public int layMaQuanLy() throws SQLException{
+        return DNguoiDung.layMaQuanLy();
+    }
 }
