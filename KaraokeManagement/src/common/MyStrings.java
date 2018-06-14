@@ -22,8 +22,8 @@ public class MyStrings {
     public static String Management_Staffs = "QUẢN LÝ NHÂN VIÊN";
     public static String Management_Singing_Rooms = "QUẢN LÝ PHÒNG HÁT";
     public static String Management_Services = "QUẢN LÝ DỊCH VỤ";
-    public static String Management_Promotions = "QUẢN LÝ KHUYẾN MÃI";
-    public static String Management_Revenues = "QUẢN LÝ DOANH THU";
+    public static String Management_Promotions = "KHUYẾN MÃI";
+    public static String Management_Revenues = "DOANH THU";
     
     public static String Booking_Bills = "ĐƠN ĐẶT PHÒNG";
     public static String Services = "DỊCH VỤ";
@@ -46,8 +46,10 @@ public class MyStrings {
     public static String Invalid_Start_Time = "Thời gian đặt phòng không hợp lệ!";
     public static String Invalid_Room_Price = "Giá phòng tối thiểu là 50.000 vnd!";
     public static String Invalid_Room_Volume = "Sức chứa tối đa là 200 người!";
+    public static String Invalid_Number_Input_String = "Giá trị số không được chứa ký tự";
     public static String Salary_Must_Higher = "Lương phải trên 100.000 VND!";
-    public static String Value_Must_Higher = "Giá trị khuyến mãi phải là bội số của 10000 VND!";
+    public static String Value_Promotion_Must_Higher = "Giá trị khuyến mãi phải là bội số của 10000 VND!";
+    public static String DateEnd_Must_Greater_Than_DateStart = "Ngày kết thúc phải lớn hơn ngày bắt đầu";
     
     public static String Please_Select_Row = "Hãy chọn 1 dòng để thực hiện thao tác!";
     public static String Please_Fill_Full = "Hãy điền đầy đủ thông tin!";

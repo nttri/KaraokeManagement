@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import DTO.NhanVien;
 import static GUI.Frame_QuanLy.QL;
+import javax.swing.JTextField;
 
 /**
  *
@@ -22,8 +23,13 @@ public class Dialog_ThemNhanVien extends javax.swing.JDialog {
     public Dialog_ThemNhanVien(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        customInit();
     }
 
+    void customInit(){
+        ((JTextField) tfNgaySinh.getDateEditor()).setEditable(false);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -123,7 +129,7 @@ public class Dialog_ThemNhanVien extends javax.swing.JDialog {
         tfMatKhau.setForeground(new java.awt.Color(10, 145, 39));
 
         btnThem.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnThem.setForeground(new java.awt.Color(10, 145, 39));
+        btnThem.setForeground(new java.awt.Color(0, 68, 80));
         btnThem.setText("THÊM");
         btnThem.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -275,7 +281,6 @@ public class Dialog_ThemNhanVien extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Add_Succeeded);
                 this.dispose();
             }
-
         }       
     }//GEN-LAST:event_btnThemActionPerformed
 
