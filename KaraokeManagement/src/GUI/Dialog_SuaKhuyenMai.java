@@ -6,6 +6,7 @@
 package GUI;
 
 import Business.BKhuyenMai;
+import DTO.KhuyenMai;
 import common.MyStrings;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -13,26 +14,30 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
  * @author Tu
  */
-public class Dialog_ThemKhuyenMai extends javax.swing.JDialog {
+public class Dialog_SuaKhuyenMai extends javax.swing.JDialog {
 
+    KhuyenMai gKhuyenMai;
     /**
-     * Creates new form Dialog_ThemKhuyenMai
+     * Creates new form Dialog_SuaKhuyenMai
      */
-    public Dialog_ThemKhuyenMai(java.awt.Frame parent, boolean modal) {
+    public Dialog_SuaKhuyenMai(java.awt.Frame parent, boolean modal, KhuyenMai khuyenMai) {
         super(parent, modal);
         initComponents();
+        gKhuyenMai = khuyenMai;
         customInit();
     }
 
     void customInit(){
-        ((JTextField) jDC_ngayBD.getDateEditor()).setEditable(false);
-        ((JTextField) jDC_ngayKT.getDateEditor()).setEditable(false);
+        tfMaKM.setText(gKhuyenMai.getMaKM());
+        tfTenKM.setText(gKhuyenMai.getTenKM());
+        jDC_ngayBD.setDate(gKhuyenMai.getThoiGianBD());
+        jDC_ngayKT.setDate(gKhuyenMai.getThoiGianKT());
+        tfGiaTriKM.setText(String.valueOf(gKhuyenMai.getGiaTriKM()));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,7 +58,7 @@ public class Dialog_ThemKhuyenMai extends javax.swing.JDialog {
         tfTenKM = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jDC_ngayKT = new com.toedter.calendar.JDateChooser();
-        btn_Them = new javax.swing.JButton();
+        btn_Luu = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         tfGiaTriKM = new javax.swing.JTextField();
 
@@ -64,7 +69,7 @@ public class Dialog_ThemKhuyenMai extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 33)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("THÊM KHUYẾN MÃI");
+        jLabel1.setText("SỬA KHUYẾN MÃI");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -72,6 +77,7 @@ public class Dialog_ThemKhuyenMai extends javax.swing.JDialog {
 
         tfMaKM.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tfMaKM.setForeground(new java.awt.Color(10, 145, 39));
+        tfMaKM.setEnabled(false);
 
         jDC_ngayBD.setDateFormatString("dd/MM/yyyy");
         jDC_ngayBD.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -94,12 +100,12 @@ public class Dialog_ThemKhuyenMai extends javax.swing.JDialog {
         jDC_ngayKT.setDateFormatString("dd/MM/yyyy");
         jDC_ngayKT.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        btn_Them.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btn_Them.setForeground(new java.awt.Color(0, 68, 80));
-        btn_Them.setText("THÊM");
-        btn_Them.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_Luu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_Luu.setForeground(new java.awt.Color(0, 68, 80));
+        btn_Luu.setText("LƯU");
+        btn_Luu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_ThemMouseClicked(evt);
+                btn_LuuMouseClicked(evt);
             }
         });
 
@@ -114,12 +120,16 @@ public class Dialog_ThemKhuyenMai extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(155, 155, 155)
+                .addComponent(btn_Luu, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
@@ -138,12 +148,8 @@ public class Dialog_ThemKhuyenMai extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfMaKM, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(116, 116, 116))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(btn_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(tfMaKM, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(116, 116, 116))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +177,7 @@ public class Dialog_ThemKhuyenMai extends javax.swing.JDialog {
                     .addComponent(tfGiaTriKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(37, 37, 37)
-                .addComponent(btn_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_Luu, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -192,14 +198,13 @@ public class Dialog_ThemKhuyenMai extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_ThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseClicked
+    private void btn_LuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LuuMouseClicked
         String maKM = tfMaKM.getText();
         String tenKM = tfTenKM.getText();
         Date ngayBD = jDC_ngayBD.getDate();
         Date ngayKT = jDC_ngayKT.getDate();
         String sGiaTriKM = tfGiaTriKM.getText();
-        
-        
+
         if (!maKM.isEmpty() && !tenKM.isEmpty() && ngayBD != null && ngayKT != null && !sGiaTriKM.isEmpty()){
             if (ngayKT.compareTo(ngayBD) == -1){
                 JOptionPane.showMessageDialog(rootPane, MyStrings.DateEnd_Must_Greater_Than_DateStart);
@@ -211,39 +216,41 @@ public class Dialog_ThemKhuyenMai extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Invalid_Number_Input_String);
                 return;
             }
-            
+
             if (!isValidValueOfPromotion(giaTriKM)){
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Value_Promotion_Must_Higher);
                 return;
             }
             String sNgayBD = new SimpleDateFormat("yyyy-MM-dd").format(jDC_ngayBD.getDate());
             String sNgayKT = new SimpleDateFormat("yyyy-MM-dd").format(jDC_ngayKT.getDate());
-            
+
             BKhuyenMai bKhuyenMai = new BKhuyenMai();
             boolean res = false;
             try {
-                res = bKhuyenMai.themKhuyenMai(maKM, tenKM, giaTriKM, sNgayBD, sNgayKT);
+                res = bKhuyenMai.capNhatKhuyenMai(maKM, tenKM, giaTriKM, sNgayBD, sNgayKT);
             } catch (SQLException ex) {
                 Logger.getLogger(Dialog_ThemKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (!res) {
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Add_Failed);
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Edit_Failed);
             }
             else{
-                JOptionPane.showMessageDialog(rootPane, MyStrings.Add_Succeeded);
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Edit_Succeeded);
                 this.dispose();
             }
         }
         else {
             JOptionPane.showMessageDialog(rootPane, MyStrings.Please_Fill_Full);
         }
-    }//GEN-LAST:event_btn_ThemMouseClicked
+    }//GEN-LAST:event_btn_LuuMouseClicked
 
     boolean isValidValueOfPromotion(int giaTriKM){
         return (giaTriKM > 0 && giaTriKM % 10000 == 0);
     }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Them;
+    private javax.swing.JButton btn_Luu;
     private com.toedter.calendar.JDateChooser jDC_ngayBD;
     private com.toedter.calendar.JDateChooser jDC_ngayKT;
     private javax.swing.JLabel jLabel1;

@@ -249,15 +249,15 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     void updateQuanLyDoanhThu(){
         int Loai = cbb_Loc_pnDoanhThu.getSelectedIndex();
         String NgayBD = "", NgayKT = "";
-        if(Loai == 0 || Loai == 1 ){
+        if(Loai == 0){
             NgayBD = Integer.toString(jDC_NgayBatDau.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayBatDau.getDate().getMonth()+1)+"-"+Integer.toString(jDC_NgayBatDau.getDate().getDate());
             NgayKT = Integer.toString(jDC_NgayKetThuc.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayKetThuc.getDate().getMonth()+1)+"-"+Integer.toString(jDC_NgayKetThuc.getDate().getDate());
         }
-        else if(Loai==2){
+        else if(Loai == 1){
             NgayBD = Integer.toString(jDC_NgayBatDau.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayBatDau.getDate().getMonth()+1)+"-01";
             NgayKT = Integer.toString(jDC_NgayKetThuc.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayKetThuc.getDate().getMonth()+1)+"-"+Integer.toString(this.MaxDay(jDC_NgayKetThuc.getDate().getMonth()+1, jDC_NgayKetThuc.getDate().getYear()+1900));
         }
-        else if(Loai == 3){
+        else if(Loai == 2){
             NgayBD = Integer.toString(jDC_NgayBatDau.getDate().getYear()+1900)+"-01-01";
             NgayKT = Integer.toString(jDC_NgayKetThuc.getDate().getYear()+1900)+"-12-31";
         }
@@ -540,6 +540,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         tbDichVu_pnQuanLyDoanhThu = new javax.swing.JTable();
         jLB_TongDoanhThu = new javax.swing.JLabel();
         jTF_TongDoanhThu = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1280, 708));
@@ -1260,7 +1261,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jDC_NgayKetThuc.setBounds(110, 160, 250, 30);
 
         cbb_Loc_pnDoanhThu.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        cbb_Loc_pnDoanhThu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lọc theo ...", "Ngày - Tháng - Năm", "Tháng - Năm", "Năm" }));
+        cbb_Loc_pnDoanhThu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày - Tháng - Năm", "Tháng - Năm", "Năm" }));
         jpn_QuanLyDoanhThu.add(cbb_Loc_pnDoanhThu);
         cbb_Loc_pnDoanhThu.setBounds(670, 110, 200, 30);
 
@@ -1398,6 +1399,12 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jTF_TongDoanhThu.setName("jbn_"); // NOI18N
         jpn_QuanLyDoanhThu.add(jTF_TongDoanhThu);
         jTF_TongDoanhThu.setBounds(850, 560, 180, 31);
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Lọc theo");
+        jpn_QuanLyDoanhThu.add(jLabel15);
+        jLabel15.setBounds(550, 110, 100, 30);
 
         getContentPane().add(jpn_QuanLyDoanhThu);
         jpn_QuanLyDoanhThu.setBounds(210, 0, 1070, 680);
@@ -1889,11 +1896,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             if (evt.getClickCount() == 2){
                 BKhuyenMai bKhuyenMai = new BKhuyenMai();
                 KhuyenMai khuyenMai = null;
-                String maKM = mTable_DichVu.getValueAt(r, 0).toString();
+                String maKM = mTable_KhuyenMai.getValueAt(r, 0).toString();
                 try {
                     khuyenMai = bKhuyenMai.layKhuyenMaiTheoMa(maKM);
-                    //Dialog_SuaDichVu dSuaDichVu = new Dialog_SuaDichVu(this, rootPaneCheckingEnabled, dichVu, MyStrings.Manager);
-                    //dSuaDichVu.setVisible(true);
+                    Dialog_SuaKhuyenMai dSuaKhuyenMai = new Dialog_SuaKhuyenMai(this, rootPaneCheckingEnabled, khuyenMai);
+                    dSuaKhuyenMai.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1981,6 +1988,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
