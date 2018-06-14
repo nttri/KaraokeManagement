@@ -1158,6 +1158,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             }
         });
         tbKhuyenMai_pnQuanLyKhuyenMai.setRowHeight(24);
+        tbKhuyenMai_pnQuanLyKhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbKhuyenMai_pnQuanLyKhuyenMaiMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbKhuyenMai_pnQuanLyKhuyenMai);
         if (tbKhuyenMai_pnQuanLyKhuyenMai.getColumnModel().getColumnCount() > 0) {
             tbKhuyenMai_pnQuanLyKhuyenMai.getColumnModel().getColumn(0).setMinWidth(150);
@@ -1564,8 +1569,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
     private void btnTaoMoi_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnPhongHatActionPerformed
         Dialog_ThemPhongHat dThemPhongHat = new Dialog_ThemPhongHat(this, rootPaneCheckingEnabled, MyStrings.Manager);
-        dThemPhongHat.setBackground(QLColor.background);
-        dThemPhongHat.setVisible(true);
+        dThemPhongHat.setVisible(true);        
+        updateQuanLyPhongHat();
     }//GEN-LAST:event_btnTaoMoi_pnPhongHatActionPerformed
 
     private void btnXoaPhong_pnPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaPhong_pnPhongHatActionPerformed
@@ -1598,8 +1603,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
     private void btnTaoMoi_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnDichVuActionPerformed
         Dialog_ThemDichVu dThemDichVu = new Dialog_ThemDichVu(this, rootPaneCheckingEnabled, MyStrings.Manager);
-        dThemDichVu.setBackground(QLColor.background);
         dThemDichVu.setVisible(true);
+        updateQuanLyDichVu();
     }//GEN-LAST:event_btnTaoMoi_pnDichVuActionPerformed
 
     private void btnXoa_pnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnDichVuActionPerformed
@@ -1664,7 +1669,6 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChinhSua_pnThongTinCaNhanActionPerformed
 
     private void btnLuu_pnThongTinCaNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuu_pnThongTinCaNhanActionPerformed
-
         String hoTen = tfHoTen.getText();
         String gioiTinh = cbbGioiTinh.getSelectedItem().toString();
         String ngaySinh = new SimpleDateFormat("yyyy-MM-dd").format(tfNgaySinh.getDate());
@@ -1873,7 +1877,16 @@ public class Frame_QuanLy extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
             }
         }
+        
+        updateQuanLyKhuyenMai();
     }//GEN-LAST:event_btnXoa_pnKhuyenMaiActionPerformed
+
+    private void tbKhuyenMai_pnQuanLyKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhuyenMai_pnQuanLyKhuyenMaiMouseClicked
+        int r = tbKhuyenMai_pnQuanLyKhuyenMai.getSelectedRow();
+        if (r != -1){
+            btnXoa_pnKhuyenMai.setEnabled(true);
+        }
+    }//GEN-LAST:event_tbKhuyenMai_pnQuanLyKhuyenMaiMouseClicked
 
     Boolean isOldEnough(String input) {
         Date _today = new Date();
