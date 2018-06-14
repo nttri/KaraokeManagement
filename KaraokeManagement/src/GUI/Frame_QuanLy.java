@@ -439,6 +439,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btn_QuanLyDichVu = new javax.swing.JButton();
         btn_QuanLyDoanhThu = new javax.swing.JButton();
         btn_Thoat = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jpn_ThongTinCaNhan = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         lblMaNV = new javax.swing.JLabel();
@@ -638,7 +639,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_QuanLyDoanhThu);
-        btn_QuanLyDoanhThu.setBounds(0, 210, 210, 70);
+        btn_QuanLyDoanhThu.setBounds(0, 280, 210, 70);
 
         btn_Thoat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_Thoat.setForeground(new java.awt.Color(255, 255, 255));
@@ -657,6 +658,13 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         });
         jPanel2.add(btn_Thoat);
         btn_Thoat.setBounds(0, 510, 210, 70);
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_KhuyenMai.png"))); // NOI18N
+        jButton1.setPreferredSize(new java.awt.Dimension(49, 49));
+        jPanel2.add(jButton1);
+        jButton1.setBounds(0, 210, 210, 70);
 
         getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 100, 210, 580);
@@ -1792,6 +1800,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JButton btn_TimKiem;
     private javax.swing.JComboBox<String> cbbGioiTinh;
     private javax.swing.JComboBox<String> cbb_DieuKienLoc;
+    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDC_NgayBatDau;
     private com.toedter.calendar.JDateChooser jDC_NgayKetThuc;
     private javax.swing.JLabel jLB_Brand;
