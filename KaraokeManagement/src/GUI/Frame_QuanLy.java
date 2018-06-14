@@ -477,6 +477,10 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnTaoMoi_pnDichVu = new javax.swing.JButton();
         btnXoa_pnDichVu = new javax.swing.JButton();
         btnThemLoaiDichVu = new javax.swing.JButton();
+        jpn_QuanLyKhuyenMai = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbDanhSachKhuyenMai_pnQuanLyKhuyenMai = new javax.swing.JTable();
         jpn_QuanLyDoanhThu = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -1074,6 +1078,48 @@ public class Frame_QuanLy extends javax.swing.JFrame {
 
         getContentPane().add(jpn_QuanLyDichVu);
         jpn_QuanLyDichVu.setBounds(210, 0, 1070, 680);
+
+        jpn_QuanLyKhuyenMai.setBackground(new java.awt.Color(0, 68, 80));
+        jpn_QuanLyKhuyenMai.setMinimumSize(new java.awt.Dimension(1070, 680));
+        jpn_QuanLyKhuyenMai.setPreferredSize(new java.awt.Dimension(1070, 680));
+        jpn_QuanLyKhuyenMai.setLayout(null);
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 50)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("QUẢN LÝ KHUYẾN MÃI");
+        jpn_QuanLyKhuyenMai.add(jLabel14);
+        jLabel14.setBounds(40, 30, 580, 70);
+
+        tbDanhSachKhuyenMai_pnQuanLyKhuyenMai.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã khuyến mãi", "Tên sự kiện", "Ngày bắt đầu", "Ngày kết thúc", "Mô tả"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tbDanhSachKhuyenMai_pnQuanLyKhuyenMai);
+
+        jpn_QuanLyKhuyenMai.add(jScrollPane2);
+        jScrollPane2.setBounds(40, 120, 750, 330);
+
+        getContentPane().add(jpn_QuanLyKhuyenMai);
+        jpn_QuanLyKhuyenMai.setBounds(210, 0, 1070, 680);
 
         jpn_QuanLyDoanhThu.setBackground(new java.awt.Color(0, 68, 80));
         jpn_QuanLyDoanhThu.setMinimumSize(new java.awt.Dimension(1070, 680));
@@ -1756,6 +1802,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1769,6 +1816,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
@@ -1776,6 +1824,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JPanel jpn_QuanLyDichVu;
     private javax.swing.JPanel jpn_QuanLyDoanhThu;
+    private javax.swing.JPanel jpn_QuanLyKhuyenMai;
     private javax.swing.JPanel jpn_QuanLyNhanVien;
     private javax.swing.JPanel jpn_QuanLyPhongHat;
     private javax.swing.JPanel jpn_ThongTinCaNhan;
@@ -1783,6 +1832,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel lblMaNV;
     private javax.swing.JScrollPane spDichVu_pnDichVu;
     private javax.swing.JScrollPane spPhongHat_pnPhongHat;
+    private javax.swing.JTable tbDanhSachKhuyenMai_pnQuanLyKhuyenMai;
     private javax.swing.JTable tbDanhSachNhanVien_pnQuanLyNhanVien;
     private javax.swing.JTable tbDichVu_pnQuanLyDichVu;
     private javax.swing.JTable tbDichVu_pnQuanLyDoanhThu;
