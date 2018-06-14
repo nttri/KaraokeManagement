@@ -37,9 +37,10 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     boolean bQuanLyNhanVien = false;
     boolean bQuanLyPhongHat = false;
     boolean bQuanLyDichVu = false;
+    boolean bQuanLyKhuyenMai = false;
     boolean bQuanLyDoanhThu = false;
     
-    DefaultTableModel mTable_NhanVien, mTable_PhongHat, mTable_DichVu, mTable_DoanhThu,
+    DefaultTableModel mTable_NhanVien, mTable_PhongHat, mTable_DichVu, mTable_DoanhThu, mTable_KhuyenMai,
                     mTable_DoanhThu_DonThanhToan, mTable_DoanhThu_PhongHat, mTable_DoanhThu_DichVu;
     
     /**
@@ -50,6 +51,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         mTable_NhanVien = (DefaultTableModel) tbDanhSachNhanVien_pnQuanLyNhanVien.getModel();
         mTable_PhongHat = (DefaultTableModel) tbPhongHat_pnQuanLyPhongHat.getModel();
         mTable_DichVu = (DefaultTableModel) tbDichVu_pnQuanLyDichVu.getModel();
+        mTable_KhuyenMai = (DefaultTableModel) tbKhuyenMai_pnQuanLyKhuyenMai.getModel();
         mTable_DoanhThu_DonThanhToan = (DefaultTableModel) tbDonThanhToan_pnQuanLyDoanhThu.getModel();
         mTable_DoanhThu_PhongHat = (DefaultTableModel) tbPhongHat_pnQuanLyDoanhThu.getModel();
         mTable_DoanhThu_DichVu = (DefaultTableModel) tbDichVu_pnQuanLyDoanhThu.getModel();
@@ -85,6 +87,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jpn_QuanLyNhanVien.setVisible(false);
         jpn_QuanLyPhongHat.setVisible(false);
         jpn_QuanLyDichVu.setVisible(false);
+        jpn_QuanLyKhuyenMai.setVisible(false);
         jpn_QuanLyDoanhThu.setVisible(false);
     }
     
@@ -92,6 +95,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btn_QuanLyNhanVien.setBackground(color);
         btn_QuanLyPhongHat.setBackground(color);
         btn_QuanLyDichVu.setBackground(color);
+        btn_QuanLyKhuyenMai.setBackground(color);
         btn_QuanLyDoanhThu.setBackground(color);
         btn_Thoat.setBackground(color);
     }
@@ -100,6 +104,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         bQuanLyNhanVien = false;
         bQuanLyPhongHat = false;
         bQuanLyDichVu = false;
+        bQuanLyKhuyenMai = false;
         bQuanLyDoanhThu = false;
         
         btnXoa_pnQuanLyNhanVien.setEnabled(false);
@@ -111,6 +116,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btn_QuanLyNhanVien.setText("");
         btn_QuanLyPhongHat.setText("");
         btn_QuanLyDichVu.setText("");
+        btn_QuanLyKhuyenMai.setText("");
         btn_QuanLyDoanhThu.setText("");       
     }
     
@@ -437,9 +443,9 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btn_QuanLyNhanVien = new javax.swing.JButton();
         btn_QuanLyPhongHat = new javax.swing.JButton();
         btn_QuanLyDichVu = new javax.swing.JButton();
+        btn_QuanLyKhuyenMai = new javax.swing.JButton();
         btn_QuanLyDoanhThu = new javax.swing.JButton();
         btn_Thoat = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jpn_ThongTinCaNhan = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         lblMaNV = new javax.swing.JLabel();
@@ -481,7 +487,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jpn_QuanLyKhuyenMai = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbDanhSachKhuyenMai_pnQuanLyKhuyenMai = new javax.swing.JTable();
+        tbKhuyenMai_pnQuanLyKhuyenMai = new javax.swing.JTable();
         jpn_QuanLyDoanhThu = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -618,6 +624,24 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jPanel2.add(btn_QuanLyDichVu);
         btn_QuanLyDichVu.setBounds(0, 140, 210, 70);
 
+        btn_QuanLyKhuyenMai.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_QuanLyKhuyenMai.setForeground(new java.awt.Color(255, 255, 255));
+        btn_QuanLyKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_KhuyenMai.png"))); // NOI18N
+        btn_QuanLyKhuyenMai.setPreferredSize(new java.awt.Dimension(49, 49));
+        btn_QuanLyKhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_QuanLyKhuyenMaiMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_QuanLyKhuyenMaiMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_QuanLyKhuyenMaiMouseExited(evt);
+            }
+        });
+        jPanel2.add(btn_QuanLyKhuyenMai);
+        btn_QuanLyKhuyenMai.setBounds(0, 210, 210, 70);
+
         btn_QuanLyDoanhThu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_QuanLyDoanhThu.setForeground(new java.awt.Color(255, 255, 255));
         btn_QuanLyDoanhThu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_DoanhThu.png"))); // NOI18N
@@ -658,13 +682,6 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         });
         jPanel2.add(btn_Thoat);
         btn_Thoat.setBounds(0, 510, 210, 70);
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icon_KhuyenMai.png"))); // NOI18N
-        jButton1.setPreferredSize(new java.awt.Dimension(49, 49));
-        jPanel2.add(jButton1);
-        jButton1.setBounds(0, 210, 210, 70);
 
         getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 100, 210, 580);
@@ -1098,7 +1115,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jpn_QuanLyKhuyenMai.add(jLabel14);
         jLabel14.setBounds(40, 30, 580, 70);
 
-        tbDanhSachKhuyenMai_pnQuanLyKhuyenMai.setModel(new javax.swing.table.DefaultTableModel(
+        tbKhuyenMai_pnQuanLyKhuyenMai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -1121,7 +1138,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tbDanhSachKhuyenMai_pnQuanLyKhuyenMai);
+        jScrollPane2.setViewportView(tbKhuyenMai_pnQuanLyKhuyenMai);
 
         jpn_QuanLyKhuyenMai.add(jScrollPane2);
         jScrollPane2.setBounds(40, 120, 750, 330);
@@ -1736,6 +1753,33 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         updateQuanLyDoanhThu();       
     }//GEN-LAST:event_btn_TimKiemActionPerformed
 
+    private void btn_QuanLyKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyKhuyenMaiMouseClicked
+        // TODO add your handling code here:
+        setDefaultAllButtonAndPanel();
+        
+        bQuanLyKhuyenMai = true;
+        btn_QuanLyKhuyenMai.setBackground(QLColor.btn_When_Clicked);
+        btn_QuanLyKhuyenMai.setText(MyStrings.Management_Promotions);
+        jpn_QuanLyKhuyenMai.setVisible(true);
+        
+        //updateQuanLyKhuyenMai();
+    }//GEN-LAST:event_btn_QuanLyKhuyenMaiMouseClicked
+
+    private void btn_QuanLyKhuyenMaiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyKhuyenMaiMouseEntered
+        // TODO add your handling code here:
+        if (bQuanLyKhuyenMai == false)
+            btn_QuanLyKhuyenMai.setBackground(QLColor.btn_When_Entered);
+        btn_QuanLyKhuyenMai.setText(MyStrings.Management_Promotions);
+    }//GEN-LAST:event_btn_QuanLyKhuyenMaiMouseEntered
+
+    private void btn_QuanLyKhuyenMaiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyKhuyenMaiMouseExited
+        // TODO add your handling code here:
+        if (bQuanLyKhuyenMai == false){
+            btn_QuanLyKhuyenMai.setBackground(QLColor.btn_Default);
+            btn_QuanLyKhuyenMai.setText("");
+        }
+    }//GEN-LAST:event_btn_QuanLyKhuyenMaiMouseExited
+
     Boolean isOldEnough(String input) {
         Date _today = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -1794,13 +1838,13 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JButton btnXoa_pnQuanLyNhanVien;
     private javax.swing.JButton btn_QuanLyDichVu;
     private javax.swing.JButton btn_QuanLyDoanhThu;
+    private javax.swing.JButton btn_QuanLyKhuyenMai;
     private javax.swing.JButton btn_QuanLyNhanVien;
     private javax.swing.JButton btn_QuanLyPhongHat;
     private javax.swing.JButton btn_Thoat;
     private javax.swing.JButton btn_TimKiem;
     private javax.swing.JComboBox<String> cbbGioiTinh;
     private javax.swing.JComboBox<String> cbb_DieuKienLoc;
-    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDC_NgayBatDau;
     private com.toedter.calendar.JDateChooser jDC_NgayKetThuc;
     private javax.swing.JLabel jLB_Brand;
@@ -1841,11 +1885,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel lblMaNV;
     private javax.swing.JScrollPane spDichVu_pnDichVu;
     private javax.swing.JScrollPane spPhongHat_pnPhongHat;
-    private javax.swing.JTable tbDanhSachKhuyenMai_pnQuanLyKhuyenMai;
     private javax.swing.JTable tbDanhSachNhanVien_pnQuanLyNhanVien;
     private javax.swing.JTable tbDichVu_pnQuanLyDichVu;
     private javax.swing.JTable tbDichVu_pnQuanLyDoanhThu;
     private javax.swing.JTable tbDonThanhToan_pnQuanLyDoanhThu;
+    private javax.swing.JTable tbKhuyenMai_pnQuanLyKhuyenMai;
     private javax.swing.JTable tbPhongHat_pnQuanLyDoanhThu;
     private javax.swing.JTable tbPhongHat_pnQuanLyPhongHat;
     private javax.swing.JTextField tfCMND;

@@ -22,6 +22,7 @@ public class MyStrings {
     public static String Management_Staffs = "QUẢN LÝ NHÂN VIÊN";
     public static String Management_Singing_Rooms = "QUẢN LÝ PHÒNG HÁT";
     public static String Management_Services = "QUẢN LÝ DỊCH VỤ";
+    public static String Management_Promotions = "QUẢN LÝ KHUYẾN MÃI";
     public static String Management_Revenues = "QUẢN LÝ DOANH THU";
     
     public static String Booking_Bills = "ĐƠN ĐẶT PHÒNG";
