@@ -18,7 +18,8 @@ public class MyStrings {
     public static String Login_Failed_Empty = "*Tài khoản và mật khẩu không được bỏ trống";
     public static String Login_Failed_Error = "*Tài khoản hoặc mật khẩu không đúng";
     public static String Exit = "THOÁT";
-    
+    public static String Manager_Phone_Number = "Bạn hãy gọi cho quản lý để lấy lại mật khẩu.";
+            
     public static String Management_Staffs = "QUẢN LÝ NHÂN VIÊN";
     public static String Management_Singing_Rooms = "QUẢN LÝ PHÒNG HÁT";
     public static String Management_Services = "QUẢN LÝ DỊCH VỤ";

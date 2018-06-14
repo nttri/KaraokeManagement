@@ -8,10 +8,12 @@ import common.*;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,7 +54,7 @@ public class Frame_DangNhap extends javax.swing.JFrame {
         btnDangNhap = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLB_QuenMatKhau = new javax.swing.JLabel();
         jLB_Info = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel4");
@@ -130,9 +132,14 @@ public class Frame_DangNhap extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/logo.png"))); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Quên mật khẩu?");
+        jLB_QuenMatKhau.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        jLB_QuenMatKhau.setForeground(new java.awt.Color(255, 255, 255));
+        jLB_QuenMatKhau.setText("Quên mật khẩu?");
+        jLB_QuenMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLB_QuenMatKhauMouseClicked(evt);
+            }
+        });
 
         jLB_Info.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLB_Info.setForeground(new java.awt.Color(255, 153, 102));
@@ -149,7 +156,7 @@ public class Frame_DangNhap extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLB_QuenMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnDangNhap))
                                 .addComponent(jLabel2)
@@ -180,7 +187,7 @@ public class Frame_DangNhap extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDangNhap)
-                    .addComponent(jLabel7))
+                    .addComponent(jLB_QuenMatKhau))
                 .addGap(96, 96, 96)
                 .addComponent(jLabel3)
                 .addContainerGap())
@@ -264,6 +271,26 @@ public class Frame_DangNhap extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tfMatKhauKeyTyped
 
+    private void jLB_QuenMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLB_QuenMatKhauMouseClicked
+        BNguoiDung bNguoiDung = new BNguoiDung();
+        int maQL = 0;
+        try {
+            maQL = bNguoiDung.layMaQuanLy();
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        BNhanVien bNhanVien = new BNhanVien();
+        NhanVien QL = new NhanVien();
+        try {
+            QL = bNhanVien.layThongTinNhanVienTheoMaNV(maQL);
+        } catch (SQLException ex) {
+            Logger.getLogger(Frame_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
+        JOptionPane.showMessageDialog(rootPane, MyStrings.Manager_Phone_Number + System.lineSeparator() + QL.getSdt());
+    }//GEN-LAST:event_jLB_QuenMatKhauMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -302,13 +329,13 @@ public class Frame_DangNhap extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangNhap;
     private javax.swing.JLabel jLB_Info;
+    private javax.swing.JLabel jLB_QuenMatKhau;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField tfMatKhau;

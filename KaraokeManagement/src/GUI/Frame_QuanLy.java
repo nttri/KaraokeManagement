@@ -1885,6 +1885,19 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         int r = tbKhuyenMai_pnQuanLyKhuyenMai.getSelectedRow();
         if (r != -1){
             btnXoa_pnKhuyenMai.setEnabled(true);
+            
+            if (evt.getClickCount() == 2){
+                BKhuyenMai bKhuyenMai = new BKhuyenMai();
+                KhuyenMai khuyenMai = null;
+                String maKM = mTable_DichVu.getValueAt(r, 0).toString();
+                try {
+                    khuyenMai = bKhuyenMai.layKhuyenMaiTheoMa(maKM);
+                    //Dialog_SuaDichVu dSuaDichVu = new Dialog_SuaDichVu(this, rootPaneCheckingEnabled, dichVu, MyStrings.Manager);
+                    //dSuaDichVu.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }//GEN-LAST:event_tbKhuyenMai_pnQuanLyKhuyenMaiMouseClicked
 
