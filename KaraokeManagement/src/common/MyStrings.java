@@ -46,13 +46,15 @@ public class MyStrings {
     public static String Invalid_Start_Time = "Thời gian đặt phòng không hợp lệ!";
     public static String Invalid_Room_Price = "Giá phòng tối thiểu là 50.000 vnd!";
     public static String Invalid_Room_Volume = "Sức chứa tối đa là 200 người!";
-    public static String Salary_Must_Higher = "Lương phải trên 100.000 VND";
+    public static String Salary_Must_Higher = "Lương phải trên 100.000 VND!";
+    public static String Value_Must_Higher = "Giá trị khuyến mãi phải là bội số của 10000 VND!";
     
     public static String Please_Select_Row = "Hãy chọn 1 dòng để thực hiện thao tác!";
     public static String Please_Fill_Full = "Hãy điền đầy đủ thông tin!";
     public static String Please_Choose_Date = "Hãy điền đầy đủ thông tin!";
     public static String Please_Choose_Room = "Hãy chọn 1 phòng!";
     public static String Please_Choose_Service = "Hãy chọn 1 dịch vụ";
+    public static String Please_Choose_Promotion = "Hãy chọn 1 khuyến mãi";
     
     public static String Bill_Not_Payed = "Chưa thanh toán";
     public static String Bill_Payed = "Đã thanh toán";
@@ -67,4 +69,5 @@ public class MyStrings {
     public static String Confirm_Delete_Staff = "Bạn thực sự muốn xóa nhân viên này?";
     public static String Confirm_Delete_Singing_Room = "Bạn thực sự muốn xóa phòng hát này?";
     public static String Confirm_Delete_Service = "Bạn thực sự muốn xóa dịch vụ này?";
+    public static String Confirm_Delete_Promotion = "Bạn thực sự muốn xóa khuyến mãi này?";
 }

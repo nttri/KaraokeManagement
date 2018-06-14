@@ -138,7 +138,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnXoa_pnQuanLyNhanVien.setEnabled(false);
         
         BNhanVien bNhanVien = new BNhanVien();
-        ArrayList<NhanVien> arrNV = null;
+        ArrayList<NhanVien> arrNV = new ArrayList();
         
         try {
             arrNV = bNhanVien.layThongTinTatCaNhanVien();
@@ -162,7 +162,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnXoaPhong_pnPhongHat.setEnabled(false);
         
         BPhongHat bPhongHat = new BPhongHat();
-        ArrayList<PhongHat> arrPH = null;       
+        ArrayList<PhongHat> arrPH = new ArrayList();       
         try {
             arrPH = bPhongHat.layThongTinTatCaPhongHat();
         } catch (SQLException ex) {
@@ -193,7 +193,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         btnXoa_pnDichVu.setEnabled(false);
         
         BDichVu bDichVu = new BDichVu();
-        ArrayList<DichVu> arrDV = null;        
+        ArrayList<DichVu> arrDV = new ArrayList();        
         try {
             arrDV = bDichVu.layThongTinTatCaDichVu();
         } catch (SQLException ex) {
@@ -219,11 +219,20 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     
     void updateQuanLyKhuyenMai(){
         clearAllDataTable(mTable_KhuyenMai);
+        btnXoa_pnKhuyenMai.setEnabled(false);
         
         BKhuyenMai bKhuyenMai = new BKhuyenMai();
-        ArrayList<KhuyenMai> arrKM = null;
+        ArrayList<KhuyenMai> arrKM = new ArrayList();
+        
+        int Loai = cbb_Loc_pnKhuyenMai.getSelectedIndex();
         try {
-            arrKM = bKhuyenMai.layTatCaKhuyenMai();
+            if (Loai == 0){
+                arrKM = bKhuyenMai.layTatCaKhuyenMai();
+            }
+            else {
+                String homNay = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                arrKM = bKhuyenMai.layKhuyenMaiTheoThoiGian(homNay);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -238,7 +247,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }
     
     void updateQuanLyDoanhThu(){
-        int Loai = cbb_DieuKienLoc.getSelectedIndex();
+        int Loai = cbb_Loc_pnDoanhThu.getSelectedIndex();
         String NgayBD = "", NgayKT = "";
         if(Loai == 0 || Loai == 1 ){
             NgayBD = Integer.toString(jDC_NgayBatDau.getDate().getYear()+1900)+"-"+Integer.toString(jDC_NgayBatDau.getDate().getMonth()+1)+"-"+Integer.toString(jDC_NgayBatDau.getDate().getDate());
@@ -262,7 +271,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         clearAllDataTable(mTable_DoanhThu_DonThanhToan);
         
         BDonThanhToan bDonThanhToan = new BDonThanhToan();
-        ArrayList<DonThanhToan> arrDTT = null;
+        ArrayList<DonThanhToan> arrDTT = new ArrayList();
         try {
             arrDTT = bDonThanhToan.layDonThanhToanTheoThoiGian(ngayBD, ngayKT);
         } catch (SQLException ex) {
@@ -288,7 +297,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         clearAllDataTable(mTable_DoanhThu_PhongHat);
         
         BDonThanhToan bDonThanhToan = new BDonThanhToan();
-        ArrayList<DonThanhToan> arrDTT = null;
+        ArrayList<DonThanhToan> arrDTT = new ArrayList();
         try {
             arrDTT = bDonThanhToan.layDonThanhToanTheoThoiGian(ngayBD, ngayKT);
         } catch (SQLException ex) {
@@ -346,7 +355,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         clearAllDataTable(mTable_DoanhThu_DichVu);
         
         BDonThanhToan bDonThanhToan = new BDonThanhToan();
-        ArrayList<DonThanhToan> arrDTT = null;
+        ArrayList<DonThanhToan> arrDTT = new ArrayList();
         try {
             arrDTT = bDonThanhToan.layDonThanhToanTheoThoiGian(ngayBD, ngayKT);
         } catch (SQLException ex) {
@@ -412,7 +421,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         
         // Lấy chi tiết các dịch vụ của đơn thanh toán
         BChiTietDichVu bChiTietDichVu = new BChiTietDichVu();
-        ArrayList<ChiTietDichVu> arrCTDV = null;
+        ArrayList<ChiTietDichVu> arrCTDV = new ArrayList();
         try {
             arrCTDV = bChiTietDichVu.layThongTinChiTietDichVuTheoMaDon(maDTT);
         } catch (SQLException ex) {
@@ -508,8 +517,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbKhuyenMai_pnQuanLyKhuyenMai = new javax.swing.JTable();
-        cbb_LocKhuyenMai = new javax.swing.JComboBox<>();
-        btn_TimKiem_KhuyenMai = new javax.swing.JButton();
+        cbb_Loc_pnKhuyenMai = new javax.swing.JComboBox<>();
+        btn_TimKiem_pnKhuyenMai = new javax.swing.JButton();
         btnTaoMoi_pnKhuyenMai = new javax.swing.JButton();
         btnXoa_pnKhuyenMai = new javax.swing.JButton();
         jpn_QuanLyDoanhThu = new javax.swing.JPanel();
@@ -518,8 +527,8 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jDC_NgayBatDau = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         jDC_NgayKetThuc = new com.toedter.calendar.JDateChooser();
-        cbb_DieuKienLoc = new javax.swing.JComboBox<>();
-        btn_TimKiem = new javax.swing.JButton();
+        cbb_Loc_pnDoanhThu = new javax.swing.JComboBox<>();
+        btn_TimKiem_pnDoanhThu = new javax.swing.JButton();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jScrollPane7 = new javax.swing.JScrollPane();
         tbDonThanhToan_pnQuanLyDoanhThu = new javax.swing.JTable();
@@ -617,11 +626,6 @@ public class Frame_QuanLy extends javax.swing.JFrame {
                 btn_QuanLyPhongHatMouseExited(evt);
             }
         });
-        btn_QuanLyPhongHat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_QuanLyPhongHatActionPerformed(evt);
-            }
-        });
         jPanel2.add(btn_QuanLyPhongHat);
         btn_QuanLyPhongHat.setBounds(0, 70, 210, 70);
 
@@ -638,11 +642,6 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_QuanLyDichVuMouseExited(evt);
-            }
-        });
-        btn_QuanLyDichVu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_QuanLyDichVuActionPerformed(evt);
             }
         });
         jPanel2.add(btn_QuanLyDichVu);
@@ -679,11 +678,6 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_QuanLyDoanhThuMouseExited(evt);
-            }
-        });
-        btn_QuanLyDoanhThu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_QuanLyDoanhThuActionPerformed(evt);
             }
         });
         jPanel2.add(btn_QuanLyDoanhThu);
@@ -1179,20 +1173,20 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jpn_QuanLyKhuyenMai.add(jScrollPane2);
         jScrollPane2.setBounds(40, 180, 1000, 360);
 
-        cbb_LocKhuyenMai.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        cbb_LocKhuyenMai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Còn hiệu lực" }));
-        jpn_QuanLyKhuyenMai.add(cbb_LocKhuyenMai);
-        cbb_LocKhuyenMai.setBounds(40, 110, 150, 30);
+        cbb_Loc_pnKhuyenMai.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        cbb_Loc_pnKhuyenMai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Còn hiệu lực" }));
+        jpn_QuanLyKhuyenMai.add(cbb_Loc_pnKhuyenMai);
+        cbb_Loc_pnKhuyenMai.setBounds(40, 110, 150, 30);
 
-        btn_TimKiem_KhuyenMai.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        btn_TimKiem_KhuyenMai.setText("Tìm kiếm");
-        btn_TimKiem_KhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+        btn_TimKiem_pnKhuyenMai.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        btn_TimKiem_pnKhuyenMai.setText("Tìm kiếm");
+        btn_TimKiem_pnKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_TimKiem_KhuyenMaiActionPerformed(evt);
+                btn_TimKiem_pnKhuyenMaiActionPerformed(evt);
             }
         });
-        jpn_QuanLyKhuyenMai.add(btn_TimKiem_KhuyenMai);
-        btn_TimKiem_KhuyenMai.setBounds(230, 110, 130, 30);
+        jpn_QuanLyKhuyenMai.add(btn_TimKiem_pnKhuyenMai);
+        btn_TimKiem_pnKhuyenMai.setBounds(230, 110, 130, 30);
 
         btnTaoMoi_pnKhuyenMai.setBackground(new java.awt.Color(10, 125, 39));
         btnTaoMoi_pnKhuyenMai.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -1260,20 +1254,20 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         jpn_QuanLyDoanhThu.add(jDC_NgayKetThuc);
         jDC_NgayKetThuc.setBounds(110, 160, 250, 30);
 
-        cbb_DieuKienLoc.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        cbb_DieuKienLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lọc theo ...", "Ngày - Tháng - Năm", "Tháng - Năm", "Năm" }));
-        jpn_QuanLyDoanhThu.add(cbb_DieuKienLoc);
-        cbb_DieuKienLoc.setBounds(670, 110, 200, 30);
+        cbb_Loc_pnDoanhThu.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        cbb_Loc_pnDoanhThu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lọc theo ...", "Ngày - Tháng - Năm", "Tháng - Năm", "Năm" }));
+        jpn_QuanLyDoanhThu.add(cbb_Loc_pnDoanhThu);
+        cbb_Loc_pnDoanhThu.setBounds(670, 110, 200, 30);
 
-        btn_TimKiem.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        btn_TimKiem.setText("Tìm kiếm");
-        btn_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+        btn_TimKiem_pnDoanhThu.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        btn_TimKiem_pnDoanhThu.setText("Tìm kiếm");
+        btn_TimKiem_pnDoanhThu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_TimKiemActionPerformed(evt);
+                btn_TimKiem_pnDoanhThuActionPerformed(evt);
             }
         });
-        jpn_QuanLyDoanhThu.add(btn_TimKiem);
-        btn_TimKiem.setBounds(900, 110, 130, 30);
+        jpn_QuanLyDoanhThu.add(btn_TimKiem_pnDoanhThu);
+        btn_TimKiem_pnDoanhThu.setBounds(900, 110, 130, 30);
 
         jTabbedPane5.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane5.setFont(new java.awt.Font("Roboto Lt", 0, 20)); // NOI18N
@@ -1439,10 +1433,6 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_QuanLyNhanVienMouseExited
 
-    private void btn_QuanLyPhongHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuanLyPhongHatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_QuanLyPhongHatActionPerformed
-
     private void btn_QuanLyPhongHatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyPhongHatMouseClicked
         // TODO add your handling code here:
         setDefaultAllButtonAndPanel();
@@ -1470,10 +1460,6 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_QuanLyPhongHatMouseExited
 
-    private void btn_QuanLyDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuanLyDichVuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_QuanLyDichVuActionPerformed
-
     private void btn_QuanLyDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyDichVuMouseClicked
         // TODO add your handling code here:
         setDefaultAllButtonAndPanel();
@@ -1500,10 +1486,6 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             btn_QuanLyDichVu.setText("");
         }
     }//GEN-LAST:event_btn_QuanLyDichVuMouseExited
-
-    private void btn_QuanLyDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuanLyDoanhThuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_QuanLyDoanhThuActionPerformed
 
     private void btn_QuanLyDoanhThuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyDoanhThuMouseClicked
         // TODO add your handling code here:
@@ -1830,9 +1812,9 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbDichVu_pnQuanLyDichVuMouseClicked
 
-    private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
+    private void btn_TimKiem_pnDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiem_pnDoanhThuActionPerformed
         updateQuanLyDoanhThu();       
-    }//GEN-LAST:event_btn_TimKiemActionPerformed
+    }//GEN-LAST:event_btn_TimKiem_pnDoanhThuActionPerformed
 
     private void btn_QuanLyKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyKhuyenMaiMouseClicked
         // TODO add your handling code here:
@@ -1862,16 +1844,35 @@ public class Frame_QuanLy extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_QuanLyKhuyenMaiMouseExited
 
-    private void btn_TimKiem_KhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiem_KhuyenMaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_TimKiem_KhuyenMaiActionPerformed
+    private void btn_TimKiem_pnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiem_pnKhuyenMaiActionPerformed
+        updateQuanLyKhuyenMai();
+    }//GEN-LAST:event_btn_TimKiem_pnKhuyenMaiActionPerformed
 
     private void btnTaoMoi_pnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoi_pnKhuyenMaiActionPerformed
-        // TODO add your handling code here:
+        Dialog_ThemKhuyenMai dThemKhuyenMai = new Dialog_ThemKhuyenMai(this, rootPaneCheckingEnabled);
+        dThemKhuyenMai.setVisible(true);
+        updateQuanLyKhuyenMai();
     }//GEN-LAST:event_btnTaoMoi_pnKhuyenMaiActionPerformed
 
     private void btnXoa_pnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_pnKhuyenMaiActionPerformed
-        // TODO add your handling code here:
+        int r = tbKhuyenMai_pnQuanLyKhuyenMai.getSelectedRow();
+        int input = JOptionPane.showConfirmDialog(rootPane, MyStrings.Confirm_Delete_Promotion, MyStrings.Confirm, JOptionPane.OK_CANCEL_OPTION);
+        if (input == 0){ // OK
+            BKhuyenMai bKhuyenMai = new BKhuyenMai();
+            String maKM = mTable_KhuyenMai.getValueAt(r, 0).toString();
+            boolean rs = true;
+            try {
+                rs = bKhuyenMai.xoaKhuyenMai(maKM);
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (rs){
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Succeeded);
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, MyStrings.Delete_Failed);
+            }
+        }
     }//GEN-LAST:event_btnXoa_pnKhuyenMaiActionPerformed
 
     Boolean isOldEnough(String input) {
@@ -1938,11 +1939,11 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     private javax.swing.JButton btn_QuanLyNhanVien;
     private javax.swing.JButton btn_QuanLyPhongHat;
     private javax.swing.JButton btn_Thoat;
-    private javax.swing.JButton btn_TimKiem;
-    private javax.swing.JButton btn_TimKiem_KhuyenMai;
+    private javax.swing.JButton btn_TimKiem_pnDoanhThu;
+    private javax.swing.JButton btn_TimKiem_pnKhuyenMai;
     private javax.swing.JComboBox<String> cbbGioiTinh;
-    private javax.swing.JComboBox<String> cbb_DieuKienLoc;
-    private javax.swing.JComboBox<String> cbb_LocKhuyenMai;
+    private javax.swing.JComboBox<String> cbb_Loc_pnDoanhThu;
+    private javax.swing.JComboBox<String> cbb_Loc_pnKhuyenMai;
     private com.toedter.calendar.JDateChooser jDC_NgayBatDau;
     private com.toedter.calendar.JDateChooser jDC_NgayKetThuc;
     private javax.swing.JLabel jLB_Brand;
