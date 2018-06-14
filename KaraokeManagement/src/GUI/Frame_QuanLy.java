@@ -361,6 +361,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
     }
     
     int tinhTongTienThanhToan(int maDTT){
+        //Lấy thông tin đơn thanh toán
         BDonThanhToan bDonThanhToan = new BDonThanhToan();
         DonThanhToan DTT = null;
         try {
@@ -369,6 +370,7 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        // Lấy chi tiết các dịch vụ của đơn thanh toán
         BChiTietDichVu bChiTietDichVu = new BChiTietDichVu();
         ArrayList<ChiTietDichVu> arrCTDV = null;
         try {
@@ -377,9 +379,29 @@ public class Frame_QuanLy extends javax.swing.JFrame {
             Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        int tongTien = DTT.getGiaPhong();
-        for (ChiTietDichVu x : arrCTDV ){
-            tongTien += x.getDonGia() * x.getSoLuong();
+        // Tính tiền phòng
+        Date bd = DTT.getThoiGianBatDau();
+        Date kt = DTT.getThoiGianKetThuc();
+        long diff = kt.getTime() - bd.getTime();
+        int soGioSuDung = (int)TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);
+        int tongTien = DTT.getGiaPhong() * soGioSuDung;
+        
+        // Lấy tiền khuyến mãi (nếu có)
+        if (DTT.getMaKhuyenMai() != null && !DTT.getMaKhuyenMai().isEmpty()){
+            BKhuyenMai bKhuyenMai = new BKhuyenMai();
+            KhuyenMai khuyenMai = null;
+            try {
+                khuyenMai = bKhuyenMai.layKhuyenMaiTheoMa(DTT.getMaKhuyenMai());
+            } catch (SQLException ex) {
+                Logger.getLogger(Frame_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            tongTien -= khuyenMai.getGiaTriKM();
+        }
+        
+        // Tính tổng tiền các dịch vụ
+        for (ChiTietDichVu CTDV : arrCTDV ){
+            tongTien += CTDV.getDonGia() * CTDV.getSoLuong();
         }
         
         return tongTien;
